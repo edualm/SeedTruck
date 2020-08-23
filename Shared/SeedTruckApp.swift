@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-@main
-struct SeedTruckApp: App {
+@main struct SeedTruckApp: App {
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }

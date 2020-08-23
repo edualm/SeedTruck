@@ -7,14 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */; };
+		A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */; };
+		A011C7E824F20DCF009D72C6 /* FileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E724F20DCF009D72C6 /* FileSize.swift */; };
+		A011C7E924F20DCF009D72C6 /* FileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E724F20DCF009D72C6 /* FileSize.swift */; };
+		A011C7EB24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */; };
+		A011C7EC24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */; };
+		A011C7EF24F21078009D72C6 /* SeedboxConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */; };
+		A011C7F024F21078009D72C6 /* SeedboxConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */; };
+		A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F124F21088009D72C6 /* TransmissionConnection.swift */; };
+		A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F124F21088009D72C6 /* TransmissionConnection.swift */; };
+		A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
+		A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
+		A011C7F824F2130A009D72C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A011C7F724F2130A009D72C6 /* README.md */; };
+		A011C7F924F2130A009D72C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A011C7F724F2130A009D72C6 /* README.md */; };
+		A011C7FB24F21406009D72C6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = A011C7FA24F21406009D72C6 /* LICENSE.txt */; };
+		A011C7FC24F21406009D72C6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = A011C7FA24F21406009D72C6 /* LICENSE.txt */; };
 		A045C8BE24F2006500B3B1CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8BD24F2006500B3B1CD /* Tests_iOS.swift */; };
 		A045C8C924F2006500B3B1CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8C824F2006500B3B1CD /* Tests_macOS.swift */; };
 		A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */; };
 		A045C8CC24F2006500B3B1CD /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */; };
-		A045C8CD24F2006500B3B1CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8A324F2006400B3B1CD /* ContentView.swift */; };
-		A045C8CE24F2006500B3B1CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8A324F2006400B3B1CD /* ContentView.swift */; };
 		A045C8CF24F2006500B3B1CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A045C8A424F2006500B3B1CD /* Assets.xcassets */; };
 		A045C8D024F2006500B3B1CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A045C8A424F2006500B3B1CD /* Assets.xcassets */; };
+		A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8DF24F2011E00B3B1CD /* MainView.swift */; };
+		A045C8E124F2011E00B3B1CD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8DF24F2011E00B3B1CD /* MainView.swift */; };
+		A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E224F2013100B3B1CD /* TorrentsView.swift */; };
+		A045C8E424F2013100B3B1CD /* TorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E224F2013100B3B1CD /* TorrentsView.swift */; };
+		A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
+		A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
+		A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
+		A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,8 +57,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTorrent.swift; sourceTree = "<group>"; };
+		A011C7E724F20DCF009D72C6 /* FileSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSize.swift; sourceTree = "<group>"; };
+		A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsViewPresenter.swift; sourceTree = "<group>"; };
+		A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedboxConnection.swift; sourceTree = "<group>"; };
+		A011C7F124F21088009D72C6 /* TransmissionConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionConnection.swift; sourceTree = "<group>"; };
+		A011C7F424F211C6009D72C6 /* LocalTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTorrent.swift; sourceTree = "<group>"; };
+		A011C7F724F2130A009D72C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		A011C7FA24F21406009D72C6 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
-		A045C8A324F2006400B3B1CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A045C8A424F2006500B3B1CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A045C8A924F2006500B3B1CD /* SeedTruck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedTruck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A045C8AC24F2006500B3B1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +78,10 @@
 		A045C8C424F2006500B3B1CD /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A045C8C824F2006500B3B1CD /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
 		A045C8CA24F2006500B3B1CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A045C8DF24F2011E00B3B1CD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A045C8E224F2013100B3B1CD /* TorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsView.swift; sourceTree = "<group>"; };
+		A045C8E524F2021100B3B1CD /* TorrentItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentItemView.swift; sourceTree = "<group>"; };
+		A045C8E824F205B100B3B1CD /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +116,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A011C7E324F20C78009D72C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A011C7F424F211C6009D72C6 /* LocalTorrent.swift */,
+				A011C7E724F20DCF009D72C6 /* FileSize.swift */,
+				A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A011C7ED24F21064009D72C6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */,
+				A011C7F124F21088009D72C6 /* TransmissionConnection.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		A045C89C24F2006400B3B1CD = {
 			isa = PBXGroup;
 			children = (
+				A011C7FA24F21406009D72C6 /* LICENSE.txt */,
+				A011C7F724F2130A009D72C6 /* README.md */,
 				A045C8A124F2006400B3B1CD /* Shared */,
 				A045C8AB24F2006500B3B1CD /* iOS */,
 				A045C8B224F2006500B3B1CD /* macOS */,
@@ -98,9 +152,15 @@
 		A045C8A124F2006400B3B1CD /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				A011C7ED24F21064009D72C6 /* Network */,
+				A011C7E324F20C78009D72C6 /* Model */,
+				A045C8EB24F208AC00B3B1CD /* Components */,
 				A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */,
-				A045C8A324F2006400B3B1CD /* ContentView.swift */,
+				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
+				A045C8E224F2013100B3B1CD /* TorrentsView.swift */,
+				A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */,
 				A045C8A424F2006500B3B1CD /* Assets.xcassets */,
+				A045C8E524F2021100B3B1CD /* TorrentItemView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -149,6 +209,14 @@
 				A045C8CA24F2006500B3B1CD /* Info.plist */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		A045C8EB24F208AC00B3B1CD /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A045C8E824F205B100B3B1CD /* ProgressBarView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +343,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A011C7FB24F21406009D72C6 /* LICENSE.txt in Resources */,
+				A011C7F824F2130A009D72C6 /* README.md in Resources */,
 				A045C8CF24F2006500B3B1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,6 +353,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A011C7FC24F21406009D72C6 /* LICENSE.txt in Resources */,
+				A011C7F924F2130A009D72C6 /* README.md in Resources */,
 				A045C8D024F2006500B3B1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,8 +380,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A045C8CD24F2006500B3B1CD /* ContentView.swift in Sources */,
+				A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
+				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
+				A011C7EB24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */,
+				A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */,
+				A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */,
+				A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */,
+				A011C7E824F20DCF009D72C6 /* FileSize.swift in Sources */,
+				A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */,
 				A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
+				A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */,
+				A011C7EF24F21078009D72C6 /* SeedboxConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,8 +398,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A045C8CE24F2006500B3B1CD /* ContentView.swift in Sources */,
+				A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
+				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
+				A011C7EC24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */,
+				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
+				A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */,
+				A045C8E424F2013100B3B1CD /* TorrentsView.swift in Sources */,
+				A011C7E924F20DCF009D72C6 /* FileSize.swift in Sources */,
+				A045C8E124F2011E00B3B1CD /* MainView.swift in Sources */,
 				A045C8CC24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
+				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
+				A011C7F024F21078009D72C6 /* SeedboxConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
