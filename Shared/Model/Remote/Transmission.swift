@@ -9,36 +9,48 @@ import Foundation
 
 enum Transmission {
     
-    struct RPCResponse {
+    enum RPCResponse {
         
         enum Result {
+            
             case success
             case error(String)
         }
         
-        let result: Result
+        struct Generic {
+            
+            let result: Result
+            
+            let arguments: Dictionary<String, Any>?
+            let tag: Int?
+        }
         
-        let arguments: Dictionary<String, Any>?
-        let tag: Int?
+        struct TorrentGet: Codable {
+            
+            let result: Result
+            
+            let arguments: [Torrent]
+            let tag: Int?
+        }
     }
     
-    struct Torrent {
+    struct Torrent: Codable {
         
-        struct File {
+        struct File: Codable {
             
             let bytesCompleted: Int
             let length: Int
             let name: String
         }
         
-        struct FileStats {
+        struct FileStats: Codable {
             
             let bytesCompleted: Int
             let wanted: Bool
             let priority: Int
         }
         
-        struct Peer {
+        struct Peer: Codable {
             
             let address: String
             let clientName: String
@@ -58,7 +70,7 @@ enum Transmission {
             let rateToPeer: Int
         }
         
-        struct PeersFrom {
+        struct PeersFrom: Codable {
             
             let fromCache: Int
             let fromDht: Int
@@ -69,7 +81,7 @@ enum Transmission {
             let fromTracker: Int
         }
         
-        struct Tracker {
+        struct Tracker: Codable {
             
             let announce: String
             let id: Int
@@ -77,7 +89,7 @@ enum Transmission {
             let tier: Int
         }
         
-        struct TrackerStats {
+        struct TrackerStats: Codable {
             
             let announce: String
             let announceState: Int
@@ -176,36 +188,5 @@ enum Transmission {
         let wanted: [Bool]
         let webseeds: [String]
         let webseedsSeedingToUs: Int?
-    }
-}
-
-extension Transmission.RPCResponse {
-    
-    init?(json: [String: Any]) {
-        guard let result = json["result"] as? String else {
-            return nil
-        }
-        
-        if let tag = json["tag"] as? Int {
-            self.tag = tag
-        } else {
-            self.tag = nil
-        }
-        
-        guard result == "success" else {
-            self.result = .error(result)
-            
-            self.arguments = nil
-            
-            return
-        }
-        
-        self.result = .success
-        
-        if let arguments = json["arguments"] as? Dictionary<String, Any> {
-            self.arguments = arguments
-        } else {
-            self.arguments = nil
-        }
     }
 }

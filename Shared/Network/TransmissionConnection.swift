@@ -49,7 +49,7 @@ class TransmissionConnection: ServerConnection {
         self.connectionDetails = connectionDetails
     }
     
-    private func performCall(withMethod method: String, parameters: Dictionary<String, String>?, completionHandler: @escaping (Result<Transmission.RPCResponse, TransmissionError>) -> ()) {
+    private func performCall<T: Decodable>(withMethod method: String, parameters: Dictionary<String, String>?, completionHandler: @escaping (Result<T, TransmissionError>) -> ()) {
         let request: [String: Any] = [
             "method": method,
             "arguments": parameters as Any
@@ -107,13 +107,7 @@ class TransmissionConnection: ServerConnection {
                 return
             }
             
-            guard let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: .init()) as? [String: Any] else {
-                completionHandler(.failure(.invalidResponse))
-                
-                return
-            }
-            
-            guard let parsedResponse = Transmission.RPCResponse(json: jsonResponse) else {
+            guard let parsedResponse = try? JSONDecoder().decode(T.self, from: data) else {
                 completionHandler(.failure(.invalidResponse))
                 
                 return
@@ -130,7 +124,7 @@ class TransmissionConnection: ServerConnection {
     }
     
     func getTorrents(completionHandler: (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
-        performCall(withMethod: "torrent-get", parameters: [:]) { result in
+        performCall(withMethod: "torrent-get", parameters: [:]) { (result: Result<Transmission.RPCResponse.TorrentGet, TransmissionError>) in
             switch result {
             case .success(let response):
                 ()
