@@ -9,31 +9,72 @@ import SwiftUI
 
 struct TorrentDetailsView: View {
     
-    let torrent: RemoteTorrent
-    
-    var body: some View {
-        ScrollView {
+    private struct NameView: View {
+        
+        let torrent: RemoteTorrent
+        
+        var body: some View {
             GroupBox(label: Label("Name", systemImage: "pencil.and.ellipsis.rectangle")) {
                 HStack {
                     Text(torrent.name)
                     Spacer()
                 }.padding(.top)
             }
+        }
+    }
+
+    private struct StatusView: View {
+        
+        let torrent: RemoteTorrent
+        
+        var body: some View {
             GroupBox(label: Label("Status", systemImage: "exclamationmark.bubble")) {
                 HStack {
                     Text(torrent.status.displayableStatus)
                     Spacer()
                 }.padding(.top)
             }
-            GroupBox(label: Label("Speed", systemImage: "speedometer")) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Label("Download: 10 MB/s", systemImage: "chevron.down")
-                        Label("Upload: 10 MB/s", systemImage: "chevron.up")
-                    }
-                    Spacer()
-                }.padding(.top)
+        }
+    }
+
+    private struct SpeedView: View {
+        
+        let torrent: RemoteTorrent
+        
+        var body: some View {
+            switch torrent.status {
+            case let .downloading(_, _, _, downloadRate, uploadRate):
+                GroupBox(label: Label("Speed", systemImage: "speedometer")) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Label("Download: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "chevron.down")
+                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "chevron.up")
+                        }
+                        Spacer()
+                    }.padding(.top)
+                }
+            case let .seeding(_, uploadRate):
+                GroupBox(label: Label("Speed", systemImage: "speedometer")) {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "chevron.up")
+                        }
+                        Spacer()
+                    }.padding(.top)
+                }
+            default:
+                EmptyView()
             }
+        }
+    }
+    
+    let torrent: RemoteTorrent
+    
+    var body: some View {
+        ScrollView {
+            NameView(torrent: torrent)
+            StatusView(torrent: torrent)
+            SpeedView(torrent: torrent)
             GroupBox(label: Label("Actions", systemImage: "wrench")) {
                 HStack {
                     Button("Remove Torrent") {

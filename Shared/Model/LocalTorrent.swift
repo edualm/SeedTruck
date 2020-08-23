@@ -9,6 +9,6 @@ import Foundation
 
 enum LocalTorrent {
     
-    case torrent(Data)
     case magnet(String)
+    case torrent(Data)
 }

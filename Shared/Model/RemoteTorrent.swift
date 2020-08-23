@@ -7,31 +7,34 @@
 
 import Foundation
 
-struct RemoteTorrent {
+struct RemoteTorrent: Identifiable {
     
     enum Status {
-        case idle
-        case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: FileTransmissionSpeed, uploadRate: FileTransmissionSpeed)
-        case seeding(peers: Int, uploadRate: FileTransmissionSpeed)
         
-        var displayableStatus: String {
-            switch self {
-            case .idle:
-                return "Idle"
-                
-            case .downloading:
-                return "Downloading"
-                
-            case .seeding:
-                return "Seeding"
-            }
-        }
+        case idle
+        case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int)
+        case seeding(peers: Int, uploadRate: Int)
     }
     
     let id: String
     let name: String
+    let progress: Double
     let status: Status
-    let size: FileSize
+    let size: Int
 }
 
-extension RemoteTorrent: Identifiable {}
+extension RemoteTorrent.Status {
+    
+    var displayableStatus: String {
+        switch self {
+        case .idle:
+            return "Idle"
+            
+        case .downloading:
+            return "Downloading"
+            
+        case .seeding:
+            return "Seeding"
+        }
+    }
+}

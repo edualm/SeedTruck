@@ -29,7 +29,7 @@ enum Transmission {
             
             let result: Result
             
-            let arguments: [Torrent]
+            let arguments: Dictionary<String, [Torrent]>
             let tag: Int?
         }
     }
@@ -185,8 +185,8 @@ enum Transmission {
         let uploadLimit: Int?
         let uploadLimited: Bool?
         let uploadRatio: Double?
-        let wanted: [Bool]
-        let webseeds: [String]
+        let wanted: [Bool]?
+        let webseeds: [String]?
         let webseedsSeedingToUs: Int?
     }
 }

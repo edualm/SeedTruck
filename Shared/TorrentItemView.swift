@@ -9,27 +9,47 @@ import SwiftUI
 
 struct TorrentItemView: View {
     
-    @State var name: String
-    @State var progress: CGFloat
+    struct SpeedView: View {
+        
+        let torrent: RemoteTorrent
+        
+        var body: some View {
+            switch torrent.status {
+            case .idle:
+                Text("Idle")
+            case let .downloading(_, _, _, downloadRate, uploadRate):
+                HStack {
+                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "chevron.down")
+                        .font(.footnote)
+                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "chevron.up")
+                        .font(.footnote)
+                }
+            case let .seeding(_, uploadRate):
+                HStack {
+                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "chevron.up")
+                        .font(.footnote)
+                }
+            }
+        }
+    }
+    
+    var torrent: RemoteTorrent
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(name)
+            Text(torrent.name)
                 .bold()
-            ProgressBarView(cornerRadius: 10.0, progress: progress)
+            ProgressBarView(cornerRadius: 10.0, progress: CGFloat(torrent.progress))
                 .frame(width: nil, height: 20, alignment: .center)
-            HStack {
-                Label("10 MB/s", systemImage: "chevron.down")
-                    .font(.footnote)
-                Label("10 MB/s", systemImage: "chevron.up")
-                    .font(.footnote)
-            }
+            SpeedView(torrent: torrent)
         }
     }
 }
 
 struct TorrentItemView_Previews: PreviewProvider {
     static var previews: some View {
-        TorrentItemView(name: "Super Legal Movie [WEB-DL].mkv", progress: 0.5)
+        Group {
+            TorrentItemView(torrent: PreviewMockData.torrent)
+        }.previewLayout(.fixed(width: 400, height: 100))
     }
 }

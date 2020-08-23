@@ -33,7 +33,7 @@ struct TorrentsView: View {
                     List {
                         ForEach(server.torrents) { torrent in
                             ZStack {
-                                TorrentItemView(name: torrent.name, progress: 0.1)
+                                TorrentItemView(torrent: torrent)
                                     .padding(.all, 5)
                                 NavigationLink(destination: TorrentDetailsView(torrent: torrent)) {
                                     EmptyView()

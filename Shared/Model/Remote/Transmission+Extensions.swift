@@ -40,44 +40,45 @@ extension Transmission.RPCResponse.Generic {
 
 extension Transmission.RPCResponse.Result: Codable {
     
-    enum Key: CodingKey {
-        
-        case rawValue
-        case associatedValue
-    }
-    
     enum CodingError: Error {
         
         case unknownValue
     }
     
     init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: Key.self)
-        let rawValue = try container.decode(String.self, forKey: .rawValue)
+        let value = try decoder.singleValueContainer().decode(String.self)
         
-        switch rawValue {
+        switch value {
         case "success":
             self = .success
-            
-        case "error":
-            let error = try container.decode(String.self, forKey: .associatedValue)
-            self = .error(error)
-            
         default:
-            throw CodingError.unknownValue
+            self = .error(value)
         }
     }
     
     func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: Key.self)
+        var container = encoder.singleValueContainer()
         
         switch self {
         case .success:
-            try container.encode("success", forKey: .rawValue)
+            try container.encode("success")
             
         case .error(let error):
-            try container.encode("error", forKey: .rawValue)
-            try container.encode(error, forKey: .associatedValue)
+            try container.encode(error)
+        }
+    }
+}
+
+extension Transmission.RPCResponse.Result: Equatable {
+    
+    static func ==(rhs: Transmission.RPCResponse.Result, lhs: Transmission.RPCResponse.Result) -> Bool {
+        switch (rhs, lhs) {
+        case (.success, .success):
+            return true
+        case (.success, .error), (.error, .success):
+            return false
+        case let (.error(lhsError), .error(rhsError)):
+            return lhsError == rhsError
         }
     }
 }
