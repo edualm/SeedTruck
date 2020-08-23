@@ -23,6 +23,10 @@ struct FileSize: FileSizeRepresenting {
     
     let bytes: Int
     
+    init(bytes: Int) {
+        self.bytes = bytes
+    }
+    
     var fileSizeForPresentation: String {
         fileSizeForPresentationBase
     }
@@ -31,6 +35,10 @@ struct FileSize: FileSizeRepresenting {
 struct FileTransmissionSpeed: FileSizeRepresenting {
     
     let bytes: Int
+    
+    init(bytesPerSecond: Int) {
+        self.bytes = bytesPerSecond
+    }
     
     var fileSizeForPresentation: String {
         fileSizeForPresentationBase + "/s"

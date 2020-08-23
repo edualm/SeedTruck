@@ -13,6 +13,19 @@ struct RemoteTorrent {
         case idle
         case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: FileTransmissionSpeed, uploadRate: FileTransmissionSpeed)
         case seeding(peers: Int, uploadRate: FileTransmissionSpeed)
+        
+        var displayableStatus: String {
+            switch self {
+            case .idle:
+                return "Idle"
+                
+            case .downloading:
+                return "Downloading"
+                
+            case .seeding:
+                return "Seeding"
+            }
+        }
     }
     
     let id: String
@@ -20,3 +33,5 @@ struct RemoteTorrent {
     let status: Status
     let size: FileSize
 }
+
+extension RemoteTorrent: Identifiable {}

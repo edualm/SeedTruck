@@ -16,6 +16,11 @@ struct MainView: View {
                     Image(systemName: "arrow.down.doc")
                     Text("Torrents")
                 }
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "wrench")
+                    Text("Settings")
+                }
         }
     }
 }

@@ -13,8 +13,8 @@
 		A011C7E924F20DCF009D72C6 /* FileSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E724F20DCF009D72C6 /* FileSize.swift */; };
 		A011C7EB24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */; };
 		A011C7EC24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */; };
-		A011C7EF24F21078009D72C6 /* SeedboxConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */; };
-		A011C7F024F21078009D72C6 /* SeedboxConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */; };
+		A011C7EF24F21078009D72C6 /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* ServerConnection.swift */; };
+		A011C7F024F21078009D72C6 /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* ServerConnection.swift */; };
 		A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F124F21088009D72C6 /* TransmissionConnection.swift */; };
 		A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F124F21088009D72C6 /* TransmissionConnection.swift */; };
 		A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
@@ -41,6 +41,10 @@
 		A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
 		A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
 		A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
+		A09656A924F2C6CA009D0FE1 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656A824F2C6CA009D0FE1 /* Server.swift */; };
+		A09656AA24F2C6CA009D0FE1 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656A824F2C6CA009D0FE1 /* Server.swift */; };
+		A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
+		A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +68,7 @@
 		A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTorrent.swift; sourceTree = "<group>"; };
 		A011C7E724F20DCF009D72C6 /* FileSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSize.swift; sourceTree = "<group>"; };
 		A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsViewPresenter.swift; sourceTree = "<group>"; };
-		A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedboxConnection.swift; sourceTree = "<group>"; };
+		A011C7EE24F21078009D72C6 /* ServerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
 		A011C7F124F21088009D72C6 /* TransmissionConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionConnection.swift; sourceTree = "<group>"; };
 		A011C7F424F211C6009D72C6 /* LocalTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTorrent.swift; sourceTree = "<group>"; };
 		A011C7F724F2130A009D72C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -88,6 +92,8 @@
 		A045C8E224F2013100B3B1CD /* TorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsView.swift; sourceTree = "<group>"; };
 		A045C8E524F2021100B3B1CD /* TorrentItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentItemView.swift; sourceTree = "<group>"; };
 		A045C8E824F205B100B3B1CD /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		A09656A824F2C6CA009D0FE1 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +134,7 @@
 				A011C7F424F211C6009D72C6 /* LocalTorrent.swift */,
 				A011C7E724F20DCF009D72C6 /* FileSize.swift */,
 				A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */,
+				A09656A824F2C6CA009D0FE1 /* Server.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -135,7 +142,7 @@
 		A011C7ED24F21064009D72C6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A011C7EE24F21078009D72C6 /* SeedboxConnection.swift */,
+				A011C7EE24F21078009D72C6 /* ServerConnection.swift */,
 				A011C7F124F21088009D72C6 /* TransmissionConnection.swift */,
 			);
 			path = Network;
@@ -163,6 +170,7 @@
 				A045C8EB24F208AC00B3B1CD /* Components */,
 				A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */,
 				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
+				A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */,
 				A023BAE624F294EF00B82FB3 /* SettingsView.swift */,
 				A045C8E224F2013100B3B1CD /* TorrentsView.swift */,
 				A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */,
@@ -388,10 +396,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A09656A924F2C6CA009D0FE1 /* Server.swift in Sources */,
 				A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A011C7EB24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */,
 				A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */,
+				A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */,
 				A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */,
 				A011C7E824F20DCF009D72C6 /* FileSize.swift in Sources */,
@@ -399,7 +409,7 @@
 				A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
 				A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
-				A011C7EF24F21078009D72C6 /* SeedboxConnection.swift in Sources */,
+				A011C7EF24F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A023BAE724F294EF00B82FB3 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,10 +418,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A09656AA24F2C6CA009D0FE1 /* Server.swift in Sources */,
 				A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A011C7EC24F20F4F009D72C6 /* TorrentsViewPresenter.swift in Sources */,
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
+				A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */,
 				A045C8E424F2013100B3B1CD /* TorrentsView.swift in Sources */,
 				A011C7E924F20DCF009D72C6 /* FileSize.swift in Sources */,
@@ -419,7 +431,7 @@
 				A045C8CC24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
 				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
-				A011C7F024F21078009D72C6 /* SeedboxConnection.swift in Sources */,
+				A011C7F024F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A023BAE824F294EF00B82FB3 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

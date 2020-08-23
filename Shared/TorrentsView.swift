@@ -11,26 +11,44 @@ struct TorrentsView: View {
     
     @StateObject var presenter: TorrentsViewPresenter = TorrentsViewPresenter()
     
-    //  TODO: If has various seedboxes, present hamburger icon. Else, show EmptyView
-    
     var body: some View {
         NavigationView {
-            List {
-                ForEach([0, 1, 5, 9, 10], id: \.self) {
-                    TorrentItemView(name: "Torrent Name", progress: CGFloat($0) * 0.1)
-                        .padding(.all, 5)
+            Group {
+                if let server = presenter.viewModel.currentServer {
+                    List {
+                        ForEach(server.torrents) { torrent in
+                            ZStack {
+                                TorrentItemView(name: torrent.name, progress: 0.1)
+                                    .padding(.all, 5)
+                                NavigationLink(destination: TorrentDetailsView(torrent: torrent)) {
+                                    EmptyView()
+                                }.buttonStyle(PlainButtonStyle())
+                            }
+                        }
+                    }
+                } else {
+                    VStack {
+                        Text("😞")
+                            .font(.largeTitle)
+                        Text("No servers configured!")
+                            .font(.headline)
+                            .padding()
+                        Text("Please add a server using the Settings tab.")
+                            .fontWeight(.light)
+                    }
                 }
             }
+            
             .navigationTitle("Torrents")
-            .navigationBarItems(leading: Button(action: {
-                presenter.perform(.addTorrent)
+            .navigationBarItems(leading: presenter.viewModel.servers.count > 1 ? AnyView(Button(action: {
+                presenter.perform(.toggleChangeSeedboxListVisibility)
             }) {
                 Image(systemName: "text.justify")
-            }, trailing: Button(action: {
+            }) : AnyView(EmptyView()), trailing: presenter.viewModel.currentServer != nil ? AnyView(Button(action: {
                 presenter.perform(.addTorrent)
             }) {
                 Image(systemName: "plus")
-            })
+            }) : AnyView(EmptyView()))
         }
     }
 }
@@ -38,6 +56,10 @@ struct TorrentsView: View {
 struct TorrentsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TorrentsView()
+        Group {
+            TorrentsView()
+            TorrentsView(presenter: TorrentsViewPresenter(viewModel: .init(servers: [PreviewMockData.server],
+                                                                           currentServer: PreviewMockData.server)))
+        }
     }
 }

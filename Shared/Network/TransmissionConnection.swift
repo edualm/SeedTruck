@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TransmissionConnection: SeedboxConnection {
+struct TransmissionConnection: ServerConnection {
     
     struct ConnectionDetails {
         
@@ -27,19 +27,19 @@ struct TransmissionConnection: SeedboxConnection {
         self.connectionDetails = connectionDetails
     }
     
-    func addTorrent(_ torrent: LocalTorrent) -> Result<RemoteTorrent, SeedboxCommunicationError> {
+    func addTorrent(_ torrent: LocalTorrent) -> Result<RemoteTorrent, ServerCommunicationError> {
         return .failure(.notImplemented)
     }
     
-    func getTorrents() -> Result<[RemoteTorrent], SeedboxCommunicationError> {
+    func getTorrents() -> Result<[RemoteTorrent], ServerCommunicationError> {
         return .failure(.notImplemented)
     }
     
-    func removeTorrent(_ torrent: RemoteTorrent) -> Result<Bool, SeedboxCommunicationError> {
+    func removeTorrent(_ torrent: RemoteTorrent) -> Result<Bool, ServerCommunicationError> {
         return .failure(.notImplemented)
     }
     
-    func removeTorrent(byId id: String) -> Result<Bool, SeedboxCommunicationError> {
+    func removeTorrent(byId id: String) -> Result<Bool, ServerCommunicationError> {
         return .failure(.notImplemented)
     }
 }
