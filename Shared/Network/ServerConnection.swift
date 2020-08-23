@@ -15,8 +15,8 @@ enum ServerCommunicationError: Error {
 
 protocol ServerConnection {
     
-    func addTorrent(_ torrent: LocalTorrent) -> Result<RemoteTorrent, ServerCommunicationError>
-    func getTorrents() -> Result<[RemoteTorrent], ServerCommunicationError>
-    func removeTorrent(_ torrent: RemoteTorrent) -> Result<Bool, ServerCommunicationError>
-    func removeTorrent(byId id: String) -> Result<Bool, ServerCommunicationError>
+    func addTorrent(_ torrent: LocalTorrent, completionHandler: (Result<RemoteTorrent, ServerCommunicationError>) -> ())
+    func getTorrents(completionHandler: (Result<[RemoteTorrent], ServerCommunicationError>) -> ())
+    func removeTorrent(_ torrent: RemoteTorrent, completionHandler: (Result<Bool, ServerCommunicationError>) -> ())
+    func removeTorrent(byId id: String, completionHandler: (Result<Bool, ServerCommunicationError>) -> ())
 }

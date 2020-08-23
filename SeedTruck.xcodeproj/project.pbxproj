@@ -41,6 +41,8 @@
 		A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
 		A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
 		A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
+		A07FFC6D24F2F34E002A78B5 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
+		A07FFC6E24F2F34E002A78B5 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
 		A09656A924F2C6CA009D0FE1 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656A824F2C6CA009D0FE1 /* Server.swift */; };
 		A09656AA24F2C6CA009D0FE1 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656A824F2C6CA009D0FE1 /* Server.swift */; };
 		A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
@@ -92,6 +94,7 @@
 		A045C8E224F2013100B3B1CD /* TorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsView.swift; sourceTree = "<group>"; };
 		A045C8E524F2021100B3B1CD /* TorrentItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentItemView.swift; sourceTree = "<group>"; };
 		A045C8E824F205B100B3B1CD /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		A07FFC6C24F2F34E002A78B5 /* Transmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
 		A09656A824F2C6CA009D0FE1 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +134,7 @@
 		A011C7E324F20C78009D72C6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A07FFC6824F2F1BB002A78B5 /* Remote */,
 				A011C7F424F211C6009D72C6 /* LocalTorrent.swift */,
 				A011C7E724F20DCF009D72C6 /* FileSize.swift */,
 				A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */,
@@ -233,6 +237,14 @@
 				A045C8E824F205B100B3B1CD /* ProgressBarView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A07FFC6824F2F1BB002A78B5 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				A07FFC6C24F2F34E002A78B5 /* Transmission.swift */,
+			);
+			path = Remote;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,6 +418,7 @@
 				A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */,
 				A011C7E824F20DCF009D72C6 /* FileSize.swift in Sources */,
 				A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */,
+				A07FFC6D24F2F34E002A78B5 /* Transmission.swift in Sources */,
 				A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
 				A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
@@ -428,6 +441,7 @@
 				A045C8E424F2013100B3B1CD /* TorrentsView.swift in Sources */,
 				A011C7E924F20DCF009D72C6 /* FileSize.swift in Sources */,
 				A045C8E124F2011E00B3B1CD /* MainView.swift in Sources */,
+				A07FFC6E24F2F34E002A78B5 /* Transmission.swift in Sources */,
 				A045C8CC24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
 				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
