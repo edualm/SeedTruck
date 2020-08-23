@@ -23,6 +23,10 @@
 		A011C7F924F2130A009D72C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A011C7F724F2130A009D72C6 /* README.md */; };
 		A011C7FB24F21406009D72C6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = A011C7FA24F21406009D72C6 /* LICENSE.txt */; };
 		A011C7FC24F21406009D72C6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = A011C7FA24F21406009D72C6 /* LICENSE.txt */; };
+		A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
+		A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
+		A023BAE724F294EF00B82FB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE624F294EF00B82FB3 /* SettingsView.swift */; };
+		A023BAE824F294EF00B82FB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE624F294EF00B82FB3 /* SettingsView.swift */; };
 		A045C8BE24F2006500B3B1CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8BD24F2006500B3B1CD /* Tests_iOS.swift */; };
 		A045C8C924F2006500B3B1CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8C824F2006500B3B1CD /* Tests_macOS.swift */; };
 		A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */; };
@@ -65,6 +69,8 @@
 		A011C7F424F211C6009D72C6 /* LocalTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTorrent.swift; sourceTree = "<group>"; };
 		A011C7F724F2130A009D72C6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A011C7FA24F21406009D72C6 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentDetailsView.swift; sourceTree = "<group>"; };
+		A023BAE624F294EF00B82FB3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
 		A045C8A424F2006500B3B1CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A045C8A924F2006500B3B1CD /* SeedTruck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedTruck.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -157,10 +163,12 @@
 				A045C8EB24F208AC00B3B1CD /* Components */,
 				A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */,
 				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
+				A023BAE624F294EF00B82FB3 /* SettingsView.swift */,
 				A045C8E224F2013100B3B1CD /* TorrentsView.swift */,
 				A011C7EA24F20F4F009D72C6 /* TorrentsViewPresenter.swift */,
-				A045C8A424F2006500B3B1CD /* Assets.xcassets */,
+				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
 				A045C8E524F2021100B3B1CD /* TorrentItemView.swift */,
+				A045C8A424F2006500B3B1CD /* Assets.xcassets */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -390,7 +398,9 @@
 				A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */,
 				A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
 				A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */,
+				A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
 				A011C7EF24F21078009D72C6 /* SeedboxConnection.swift in Sources */,
+				A023BAE724F294EF00B82FB3 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,7 +418,9 @@
 				A045C8E124F2011E00B3B1CD /* MainView.swift in Sources */,
 				A045C8CC24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
 				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
+				A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
 				A011C7F024F21078009D72C6 /* SeedboxConnection.swift in Sources */,
+				A023BAE824F294EF00B82FB3 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

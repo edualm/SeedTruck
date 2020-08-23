@@ -11,6 +11,8 @@ struct TorrentsView: View {
     
     @StateObject var presenter: TorrentsViewPresenter = TorrentsViewPresenter()
     
+    //  TODO: If has various seedboxes, present hamburger icon. Else, show EmptyView
+    
     var body: some View {
         NavigationView {
             List {
@@ -20,7 +22,11 @@ struct TorrentsView: View {
                 }
             }
             .navigationTitle("Torrents")
-            .navigationBarItems(trailing: Button(action: {
+            .navigationBarItems(leading: Button(action: {
+                presenter.perform(.addTorrent)
+            }) {
+                Image(systemName: "text.justify")
+            }, trailing: Button(action: {
                 presenter.perform(.addTorrent)
             }) {
                 Image(systemName: "plus")
