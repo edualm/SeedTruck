@@ -9,12 +9,13 @@ import SwiftUI
 
 struct AddMagnetView: View {
     
+    @Environment(\.presentationMode) private var presentation
+    
     @State private var isLoading = false
     @State private var magnetLink: String = ""
     @State private var showingErrorAlert = false
     
     @Binding var server: Server?
-    @Binding var showing: Bool
     
     var body: some View {
         NavigationView {
@@ -43,7 +44,7 @@ struct AddMagnetView: View {
                             
                             switch $0 {
                             case .success:
-                                showing = false
+                                self.presentation.wrappedValue.dismiss()
                             case .failure:
                                 showingErrorAlert = true
                             }
@@ -54,7 +55,7 @@ struct AddMagnetView: View {
                 }
                 .navigationTitle("Add Magnet")
                 .navigationBarItems(trailing: Button(action: {
-                    showing = false
+                    self.presentation.wrappedValue.dismiss()
                 }) {
                     Text("Cancel")
                         .fontWeight(.medium)
@@ -73,7 +74,6 @@ struct AddMagnetView: View {
 struct AddMagnetView_Previews: PreviewProvider {
     
     static var previews: some View {
-        AddMagnetView(server: .constant(PreviewMockData.server),
-                      showing: .constant(true))
+        AddMagnetView(server: .constant(PreviewMockData.server))
     }
 }

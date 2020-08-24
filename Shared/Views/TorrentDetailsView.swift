@@ -70,6 +70,9 @@ struct TorrentDetailsView: View {
         }
     }
     
+    @Environment(\.presentationMode) private var presentation
+    
+    let server: Server
     let torrent: RemoteTorrent
     
     var body: some View {
@@ -78,10 +81,19 @@ struct TorrentDetailsView: View {
             StatusView(torrent: torrent)
             SpeedView(torrent: torrent)
             GroupBox(label: Label("Actions", systemImage: "wrench")) {
-                HStack {
-                    Button("Remove Torrent") {
-                        
-                    }
+                VStack {
+                    Button(action: {
+                        self.presentation.wrappedValue.dismiss()
+                    }) {
+                        Label("Remove Torrent", systemImage: "xmark")
+                    }.padding(4)
+                    
+                    Button(action: {
+                        self.presentation.wrappedValue.dismiss()
+                    }) {
+                        Label("Remove Torrent and Data", systemImage: "trash")
+                            .foregroundColor(.red)
+                    }.padding(4)
                 }.padding(.top)
             }
         }
@@ -93,7 +105,8 @@ struct TorrentDetailsView: View {
 struct TorrentDetailsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TorrentDetailsView(torrent: PreviewMockData.torrent)
+        TorrentDetailsView(server: PreviewMockData.server,
+                           torrent: PreviewMockData.torrent)
             
     }
 }

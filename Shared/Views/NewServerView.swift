@@ -19,6 +19,7 @@ struct NewServerView: View {
     }
     
     @Environment(\.managedObjectContext) var managedObjectContext
+    @Environment(\.presentationMode) private var presentation
     
     @State private var name = ""
     @State private var endpoint = ""
@@ -27,8 +28,6 @@ struct NewServerView: View {
     @State private var password = ""
     
     @State private var showingAlert: AlertIdentifier?
-    
-    @Binding var showing: Bool
     
     var server: Server? {
         guard let endpoint = URL(string: endpoint) else {
@@ -78,14 +77,14 @@ struct NewServerView: View {
             return
         }
         
-        showing = false
-        
-        //  Mjölnir 🔨
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+        do {
             managedObjectContext.insert(server)
             
-            try! managedObjectContext.save()
+            try managedObjectContext.save()
+            
+            self.presentation.wrappedValue.dismiss()
+        } catch {
+            showingAlert = .init(id: .failure)
         }
     }
     
@@ -144,6 +143,6 @@ struct NewServerView: View {
 struct NewServerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        NewServerView(showing: .constant(true))
+        NewServerView()
     }
 }

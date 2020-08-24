@@ -98,7 +98,7 @@ struct SettingsTabView: View {
                     }
                     
                     Section {
-                        NavigationLink(destination: NewServerView(showing: $showingNewServer), isActive: $showingNewServer) {
+                        NavigationLink(destination: NewServerView()) {
                             Text("New Server")
                         }
                     }

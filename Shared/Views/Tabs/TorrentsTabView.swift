@@ -128,7 +128,7 @@ struct TorrentsTabView: View {
             }
         }
         .sheet(isPresented: $showingAddMagnetModal) {
-            AddMagnetView(server: $selectedServer, showing: $showingAddMagnetModal)
+            AddMagnetView(server: $selectedServer)
         }
     }
 }

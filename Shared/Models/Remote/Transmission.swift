@@ -25,6 +25,13 @@ enum Transmission {
             let tag: Int?
         }
         
+        struct NoArguments: Codable {
+            
+            let result: Result
+            
+            let tag: Int?
+        }
+        
         struct TorrentAdd: Codable {
             
             let result: Result

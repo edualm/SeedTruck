@@ -68,7 +68,8 @@ struct TorrentListView: View {
                             ZStack {
                                 TorrentItemView(torrent: torrent)
                                     .padding(.all, 5)
-                                NavigationLink(destination: TorrentDetailsView(torrent: torrent)) {
+                                NavigationLink(destination: TorrentDetailsView(server: selectedServer!,
+                                                                               torrent: torrent)) {
                                     EmptyView()
                                 }.buttonStyle(PlainButtonStyle())
                             }

@@ -164,25 +164,19 @@ class TransmissionConnection: ServerConnection {
         }
     }
     
-    private func getTorrents(ids: [String], completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
+    private func getTorrents(ids: [Int], completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
         let parameters: Parameters
         
         if ids.count != 0 {
             parameters = [
                 "fields": Self.TorrentFields,
-                "ids": ids.map { Int($0) }
+                "ids": ids
             ]
         } else {
             parameters = ["fields": Self.TorrentFields]
         }
         
         performCall(withMethod: "torrent-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentGet, TransmissionError>) in
-            if parameters.keys.contains("id") {
-                print("got ids")
-            }
-            
-            print(parameters)
-            
             switch result {
             case .success(let response):
                 guard let transmissionTorrents = response.arguments?["torrents"] else {
@@ -206,7 +200,7 @@ class TransmissionConnection: ServerConnection {
     }
     
     func getTorrent(id: String, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
-        getTorrents(ids: [id]) {
+        getTorrents(ids: [Int(id)].compactMap { $0 }) {
             switch $0 {
             case .success(let torrents):
                 guard torrents.count == 1 else {
@@ -227,11 +221,29 @@ class TransmissionConnection: ServerConnection {
         getTorrents(ids: [], completionHandler: completionHandler)
     }
     
-    func removeTorrent(_ torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
-        completionHandler(.failure(.notImplemented))
+    private func removeTorrents(byId ids: [String], deletingData: Bool, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
+        let parameters: Parameters = [
+            "ids": ids.map { Int($0) },
+            "delete-local-data": deletingData
+        ]
+        
+        performCall(withMethod: "torrent-remove", parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
+            switch result {
+            case .success(let response):
+                switch response.result {
+                case .success:
+                    completionHandler(.success(true))
+                case .error:
+                    completionHandler(.success(false))
+                }
+                
+            case .failure(let error):
+                completionHandler(.failure(.serverError(error.localizedDescription)))
+            }
+        }
     }
     
-    func removeTorrent(byId id: String, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
-        completionHandler(.failure(.notImplemented))
+    func removeTorrent(_ torrent: RemoteTorrent, deletingData: Bool, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
+        removeTorrents(byId: [torrent.id], deletingData: deletingData, completionHandler: completionHandler)
     }
 }

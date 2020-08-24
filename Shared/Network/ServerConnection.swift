@@ -22,8 +22,7 @@ protocol ServerConnection {
     func addTorrent(_ torrent: LocalTorrent, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ())
     func getTorrent(id: String, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ())
     func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ())
-    func removeTorrent(_ torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
-    func removeTorrent(byId id: String, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
+    func removeTorrent(_ torrent: RemoteTorrent, deletingData: Bool, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
 }
 
 enum ServerType: String, CaseIterable {
