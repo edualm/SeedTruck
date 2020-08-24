@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MainView: View {
     
+    @Environment(\.managedObjectContext) private var managedObjectContext
+    
     var body: some View {
         TabView {
             TorrentsView()
@@ -16,7 +18,7 @@ struct MainView: View {
                     Image(systemName: "tray.and.arrow.down")
                     Text("Torrents")
                 }
-            SettingsView()
+            SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")

@@ -9,6 +9,8 @@ import Foundation
 
 class TransmissionConnection: ServerConnection {
     
+    private typealias Parameters = Dictionary<String, Any>
+    
     private enum Header: String {
         
         case Authorization = "Authorization"
@@ -131,12 +133,23 @@ class TransmissionConnection: ServerConnection {
         }
     }
     
-    func addTorrent(_ torrent: LocalTorrent, completionHandler: (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
-        completionHandler(.failure(.notImplemented))
+    func addTorrent(_ torrent: LocalTorrent, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
+        let parameters: Parameters
+        
+        switch torrent {
+        case .magnet(let magnet):
+            parameters = ["filename": magnet]
+        case .torrent(let torrent):
+            parameters = ["metainfo": torrent.base64EncodedString()]
+        }
+        
+        performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentAdd, TransmissionError>) in
+            completionHandler(.failure(.notImplemented))
+        }
     }
     
     func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
-        let parameters: Dictionary<String, [String]> = ["fields": ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload"]]
+        let parameters: Parameters = ["fields": ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload"]]
         
         performCall(withMethod: "torrent-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentGet, TransmissionError>) in
             switch result {
@@ -161,11 +174,11 @@ class TransmissionConnection: ServerConnection {
         }
     }
     
-    func removeTorrent(_ torrent: RemoteTorrent, completionHandler: (Result<Bool, ServerCommunicationError>) -> ()) {
+    func removeTorrent(_ torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
         completionHandler(.failure(.notImplemented))
     }
     
-    func removeTorrent(byId id: String, completionHandler: (Result<Bool, ServerCommunicationError>) -> ()) {
+    func removeTorrent(byId id: String, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
         completionHandler(.failure(.notImplemented))
     }
 }

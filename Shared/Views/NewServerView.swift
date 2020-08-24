@@ -102,8 +102,9 @@ struct NewServerView: View {
                     }
                 }
                 TextField("Endpoint", text: $endpoint)
+                    .keyboardType(.URL)
                 TextField("Username", text: $username)
-                TextField("Password", text: $password)
+                SecureField("Password", text: $password)
             }
             
             Section {

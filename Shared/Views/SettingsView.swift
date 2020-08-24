@@ -23,8 +23,16 @@ struct SettingsView: View {
         ]
     ) private var serverConnections: FetchedResults<Server>
     
+    @Environment(\.managedObjectContext) private var managedObjectContext
+    
     @State private var showingNewServer = false
     @State private var connectionResults: [Server: ConnectionResult] = [:]
+    
+    @ObservedObject private var presenter: SettingsPresenter
+    
+    init(presenter: SettingsPresenter) {
+        self.presenter = presenter
+    }
     
     func onAppear() {
         connectionResults = serverConnections.reduce(into: [Server: ConnectionResult]()) {
@@ -41,6 +49,11 @@ struct SettingsView: View {
     }
     
     var body: some View {
+        let showingDeleteAlertBinding = Binding<Bool>(
+            get: { self.presenter.showingDeleteAlert },
+            set: { _ in }
+        )
+        
         NavigationView {
             VStack {
                 List {
@@ -59,12 +72,25 @@ struct SettingsView: View {
                             case .none:
                                 EmptyView()
                             }
-                            NavigationLink(destination: EmptyView()) {
+                            Button(action: {
+                                
+                            }) {
                                 Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
                             }
-                            NavigationLink(destination: EmptyView()) {
+                            Button(action: {
+                                self.presenter.perform(.delete(server))
+                            }) {
                                 Label("Delete", systemImage: "trash")
                                     .foregroundColor(.red)
+                            }.alert(isPresented: showingDeleteAlertBinding) {
+                                Alert(title: Text("Are you sure you want to delete XXX?"),
+                                      message: nil,
+                                      primaryButton: .destructive(Text("Delete")) {
+                                        self.presenter.perform(.confirmDeletion)
+                                      },
+                                      secondaryButton: .cancel() {
+                                        self.presenter.perform(.abortDeletion)
+                                      })
                             }
                         }
                     }
@@ -78,14 +104,15 @@ struct SettingsView: View {
                 .listStyle(InsetGroupedListStyle())
             }
             .navigationTitle("Settings")
-        }.onAppear(perform: onAppear)
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear(perform: onAppear)
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        SettingsView()
-            
+        SettingsView(presenter: SettingsPresenter(managedObjectContext: MockCoreDataManagedObjectDeleter()))
     }
 }
