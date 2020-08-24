@@ -22,55 +22,118 @@ struct NoServersConfiguredView: View {
     }
 }
 
+struct ServerConnectionErrorView: View {
+    
+    var body: some View {
+        VStack {
+            Text("😞")
+                .font(.largeTitle)
+            Text("Error!")
+                .font(.headline)
+                .padding()
+            Text("Data could not be retrieved from the server.")
+                .fontWeight(.light)
+        }
+    }
+}
+
 struct TorrentsView: View {
     
-    @EnvironmentObject var engine: Engine
+    private enum Status {
+        case error
+        case noError
+    }
     
-    @State var selectedServer: Server?
+    @FetchRequest(
+        entity: Server.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \Server.name, ascending: true)
+        ]
+    ) var serverConnections: FetchedResults<Server>
+    
+    @State private var status: Status = .noError
+    @State private var selectedServer: Server?
+    @State private var torrents: [RemoteTorrent] = []
+    
+    @State var timer: Timer? = nil
     
     func onAppear() {
-        if engine.servers.count != 0 {
-            selectedServer = engine.servers[0]
+        selectedServer = serverConnections.first
+        
+        updateData()
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+            updateData()
+        }
+    }
+    
+    func onDisappear() {
+        timer?.invalidate()
+        timer = nil
+    }
+    
+    func updateData() {
+        if let server = selectedServer {
+            server.connection.getTorrents { result in
+                guard case let Result.success(torrents) = result else {
+                    self.status = .error
+                    self.torrents = []
+                    
+                    return
+                }
+                
+                self.status = .noError
+                self.torrents = torrents
+            }
         }
     }
     
     var body: some View {
         NavigationView {
             Group {
-                if let server = selectedServer {
-                    List {
-                        ForEach(server.torrents) { torrent in
-                            ZStack {
-                                TorrentItemView(torrent: torrent)
-                                    .padding(.all, 5)
-                                NavigationLink(destination: TorrentDetailsView(torrent: torrent)) {
-                                    EmptyView()
-                                }.buttonStyle(PlainButtonStyle())
+                switch status {
+                case .error:
+                    ServerConnectionErrorView()
+                case .noError:
+                    if selectedServer != nil {
+                        List {
+                            ForEach(torrents) { torrent in
+                                ZStack {
+                                    TorrentItemView(torrent: torrent)
+                                        .padding(.all, 5)
+                                    NavigationLink(destination: TorrentDetailsView(torrent: torrent)) {
+                                        EmptyView()
+                                    }.buttonStyle(PlainButtonStyle())
+                                }
                             }
                         }
+                    } else {
+                        NoServersConfiguredView()
                     }
-                } else {
-                    NoServersConfiguredView()
                 }
             }
             .navigationTitle(selectedServer?.name ?? "Torrents")
             .navigationBarItems(leading: Menu {
-                ForEach(engine.servers, id: \.self) { server in
+                ForEach(serverConnections, id: \.self) { server in
                     Button {
-                        self.selectedServer = server
+                        selectedServer = server
+                        torrents = []
+                        updateData()
                     } label: {
                         Text(server.name)
-                        Image(systemName: "desktopcomputer")
+                        Image(systemName: "server.rack")
                     }
                 }
             } label: {
                  Image(systemName: "text.justify")
-            }, trailing: engine.servers.count > 0 ? AnyView(Button(action: {
+            }, trailing: serverConnections.count > 0 ? AnyView(Button(action: {
                 //  Add Torrent...
             }) {
-                Image(systemName: "plus")
+                Image(systemName: "link.badge.plus")
             }) : AnyView(EmptyView()))
-        }.onAppear(perform: onAppear)
+        }
+        .onAppear(perform: onAppear)
+        .onDisappear(perform: onDisappear)
     }
 }
 

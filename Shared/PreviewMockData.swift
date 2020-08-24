@@ -19,8 +19,13 @@ enum PreviewMockData {
                                                                  uploadRate: 125000),
                                             size: 1000000)
     
-    static let server = Server(id: UUID(),
-                               name: "Server #1",
-                               connectionDetails: .init(type: .transmission, endpoint: URL(string: "http://endpoint/")!, credentials: nil),
-                               torrents: [torrent])
+    static var server: Server {
+        let server = Server()
+        
+        server.endpoint = URL(string: "http://endpoint/")!
+        server.name = "Server #1"
+        server.type = 0
+        
+        return server
+    }
 }

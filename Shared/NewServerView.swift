@@ -28,25 +28,23 @@ struct NewServerView: View {
     
     @State var showingAlert: AlertIdentifier?
     
+    @Binding var showing: Bool
+    
     var server: Server? {
-        let type: ServerType = ServerType(fromCode: self.type)!
-        
         guard let endpoint = URL(string: endpoint) else {
             return nil
         }
         
-        let credentials: URLCredential?
+        let newServer = Server.new(withManagedContext: managedObjectContext)
         
-        if username != "" && password != "" {
-            credentials = URLCredential(user: username, password: password, persistence: .none)
-        } else {
-            credentials = nil
-        }
+        newServer.name = name
+        newServer.endpoint = endpoint
+        newServer.type = Int16(type)
         
-        return Server(name: name,
-                      connectionDetails: .init(type: type,
-                                               endpoint: endpoint,
-                                               credentials: credentials))
+        newServer.credentialUsername = !username.isEmpty ? username : nil
+        newServer.credentialPassword = !password.isEmpty ? password : nil
+        
+        return newServer
     }
     
     func testConnection(completion: @escaping (Bool) -> ()) {
@@ -58,6 +56,10 @@ struct NewServerView: View {
         
         server.connection.getTorrents { result in
             DispatchQueue.main.async {
+                defer {
+                    managedObjectContext.delete(server)
+                }
+                
                 guard case Result.success = result else {
                     completion(false)
                     
@@ -76,16 +78,15 @@ struct NewServerView: View {
             return
         }
         
-        let newServer = ServerConnectionDetails(context: managedObjectContext)
+        managedObjectContext.insert(server)
         
-        newServer.name = server.name
-        newServer.endpoint = server.connectionDetails.endpoint
-        newServer.type = server.connectionDetails.type.code
-        
-        newServer.credentialUsername = server.connectionDetails.credentials?.user
-        newServer.credentialPassword = server.connectionDetails.credentials?.password
-        
-        try! managedObjectContext.save()
+        do {
+            try managedObjectContext.save()
+            
+            showing = false
+        } catch {
+            showingAlert = AlertIdentifier(id: .failure)
+        }
     }
     
     var body: some View {
@@ -118,9 +119,7 @@ struct NewServerView: View {
                     Label("Test Connection", systemImage: "wand.and.rays")
                 }
                 
-                Button(action: {
-                    
-                }) {
+                Button(action: save) {
                     Label("Save", systemImage: "tag")
                 }
             }
@@ -144,6 +143,6 @@ struct NewServerView: View {
 struct NewServerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        NewServerView()
+        NewServerView(showing: .constant(true))
     }
 }

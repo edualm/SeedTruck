@@ -119,6 +119,18 @@ class TransmissionConnection: ServerConnection {
         task.resume()
     }
     
+    func test(completionHandler: @escaping (Bool) -> ()) {
+        getTorrents {
+            if case Result.success = $0 {
+                completionHandler(true)
+                
+                return
+            }
+            
+            completionHandler(false)
+        }
+    }
+    
     func addTorrent(_ torrent: LocalTorrent, completionHandler: (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
         completionHandler(.failure(.notImplemented))
     }

@@ -13,12 +13,12 @@ struct MainView: View {
         TabView {
             TorrentsView()
                 .tabItem {
-                    Image(systemName: "arrow.down.doc")
+                    Image(systemName: "tray.and.arrow.down")
                     Text("Torrents")
                 }
             SettingsView()
                 .tabItem {
-                    Image(systemName: "wrench")
+                    Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")
                 }
         }

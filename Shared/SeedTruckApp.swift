@@ -12,13 +12,10 @@ import CoreData
     
     @Environment(\.scenePhase) private var scenePhase
     
-    let engine = Engine()
-    
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
-                .environmentObject(engine)
         }.onChange(of: scenePhase) { phase in
             switch phase {
             case .background:
