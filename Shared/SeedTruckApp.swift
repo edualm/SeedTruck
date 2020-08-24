@@ -16,6 +16,13 @@ import CoreData
         WindowGroup {
             MainView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
+                .onOpenURL { url in
+                    if url.isFileURL {
+                        //  Handle a `.torrent` file
+                    } else {
+                        //  Handle a magnet link
+                    }
+                }
         }.onChange(of: scenePhase) { phase in
             switch phase {
             case .background:
