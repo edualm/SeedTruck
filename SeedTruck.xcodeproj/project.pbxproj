@@ -53,6 +53,8 @@
 		A05FE16B24F45B2700B57E45 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16924F45B2700B57E45 /* LoadingView.swift */; };
 		A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */; };
 		A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */; };
+		A073DD2124F4658700BA37C9 /* AddMagnetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073DD2024F4658700BA37C9 /* AddMagnetView.swift */; };
+		A073DD2224F4658700BA37C9 /* AddMagnetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073DD2024F4658700BA37C9 /* AddMagnetView.swift */; };
 		A07FFC6D24F2F34E002A78B5 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
 		A07FFC6E24F2F34E002A78B5 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
 		A07FFC7024F30044002A78B5 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
@@ -121,6 +123,7 @@
 		A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionErrorView.swift; sourceTree = "<group>"; };
 		A05FE16924F45B2700B57E45 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ByteCountFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		A073DD2024F4658700BA37C9 /* AddMagnetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMagnetView.swift; sourceTree = "<group>"; };
 		A07FFC6C24F2F34E002A78B5 /* Transmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
 		A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transmission+Extensions.swift"; sourceTree = "<group>"; };
 		A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionModelTests.swift; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 			isa = PBXGroup;
 			children = (
 				A05FE16824F446E200B57E45 /* Tabs */,
+				A073DD2024F4658700BA37C9 /* AddMagnetView.swift */,
 				A05FE16924F45B2700B57E45 /* LoadingView.swift */,
 				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
 				A02C585824F3446100C82D68 /* NewServerView.swift */,
@@ -517,6 +521,7 @@
 				A011C7EF24F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A023BAE724F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
 				A0C1DB3624F42E4100C76682 /* SettingsPresenter.swift in Sources */,
+				A073DD2124F4658700BA37C9 /* AddMagnetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,6 +555,7 @@
 				A011C7F024F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A023BAE824F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
 				A0C1DB3724F42E4100C76682 /* SettingsPresenter.swift in Sources */,
+				A073DD2224F4658700BA37C9 /* AddMagnetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

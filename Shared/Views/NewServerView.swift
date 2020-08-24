@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewServerView: View {
     
-    struct AlertIdentifier: Identifiable {
+    private struct AlertIdentifier: Identifiable {
         enum Choice {
             case failure
             case success
@@ -20,13 +20,13 @@ struct NewServerView: View {
     
     @Environment(\.managedObjectContext) var managedObjectContext
     
-    @State var name = ""
-    @State var endpoint = ""
-    @State var type = 0
-    @State var username = ""
-    @State var password = ""
+    @State private var name = ""
+    @State private var endpoint = ""
+    @State private var type = 0
+    @State private var username = ""
+    @State private var password = ""
     
-    @State var showingAlert: AlertIdentifier?
+    @State private var showingAlert: AlertIdentifier?
     
     @Binding var showing: Bool
     
@@ -73,14 +73,16 @@ struct NewServerView: View {
     
     func save() {
         guard let server = server else {
-            showingAlert = AlertIdentifier(id: .failure)
+            showingAlert = .init(id: .failure)
             
             return
         }
         
         showing = false
         
-        DispatchQueue.main.async {
+        //  Mjölnir 🔨
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
             managedObjectContext.insert(server)
             
             try! managedObjectContext.save()
@@ -109,9 +111,9 @@ struct NewServerView: View {
                 Button(action: {
                     testConnection {
                         if $0 {
-                            showingAlert = AlertIdentifier(id: .success)
+                            showingAlert = .init(id: .success)
                         } else {
-                            showingAlert = AlertIdentifier(id: .failure)
+                            showingAlert = .init(id: .failure)
                         }
                     }
                 }) {

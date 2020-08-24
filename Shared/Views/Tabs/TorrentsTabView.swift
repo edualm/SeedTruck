@@ -9,6 +9,14 @@ import SwiftUI
 
 struct TorrentsTabView: View {
     
+    private struct AlertIdentifier: Identifiable {
+        enum Choice {
+            case addTorrentError
+        }
+        
+        var id: Choice
+    }
+    
     private struct AddMenuItem: Hashable {
         
         let name: String
@@ -27,26 +35,26 @@ struct TorrentsTabView: View {
     private var addMenuItems: [AddMenuItem] {
         [
             .init(name: "Magnet Link", systemImage: "link") {
-                //  TODO: Ask the user to input a magnet link...
+                self.showingAddMagnetModal = true
             },
             .init(name: "Torrent File", systemImage: "doc") {
                 let picker = DocumentPickerViewController(
                     torrentPickerWithOnPick: { url in
                         guard url.lastPathComponent.split(separator: ".").last == "torrent" else {
-                            self.showingAddTorrentErrorAlert = true
+                            self.showingAlert = .init(id: .addTorrentError)
                             
                             return
                         }
                         
                         guard let fileData = try? Data(contentsOf: url) else {
-                            self.showingAddTorrentErrorAlert = true
+                            self.showingAlert = .init(id: .addTorrentError)
                             
                             return
                         }
                         
                         selectedServer?.connection.addTorrent(.torrent(fileData)) { result in
                             if case Result.failure = result {
-                                self.showingAddTorrentErrorAlert = true
+                                self.showingAlert = .init(id: .addTorrentError)
                             }
                         }
                     },
@@ -68,9 +76,8 @@ struct TorrentsTabView: View {
     private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     
     @State private var selectedServer: Server?
-    @State private var showingAddTorrentErrorAlert = false
-    
-    //  TODO: Actually show an error alert!
+    @State private var showingAlert: AlertIdentifier?
+    @State private var showingAddMagnetModal: Bool = false
     
     func onAppear() {
         if selectedServer == nil {
@@ -110,6 +117,18 @@ struct TorrentsTabView: View {
         .onAppear(perform: onAppear)
         .onReceive(managedContextDidSave) { _ in
             selectedServer = serverConnections.first
+        }
+        .alert(item: $showingAlert) {
+            switch $0.id {
+            case .addTorrentError:
+                return Alert(title: Text("Error!"),
+                      message: Text("An error has occurred while adding the requested torrent."),
+                      dismissButton: .default(Text("Ok")))
+            
+            }
+        }
+        .sheet(isPresented: $showingAddMagnetModal) {
+            AddMagnetView(server: $selectedServer, showing: $showingAddMagnetModal)
         }
     }
 }
