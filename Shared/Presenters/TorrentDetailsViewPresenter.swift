@@ -59,9 +59,9 @@ class TorrentDetailsViewPresenter: ObservableObject {
                     self.actionToCommit = nil
                     
                     if case let Result.success(success) = result, success {
-                        self.currentAlert = nil
-                        
                         DispatchQueue.main.async {
+                            self.currentAlert = nil
+                            
                             onSuccess?()
                         }
                         
