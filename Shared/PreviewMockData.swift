@@ -21,5 +21,6 @@ enum PreviewMockData {
     
     static let server = Server(id: UUID(),
                                name: "Server #1",
+                               connectionDetails: .init(type: .transmission, endpoint: URL(string: "http://endpoint/")!, credentials: nil),
                                torrents: [torrent])
 }

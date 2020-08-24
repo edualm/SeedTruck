@@ -24,12 +24,20 @@ struct NoServersConfiguredView: View {
 
 struct TorrentsView: View {
     
-    @StateObject var presenter: TorrentsViewPresenter = TorrentsViewPresenter()
+    @EnvironmentObject var engine: Engine
+    
+    @State var selectedServer: Server?
+    
+    func onAppear() {
+        if engine.servers.count != 0 {
+            selectedServer = engine.servers[0]
+        }
+    }
     
     var body: some View {
         NavigationView {
             Group {
-                if let server = presenter.viewModel.currentServer {
+                if let server = selectedServer {
                     List {
                         ForEach(server.torrents) { torrent in
                             ZStack {
@@ -45,18 +53,24 @@ struct TorrentsView: View {
                     NoServersConfiguredView()
                 }
             }
-            
-            .navigationTitle("Torrents")
-            .navigationBarItems(leading: presenter.viewModel.servers.count > 1 ? AnyView(Button(action: {
-                presenter.perform(.toggleChangeSeedboxListVisibility)
-            }) {
-                Image(systemName: "text.justify")
-            }) : AnyView(EmptyView()), trailing: presenter.viewModel.currentServer != nil ? AnyView(Button(action: {
-                presenter.perform(.addTorrent)
+            .navigationTitle(selectedServer?.name ?? "Torrents")
+            .navigationBarItems(leading: Menu {
+                ForEach(engine.servers, id: \.self) { server in
+                    Button {
+                        self.selectedServer = server
+                    } label: {
+                        Text(server.name)
+                        Image(systemName: "desktopcomputer")
+                    }
+                }
+            } label: {
+                 Image(systemName: "text.justify")
+            }, trailing: engine.servers.count > 0 ? AnyView(Button(action: {
+                //  Add Torrent...
             }) {
                 Image(systemName: "plus")
             }) : AnyView(EmptyView()))
-        }
+        }.onAppear(perform: onAppear)
     }
 }
 
@@ -65,8 +79,6 @@ struct TorrentsView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             TorrentsView()
-            TorrentsView(presenter: TorrentsViewPresenter(viewModel: .init(servers: [PreviewMockData.server],
-                                                                           currentServer: PreviewMockData.server)))
         }
     }
 }

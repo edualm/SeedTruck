@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17189" systemVersion="19G73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ServerConnectionDetails" representedClassName=".ServerConnectionDetails" syncable="YES">
+        <attribute name="credentialPassword" optional="YES" attributeType="String"/>
+        <attribute name="credentialUsername" optional="YES" attributeType="String"/>
+        <attribute name="endpoint" attributeType="URI"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="ServerConnectionDetails" positionX="-63" positionY="-18" width="128" height="118"/>
+    </elements>
+</model>

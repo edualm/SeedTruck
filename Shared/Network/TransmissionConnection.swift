@@ -49,7 +49,7 @@ class TransmissionConnection: ServerConnection {
         self.connectionDetails = connectionDetails
     }
     
-    private func performCall<T: Decodable>(withMethod method: String, parameters: Dictionary<String, String>?, completionHandler: @escaping (Result<T, TransmissionError>) -> ()) {
+    private func performCall<T: Decodable>(withMethod method: String, parameters: Dictionary<String, Any>?, completionHandler: @escaping (Result<T, TransmissionError>) -> ()) {
         let request: [String: Any] = [
             "method": method,
             "arguments": parameters as Any
@@ -123,14 +123,28 @@ class TransmissionConnection: ServerConnection {
         completionHandler(.failure(.notImplemented))
     }
     
-    func getTorrents(completionHandler: (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
-        performCall(withMethod: "torrent-get", parameters: [:]) { (result: Result<Transmission.RPCResponse.TorrentGet, TransmissionError>) in
+    func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
+        let parameters: Dictionary<String, [String]> = ["fields": ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload"]]
+        
+        performCall(withMethod: "torrent-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentGet, TransmissionError>) in
             switch result {
             case .success(let response):
-                ()
+                guard let transmissionTorrents = response.arguments["torrents"] else {
+                    completionHandler(.failure(.parseError))
+                    
+                    return
+                }
+                
+                if case let Transmission.RPCResponse.Result.error(error) = response.result {
+                    completionHandler(.failure(.serverError(error)))
+                    
+                    return
+                }
+                
+                completionHandler(.success(transmissionTorrents.compactMap { RemoteTorrent(from: $0) }))
                 
             case .failure(let error):
-                ()
+                completionHandler(.failure(.serverError(error.localizedDescription)))
             }
         }
     }

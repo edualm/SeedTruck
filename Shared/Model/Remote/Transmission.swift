@@ -175,6 +175,7 @@ enum Transmission {
         let seedIdleMode: Int?
         let seedRatioLimit: Double?
         let seedRatioMode: Int?
+        let sizeWhenDone: Int?
         let startDate: Int?
         let status: Int?
         let trackers: [Tracker]?

@@ -9,22 +9,32 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @FetchRequest(
+        entity: ServerConnectionDetails.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \ServerConnectionDetails.credentialUsername, ascending: true)
+        ]
+    ) var serverConnections: FetchedResults<ServerConnectionDetails>
+    
     var body: some View {
         NavigationView {
             VStack {
                 List {
-                    Section(header: Text("Server #1")) {
-                        Label("Connection Successful!", systemImage: "checkmark")
-                            .foregroundColor(.green)
-                        NavigationLink(destination: EmptyView()) {
-                            Label("Edit", systemImage: "pencil")
-                        }
-                        NavigationLink(destination: EmptyView()) {
-                            Label("Delete", systemImage: "trash")
+                    ForEach(serverConnections) {
+                        Section(header: Text($0.name)) {
+                            Label("Connection Successful!", systemImage: "checkmark")
+                                .foregroundColor(.green)
+                            NavigationLink(destination: EmptyView()) {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            NavigationLink(destination: EmptyView()) {
+                                Label("Delete", systemImage: "trash")
+                            }
                         }
                     }
+                    
                     Section {
-                        NavigationLink(destination: EmptyView()) {
+                        NavigationLink(destination: NewServerView()) {
                             Text("New Server")
                         }
                     }

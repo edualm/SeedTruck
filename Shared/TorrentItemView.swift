@@ -17,6 +17,7 @@ struct TorrentItemView: View {
             switch torrent.status {
             case .idle:
                 Text("Idle")
+                    .fontWeight(.light)
             case let .downloading(_, _, _, downloadRate, uploadRate):
                 HStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "chevron.down")
