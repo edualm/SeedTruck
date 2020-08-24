@@ -30,6 +30,8 @@ struct SettingsTabView: View {
     
     @ObservedObject private var presenter: SettingsPresenter
     
+    private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
+    
     init(presenter: SettingsPresenter) {
         self.presenter = presenter
     }
@@ -83,7 +85,7 @@ struct SettingsTabView: View {
                                 Label("Delete", systemImage: "trash")
                                     .foregroundColor(.red)
                             }.alert(isPresented: showingDeleteAlertBinding) {
-                                Alert(title: Text("Are you sure you want to delete \"\(server.name)\"?"),
+                                Alert(title: Text("Are you sure you want to delete \"\(presenter.serverUnderModification?.name ?? "Unknown")\"?"),
                                       message: nil,
                                       primaryButton: .destructive(Text("Delete")) {
                                         self.presenter.perform(.confirmDeletion)
@@ -107,6 +109,9 @@ struct SettingsTabView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear(perform: onAppear)
+        .onReceive(managedContextDidSave) { _ in
+            onAppear()
+        }
     }
 }
 

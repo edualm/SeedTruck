@@ -78,14 +78,12 @@ struct NewServerView: View {
             return
         }
         
-        managedObjectContext.insert(server)
+        showing = false
         
-        do {
-            try managedObjectContext.save()
+        DispatchQueue.main.async {
+            managedObjectContext.insert(server)
             
-            showing = false
-        } catch {
-            showingAlert = AlertIdentifier(id: .failure)
+            try! managedObjectContext.save()
         }
     }
     

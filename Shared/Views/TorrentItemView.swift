@@ -18,6 +18,7 @@ struct TorrentItemView: View {
             case .idle:
                 Text("Idle")
                     .fontWeight(.light)
+                
             case let .downloading(_, _, _, downloadRate, uploadRate):
                 HStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "chevron.down")
@@ -25,6 +26,7 @@ struct TorrentItemView: View {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "chevron.up")
                         .font(.footnote)
                 }
+                
             case let .seeding(_, uploadRate):
                 HStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "chevron.up")

@@ -10,6 +10,7 @@ import CoreData
 protocol CoreDataManagedObjectDeleter {
     
     func delete(_ object: NSManagedObject)
+    func save() throws
 }
 
 extension NSManagedObjectContext: CoreDataManagedObjectDeleter {}
@@ -17,4 +18,5 @@ extension NSManagedObjectContext: CoreDataManagedObjectDeleter {}
 class MockCoreDataManagedObjectDeleter: CoreDataManagedObjectDeleter {
     
     func delete(_ object: NSManagedObject) {}
+    func save() {}
 }

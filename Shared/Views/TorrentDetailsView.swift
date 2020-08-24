@@ -53,6 +53,7 @@ struct TorrentDetailsView: View {
                         Spacer()
                     }.padding(.top)
                 }
+                
             case let .seeding(_, uploadRate):
                 GroupBox(label: Label("Speed", systemImage: "speedometer")) {
                     HStack {
@@ -62,6 +63,7 @@ struct TorrentDetailsView: View {
                         Spacer()
                     }.padding(.top)
                 }
+                
             default:
                 EmptyView()
             }

@@ -65,13 +65,17 @@ struct TorrentsTabView: View {
         ]
     ) var serverConnections: FetchedResults<Server>
     
+    private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
+    
     @State private var selectedServer: Server?
     @State private var showingAddTorrentErrorAlert = false
     
     //  TODO: Actually show an error alert!
     
     func onAppear() {
-        selectedServer = serverConnections.first
+        if selectedServer == nil {
+            selectedServer = serverConnections.first
+        }
     }
     
     var body: some View {
@@ -104,6 +108,9 @@ struct TorrentsTabView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear(perform: onAppear)
+        .onReceive(managedContextDidSave) { _ in
+            selectedServer = serverConnections.first
+        }
     }
 }
 

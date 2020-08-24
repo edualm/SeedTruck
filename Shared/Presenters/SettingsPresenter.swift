@@ -45,6 +45,7 @@ class SettingsPresenter: ObservableObject {
             }
             
             managedObjectContext.delete(server)
+            try! managedObjectContext.save()
             
             serverUnderModification = nil
             showingDeleteAlert = false

@@ -11,6 +11,8 @@ struct TorrentListView: View {
     
     private enum Status {
         
+        case loading
+        
         case error
         case noError
     }
@@ -51,28 +53,37 @@ struct TorrentListView: View {
     }
     
     var body: some View {
-        switch status {
-        case .error:
-            ServerConnectionErrorView()
-        case .noError:
-            if selectedServer != nil {
-                List {
-                    ForEach(torrents) { torrent in
-                        ZStack {
-                            TorrentItemView(torrent: torrent)
-                                .padding(.all, 5)
-                            NavigationLink(destination: TorrentDetailsView(torrent: torrent)) {
-                                EmptyView()
-                            }.buttonStyle(PlainButtonStyle())
+        Group {
+            switch status {
+            case .error:
+                ServerConnectionErrorView()
+                
+            case .loading:
+                LoadingView()
+                
+            case .noError:
+                if selectedServer != nil {
+                    List {
+                        ForEach(torrents) { torrent in
+                            ZStack {
+                                TorrentItemView(torrent: torrent)
+                                    .padding(.all, 5)
+                                NavigationLink(destination: TorrentDetailsView(torrent: torrent)) {
+                                    EmptyView()
+                                }.buttonStyle(PlainButtonStyle())
+                            }
                         }
                     }
+                    .listStyle(InsetGroupedListStyle())
+                } else {
+                    NoServersConfiguredView()
                 }
-                .listStyle(InsetGroupedListStyle())
-                .onAppear(perform: onAppear)
-                .onDisappear(perform: onDisappear)
-            } else {
-                NoServersConfiguredView()
             }
+        }
+        .onAppear(perform: onAppear)
+        .onDisappear(perform: onDisappear)
+        .onChange(of: selectedServer) { _ in
+            status = .loading
         }
     }
 }
