@@ -18,7 +18,7 @@ struct MainView: View {
                     Image(systemName: "tray.and.arrow.down")
                     Text("Torrents")
                 }
-            SettingsTabView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
+            SettingsTabView(actionHandler: SettingsActionHandler(managedObjectContext: managedObjectContext))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")

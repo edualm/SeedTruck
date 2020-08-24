@@ -69,8 +69,8 @@ struct TorrentListView: View {
                                 TorrentItemView(torrent: torrent)
                                     .padding(.all, 5)
                                 NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                               presenter: .init(server: selectedServer!,
-                                                                                                torrent: torrent))) {
+                                                                               actionHandler: .init(server: selectedServer!,
+                                                                                                    torrent: torrent))) {
                                     EmptyView()
                                 }.buttonStyle(PlainButtonStyle())
                             }

@@ -1,5 +1,5 @@
 //
-//  SettingsPresenter.swift
+//  SettingsActionHandler.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 24/08/2020.
@@ -8,7 +8,7 @@
 import CoreData
 import Foundation
 
-class SettingsPresenter: ObservableObject {
+class SettingsActionHandler: ObservableObject {
     
     @Published var showingDeleteAlert = false
     

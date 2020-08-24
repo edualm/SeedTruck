@@ -28,12 +28,12 @@ struct SettingsTabView: View {
     @State private var showingNewServer = false
     @State private var connectionResults: [Server: ConnectionResult] = [:]
     
-    @ObservedObject private var presenter: SettingsPresenter
+    @ObservedObject private var actionHandler: SettingsActionHandler
     
     private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     
-    init(presenter: SettingsPresenter) {
-        self.presenter = presenter
+    init(actionHandler: SettingsActionHandler) {
+        self.actionHandler = actionHandler
     }
     
     func onAppear() {
@@ -52,7 +52,7 @@ struct SettingsTabView: View {
     
     var body: some View {
         let showingDeleteAlertBinding = Binding<Bool>(
-            get: { self.presenter.showingDeleteAlert },
+            get: { self.actionHandler.showingDeleteAlert },
             set: { _ in }
         )
         
@@ -80,18 +80,18 @@ struct SettingsTabView: View {
                                 Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
                             }
                             Button(action: {
-                                self.presenter.perform(.delete(server))
+                                self.actionHandler.perform(.delete(server))
                             }) {
                                 Label("Delete", systemImage: "trash")
                                     .foregroundColor(.red)
                             }.alert(isPresented: showingDeleteAlertBinding) {
-                                Alert(title: Text("Are you sure you want to delete \"\(presenter.serverUnderModification?.name ?? "Unknown")\"?"),
+                                Alert(title: Text("Are you sure you want to delete \"\(actionHandler.serverUnderModification?.name ?? "Unknown")\"?"),
                                       message: nil,
                                       primaryButton: .destructive(Text("Delete")) {
-                                        self.presenter.perform(.confirmDeletion)
+                                        self.actionHandler.perform(.confirmDeletion)
                                       },
                                       secondaryButton: .cancel() {
-                                        self.presenter.perform(.abortDeletion)
+                                        self.actionHandler.perform(.abortDeletion)
                                       })
                             }
                         }
@@ -118,6 +118,6 @@ struct SettingsTabView: View {
 struct SettingsTabView_Previews: PreviewProvider {
     
     static var previews: some View {
-        SettingsTabView(presenter: SettingsPresenter(managedObjectContext: MockCoreDataManagedObjectDeleter()))
+        SettingsTabView(actionHandler: SettingsActionHandler(managedObjectContext: MockCoreDataManagedObjectDeleter()))
     }
 }

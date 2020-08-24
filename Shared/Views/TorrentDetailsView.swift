@@ -22,7 +22,7 @@ struct TorrentDetailsView: View {
             }
         }
     }
-
+    
     private struct StatusView: View {
         
         let torrent: RemoteTorrent
@@ -36,7 +36,7 @@ struct TorrentDetailsView: View {
             }
         }
     }
-
+    
     private struct SpeedView: View {
         
         let torrent: RemoteTorrent
@@ -74,12 +74,12 @@ struct TorrentDetailsView: View {
     
     let torrent: RemoteTorrent
     
-    @ObservedObject var presenter: TorrentDetailsViewPresenter
+    @ObservedObject var actionHandler: TorrentDetailsActionHandler
     
     var body: some View {
-        let currentAlert = Binding<TorrentDetailsViewPresenter.AlertIdentifier?>(
-            get: { self.presenter.currentAlert },
-            set: { self.presenter.currentAlert = $0 }
+        let currentAlert = Binding<TorrentDetailsActionHandler.AlertIdentifier?>(
+            get: { self.actionHandler.currentAlert },
+            set: { self.actionHandler.currentAlert = $0 }
         )
         
         return ScrollView {
@@ -89,13 +89,13 @@ struct TorrentDetailsView: View {
             GroupBox(label: Label("Actions", systemImage: "wrench")) {
                 VStack {
                     Button(action: {
-                        presenter.perform(.prepareForRemoval(deletingFiles: false))
+                        actionHandler.perform(.prepareForRemoval(deletingFiles: false))
                     }) {
                         Label("Remove Torrent", systemImage: "xmark")
                     }.padding(4)
                     
                     Button(action: {
-                        presenter.perform(.prepareForRemoval(deletingFiles: true))
+                        actionHandler.perform(.prepareForRemoval(deletingFiles: true))
                     }) {
                         Label("Remove Torrent and Data", systemImage: "trash")
                             .foregroundColor(.red)
@@ -111,7 +111,7 @@ struct TorrentDetailsView: View {
                 return Alert(title: Text("Are you sure?"),
                              message: Text("You are about to perform a destructive action.\n\nAre you really sure?"),
                              primaryButton: .destructive(Text("Confirm")) {
-                                self.presenter.perform(.commit) {
+                                self.actionHandler.perform(.commit) {
                                     self.presentation.wrappedValue.dismiss()
                                 }
                              }, secondaryButton: .cancel())
@@ -129,8 +129,8 @@ struct TorrentDetailsView_Previews: PreviewProvider {
     
     static var previews: some View {
         TorrentDetailsView(torrent: PreviewMockData.torrent,
-                           presenter: .init(server: PreviewMockData.server,
-                                            torrent: PreviewMockData.torrent))
-            
+                           actionHandler: .init(server: PreviewMockData.server,
+                                                torrent: PreviewMockData.torrent))
+        
     }
 }
