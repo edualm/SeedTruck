@@ -54,6 +54,8 @@
 		A07FFC7324F306AC002A78B5 /* TransmissionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */; };
 		A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
+		A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
+		A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +110,7 @@
 		A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transmission+Extensions.swift"; sourceTree = "<group>"; };
 		A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionModelTests.swift; sourceTree = "<group>"; };
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
+		A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */,
+				A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -444,6 +448,7 @@
 				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
+				A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
 				A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */,
 				A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */,
@@ -470,6 +475,7 @@
 				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
+				A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
 				A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */,
 				A045C8E424F2013100B3B1CD /* TorrentsView.swift in Sources */,

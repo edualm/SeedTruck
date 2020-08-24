@@ -51,11 +51,11 @@ struct TorrentsView: View {
         ]
     ) var serverConnections: FetchedResults<Server>
     
-    @State private var status: Status = .noError
     @State private var selectedServer: Server?
+    @State private var showingAddTorrentActionSheet = false
+    @State private var status: Status = .noError
+    @State private var timer: Timer? = nil
     @State private var torrents: [RemoteTorrent] = []
-    
-    @State var timer: Timer? = nil
     
     func onAppear() {
         selectedServer = serverConnections.first
@@ -125,11 +125,26 @@ struct TorrentsView: View {
                     }
                 }
             } label: {
-                 Image(systemName: "text.justify")
+                Image(systemName: "text.justify")
             }, trailing: serverConnections.count > 0 ? AnyView(Button(action: {
-                //  Add Torrent...
+                showingAddTorrentActionSheet = true
             }) {
                 Image(systemName: "link.badge.plus")
+            }.actionSheet(isPresented: $showingAddTorrentActionSheet) {
+                ActionSheet(title: Text("Add Torrent"), message: nil, buttons: [
+                    .default(Text("Magnet Link")) { },
+                    .default(Text("Torrent File")) {
+                        let picker = DocumentPickerViewController(
+                            torrentPickerWithOnPick: { url in
+                                //  Success, check if the file is sane and upload it!
+                            },
+                            onDismiss: {}
+                        )
+                        
+                        UIApplication.shared.windows.first?.rootViewController?.present(picker, animated: true)
+                    },
+                    .cancel()
+                ])
             }) : AnyView(EmptyView()))
         }
         .onAppear(perform: onAppear)
