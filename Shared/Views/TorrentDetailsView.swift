@@ -72,24 +72,30 @@ struct TorrentDetailsView: View {
     
     @Environment(\.presentationMode) private var presentation
     
-    let server: Server
     let torrent: RemoteTorrent
     
+    @ObservedObject var presenter: TorrentDetailsViewPresenter
+    
     var body: some View {
-        ScrollView {
+        let currentAlert = Binding<TorrentDetailsViewPresenter.AlertIdentifier?>(
+            get: { self.presenter.currentAlert },
+            set: { self.presenter.currentAlert = $0 }
+        )
+        
+        return ScrollView {
             NameView(torrent: torrent)
             StatusView(torrent: torrent)
             SpeedView(torrent: torrent)
             GroupBox(label: Label("Actions", systemImage: "wrench")) {
                 VStack {
                     Button(action: {
-                        self.presentation.wrappedValue.dismiss()
+                        presenter.perform(.prepareForRemoval(deletingFiles: false))
                     }) {
                         Label("Remove Torrent", systemImage: "xmark")
                     }.padding(4)
                     
                     Button(action: {
-                        self.presentation.wrappedValue.dismiss()
+                        presenter.perform(.prepareForRemoval(deletingFiles: true))
                     }) {
                         Label("Remove Torrent and Data", systemImage: "trash")
                             .foregroundColor(.red)
@@ -99,14 +105,32 @@ struct TorrentDetailsView: View {
         }
         .padding()
         .navigationBarTitle("Torrent Detail")
+        .alert(item: currentAlert) {
+            switch $0.id {
+            case .confirmation:
+                return Alert(title: Text("Are you sure?"),
+                             message: Text("You are about to perform a destructive action.\n\nAre you really sure?"),
+                             primaryButton: .destructive(Text("Confirm")) {
+                                self.presenter.perform(.commit) {
+                                    self.presentation.wrappedValue.dismiss()
+                                }
+                             }, secondaryButton: .cancel())
+                
+            case .error:
+                return Alert(title: Text("Error!"),
+                             message: Text("The requested action couldn't be completed."),
+                             dismissButton: .default(Text("Ok")))
+            }
+        }
     }
 }
 
 struct TorrentDetailsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TorrentDetailsView(server: PreviewMockData.server,
-                           torrent: PreviewMockData.torrent)
+        TorrentDetailsView(torrent: PreviewMockData.torrent,
+                           presenter: .init(server: PreviewMockData.server,
+                                            torrent: PreviewMockData.torrent))
             
     }
 }
