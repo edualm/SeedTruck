@@ -29,7 +29,7 @@ enum Transmission {
             
             let result: Result
             
-            let arguments: Dictionary<String, [Torrent]>
+            let arguments: Dictionary<String, TorrentAdded>?
             let tag: Int?
         }
         
@@ -37,9 +37,16 @@ enum Transmission {
             
             let result: Result
             
-            let arguments: Dictionary<String, [Torrent]>
+            let arguments: Dictionary<String, [Torrent]>?
             let tag: Int?
         }
+    }
+    
+    struct TorrentAdded: Codable {
+        
+        let hashString: String
+        let id: Int
+        let name: String
     }
     
     struct Torrent: Codable {

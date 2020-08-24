@@ -1,5 +1,5 @@
 //
-//  SettingsView.swift
+//  SettingsTabView.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 23/08/2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsView: View {
+struct SettingsTabView: View {
     
     private enum ConnectionResult {
         case connecting
@@ -83,7 +83,7 @@ struct SettingsView: View {
                                 Label("Delete", systemImage: "trash")
                                     .foregroundColor(.red)
                             }.alert(isPresented: showingDeleteAlertBinding) {
-                                Alert(title: Text("Are you sure you want to delete XXX?"),
+                                Alert(title: Text("Are you sure you want to delete \"\(server.name)\"?"),
                                       message: nil,
                                       primaryButton: .destructive(Text("Delete")) {
                                         self.presenter.perform(.confirmDeletion)
@@ -110,9 +110,9 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsView_Previews: PreviewProvider {
+struct SettingsTabView_Previews: PreviewProvider {
     
     static var previews: some View {
-        SettingsView(presenter: SettingsPresenter(managedObjectContext: MockCoreDataManagedObjectDeleter()))
+        SettingsTabView(presenter: SettingsPresenter(managedObjectContext: MockCoreDataManagedObjectDeleter()))
     }
 }

@@ -1,5 +1,5 @@
 //
-//  TorrentsView.swift
+//  TorrentsTabView.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 23/08/2020.
@@ -107,7 +107,7 @@ struct TorrentsTabView: View {
     }
 }
 
-struct TorrentsView_Previews: PreviewProvider {
+struct TorrentsTabView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {

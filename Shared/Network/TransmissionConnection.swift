@@ -44,6 +44,8 @@ class TransmissionConnection: ServerConnection {
     
     static private let CSRFTokenHeaderName = "X-Transmission-Session-Id"
     
+    static private let TorrentFields = ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload"]
+    
     private let connectionDetails: ConnectionDetails
     private var csrfToken: String?
     
@@ -144,17 +146,46 @@ class TransmissionConnection: ServerConnection {
         }
         
         performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentAdd, TransmissionError>) in
-            completionHandler(.failure(.notImplemented))
+            switch result {
+            case .success(let response):
+                guard let torrentAdded = response.arguments?["torrent-added"] else {
+                    completionHandler(.failure(.parseError))
+                    
+                    return
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
+                    self.getTorrent(id: String(torrentAdded.id), completionHandler: completionHandler)
+                }
+                
+            case .failure(let error):
+                completionHandler(.failure(.serverError(error.localizedDescription)))
+            }
         }
     }
     
-    func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
-        let parameters: Parameters = ["fields": ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload"]]
+    private func getTorrents(ids: [String], completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
+        let parameters: Parameters
+        
+        if ids.count != 0 {
+            parameters = [
+                "fields": Self.TorrentFields,
+                "ids": ids.map { Int($0) }
+            ]
+        } else {
+            parameters = ["fields": Self.TorrentFields]
+        }
         
         performCall(withMethod: "torrent-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentGet, TransmissionError>) in
+            if parameters.keys.contains("id") {
+                print("got ids")
+            }
+            
+            print(parameters)
+            
             switch result {
             case .success(let response):
-                guard let transmissionTorrents = response.arguments["torrents"] else {
+                guard let transmissionTorrents = response.arguments?["torrents"] else {
                     completionHandler(.failure(.parseError))
                     
                     return
@@ -172,6 +203,28 @@ class TransmissionConnection: ServerConnection {
                 completionHandler(.failure(.serverError(error.localizedDescription)))
             }
         }
+    }
+    
+    func getTorrent(id: String, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
+        getTorrents(ids: [id]) {
+            switch $0 {
+            case .success(let torrents):
+                guard torrents.count == 1 else {
+                    completionHandler(.failure(.parseError))
+                    
+                    return
+                }
+                
+                completionHandler(.success(torrents[0]))
+                
+            case .failure(let error):
+                completionHandler(.failure(.serverError(error.localizedDescription)))
+            }
+        }
+    }
+    
+    func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
+        getTorrents(ids: [], completionHandler: completionHandler)
     }
     
     func removeTorrent(_ torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
