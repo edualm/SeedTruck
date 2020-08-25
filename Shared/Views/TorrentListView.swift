@@ -34,7 +34,7 @@ struct TorrentListView: View {
                 }
                 
                 self.status = .noError
-                self.torrents = torrents
+                self.torrents = torrents.sorted { $0.name < $1.name }
             }
         }
     }
