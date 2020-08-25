@@ -130,6 +130,11 @@
 		A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
 		A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
+		A0C071AB24F59CC700CEC1DA /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */; };
+		A0C071AD24F59CC700CEC1DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AC24F59CC700CEC1DA /* ContentView.swift */; };
+		A0C071AF24F59CC800CEC1DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071AE24F59CC800CEC1DA /* Assets.xcassets */; };
+		A0C071B224F59CC800CEC1DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */; };
+		A0C071BD24F59CC800CEC1DA /* SeedTruckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071BC24F59CC800CEC1DA /* SeedTruckTests.swift */; };
 		A0C1DB3624F42E4100C76682 /* SettingsActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3524F42E4100C76682 /* SettingsActionHandler.swift */; };
 		A0C1DB3724F42E4100C76682 /* SettingsActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3524F42E4100C76682 /* SettingsActionHandler.swift */; };
 		A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3824F4358500C76682 /* TorrentListView.swift */; };
@@ -166,6 +171,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A096385724F568CF00F2062F;
 			remoteInfo = "SeedTruck (watchOS)";
+		};
+		A0C071B924F59CC800CEC1DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A045C89D24F2006400B3B1CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A0C071A724F59CC700CEC1DA;
+			remoteInfo = SeedTruck;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -265,6 +277,15 @@
 		A09638B624F58BD300F2062F /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
 		A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
+		A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeedTruck (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
+		A0C071AC24F59CC700CEC1DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A0C071AE24F59CC800CEC1DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A0C071B324F59CC800CEC1DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0C071B824F59CC800CEC1DA /* Tests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0C071BC24F59CC800CEC1DA /* SeedTruckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckTests.swift; sourceTree = "<group>"; };
+		A0C071BE24F59CC800CEC1DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0C1DB3524F42E4100C76682 /* SettingsActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionHandler.swift; sourceTree = "<group>"; };
 		A0C1DB3824F4358500C76682 /* TorrentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentListView.swift; sourceTree = "<group>"; };
 		A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagedObjectDeleter.swift; sourceTree = "<group>"; };
@@ -300,6 +321,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A096385E24F568CF00F2062F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0C071A524F59CC700CEC1DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0C071B524F59CC800CEC1DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -352,10 +387,12 @@
 				A045C8A124F2006400B3B1CD /* Shared */,
 				A045C8AB24F2006500B3B1CD /* iOS */,
 				A045C8B224F2006500B3B1CD /* macOS */,
-				A045C8BC24F2006500B3B1CD /* Tests iOS */,
-				A045C8C724F2006500B3B1CD /* Tests macOS */,
 				A096385924F568CF00F2062F /* watchOS */,
 				A096386524F568CF00F2062F /* watchOS Extension */,
+				A0C071A924F59CC700CEC1DA /* tvOS */,
+				A045C8BC24F2006500B3B1CD /* Tests iOS */,
+				A045C8C724F2006500B3B1CD /* Tests macOS */,
+				A0C071BB24F59CC800CEC1DA /* Tests tvOS */,
 				A045C8AA24F2006500B3B1CD /* Products */,
 				A054DA8524F51E34003A12AD /* Frameworks */,
 			);
@@ -387,6 +424,8 @@
 				A045C8C424F2006500B3B1CD /* Tests macOS.xctest */,
 				A096385824F568CF00F2062F /* SeedTruck (watchOS).app */,
 				A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */,
+				A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */,
+				A0C071B824F59CC800CEC1DA /* Tests tvOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -544,6 +583,35 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		A0C071A924F59CC700CEC1DA /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */,
+				A0C071AC24F59CC700CEC1DA /* ContentView.swift */,
+				A0C071AE24F59CC800CEC1DA /* Assets.xcassets */,
+				A0C071B324F59CC800CEC1DA /* Info.plist */,
+				A0C071B024F59CC800CEC1DA /* Preview Content */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		A0C071B024F59CC800CEC1DA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A0C071BB24F59CC800CEC1DA /* Tests tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				A0C071BC24F59CC800CEC1DA /* SeedTruckTests.swift */,
+				A0C071BE24F59CC800CEC1DA /* Info.plist */,
+			);
+			path = "Tests tvOS";
+			sourceTree = "<group>";
+		};
 		A0C1DB3E24F4376800C76682 /* Action Handlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,6 +753,41 @@
 			productReference = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */;
 			productType = "com.apple.product-type.watchkit2-extension";
 		};
+		A0C071A724F59CC700CEC1DA /* SeedTruck (tvOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0C071D024F59CC800CEC1DA /* Build configuration list for PBXNativeTarget "SeedTruck (tvOS)" */;
+			buildPhases = (
+				A0C071A424F59CC700CEC1DA /* Sources */,
+				A0C071A524F59CC700CEC1DA /* Frameworks */,
+				A0C071A624F59CC700CEC1DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SeedTruck (tvOS)";
+			productName = SeedTruck;
+			productReference = A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */;
+			productType = "com.apple.product-type.application";
+		};
+		A0C071B724F59CC800CEC1DA /* Tests tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A0C071D124F59CC800CEC1DA /* Build configuration list for PBXNativeTarget "Tests tvOS" */;
+			buildPhases = (
+				A0C071B424F59CC800CEC1DA /* Sources */,
+				A0C071B524F59CC800CEC1DA /* Frameworks */,
+				A0C071B624F59CC800CEC1DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A0C071BA24F59CC800CEC1DA /* PBXTargetDependency */,
+			);
+			name = "Tests tvOS";
+			productName = SeedTruckTests;
+			productReference = A0C071B824F59CC800CEC1DA /* Tests tvOS.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -714,6 +817,13 @@
 					A096386024F568CF00F2062F = {
 						CreatedOnToolsVersion = 12.0;
 					};
+					A0C071A724F59CC700CEC1DA = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					A0C071B724F59CC800CEC1DA = {
+						CreatedOnToolsVersion = 12.0;
+						TestTargetID = A0C071A724F59CC700CEC1DA;
+					};
 				};
 			};
 			buildConfigurationList = A045C8A024F2006400B3B1CD /* Build configuration list for PBXProject "SeedTruck" */;
@@ -737,6 +847,8 @@
 				A045C8C324F2006500B3B1CD /* Tests macOS */,
 				A096385724F568CF00F2062F /* SeedTruck (watchOS) */,
 				A096386024F568CF00F2062F /* SeedTruck (watchOS) Extension */,
+				A0C071A724F59CC700CEC1DA /* SeedTruck (tvOS) */,
+				A0C071B724F59CC800CEC1DA /* Tests tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -786,6 +898,22 @@
 			files = (
 				A096387424F568D000F2062F /* Preview Assets.xcassets in Resources */,
 				A096387124F568D000F2062F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0C071A624F59CC700CEC1DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0C071B224F59CC800CEC1DA /* Preview Assets.xcassets in Resources */,
+				A0C071AF24F59CC800CEC1DA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0C071B624F59CC800CEC1DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -949,6 +1077,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A0C071A424F59CC700CEC1DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0C071AD24F59CC700CEC1DA /* ContentView.swift in Sources */,
+				A0C071AB24F59CC700CEC1DA /* SeedTruckApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A0C071B424F59CC800CEC1DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0C071BD24F59CC800CEC1DA /* SeedTruckTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -971,6 +1116,11 @@
 			isa = PBXTargetDependency;
 			target = A096385724F568CF00F2062F /* SeedTruck (watchOS) */;
 			targetProxy = A096387724F568D000F2062F /* PBXContainerItemProxy */;
+		};
+		A0C071BA24F59CC800CEC1DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A0C071A724F59CC700CEC1DA /* SeedTruck (tvOS) */;
+			targetProxy = A0C071B924F59CC800CEC1DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1358,6 +1508,100 @@
 			};
 			name = Release;
 		};
+		A0C071CA24F59CC800CEC1DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = tvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+			};
+			name = Debug;
+		};
+		A0C071CB24F59CC800CEC1DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = tvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A0C071CC24F59CC800CEC1DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				INFOPLIST_FILE = "Tests tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruckTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeedTruck.app/SeedTruck";
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+			};
+			name = Debug;
+		};
+		A0C071CD24F59CC800CEC1DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				INFOPLIST_FILE = "Tests tvOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruckTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeedTruck.app/SeedTruck";
+				TVOS_DEPLOYMENT_TARGET = 14.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1420,6 +1664,24 @@
 			buildConfigurations = (
 				A096387B24F568D000F2062F /* Debug */,
 				A096387C24F568D000F2062F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0C071D024F59CC800CEC1DA /* Build configuration list for PBXNativeTarget "SeedTruck (tvOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0C071CA24F59CC800CEC1DA /* Debug */,
+				A0C071CB24F59CC800CEC1DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A0C071D124F59CC800CEC1DA /* Build configuration list for PBXNativeTarget "Tests tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A0C071CC24F59CC800CEC1DA /* Debug */,
+				A0C071CD24F59CC800CEC1DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
