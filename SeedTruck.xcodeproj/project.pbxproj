@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A01056A524F48D5E00DA056D /* URLHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A424F48D5E00DA056D /* URLHandlerView.swift */; };
+		A01056A624F48D5E00DA056D /* URLHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A424F48D5E00DA056D /* URLHandlerView.swift */; };
+		A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */; };
+		A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */; };
+		A01056AB24F491B600DA056D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056AA24F491B600DA056D /* String+Extensions.swift */; };
+		A01056AC24F491B600DA056D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056AA24F491B600DA056D /* String+Extensions.swift */; };
 		A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */; };
 		A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */; };
 		A011C7EF24F21078009D72C6 /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* ServerConnection.swift */; };
@@ -92,6 +98,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A01056A424F48D5E00DA056D /* URLHandlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHandlerView.swift; sourceTree = "<group>"; };
+		A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTorrent+Initializers.swift"; sourceTree = "<group>"; };
+		A01056AA24F491B600DA056D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTorrent.swift; sourceTree = "<group>"; };
 		A011C7EE24F21078009D72C6 /* ServerConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnection.swift; sourceTree = "<group>"; };
 		A011C7F124F21088009D72C6 /* TransmissionConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionConnection.swift; sourceTree = "<group>"; };
@@ -175,6 +184,7 @@
 				A02C585424F33FEE00C82D68 /* Core Data */,
 				A07FFC6824F2F1BB002A78B5 /* Remote */,
 				A011C7F424F211C6009D72C6 /* LocalTorrent.swift */,
+				A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */,
 				A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */,
 				A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */,
 			);
@@ -299,6 +309,7 @@
 				A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */,
 				A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */,
 				A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */,
+				A01056AA24F491B600DA056D /* String+Extensions.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -334,6 +345,7 @@
 				A0C1DB3824F4358500C76682 /* TorrentListView.swift */,
 				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
 				A045C8E524F2021100B3B1CD /* TorrentItemView.swift */,
+				A01056A424F48D5E00DA056D /* URLHandlerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -502,8 +514,10 @@
 				A02C585224F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */,
 				A073DD2424F4768400BA37C9 /* TorrentDetailsActionHandler.swift in Sources */,
 				A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
+				A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
 				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */,
+				A01056A524F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
@@ -525,6 +539,7 @@
 				A02C585624F3400200C82D68 /* ServerConnectionDetails.swift in Sources */,
 				A011C7EF24F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A023BAE724F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
+				A01056AB24F491B600DA056D /* String+Extensions.swift in Sources */,
 				A0C1DB3624F42E4100C76682 /* SettingsActionHandler.swift in Sources */,
 				A073DD2124F4658700BA37C9 /* AddMagnetView.swift in Sources */,
 			);
@@ -537,8 +552,10 @@
 				A02C585324F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */,
 				A073DD2524F4768400BA37C9 /* TorrentDetailsActionHandler.swift in Sources */,
 				A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
+				A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
 				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
+				A01056A624F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
@@ -560,6 +577,7 @@
 				A02C585724F3400200C82D68 /* ServerConnectionDetails.swift in Sources */,
 				A011C7F024F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A023BAE824F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
+				A01056AC24F491B600DA056D /* String+Extensions.swift in Sources */,
 				A0C1DB3724F42E4100C76682 /* SettingsActionHandler.swift in Sources */,
 				A073DD2224F4658700BA37C9 /* AddMagnetView.swift in Sources */,
 			);

@@ -12,16 +12,30 @@ import CoreData
     
     @Environment(\.scenePhase) private var scenePhase
     
+    @State private var openedTorrent: LocalTorrent? = nil
+    
     var body: some Scene {
+        let showingURLHandlerSheet = Binding<Bool>(
+            get: { openedTorrent != nil },
+            set: {
+                if !$0 {
+                    openedTorrent = nil
+                }
+            }
+        )
+        
         WindowGroup {
             MainView()
+                .sheet(isPresented: showingURLHandlerSheet) {
+                    if let torrent = openedTorrent {
+                        URLHandlerView(torrent: torrent)
+                    } else {
+                        EmptyView()
+                    }
+                }
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
                 .onOpenURL { url in
-                    if url.isFileURL {
-                        //  Handle a `.torrent` file
-                    } else {
-                        //  Handle a magnet link
-                    }
+                    openedTorrent = LocalTorrent(url: url)
                 }
         }.onChange(of: scenePhase) { phase in
             switch phase {

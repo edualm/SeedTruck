@@ -52,7 +52,7 @@ struct TorrentItemView: View {
 struct TorrentItemView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            TorrentItemView(torrent: PreviewMockData.torrent)
+            TorrentItemView(torrent: PreviewMockData.remoteTorrent)
         }.previewLayout(.fixed(width: 400, height: 100))
     }
 }

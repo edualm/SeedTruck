@@ -50,7 +50,7 @@ struct AddMagnetView: View {
                             }
                         }
                     }) {
-                        Text("Add")
+                        Text("Start Download")
                     }
                 }
                 .navigationTitle("Add Magnet")

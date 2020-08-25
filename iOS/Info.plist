@@ -105,5 +105,7 @@
 			<string>io.edr.seedtruck.torrent</string>
 		</dict>
 	</array>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 </dict>
 </plist>

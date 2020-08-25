@@ -128,9 +128,9 @@ struct TorrentDetailsView: View {
 struct TorrentDetailsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TorrentDetailsView(torrent: PreviewMockData.torrent,
+        TorrentDetailsView(torrent: PreviewMockData.remoteTorrent,
                            actionHandler: .init(server: PreviewMockData.server,
-                                                torrent: PreviewMockData.torrent))
+                                                torrent: PreviewMockData.remoteTorrent))
         
     }
 }
