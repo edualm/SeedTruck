@@ -50,6 +50,12 @@ struct SettingsTabView: View {
         }
     }
     
+    #if os(watchOS) || os(tvOS)
+    static private let listStyle = DefaultListStyle()
+    #else
+    static private let listStyle = InsetGroupedListStyle()
+    #endif
+    
     var body: some View {
         let showingDeleteAlertBinding = Binding<Bool>(
             get: { self.actionHandler.showingDeleteAlert },
@@ -101,7 +107,7 @@ struct SettingsTabView: View {
                         }
                     }
                 }
-                .listStyle(InsetGroupedListStyle())
+                .listStyle(Self.listStyle)
             }
             .navigationTitle("Settings")
         }

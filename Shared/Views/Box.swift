@@ -18,7 +18,7 @@ struct Box<Label: View, Content: View>: View {
     }
     
     var body: some View {
-        #if !os(watchOS)
+        #if !(os(watchOS) || os(tvOS))
         GroupBox(label: label) {
             content
         }

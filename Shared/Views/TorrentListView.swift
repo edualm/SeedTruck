@@ -58,7 +58,7 @@ struct TorrentListView: View {
         timer = nil
     }
     
-    #if os(watchOS)
+    #if os(watchOS) || os(tvOS)
     static private let listStyle = DefaultListStyle()
     #else
     static private let listStyle = InsetGroupedListStyle()
