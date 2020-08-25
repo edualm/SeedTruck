@@ -2,7 +2,7 @@
 
 A seedbox management application for iOS and macOS.
 
-This is not the kind of project Apple allows on the App Store, so its source is free for anyone to use. You'll need to compile it yourself if you want to use the app, though.
+This is not the kind of project Apple allows on the App Store, so I'm open-sourcing it, hopefully it's useful for someone. You may also (and should!) use the app if you want, but you'll need to compile and install it yourself though.
 
 It uses SwiftUI 2, and as such, can only run on iOS/tvOS 14+, watchOS 7+ and macOS 11+.
 
@@ -23,3 +23,7 @@ iOS, tvOS and watchOS support are practically done. macOS support will only prob
 ## Tests
 
 Coming soon. Reason is that I am not being able to run them under Xcode 12, so not much point in writing them unfortunately.
+
+## License
+
+MIT
