@@ -354,8 +354,8 @@
 				A045C8B224F2006500B3B1CD /* macOS */,
 				A045C8BC24F2006500B3B1CD /* Tests iOS */,
 				A045C8C724F2006500B3B1CD /* Tests macOS */,
-				A096385924F568CF00F2062F /* SeedTruck (watchOS) */,
-				A096386524F568CF00F2062F /* SeedTruck (watchOS) Extension */,
+				A096385924F568CF00F2062F /* watchOS */,
+				A096386524F568CF00F2062F /* watchOS Extension */,
 				A045C8AA24F2006500B3B1CD /* Products */,
 				A054DA8524F51E34003A12AD /* Frameworks */,
 			);
@@ -497,16 +497,16 @@
 			path = Remote;
 			sourceTree = "<group>";
 		};
-		A096385924F568CF00F2062F /* SeedTruck (watchOS) */ = {
+		A096385924F568CF00F2062F /* watchOS */ = {
 			isa = PBXGroup;
 			children = (
 				A096385A24F568CF00F2062F /* Assets.xcassets */,
 				A096385C24F568CF00F2062F /* Info.plist */,
 			);
-			path = "SeedTruck (watchOS)";
+			path = watchOS;
 			sourceTree = "<group>";
 		};
-		A096386524F568CF00F2062F /* SeedTruck (watchOS) Extension */ = {
+		A096386524F568CF00F2062F /* watchOS Extension */ = {
 			isa = PBXGroup;
 			children = (
 				A09638B924F5901000F2062F /* Utilities */,
@@ -516,7 +516,7 @@
 				A096387524F568D000F2062F /* Info.plist */,
 				A096387224F568D000F2062F /* Preview Content */,
 			);
-			path = "SeedTruck (watchOS) Extension";
+			path = "watchOS Extension";
 			sourceTree = "<group>";
 		};
 		A096387224F568D000F2062F /* Preview Content */ = {
@@ -1277,7 +1277,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
-				INFOPLIST_FILE = "SeedTruck (watchOS)/Info.plist";
+				INFOPLIST_FILE = watchOS/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1297,7 +1297,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
-				INFOPLIST_FILE = "SeedTruck (watchOS)/Info.plist";
+				INFOPLIST_FILE = watchOS/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1314,10 +1314,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SeedTruck (watchOS) Extension/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "SeedTruck (watchOS) Extension/Info.plist";
+				INFOPLIST_FILE = "watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1338,10 +1338,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"SeedTruck (watchOS) Extension/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "SeedTruck (watchOS) Extension/Info.plist";
+				INFOPLIST_FILE = "watchOS Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
