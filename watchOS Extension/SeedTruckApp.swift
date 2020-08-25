@@ -5,16 +5,15 @@
 //  Created by Eduardo Almeida on 25/08/2020.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
 
 @main
 struct SeedTruckApp: App {
     
-    @Environment(\.scenePhase) private var scenePhase
     @State private var dataTransferManager: DataTransferManager? = nil
     
-    @SceneBuilder var body: some Scene {
+    var body: some Scene {
         WindowGroup {
             NavigationView {
                 MainView()
@@ -39,16 +38,4 @@ struct SeedTruckApp: App {
         
         return container
     }()
-    
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
 }

@@ -17,7 +17,11 @@ extension ByteCountFormatter {
     }()
     
     static func humanReadableFileSize(bytes: Int) -> String {
-        formatter.string(fromByteCount: Int64(bytes))
+        guard bytes != 0 else {
+            return "0 KB"
+        }
+        
+        return formatter.string(fromByteCount: Int64(bytes))
     }
     
     static func humanReadableTransmissionSpeed(bytesPerSecond: Int) -> String {

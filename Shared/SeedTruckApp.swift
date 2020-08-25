@@ -16,7 +16,10 @@ import UniformTypeIdentifiers
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var openedTorrent: LocalTorrent? = nil
+    
+    #if os(iOS)
     @State private var dataTransferManager: DataTransferManager? = nil
+    #endif
     
     var body: some Scene {
         let showingURLHandlerSheet = Binding<Bool>(
@@ -59,9 +62,11 @@ import UniformTypeIdentifiers
                     return true
                 }
                 .onAppear {
+                    #if os(iOS)
                     if dataTransferManager == nil {
                         dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
                     }
+                    #endif
                 }
         }.onChange(of: scenePhase) { phase in
             switch phase {

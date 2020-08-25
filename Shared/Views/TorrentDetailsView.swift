@@ -70,6 +70,36 @@ struct TorrentDetailsView: View {
         }
     }
     
+    private struct ActionsView: View {
+        
+        let actionHandler: TorrentDetailsActionHandler
+        
+        var body: some View {
+            Button(action: {
+                actionHandler.perform(.prepareForRemoval(deletingFiles: false))
+            }) {
+                #if os(watchOS)
+                Text("Remove Torrent")
+                #else
+                Label("Remove Torrent", systemImage: "xmark")
+                #endif
+            }.padding(4)
+            
+            Button(action: {
+                actionHandler.perform(.prepareForRemoval(deletingFiles: true))
+            }) {
+                #if os(watchOS)
+                Text("Remove Torrent and Data")
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.red)
+                #else
+                Label("Remove Torrent and Data", systemImage: "trash")
+                    .foregroundColor(.red)
+                #endif
+            }.padding(4)
+        }
+    }
+    
     @Environment(\.presentationMode) private var presentation
     
     let torrent: RemoteTorrent
@@ -85,51 +115,36 @@ struct TorrentDetailsView: View {
         let view = ScrollView {
             NameView(torrent: torrent)
             
-            #if os(watchOS)
+            #if os(watchOS) || os(tvOS)
             Divider()
                 .padding()
             #endif
             
             StatusView(torrent: torrent)
             
-            #if os(watchOS)
+            #if os(watchOS) || os(tvOS)
             Divider()
                 .padding()
             #endif
             
             SpeedView(torrent: torrent)
             
-            #if os(watchOS)
+            #if os(watchOS) || os(tvOS)
             Divider()
                 .padding()
             #endif
             
+            #if os(tvOS)
+            HStack {
+                ActionsView(actionHandler: actionHandler)
+            }
+            #else
             Box(label: Label("Actions", systemImage: "wrench")) {
                 VStack {
-                    Button(action: {
-                        actionHandler.perform(.prepareForRemoval(deletingFiles: false))
-                    }) {
-                        #if os(watchOS)
-                        Text("Remove Torrent")
-                        #else
-                        Label("Remove Torrent", systemImage: "xmark")
-                        #endif
-                    }.padding(4)
-                    
-                    Button(action: {
-                        actionHandler.perform(.prepareForRemoval(deletingFiles: true))
-                    }) {
-                        #if os(watchOS)
-                        Text("Remove Torrent and Data")
-                            .multilineTextAlignment(.center)
-                            .foregroundColor(.red)
-                        #else
-                        Label("Remove Torrent and Data", systemImage: "trash")
-                            .foregroundColor(.red)
-                        #endif
-                    }.padding(4)
+                    ActionsView(actionHandler: actionHandler)
                 }.padding(.top)
             }
+            #endif
         }
         .navigationBarTitle("Torrent Detail")
         .alert(item: currentAlert) {
@@ -150,7 +165,7 @@ struct TorrentDetailsView: View {
             }
         }
         
-        #if os(watchOS)
+        #if os(watchOS) || os(tvOS)
         return view
         #else
         return view.padding()

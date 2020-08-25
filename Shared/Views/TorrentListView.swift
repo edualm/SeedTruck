@@ -58,10 +58,10 @@ struct TorrentListView: View {
         timer = nil
     }
     
-    #if os(watchOS) || os(tvOS)
-    static private let listStyle = DefaultListStyle()
-    #else
+    #if os(iOS)
     static private let listStyle = InsetGroupedListStyle()
+    #else
+    static private let listStyle = DefaultListStyle()
     #endif
     
     var body: some View {
@@ -75,20 +75,39 @@ struct TorrentListView: View {
                 
             case .noError:
                 if selectedServer != nil {
-                    List {
-                        ForEach(torrents) { torrent in
-                            ZStack {
-                                TorrentItemView(torrent: torrent)
-                                    .padding(.all, 5)
-                                NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                               actionHandler: .init(server: selectedServer!,
-                                                                                                    torrent: torrent))) {
-                                    EmptyView()
-                                }.buttonStyle(PlainButtonStyle())
+                    VStack {
+                        #if os(watchOS)
+                        ServerStatusViewSmall(torrents: torrents)
+                        #endif
+                        
+                        List {
+                            ForEach(torrents) { torrent in
+                                ZStack {
+                                    #if os(tvOS)
+                                    NavigationLink(destination: TorrentDetailsView(torrent: torrent,
+                                                                                   actionHandler: .init(server: selectedServer!,
+                                                                                                        torrent: torrent))) {
+                                        TorrentItemView(torrent: torrent)
+                                            .padding(.all, 5)
+                                    }
+                                    #else
+                                    TorrentItemView(torrent: torrent)
+                                        .padding(.all, 5)
+                                    NavigationLink(destination: TorrentDetailsView(torrent: torrent,
+                                                                                   actionHandler: .init(server: selectedServer!,
+                                                                                                        torrent: torrent))) {
+                                        EmptyView()
+                                    }.buttonStyle(PlainButtonStyle())
+                                    #endif
+                                }
                             }
                         }
+                        .listStyle(Self.listStyle)
+                        
+                        #if !os(watchOS)
+                        ServerStatusView(torrents: torrents)
+                        #endif
                     }
-                    .listStyle(Self.listStyle)
                 } else {
                     NoServersConfiguredView()
                 }

@@ -18,16 +18,23 @@ struct Box<Label: View, Content: View>: View {
     }
     
     var body: some View {
-        #if !(os(watchOS) || os(tvOS))
-        GroupBox(label: label) {
-            content
-        }
-        #else
+        #if os(watchOS)
         VStack {
             HStack {
                 label
                 Spacer()
             }
+            content
+        }
+        #elseif os(tvOS)
+        HStack(alignment: .center) {
+            label
+            Spacer()
+            content
+                .padding(.bottom, 16)
+        }
+        #else
+        GroupBox(label: label) {
             content
         }
         #endif

@@ -22,19 +22,3 @@ struct RemoteTorrent: Identifiable {
     let status: Status
     let size: Int
 }
-
-extension RemoteTorrent.Status {
-    
-    var displayableStatus: String {
-        switch self {
-        case .idle:
-            return "Idle"
-            
-        case .downloading:
-            return "Downloading"
-            
-        case .seeding:
-            return "Seeding"
-        }
-    }
-}

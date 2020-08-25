@@ -128,8 +128,7 @@
 		A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
-		A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
-		A0C071AD24F59CC700CEC1DA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AC24F59CC700CEC1DA /* ContentView.swift */; };
+		A0C071AD24F59CC700CEC1DA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AC24F59CC700CEC1DA /* MainView.swift */; };
 		A0C071AF24F59CC800CEC1DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071AE24F59CC800CEC1DA /* Assets.xcassets */; };
 		A0C071B224F59CC800CEC1DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */; };
 		A0C071BD24F59CC800CEC1DA /* SeedTruckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071BC24F59CC800CEC1DA /* SeedTruckTests.swift */; };
@@ -162,6 +161,15 @@
 		A0C071F624F5A06100CEC1DA /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16924F45B2700B57E45 /* LoadingView.swift */; };
 		A0C071F724F5A15D00CEC1DA /* TorrentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3824F4358500C76682 /* TorrentListView.swift */; };
 		A0C071F824F5A17C00CEC1DA /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */; };
+		A0C071FA24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071F924F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift */; };
+		A0C071FB24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071F924F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift */; };
+		A0C071FC24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071F924F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift */; };
+		A0C071FD24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071F924F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift */; };
+		A0C071FF24F5AFC400CEC1DA /* ServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */; };
+		A0C0720024F5AFC400CEC1DA /* ServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */; };
+		A0C0720424F5B03700CEC1DA /* ServerStatusViewSmall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0720324F5B03700CEC1DA /* ServerStatusViewSmall.swift */; };
+		A0C0720524F5B04500CEC1DA /* ServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */; };
+		A0C0720624F5B90300CEC1DA /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02C584D24F325A400C82D68 /* DataModel.xcdatamodeld */; };
 		A0C1DB3624F42E4100C76682 /* SettingsActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3524F42E4100C76682 /* SettingsActionHandler.swift */; };
 		A0C1DB3724F42E4100C76682 /* SettingsActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3524F42E4100C76682 /* SettingsActionHandler.swift */; };
 		A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3824F4358500C76682 /* TorrentListView.swift */; };
@@ -306,13 +314,16 @@
 		A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 		A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeedTruck (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
-		A0C071AC24F59CC700CEC1DA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A0C071AC24F59CC700CEC1DA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		A0C071AE24F59CC800CEC1DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A0C071B324F59CC800CEC1DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0C071B824F59CC800CEC1DA /* Tests tvOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests tvOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C071BC24F59CC800CEC1DA /* SeedTruckTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckTests.swift; sourceTree = "<group>"; };
 		A0C071BE24F59CC800CEC1DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0C071F924F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteTorrent+Convenience.swift"; sourceTree = "<group>"; };
+		A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStatusView.swift; sourceTree = "<group>"; };
+		A0C0720324F5B03700CEC1DA /* ServerStatusViewSmall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerStatusViewSmall.swift; sourceTree = "<group>"; };
 		A0C1DB3524F42E4100C76682 /* SettingsActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionHandler.swift; sourceTree = "<group>"; };
 		A0C1DB3824F4358500C76682 /* TorrentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentListView.swift; sourceTree = "<group>"; };
 		A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagedObjectDeleter.swift; sourceTree = "<group>"; };
@@ -380,6 +391,7 @@
 				A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */,
 				A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */,
 				A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */,
+				A0C071F924F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift */,
 				A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */,
 				A096388624F569CA00F2062F /* ServerType.swift */,
 			);
@@ -614,7 +626,7 @@
 			isa = PBXGroup;
 			children = (
 				A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */,
-				A0C071AC24F59CC700CEC1DA /* ContentView.swift */,
+				A0C071AC24F59CC700CEC1DA /* MainView.swift */,
 				A0C071AE24F59CC800CEC1DA /* Assets.xcassets */,
 				A0C071B324F59CC800CEC1DA /* Info.plist */,
 				A0C071B024F59CC800CEC1DA /* Preview Content */,
@@ -659,6 +671,8 @@
 				A02C585824F3446100C82D68 /* NewServerView.swift */,
 				A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */,
 				A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */,
+				A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */,
+				A0C0720324F5B03700CEC1DA /* ServerStatusViewSmall.swift */,
 				A0C1DB3824F4358500C76682 /* TorrentListView.swift */,
 				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
 				A045C8E524F2021100B3B1CD /* TorrentItemView.swift */,
@@ -958,6 +972,7 @@
 				A096389024F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
 				A09638A624F56BDA00F2062F /* Box.swift in Sources */,
 				A054DA9624F51F87003A12AD /* Bencode.swift in Sources */,
+				A0C071FF24F5AFC400CEC1DA /* ServerStatusView.swift in Sources */,
 				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A09638AE24F5762700F2062F /* DataTransferManager.swift in Sources */,
 				A054DA9E24F51F87003A12AD /* BencoderError.swift in Sources */,
@@ -969,6 +984,7 @@
 				A096389A24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A054DA9224F51F87003A12AD /* Bencoder.swift in Sources */,
+				A0C071FA24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,
 				A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
 				A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */,
 				A054DA9A24F51F87003A12AD /* BencodeAccessors.swift in Sources */,
@@ -1007,6 +1023,7 @@
 				A02C585324F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */,
 				A073DD2524F4768400BA37C9 /* TorrentDetailsActionHandler.swift in Sources */,
 				A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
+				A0C071FB24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,
 				A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
 				A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
 				A09638A724F56BDA00F2062F /* Box.swift in Sources */,
@@ -1014,10 +1031,10 @@
 				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A054DA9F24F51F87003A12AD /* BencoderError.swift in Sources */,
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
+				A0C0720024F5AFC400CEC1DA /* ServerStatusView.swift in Sources */,
 				A01056A624F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
-				A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
 				A096389B24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A054DA9324F51F87003A12AD /* Bencoder.swift in Sources */,
@@ -1086,6 +1103,7 @@
 				A096388C24F569DE00F2062F /* ServerConnectionErrorView.swift in Sources */,
 				A09638AF24F5802800F2062F /* Server+CoreData.swift in Sources */,
 				A096389E24F56A8200F2062F /* Transmission.swift in Sources */,
+				A0C071FC24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,
 				A09638A024F56A9300F2062F /* ServerConnection.swift in Sources */,
 				A09638A324F56B9F00F2062F /* ProgressBarView.swift in Sources */,
 				A096389D24F56A8200F2062F /* Transmission+Extensions.swift in Sources */,
@@ -1098,6 +1116,7 @@
 				A096389824F56A3C00F2062F /* Server+Convenience.swift in Sources */,
 				A09638AA24F5718C00F2062F /* DataModel.xcdatamodeld in Sources */,
 				A09638B324F5804100F2062F /* Server+Serialization.swift in Sources */,
+				A0C0720424F5B03700CEC1DA /* ServerStatusViewSmall.swift in Sources */,
 				A096388324F5697600F2062F /* TorrentListView.swift in Sources */,
 				A09638A224F56B9700F2062F /* TorrentItemView.swift in Sources */,
 			);
@@ -1107,6 +1126,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C0720624F5B90300CEC1DA /* DataModel.xcdatamodeld in Sources */,
 				A0C071F124F5A06100CEC1DA /* NoServersConfiguredView.swift in Sources */,
 				A0C071DD24F5A05300CEC1DA /* RemoteTorrent+Transmission.swift in Sources */,
 				A0C071E624F5A05900CEC1DA /* TransmissionConnection.swift in Sources */,
@@ -1114,6 +1134,7 @@
 				A0C071F624F5A06100CEC1DA /* LoadingView.swift in Sources */,
 				A0C071E924F5A05900CEC1DA /* String+Extensions.swift in Sources */,
 				A0C071D624F5A03500CEC1DA /* TorrentDetailsActionHandler.swift in Sources */,
+				A0C0720524F5B04500CEC1DA /* ServerStatusView.swift in Sources */,
 				A0C071F324F5A06100CEC1DA /* TorrentDetailsView.swift in Sources */,
 				A0C071E424F5A05900CEC1DA /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A0C071EE24F5A06100CEC1DA /* ServerConnectionErrorView.swift in Sources */,
@@ -1124,7 +1145,8 @@
 				A0C071E024F5A05300CEC1DA /* ServerType.swift in Sources */,
 				A0C071D824F5A04700CEC1DA /* Server+Convenience.swift in Sources */,
 				A0C071D524F5A03500CEC1DA /* ProgressBarView.swift in Sources */,
-				A0C071AD24F59CC700CEC1DA /* ContentView.swift in Sources */,
+				A0C071AD24F59CC700CEC1DA /* MainView.swift in Sources */,
+				A0C071FD24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,
 				A0C071DF24F5A05300CEC1DA /* RemoteTorrent.swift in Sources */,
 				A0C071F424F5A06100CEC1DA /* TorrentItemView.swift in Sources */,
 				A0C071D924F5A04700CEC1DA /* Server+CoreData.swift in Sources */,
