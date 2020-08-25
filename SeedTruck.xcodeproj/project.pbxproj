@@ -21,10 +21,6 @@
 		A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F124F21088009D72C6 /* TransmissionConnection.swift */; };
 		A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
 		A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
-		A011C7F824F2130A009D72C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A011C7F724F2130A009D72C6 /* README.md */; };
-		A011C7F924F2130A009D72C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A011C7F724F2130A009D72C6 /* README.md */; };
-		A011C7FB24F21406009D72C6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = A011C7FA24F21406009D72C6 /* LICENSE.txt */; };
-		A011C7FC24F21406009D72C6 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = A011C7FA24F21406009D72C6 /* LICENSE.txt */; };
 		A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
 		A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
 		A023BAE724F294EF00B82FB3 /* SettingsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE624F294EF00B82FB3 /* SettingsTabView.swift */; };
@@ -51,6 +47,22 @@
 		A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
 		A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
 		A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
+		A054DA9224F51F87003A12AD /* Bencoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8A24F51F86003A12AD /* Bencoder.swift */; };
+		A054DA9324F51F87003A12AD /* Bencoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8A24F51F86003A12AD /* Bencoder.swift */; };
+		A054DA9424F51F87003A12AD /* BencodeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8B24F51F86003A12AD /* BencodeKey.swift */; };
+		A054DA9524F51F87003A12AD /* BencodeKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8B24F51F86003A12AD /* BencodeKey.swift */; };
+		A054DA9624F51F87003A12AD /* Bencode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8C24F51F86003A12AD /* Bencode.swift */; };
+		A054DA9724F51F87003A12AD /* Bencode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8C24F51F86003A12AD /* Bencode.swift */; };
+		A054DA9824F51F87003A12AD /* BencodeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8D24F51F86003A12AD /* BencodeSequence.swift */; };
+		A054DA9924F51F87003A12AD /* BencodeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8D24F51F86003A12AD /* BencodeSequence.swift */; };
+		A054DA9A24F51F87003A12AD /* BencodeAccessors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8E24F51F86003A12AD /* BencodeAccessors.swift */; };
+		A054DA9B24F51F87003A12AD /* BencodeAccessors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8E24F51F86003A12AD /* BencodeAccessors.swift */; };
+		A054DA9C24F51F87003A12AD /* BencodeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8F24F51F86003A12AD /* BencodeDescription.swift */; };
+		A054DA9D24F51F87003A12AD /* BencodeDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA8F24F51F86003A12AD /* BencodeDescription.swift */; };
+		A054DA9E24F51F87003A12AD /* BencoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA9024F51F86003A12AD /* BencoderError.swift */; };
+		A054DA9F24F51F87003A12AD /* BencoderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA9024F51F86003A12AD /* BencoderError.swift */; };
+		A054DAA024F51F87003A12AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA9124F51F86003A12AD /* Extensions.swift */; };
+		A054DAA124F51F87003A12AD /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A054DA9124F51F86003A12AD /* Extensions.swift */; };
 		A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
 		A05FE16424F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
 		A05FE16624F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */; };
@@ -130,6 +142,15 @@
 		A045C8E224F2013100B3B1CD /* TorrentsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsTabView.swift; sourceTree = "<group>"; };
 		A045C8E524F2021100B3B1CD /* TorrentItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentItemView.swift; sourceTree = "<group>"; };
 		A045C8E824F205B100B3B1CD /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		A054DA8A24F51F86003A12AD /* Bencoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bencoder.swift; sourceTree = "<group>"; };
+		A054DA8B24F51F86003A12AD /* BencodeKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BencodeKey.swift; sourceTree = "<group>"; };
+		A054DA8C24F51F86003A12AD /* Bencode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bencode.swift; sourceTree = "<group>"; };
+		A054DA8D24F51F86003A12AD /* BencodeSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BencodeSequence.swift; sourceTree = "<group>"; };
+		A054DA8E24F51F86003A12AD /* BencodeAccessors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BencodeAccessors.swift; sourceTree = "<group>"; };
+		A054DA8F24F51F86003A12AD /* BencodeDescription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BencodeDescription.swift; sourceTree = "<group>"; };
+		A054DA9024F51F86003A12AD /* BencoderError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BencoderError.swift; sourceTree = "<group>"; };
+		A054DA9124F51F86003A12AD /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A054DAA224F520D8003A12AD /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoServersConfiguredView.swift; sourceTree = "<group>"; };
 		A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionErrorView.swift; sourceTree = "<group>"; };
 		A05FE16924F45B2700B57E45 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -219,6 +240,7 @@
 				A045C8BC24F2006500B3B1CD /* Tests iOS */,
 				A045C8C724F2006500B3B1CD /* Tests macOS */,
 				A045C8AA24F2006500B3B1CD /* Products */,
+				A054DA8524F51E34003A12AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -227,6 +249,7 @@
 			children = (
 				A0C1DB3E24F4376800C76682 /* Action Handlers */,
 				A045C8EB24F208AC00B3B1CD /* Components */,
+				A054DA8824F51F74003A12AD /* External */,
 				A011C7E324F20C78009D72C6 /* Models */,
 				A011C7ED24F21064009D72C6 /* Network */,
 				A071CAC724F3110200B6AC0C /* Utilities */,
@@ -291,6 +314,37 @@
 				A045C8E824F205B100B3B1CD /* ProgressBarView.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A054DA8524F51E34003A12AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A054DA8824F51F74003A12AD /* External */ = {
+			isa = PBXGroup;
+			children = (
+				A054DA8924F51F7D003A12AD /* Bencode */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		A054DA8924F51F7D003A12AD /* Bencode */ = {
+			isa = PBXGroup;
+			children = (
+				A054DA8C24F51F86003A12AD /* Bencode.swift */,
+				A054DA8E24F51F86003A12AD /* BencodeAccessors.swift */,
+				A054DA8F24F51F86003A12AD /* BencodeDescription.swift */,
+				A054DA8B24F51F86003A12AD /* BencodeKey.swift */,
+				A054DA8A24F51F86003A12AD /* Bencoder.swift */,
+				A054DA9024F51F86003A12AD /* BencoderError.swift */,
+				A054DA8D24F51F86003A12AD /* BencodeSequence.swift */,
+				A054DA9124F51F86003A12AD /* Extensions.swift */,
+				A054DAA224F520D8003A12AD /* LICENSE.txt */,
+			);
+			path = Bencode;
 			sourceTree = "<group>";
 		};
 		A05FE16824F446E200B57E45 /* Tabs */ = {
@@ -366,6 +420,8 @@
 			dependencies = (
 			);
 			name = "SeedTruck (iOS)";
+			packageProductDependencies = (
+			);
 			productName = "SeedTruck (iOS)";
 			productReference = A045C8A924F2006500B3B1CD /* SeedTruck.app */;
 			productType = "com.apple.product-type.application";
@@ -383,6 +439,8 @@
 			dependencies = (
 			);
 			name = "SeedTruck (macOS)";
+			packageProductDependencies = (
+			);
 			productName = "SeedTruck (macOS)";
 			productReference = A045C8B124F2006500B3B1CD /* SeedTruck.app */;
 			productType = "com.apple.product-type.application";
@@ -457,6 +515,8 @@
 				Base,
 			);
 			mainGroup = A045C89C24F2006400B3B1CD;
+			packageReferences = (
+			);
 			productRefGroup = A045C8AA24F2006500B3B1CD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -474,8 +534,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A011C7FB24F21406009D72C6 /* LICENSE.txt in Resources */,
-				A011C7F824F2130A009D72C6 /* README.md in Resources */,
 				A045C8CF24F2006500B3B1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,8 +542,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A011C7FC24F21406009D72C6 /* LICENSE.txt in Resources */,
-				A011C7F924F2130A009D72C6 /* README.md in Resources */,
 				A045C8D024F2006500B3B1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -515,15 +571,19 @@
 				A073DD2424F4768400BA37C9 /* TorrentDetailsActionHandler.swift in Sources */,
 				A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
+				A054DA9624F51F87003A12AD /* Bencode.swift in Sources */,
 				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
+				A054DA9E24F51F87003A12AD /* BencoderError.swift in Sources */,
 				A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A01056A524F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
 				A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
+				A054DA9224F51F87003A12AD /* Bencoder.swift in Sources */,
 				A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
 				A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */,
+				A054DA9A24F51F87003A12AD /* BencodeAccessors.swift in Sources */,
 				A05FE16624F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */,
 				A05FE16A24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A045C8E324F2013100B3B1CD /* TorrentsTabView.swift in Sources */,
@@ -532,12 +592,16 @@
 				A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */,
 				A07FFC6D24F2F34E002A78B5 /* Transmission.swift in Sources */,
 				A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
+				A054DA9C24F51F87003A12AD /* BencodeDescription.swift in Sources */,
+				A054DA9424F51F87003A12AD /* BencodeKey.swift in Sources */,
+				A054DA9824F51F87003A12AD /* BencodeSequence.swift in Sources */,
 				A0C1DB3C24F436A500C76682 /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A02C584F24F325A400C82D68 /* DataModel.xcdatamodeld in Sources */,
 				A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
 				A02C585624F3400200C82D68 /* ServerConnectionDetails.swift in Sources */,
 				A011C7EF24F21078009D72C6 /* ServerConnection.swift in Sources */,
+				A054DAA024F51F87003A12AD /* Extensions.swift in Sources */,
 				A023BAE724F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
 				A01056AB24F491B600DA056D /* String+Extensions.swift in Sources */,
 				A0C1DB3624F42E4100C76682 /* SettingsActionHandler.swift in Sources */,
@@ -553,15 +617,19 @@
 				A073DD2524F4768400BA37C9 /* TorrentDetailsActionHandler.swift in Sources */,
 				A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
+				A054DA9724F51F87003A12AD /* Bencode.swift in Sources */,
 				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
+				A054DA9F24F51F87003A12AD /* BencoderError.swift in Sources */,
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A01056A624F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
 				A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
+				A054DA9324F51F87003A12AD /* Bencoder.swift in Sources */,
 				A05FE16424F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
 				A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */,
+				A054DA9B24F51F87003A12AD /* BencodeAccessors.swift in Sources */,
 				A05FE16724F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */,
 				A05FE16B24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A045C8E424F2013100B3B1CD /* TorrentsTabView.swift in Sources */,
@@ -570,12 +638,16 @@
 				A045C8E124F2011E00B3B1CD /* MainView.swift in Sources */,
 				A07FFC6E24F2F34E002A78B5 /* Transmission.swift in Sources */,
 				A045C8CC24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
+				A054DA9D24F51F87003A12AD /* BencodeDescription.swift in Sources */,
+				A054DA9524F51F87003A12AD /* BencodeKey.swift in Sources */,
+				A054DA9924F51F87003A12AD /* BencodeSequence.swift in Sources */,
 				A0C1DB3D24F436A500C76682 /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A02C585024F325A400C82D68 /* DataModel.xcdatamodeld in Sources */,
 				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
 				A02C585724F3400200C82D68 /* ServerConnectionDetails.swift in Sources */,
 				A011C7F024F21078009D72C6 /* ServerConnection.swift in Sources */,
+				A054DAA124F51F87003A12AD /* Extensions.swift in Sources */,
 				A023BAE824F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
 				A01056AC24F491B600DA056D /* String+Extensions.swift in Sources */,
 				A0C1DB3724F42E4100C76682 /* SettingsActionHandler.swift in Sources */,
