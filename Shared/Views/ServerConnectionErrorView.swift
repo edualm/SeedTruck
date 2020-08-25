@@ -11,7 +11,7 @@ struct ServerConnectionErrorView: View {
     
     var body: some View {
         VStack {
-            Text("😞")
+            Image(systemName: "questionmark.folder")
                 .font(.largeTitle)
             Text("Error!")
                 .font(.headline)

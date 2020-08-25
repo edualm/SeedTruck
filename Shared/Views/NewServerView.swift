@@ -53,19 +53,13 @@ struct NewServerView: View {
             return
         }
         
-        server.connection.getTorrents { result in
+        server.connection.test { result in
             DispatchQueue.main.async {
                 defer {
                     managedObjectContext.delete(server)
                 }
                 
-                guard case Result.success = result else {
-                    completion(false)
-                    
-                    return
-                }
-                
-                completion(true)
+                completion(result)
             }
         }
     }

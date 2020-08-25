@@ -92,13 +92,15 @@ class TransmissionConnection: ServerConnection {
             }
             
             guard response.statusCode != 409 else {
-                guard let newCSRFToken = response.allHeaderFields[Header.CSRFToken.name] as? String else {
+                if let newCSRFToken = response.allHeaderFields[Header.CSRFToken.name] as? String {
+                    csrfToken = newCSRFToken
+                } else if let newCSRFToken = response.allHeaderFields[Header.CSRFToken.name.localizedLowercase] as? String {
+                    csrfToken = newCSRFToken
+                } else {
                     completionHandler(.failure(.invalidResponse))
                     
                     return
                 }
-                
-                csrfToken = newCSRFToken
                 
                 performCall(withMethod: method, parameters: parameters, completionHandler: completionHandler)
                 
