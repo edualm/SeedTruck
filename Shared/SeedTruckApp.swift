@@ -5,10 +5,13 @@
 //  Created by Eduardo Almeida on 23/08/2020.
 //
 
-import SwiftUI
 import CoreData
+import SwiftUI
+import UniformTypeIdentifiers
 
 @main struct SeedTruckApp: App {
+    
+    private static let torrentUTI = "io.edr.seedtruck.torrent"
     
     @Environment(\.scenePhase) private var scenePhase
     
@@ -37,6 +40,23 @@ import CoreData
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
                 .onOpenURL { url in
                     openedTorrent = LocalTorrent(url: url)
+                }
+                .onDrop(of: [UTType(exportedAs: Self.torrentUTI)], isTargeted: nil) { providers in
+                    guard providers.count == 1 else {
+                        return false
+                    }
+                    
+                    let provider = providers[0]
+                    
+                    provider.loadInPlaceFileRepresentation(forTypeIdentifier: "public.item") { url, success, _ in
+                        guard success, let url = url else {
+                            return
+                        }
+                        
+                        openedTorrent = LocalTorrent(url: url)
+                    }
+                    
+                    return true
                 }
                 .onAppear {
                     if dataTransferManager == nil {
