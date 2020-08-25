@@ -75,11 +75,6 @@ struct SettingsTabView: View {
                                 EmptyView()
                             }
                             Button(action: {
-                                
-                            }) {
-                                Label("Edit", systemImage: "rectangle.and.pencil.and.ellipsis")
-                            }
-                            Button(action: {
                                 self.actionHandler.perform(.delete(server))
                             }) {
                                 Label("Delete", systemImage: "trash")
