@@ -42,7 +42,13 @@ struct TorrentListView: View {
     func onAppear() {
         updateData()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+        #if os(watchOS)
+        let refreshInterval = 10.0
+        #else
+        let refreshInterval = 2.0
+        #endif
+        
+        timer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: true) { _ in
             updateData()
         }
     }
@@ -51,6 +57,12 @@ struct TorrentListView: View {
         timer?.invalidate()
         timer = nil
     }
+    
+    #if os(watchOS)
+    static private let listStyle = DefaultListStyle()
+    #else
+    static private let listStyle = InsetGroupedListStyle()
+    #endif
     
     var body: some View {
         Group {
@@ -76,7 +88,7 @@ struct TorrentListView: View {
                             }
                         }
                     }
-                    .listStyle(InsetGroupedListStyle())
+                    .listStyle(Self.listStyle)
                 } else {
                     NoServersConfiguredView()
                 }

@@ -14,7 +14,7 @@ struct TorrentDetailsView: View {
         let torrent: RemoteTorrent
         
         var body: some View {
-            GroupBox(label: Label("Name", systemImage: "pencil.and.ellipsis.rectangle")) {
+            Box(label: Label("Name", systemImage: "pencil.and.ellipsis.rectangle")) {
                 HStack {
                     Text(torrent.name)
                     Spacer()
@@ -28,7 +28,7 @@ struct TorrentDetailsView: View {
         let torrent: RemoteTorrent
         
         var body: some View {
-            GroupBox(label: Label("Status", systemImage: "exclamationmark.bubble")) {
+            Box(label: Label("Status", systemImage: "exclamationmark.bubble")) {
                 HStack {
                     Text(torrent.status.displayableStatus)
                     Spacer()
@@ -44,7 +44,7 @@ struct TorrentDetailsView: View {
         var body: some View {
             switch torrent.status {
             case let .downloading(_, _, _, downloadRate, uploadRate):
-                GroupBox(label: Label("Speed", systemImage: "speedometer")) {
+                Box(label: Label("Speed", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
                             Label("Download: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "chevron.down")
@@ -55,7 +55,7 @@ struct TorrentDetailsView: View {
                 }
                 
             case let .seeding(_, uploadRate):
-                GroupBox(label: Label("Speed", systemImage: "speedometer")) {
+                Box(label: Label("Speed", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
                             Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "chevron.up")
@@ -82,28 +82,55 @@ struct TorrentDetailsView: View {
             set: { self.actionHandler.currentAlert = $0 }
         )
         
-        return ScrollView {
+        let view = ScrollView {
             NameView(torrent: torrent)
+            
+            #if os(watchOS)
+            Divider()
+                .padding()
+            #endif
+            
             StatusView(torrent: torrent)
+            
+            #if os(watchOS)
+            Divider()
+                .padding()
+            #endif
+            
             SpeedView(torrent: torrent)
-            GroupBox(label: Label("Actions", systemImage: "wrench")) {
+            
+            #if os(watchOS)
+            Divider()
+                .padding()
+            #endif
+            
+            Box(label: Label("Actions", systemImage: "wrench")) {
                 VStack {
                     Button(action: {
                         actionHandler.perform(.prepareForRemoval(deletingFiles: false))
                     }) {
+                        #if os(watchOS)
+                        Text("Remove Torrent")
+                        #else
                         Label("Remove Torrent", systemImage: "xmark")
+                        #endif
                     }.padding(4)
                     
                     Button(action: {
                         actionHandler.perform(.prepareForRemoval(deletingFiles: true))
                     }) {
+                        #if os(watchOS)
+                        Text("Remove Torrent and Data")
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.red)
+                        #else
                         Label("Remove Torrent and Data", systemImage: "trash")
                             .foregroundColor(.red)
+                        #endif
                     }.padding(4)
                 }.padding(.top)
             }
         }
-        .padding()
         .navigationBarTitle("Torrent Detail")
         .alert(item: currentAlert) {
             switch $0.id {
@@ -122,6 +149,12 @@ struct TorrentDetailsView: View {
                              dismissButton: .default(Text("Ok")))
             }
         }
+        
+        #if os(watchOS)
+        return view
+        #else
+        return view.padding()
+        #endif
     }
 }
 

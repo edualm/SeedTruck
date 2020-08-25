@@ -29,8 +29,8 @@
 		A02C585024F325A400C82D68 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02C584D24F325A400C82D68 /* DataModel.xcdatamodeld */; };
 		A02C585224F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */; };
 		A02C585324F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */; };
-		A02C585624F3400200C82D68 /* ServerConnectionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585524F3400200C82D68 /* ServerConnectionDetails.swift */; };
-		A02C585724F3400200C82D68 /* ServerConnectionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585524F3400200C82D68 /* ServerConnectionDetails.swift */; };
+		A02C585624F3400200C82D68 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585524F3400200C82D68 /* Server.swift */; };
+		A02C585724F3400200C82D68 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585524F3400200C82D68 /* Server.swift */; };
 		A02C585924F3446100C82D68 /* NewServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585824F3446100C82D68 /* NewServerView.swift */; };
 		A02C585A24F3446100C82D68 /* NewServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585824F3446100C82D68 /* NewServerView.swift */; };
 		A045C8BE24F2006500B3B1CD /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8BD24F2006500B3B1CD /* Tests_iOS.swift */; };
@@ -80,6 +80,52 @@
 		A07FFC7024F30044002A78B5 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
 		A07FFC7124F30044002A78B5 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
 		A07FFC7324F306AC002A78B5 /* TransmissionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */; };
+		A096385B24F568CF00F2062F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096385A24F568CF00F2062F /* Assets.xcassets */; };
+		A096386224F568CF00F2062F /* SeedTruck (watchOS) Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A096386724F568CF00F2062F /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096386624F568CF00F2062F /* SeedTruckApp.swift */; };
+		A096386924F568CF00F2062F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096386824F568CF00F2062F /* MainView.swift */; };
+		A096387124F568D000F2062F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096387024F568D000F2062F /* Assets.xcassets */; };
+		A096387424F568D000F2062F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096387324F568D000F2062F /* Preview Assets.xcassets */; };
+		A096387924F568D000F2062F /* SeedTruck (watchOS).app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A096385824F568CF00F2062F /* SeedTruck (watchOS).app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A096388224F5697600F2062F /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
+		A096388324F5697600F2062F /* TorrentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3824F4358500C76682 /* TorrentListView.swift */; };
+		A096388424F5699900F2062F /* RemoteTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */; };
+		A096388524F569A900F2062F /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585524F3400200C82D68 /* Server.swift */; };
+		A096388724F569CA00F2062F /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388624F569CA00F2062F /* ServerType.swift */; };
+		A096388824F569CA00F2062F /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388624F569CA00F2062F /* ServerType.swift */; };
+		A096388924F569CA00F2062F /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388624F569CA00F2062F /* ServerType.swift */; };
+		A096388A24F569DE00F2062F /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
+		A096388B24F569DE00F2062F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16924F45B2700B57E45 /* LoadingView.swift */; };
+		A096388C24F569DE00F2062F /* ServerConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */; };
+		A096388D24F569E900F2062F /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
+		A096389024F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */; };
+		A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */; };
+		A096389324F56A1B00F2062F /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
+		A096389424F56A2500F2062F /* TorrentDetailsActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073DD2324F4768400BA37C9 /* TorrentDetailsActionHandler.swift */; };
+		A096389624F56A3C00F2062F /* Server+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389524F56A3C00F2062F /* Server+Convenience.swift */; };
+		A096389724F56A3C00F2062F /* Server+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389524F56A3C00F2062F /* Server+Convenience.swift */; };
+		A096389824F56A3C00F2062F /* Server+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389524F56A3C00F2062F /* Server+Convenience.swift */; };
+		A096389A24F56A5100F2062F /* Server+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389924F56A5100F2062F /* Server+CoreData.swift */; };
+		A096389B24F56A5100F2062F /* Server+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389924F56A5100F2062F /* Server+CoreData.swift */; };
+		A096389D24F56A8200F2062F /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
+		A096389E24F56A8200F2062F /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
+		A096389F24F56A8A00F2062F /* RemoteTorrent+Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */; };
+		A09638A024F56A9300F2062F /* ServerConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7EE24F21078009D72C6 /* ServerConnection.swift */; };
+		A09638A124F56A9C00F2062F /* TransmissionConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F124F21088009D72C6 /* TransmissionConnection.swift */; };
+		A09638A224F56B9700F2062F /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
+		A09638A324F56B9F00F2062F /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
+		A09638A424F56BAE00F2062F /* ByteCountFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */; };
+		A09638A624F56BDA00F2062F /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638A524F56BDA00F2062F /* Box.swift */; };
+		A09638A724F56BDA00F2062F /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638A524F56BDA00F2062F /* Box.swift */; };
+		A09638A824F56BDA00F2062F /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638A524F56BDA00F2062F /* Box.swift */; };
+		A09638AA24F5718C00F2062F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02C584D24F325A400C82D68 /* DataModel.xcdatamodeld */; };
+		A09638AC24F5746600F2062F /* DataTransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638AB24F5746600F2062F /* DataTransferManager.swift */; };
+		A09638AE24F5762700F2062F /* DataTransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638AD24F5762700F2062F /* DataTransferManager.swift */; };
+		A09638AF24F5802800F2062F /* Server+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389924F56A5100F2062F /* Server+CoreData.swift */; };
+		A09638B124F5804100F2062F /* Server+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638B024F5804100F2062F /* Server+Serialization.swift */; };
+		A09638B224F5804100F2062F /* Server+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638B024F5804100F2062F /* Server+Serialization.swift */; };
+		A09638B324F5804100F2062F /* Server+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638B024F5804100F2062F /* Server+Serialization.swift */; };
+		A09638B724F58BD300F2062F /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638B624F58BD300F2062F /* ServerView.swift */; };
 		A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
@@ -107,7 +153,46 @@
 			remoteGlobalIDString = A045C8B024F2006500B3B1CD;
 			remoteInfo = "SeedTruck (macOS)";
 		};
+		A096386324F568CF00F2062F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A045C89D24F2006400B3B1CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A096386024F568CF00F2062F;
+			remoteInfo = "SeedTruck (watchOS) Extension";
+		};
+		A096387724F568D000F2062F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A045C89D24F2006400B3B1CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A096385724F568CF00F2062F;
+			remoteInfo = "SeedTruck (watchOS)";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A096387A24F568D000F2062F /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				A096387924F568D000F2062F /* SeedTruck (watchOS).app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A096387D24F568D000F2062F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A096386224F568CF00F2062F /* SeedTruck (watchOS) Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A01056A424F48D5E00DA056D /* URLHandlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLHandlerView.swift; sourceTree = "<group>"; };
@@ -123,7 +208,7 @@
 		A023BAE624F294EF00B82FB3 /* SettingsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabView.swift; sourceTree = "<group>"; };
 		A02C584E24F325A400C82D68 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RemoteTorrent+Transmission.swift"; sourceTree = "<group>"; };
-		A02C585524F3400200C82D68 /* ServerConnectionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionDetails.swift; sourceTree = "<group>"; };
+		A02C585524F3400200C82D68 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
 		A02C585824F3446100C82D68 /* NewServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewServerView.swift; sourceTree = "<group>"; };
 		A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
 		A045C8A424F2006500B3B1CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -160,6 +245,24 @@
 		A07FFC6C24F2F34E002A78B5 /* Transmission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
 		A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transmission+Extensions.swift"; sourceTree = "<group>"; };
 		A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionModelTests.swift; sourceTree = "<group>"; };
+		A096385824F568CF00F2062F /* SeedTruck (watchOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeedTruck (watchOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A096385A24F568CF00F2062F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A096385C24F568CF00F2062F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SeedTruck (watchOS) Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A096386624F568CF00F2062F /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
+		A096386824F568CF00F2062F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		A096387024F568D000F2062F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A096387324F568D000F2062F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A096387524F568D000F2062F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A096388624F569CA00F2062F /* ServerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerType.swift; sourceTree = "<group>"; };
+		A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTorrent+ComputedProperties.swift"; sourceTree = "<group>"; };
+		A096389524F56A3C00F2062F /* Server+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Convenience.swift"; sourceTree = "<group>"; };
+		A096389924F56A5100F2062F /* Server+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreData.swift"; sourceTree = "<group>"; };
+		A09638A524F56BDA00F2062F /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		A09638AB24F5746600F2062F /* DataTransferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferManager.swift; sourceTree = "<group>"; };
+		A09638AD24F5762700F2062F /* DataTransferManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferManager.swift; sourceTree = "<group>"; };
+		A09638B024F5804100F2062F /* Server+Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Serialization.swift"; sourceTree = "<group>"; };
+		A09638B624F58BD300F2062F /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
 		A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
 		A0C1DB3524F42E4100C76682 /* SettingsActionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActionHandler.swift; sourceTree = "<group>"; };
@@ -196,6 +299,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A096385E24F568CF00F2062F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -205,9 +315,11 @@
 				A02C585424F33FEE00C82D68 /* Core Data */,
 				A07FFC6824F2F1BB002A78B5 /* Remote */,
 				A011C7F424F211C6009D72C6 /* LocalTorrent.swift */,
+				A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */,
 				A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */,
 				A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */,
 				A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */,
+				A096388624F569CA00F2062F /* ServerType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -224,7 +336,10 @@
 		A02C585424F33FEE00C82D68 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				A02C585524F3400200C82D68 /* ServerConnectionDetails.swift */,
+				A02C585524F3400200C82D68 /* Server.swift */,
+				A096389524F56A3C00F2062F /* Server+Convenience.swift */,
+				A096389924F56A5100F2062F /* Server+CoreData.swift */,
+				A09638B024F5804100F2062F /* Server+Serialization.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -239,6 +354,8 @@
 				A045C8B224F2006500B3B1CD /* macOS */,
 				A045C8BC24F2006500B3B1CD /* Tests iOS */,
 				A045C8C724F2006500B3B1CD /* Tests macOS */,
+				A096385924F568CF00F2062F /* SeedTruck (watchOS) */,
+				A096386524F568CF00F2062F /* SeedTruck (watchOS) Extension */,
 				A045C8AA24F2006500B3B1CD /* Products */,
 				A054DA8524F51E34003A12AD /* Frameworks */,
 			);
@@ -268,6 +385,8 @@
 				A045C8B124F2006500B3B1CD /* SeedTruck.app */,
 				A045C8B924F2006500B3B1CD /* Tests iOS.xctest */,
 				A045C8C424F2006500B3B1CD /* Tests macOS.xctest */,
+				A096385824F568CF00F2062F /* SeedTruck (watchOS).app */,
+				A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -361,6 +480,7 @@
 			children = (
 				A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */,
 				A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */,
+				A09638AD24F5762700F2062F /* DataTransferManager.swift */,
 				A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */,
 				A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */,
 				A01056AA24F491B600DA056D /* String+Extensions.swift */,
@@ -377,6 +497,53 @@
 			path = Remote;
 			sourceTree = "<group>";
 		};
+		A096385924F568CF00F2062F /* SeedTruck (watchOS) */ = {
+			isa = PBXGroup;
+			children = (
+				A096385A24F568CF00F2062F /* Assets.xcassets */,
+				A096385C24F568CF00F2062F /* Info.plist */,
+			);
+			path = "SeedTruck (watchOS)";
+			sourceTree = "<group>";
+		};
+		A096386524F568CF00F2062F /* SeedTruck (watchOS) Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A09638B924F5901000F2062F /* Utilities */,
+				A09638B824F5900900F2062F /* Views */,
+				A096386624F568CF00F2062F /* SeedTruckApp.swift */,
+				A096387024F568D000F2062F /* Assets.xcassets */,
+				A096387524F568D000F2062F /* Info.plist */,
+				A096387224F568D000F2062F /* Preview Content */,
+			);
+			path = "SeedTruck (watchOS) Extension";
+			sourceTree = "<group>";
+		};
+		A096387224F568D000F2062F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A096387324F568D000F2062F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A09638B824F5900900F2062F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A096386824F568CF00F2062F /* MainView.swift */,
+				A09638B624F58BD300F2062F /* ServerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A09638B924F5901000F2062F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A09638AB24F5746600F2062F /* DataTransferManager.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		A0C1DB3E24F4376800C76682 /* Action Handlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +558,7 @@
 			children = (
 				A05FE16824F446E200B57E45 /* Tabs */,
 				A073DD2024F4658700BA37C9 /* AddMagnetView.swift */,
+				A09638A524F56BDA00F2062F /* Box.swift */,
 				A05FE16924F45B2700B57E45 /* LoadingView.swift */,
 				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
 				A02C585824F3446100C82D68 /* NewServerView.swift */,
@@ -414,10 +582,12 @@
 				A045C8A524F2006500B3B1CD /* Sources */,
 				A045C8A624F2006500B3B1CD /* Frameworks */,
 				A045C8A724F2006500B3B1CD /* Resources */,
+				A096387A24F568D000F2062F /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A096387824F568D000F2062F /* PBXTargetDependency */,
 			);
 			name = "SeedTruck (iOS)";
 			packageProductDependencies = (
@@ -481,6 +651,40 @@
 			productReference = A045C8C424F2006500B3B1CD /* Tests macOS.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		A096385724F568CF00F2062F /* SeedTruck (watchOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A096388124F568D000F2062F /* Build configuration list for PBXNativeTarget "SeedTruck (watchOS)" */;
+			buildPhases = (
+				A096385624F568CF00F2062F /* Resources */,
+				A096387D24F568D000F2062F /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A096386424F568CF00F2062F /* PBXTargetDependency */,
+			);
+			name = "SeedTruck (watchOS)";
+			productName = "SeedTruck (watchOS)";
+			productReference = A096385824F568CF00F2062F /* SeedTruck (watchOS).app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		A096386024F568CF00F2062F /* SeedTruck (watchOS) Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A096388024F568D000F2062F /* Build configuration list for PBXNativeTarget "SeedTruck (watchOS) Extension" */;
+			buildPhases = (
+				A096385D24F568CF00F2062F /* Sources */,
+				A096385E24F568CF00F2062F /* Frameworks */,
+				A096385F24F568CF00F2062F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SeedTruck (watchOS) Extension";
+			productName = "SeedTruck (watchOS) Extension";
+			productReference = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -504,6 +708,12 @@
 						CreatedOnToolsVersion = 12.0;
 						TestTargetID = A045C8B024F2006500B3B1CD;
 					};
+					A096385724F568CF00F2062F = {
+						CreatedOnToolsVersion = 12.0;
+					};
+					A096386024F568CF00F2062F = {
+						CreatedOnToolsVersion = 12.0;
+					};
 				};
 			};
 			buildConfigurationList = A045C8A024F2006400B3B1CD /* Build configuration list for PBXProject "SeedTruck" */;
@@ -525,6 +735,8 @@
 				A045C8B024F2006500B3B1CD /* SeedTruck (macOS) */,
 				A045C8B824F2006500B3B1CD /* Tests iOS */,
 				A045C8C324F2006500B3B1CD /* Tests macOS */,
+				A096385724F568CF00F2062F /* SeedTruck (watchOS) */,
+				A096386024F568CF00F2062F /* SeedTruck (watchOS) Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -560,6 +772,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A096385624F568CF00F2062F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A096385B24F568CF00F2062F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A096385F24F568CF00F2062F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A096387424F568D000F2062F /* Preview Assets.xcassets in Resources */,
+				A096387124F568D000F2062F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -571,14 +800,18 @@
 				A073DD2424F4768400BA37C9 /* TorrentDetailsActionHandler.swift in Sources */,
 				A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
+				A096389024F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
+				A09638A624F56BDA00F2062F /* Box.swift in Sources */,
 				A054DA9624F51F87003A12AD /* Bencode.swift in Sources */,
 				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
+				A09638AE24F5762700F2062F /* DataTransferManager.swift in Sources */,
 				A054DA9E24F51F87003A12AD /* BencoderError.swift in Sources */,
 				A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A01056A524F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
+				A096389A24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A054DA9224F51F87003A12AD /* Bencoder.swift in Sources */,
 				A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
@@ -587,6 +820,7 @@
 				A05FE16624F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */,
 				A05FE16A24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A045C8E324F2013100B3B1CD /* TorrentsTabView.swift in Sources */,
+				A096388724F569CA00F2062F /* ServerType.swift in Sources */,
 				A07FFC7024F30044002A78B5 /* Transmission+Extensions.swift in Sources */,
 				A02C585924F3446100C82D68 /* NewServerView.swift in Sources */,
 				A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */,
@@ -595,11 +829,13 @@
 				A054DA9C24F51F87003A12AD /* BencodeDescription.swift in Sources */,
 				A054DA9424F51F87003A12AD /* BencodeKey.swift in Sources */,
 				A054DA9824F51F87003A12AD /* BencodeSequence.swift in Sources */,
+				A096389624F56A3C00F2062F /* Server+Convenience.swift in Sources */,
 				A0C1DB3C24F436A500C76682 /* CoreDataManagedObjectDeleter.swift in Sources */,
+				A09638B124F5804100F2062F /* Server+Serialization.swift in Sources */,
 				A02C584F24F325A400C82D68 /* DataModel.xcdatamodeld in Sources */,
 				A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
-				A02C585624F3400200C82D68 /* ServerConnectionDetails.swift in Sources */,
+				A02C585624F3400200C82D68 /* Server.swift in Sources */,
 				A011C7EF24F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A054DAA024F51F87003A12AD /* Extensions.swift in Sources */,
 				A023BAE724F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
@@ -617,14 +853,18 @@
 				A073DD2524F4768400BA37C9 /* TorrentDetailsActionHandler.swift in Sources */,
 				A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
+				A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
+				A09638A724F56BDA00F2062F /* Box.swift in Sources */,
 				A054DA9724F51F87003A12AD /* Bencode.swift in Sources */,
 				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A054DA9F24F51F87003A12AD /* BencoderError.swift in Sources */,
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A01056A624F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
+				A09638B224F5804100F2062F /* Server+Serialization.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0B8C13424F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
+				A096389B24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A054DA9324F51F87003A12AD /* Bencoder.swift in Sources */,
 				A05FE16424F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
@@ -633,6 +873,7 @@
 				A05FE16724F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */,
 				A05FE16B24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A045C8E424F2013100B3B1CD /* TorrentsTabView.swift in Sources */,
+				A096388824F569CA00F2062F /* ServerType.swift in Sources */,
 				A07FFC7124F30044002A78B5 /* Transmission+Extensions.swift in Sources */,
 				A02C585A24F3446100C82D68 /* NewServerView.swift in Sources */,
 				A045C8E124F2011E00B3B1CD /* MainView.swift in Sources */,
@@ -641,11 +882,12 @@
 				A054DA9D24F51F87003A12AD /* BencodeDescription.swift in Sources */,
 				A054DA9524F51F87003A12AD /* BencodeKey.swift in Sources */,
 				A054DA9924F51F87003A12AD /* BencodeSequence.swift in Sources */,
+				A096389724F56A3C00F2062F /* Server+Convenience.swift in Sources */,
 				A0C1DB3D24F436A500C76682 /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A02C585024F325A400C82D68 /* DataModel.xcdatamodeld in Sources */,
 				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
-				A02C585724F3400200C82D68 /* ServerConnectionDetails.swift in Sources */,
+				A02C585724F3400200C82D68 /* Server.swift in Sources */,
 				A011C7F024F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A054DAA124F51F87003A12AD /* Extensions.swift in Sources */,
 				A023BAE824F294EF00B82FB3 /* SettingsTabView.swift in Sources */,
@@ -672,6 +914,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A096385D24F568CF00F2062F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A09638B724F58BD300F2062F /* ServerView.swift in Sources */,
+				A096389F24F56A8A00F2062F /* RemoteTorrent+Transmission.swift in Sources */,
+				A096388A24F569DE00F2062F /* NoServersConfiguredView.swift in Sources */,
+				A09638AC24F5746600F2062F /* DataTransferManager.swift in Sources */,
+				A096388924F569CA00F2062F /* ServerType.swift in Sources */,
+				A09638A424F56BAE00F2062F /* ByteCountFormatter+Extensions.swift in Sources */,
+				A09638A124F56A9C00F2062F /* TransmissionConnection.swift in Sources */,
+				A096388424F5699900F2062F /* RemoteTorrent.swift in Sources */,
+				A096389424F56A2500F2062F /* TorrentDetailsActionHandler.swift in Sources */,
+				A096386924F568CF00F2062F /* MainView.swift in Sources */,
+				A096388B24F569DE00F2062F /* LoadingView.swift in Sources */,
+				A096388C24F569DE00F2062F /* ServerConnectionErrorView.swift in Sources */,
+				A09638AF24F5802800F2062F /* Server+CoreData.swift in Sources */,
+				A096389E24F56A8200F2062F /* Transmission.swift in Sources */,
+				A09638A024F56A9300F2062F /* ServerConnection.swift in Sources */,
+				A09638A324F56B9F00F2062F /* ProgressBarView.swift in Sources */,
+				A096389D24F56A8200F2062F /* Transmission+Extensions.swift in Sources */,
+				A096386724F568CF00F2062F /* SeedTruckApp.swift in Sources */,
+				A096388224F5697600F2062F /* TorrentDetailsView.swift in Sources */,
+				A096388D24F569E900F2062F /* PreviewMockData.swift in Sources */,
+				A09638A824F56BDA00F2062F /* Box.swift in Sources */,
+				A096388524F569A900F2062F /* Server.swift in Sources */,
+				A096389324F56A1B00F2062F /* LocalTorrent.swift in Sources */,
+				A096389824F56A3C00F2062F /* Server+Convenience.swift in Sources */,
+				A09638AA24F5718C00F2062F /* DataModel.xcdatamodeld in Sources */,
+				A09638B324F5804100F2062F /* Server+Serialization.swift in Sources */,
+				A096388324F5697600F2062F /* TorrentListView.swift in Sources */,
+				A09638A224F56B9700F2062F /* TorrentItemView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -684,6 +961,16 @@
 			isa = PBXTargetDependency;
 			target = A045C8B024F2006500B3B1CD /* SeedTruck (macOS) */;
 			targetProxy = A045C8C524F2006500B3B1CD /* PBXContainerItemProxy */;
+		};
+		A096386424F568CF00F2062F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A096386024F568CF00F2062F /* SeedTruck (watchOS) Extension */;
+			targetProxy = A096386324F568CF00F2062F /* PBXContainerItemProxy */;
+		};
+		A096387824F568D000F2062F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A096385724F568CF00F2062F /* SeedTruck (watchOS) */;
+			targetProxy = A096387724F568D000F2062F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -981,6 +1268,96 @@
 			};
 			name = Release;
 		};
+		A096387B24F568D000F2062F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				IBSC_MODULE = SeedTruck__watchOS__Extension;
+				INFOPLIST_FILE = "SeedTruck (watchOS)/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		A096387C24F568D000F2062F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				IBSC_MODULE = SeedTruck__watchOS__Extension;
+				INFOPLIST_FILE = "SeedTruck (watchOS)/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
+		A096387E24F568D000F2062F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"SeedTruck (watchOS) Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "SeedTruck (watchOS) Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Debug;
+		};
+		A096387F24F568D000F2062F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"SeedTruck (watchOS) Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = 3D7R27DBRZ;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = "SeedTruck (watchOS) Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 7.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1025,6 +1402,24 @@
 			buildConfigurations = (
 				A045C8DD24F2006500B3B1CD /* Debug */,
 				A045C8DE24F2006500B3B1CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A096388024F568D000F2062F /* Build configuration list for PBXNativeTarget "SeedTruck (watchOS) Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A096387E24F568D000F2062F /* Debug */,
+				A096387F24F568D000F2062F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A096388124F568D000F2062F /* Build configuration list for PBXNativeTarget "SeedTruck (watchOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A096387B24F568D000F2062F /* Debug */,
+				A096387C24F568D000F2062F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

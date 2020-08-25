@@ -24,25 +24,3 @@ protocol ServerConnection {
     func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ())
     func removeTorrent(_ torrent: RemoteTorrent, deletingData: Bool, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
 }
-
-enum ServerType: String, CaseIterable {
-    
-    case transmission = "Transmission"
-    
-    init?(fromCode code: Int) {
-        switch code {
-        case 0:
-            self = .transmission
-            
-        default:
-            return nil
-        }
-    }
-    
-    var code: Int {
-        switch self {
-        case .transmission:
-            return 0
-        }
-    }
-}

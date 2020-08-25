@@ -88,30 +88,30 @@ struct TorrentsTabView: View {
     var body: some View {
         NavigationView {
             TorrentListView(selectedServer: $selectedServer)
-            .navigationTitle(selectedServer?.name ?? "Torrents")
-            .navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
-                ForEach(serverConnections, id: \.self) { server in
-                    Button {
-                        selectedServer = server
-                    } label: {
-                        Text(server.name)
-                        Image(systemName: "server.rack")
+                .navigationTitle(selectedServer?.name ?? "Torrents")
+                .navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
+                    ForEach(serverConnections, id: \.self) { server in
+                        Button {
+                            selectedServer = server
+                        } label: {
+                            Text(server.name)
+                            Image(systemName: "server.rack")
+                        }
                     }
-                }
-            } label: {
-                Image(systemName: "text.justify")
-            }) : AnyView(EmptyView()), trailing: serverConnections.count > 0 ? AnyView(Menu {
-                ForEach(addMenuItems, id: \.self) { item in
-                    Button {
-                        item.action()
-                    } label: {
-                        Text(item.name)
-                        Image(systemName: item.systemImage)
+                } label: {
+                    Image(systemName: "text.justify")
+                }) : AnyView(EmptyView()), trailing: serverConnections.count > 0 ? AnyView(Menu {
+                    ForEach(addMenuItems, id: \.self) { item in
+                        Button {
+                            item.action()
+                        } label: {
+                            Text(item.name)
+                            Image(systemName: item.systemImage)
+                        }
                     }
-                }
-            } label: {
-                Image(systemName: "link.badge.plus")
-            }) : AnyView(EmptyView()))
+                } label: {
+                    Image(systemName: "link.badge.plus")
+                }) : AnyView(EmptyView()))
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear(perform: onAppear)
@@ -122,9 +122,9 @@ struct TorrentsTabView: View {
             switch $0.id {
             case .addTorrentError:
                 return Alert(title: Text("Error!"),
-                      message: Text("An error has occurred while adding the requested torrent."),
-                      dismissButton: .default(Text("Ok")))
-            
+                             message: Text("An error has occurred while adding the requested torrent."),
+                             dismissButton: .default(Text("Ok")))
+                
             }
         }
         .sheet(isPresented: $showingAddMagnetModal) {

@@ -13,6 +13,7 @@ import CoreData
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var openedTorrent: LocalTorrent? = nil
+    @State private var dataTransferManager: DataTransferManager? = nil
     
     var body: some Scene {
         let showingURLHandlerSheet = Binding<Bool>(
@@ -36,6 +37,11 @@ import CoreData
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
                 .onOpenURL { url in
                     openedTorrent = LocalTorrent(url: url)
+                }
+                .onAppear {
+                    if dataTransferManager == nil {
+                        dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
+                    }
                 }
         }.onChange(of: scenePhase) { phase in
             switch phase {

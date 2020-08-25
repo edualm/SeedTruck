@@ -10,6 +10,7 @@ import SwiftUI
 struct NoServersConfiguredView: View {
     
     var body: some View {
+        #if !os(watchOS)
         VStack {
             Text("😞")
                 .font(.largeTitle)
@@ -19,6 +20,16 @@ struct NoServersConfiguredView: View {
             Text("Please add a server using the Settings tab.")
                 .fontWeight(.light)
         }
+        #else
+        VStack {
+            Text("No servers!")
+                .font(.headline)
+                .padding()
+            Text("Please configure at least one server using your iPhone and then try again.")
+                .fontWeight(.light)
+                .multilineTextAlignment(.center)
+        }
+        #endif
     }
 }
 
