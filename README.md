@@ -18,7 +18,7 @@ These will appear eventually.
  - View torrents, their status, and remove them.
  - Import torrents, either using a torrent file or magnet link.
  
-iOS and watchOS support are practically done, tvOS support will be done eventually, macOS support will only probably be worked on when macOS 11 is released.
+iOS, tvOS and watchOS support are practically done. macOS support will only probably be worked on when macOS 11 is released.
 
 ## Tests
 
