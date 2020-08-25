@@ -131,6 +131,7 @@ struct NewServerView: View {
                 return Alert(title: Text("Success!"),
                       message: Text("Connection established successfully."),
                       dismissButton: .default(Text("Ok")))
+                
             case .failure:
                 return Alert(title: Text("Error!"),
                       message: Text("Please verify the inserted data."),

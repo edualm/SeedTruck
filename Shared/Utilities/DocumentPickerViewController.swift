@@ -11,6 +11,7 @@ import UIKit
 import MobileCoreServices
 
 class DocumentPickerViewController: UIDocumentPickerViewController {
+    
     private let onDismiss: () -> Void
     private let onPick: (URL) -> ()
 
@@ -30,6 +31,7 @@ class DocumentPickerViewController: UIDocumentPickerViewController {
 }
 
 extension DocumentPickerViewController: UIDocumentPickerDelegate {
+    
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         onPick(urls.first!)
     }

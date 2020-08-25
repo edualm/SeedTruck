@@ -51,6 +51,7 @@ extension Transmission.RPCResponse.Result: Codable {
         switch value {
         case "success":
             self = .success
+            
         default:
             self = .error(value)
         }
@@ -75,8 +76,10 @@ extension Transmission.RPCResponse.Result: Equatable {
         switch (rhs, lhs) {
         case (.success, .success):
             return true
+            
         case (.success, .error), (.error, .success):
             return false
+            
         case let (.error(lhsError), .error(rhsError)):
             return lhsError == rhsError
         }

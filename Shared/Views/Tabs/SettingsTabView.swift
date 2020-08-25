@@ -65,12 +65,15 @@ struct SettingsTabView: View {
                             case .connecting:
                                 Label("Testing...", systemImage: "bolt.horizontal.circle")
                                     .foregroundColor(.gray)
+                                
                             case .success:
                                 Label("Connection Successful!", systemImage: "checkmark.circle")
                                     .foregroundColor(.green)
+                                
                             case .failure:
                                 Label("Connection Failed!", systemImage: "xmark.circle")
                                     .foregroundColor(.red)
+                                
                             case .none:
                                 EmptyView()
                             }

@@ -141,6 +141,7 @@ class TransmissionConnection: ServerConnection {
         switch torrent {
         case .magnet(let magnet):
             parameters = ["filename": magnet]
+            
         case .torrent(let torrent):
             parameters = ["metainfo": torrent.base64EncodedString()]
         }

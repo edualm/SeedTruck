@@ -412,8 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				A045C8BD24F2006500B3B1CD /* Tests_iOS.swift */,
-				A045C8BF24F2006500B3B1CD /* Info.plist */,
 				A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */,
+				A045C8BF24F2006500B3B1CD /* Info.plist */,
 			);
 			path = "Tests iOS";
 			sourceTree = "<group>";

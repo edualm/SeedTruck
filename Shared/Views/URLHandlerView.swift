@@ -156,6 +156,7 @@ struct URLHandlerView: View {
 }
 
 struct URLHandlerView_Previews: PreviewProvider {
+    
     static var previews: some View {
         URLHandlerView(torrent: PreviewMockData.localTorrentMagnet)
     }

@@ -27,11 +27,11 @@ class DataTransferManager: NSObject {
 extension DataTransferManager: WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print(activationState)
+        //  Do nothing.
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print(message)
+        self.session(session, didReceiveMessage: message) { _ in }
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {

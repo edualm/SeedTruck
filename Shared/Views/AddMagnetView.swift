@@ -45,6 +45,7 @@ struct AddMagnetView: View {
                             switch $0 {
                             case .success:
                                 self.presentation.wrappedValue.dismiss()
+                                
                             case .failure:
                                 showingErrorAlert = true
                             }

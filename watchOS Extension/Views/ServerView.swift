@@ -18,6 +18,7 @@ struct ServerView: View {
 }
 
 struct ServerView_Previews: PreviewProvider {
+    
     static var previews: some View {
         ServerView(server: .constant(PreviewMockData.server))
     }

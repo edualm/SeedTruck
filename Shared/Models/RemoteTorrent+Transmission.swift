@@ -45,6 +45,7 @@ extension RemoteTorrent {
             }
             
             self.status = .seeding(peers: peers, uploadRate: uploadRate)
+            
         default:
             return nil
         }
