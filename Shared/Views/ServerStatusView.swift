@@ -25,8 +25,8 @@ struct ServerStatusView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 5.0))
             Spacer()
             Group {
-                Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.downloadSpeed), systemImage: "chevron.down")
-                Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.downloadSpeed), systemImage: "chevron.up")
+                Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.downloadSpeed), systemImage: "arrow.down.forward")
+                Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.downloadSpeed), systemImage: "arrow.up.forward")
             }
             .padding(Self.rectanglePadding)
             .background(Color.secondary.opacity(0.5))

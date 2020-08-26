@@ -21,15 +21,15 @@ struct TorrentItemView: View {
                 
             case let .downloading(_, _, _, downloadRate, uploadRate):
                 HStack {
-                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "chevron.down")
+                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "arrow.down.forward")
                         .font(.footnote)
-                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "chevron.up")
+                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
                         .font(.footnote)
                 }
                 
             case let .seeding(_, uploadRate):
                 HStack {
-                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "chevron.up")
+                    Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
                         .font(.footnote)
                 }
             }
@@ -42,6 +42,7 @@ struct TorrentItemView: View {
         VStack(alignment: .leading) {
             Text(torrent.name)
                 .bold()
+                .lineLimit(1)
             ProgressBarView(cornerRadius: 10.0, progress: CGFloat(torrent.progress))
                 .frame(width: nil, height: 20, alignment: .center)
             SpeedView(torrent: torrent)

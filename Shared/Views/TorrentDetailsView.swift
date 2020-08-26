@@ -47,8 +47,8 @@ struct TorrentDetailsView: View {
                 Box(label: Label("Speed", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Label("Download: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "chevron.down")
-                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "chevron.up")
+                            Label("Download: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
+                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
                         }
                         Spacer()
                     }.padding(.top)
@@ -58,7 +58,7 @@ struct TorrentDetailsView: View {
                 Box(label: Label("Speed", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "chevron.up")
+                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
                         }
                         Spacer()
                     }.padding(.top)

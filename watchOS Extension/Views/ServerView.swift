@@ -12,7 +12,7 @@ struct ServerView: View {
     @Binding var server: Server?
     
     var body: some View {
-        TorrentListView(selectedServer: $server)
+        TorrentListView(server: $server, filter: .constant(nil))
             .navigationBarTitle(server?.name ?? "Torrents")
     }
 }

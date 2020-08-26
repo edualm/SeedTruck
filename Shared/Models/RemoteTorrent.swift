@@ -7,13 +7,35 @@
 
 import Foundation
 
+typealias Filter = RemoteTorrent.Status.Simple
+
 struct RemoteTorrent: Identifiable {
     
     enum Status {
         
+        enum Simple {
+            
+            case idle
+            case downloading
+            case seeding
+        }
+        
         case idle
         case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int)
         case seeding(peers: Int, uploadRate: Int)
+        
+        var simple: Simple {
+            switch self {
+            case .idle:
+                return .idle
+                
+            case .downloading:
+                return .downloading
+                
+            case .seeding:
+                return .seeding
+            }
+        }
     }
     
     let id: String

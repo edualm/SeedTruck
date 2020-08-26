@@ -17,13 +17,13 @@ struct TorrentsTabView: View {
         var id: Choice
     }
     
-    private struct AddMenuItem: Hashable {
+    private struct MenuItem: Hashable {
         
         let name: String
         let systemImage: String
         let action: () -> ()
         
-        static func == (lhs: TorrentsTabView.AddMenuItem, rhs: TorrentsTabView.AddMenuItem) -> Bool {
+        static func == (lhs: TorrentsTabView.MenuItem, rhs: TorrentsTabView.MenuItem) -> Bool {
             lhs.name == rhs.name
         }
         
@@ -32,7 +32,7 @@ struct TorrentsTabView: View {
         }
     }
     
-    private var addMenuItems: [AddMenuItem] {
+    private var addMenuItems: [MenuItem] {
         [
             .init(name: "Magnet Link", systemImage: "link") {
                 self.showingAddMagnetModal = true
@@ -66,6 +66,20 @@ struct TorrentsTabView: View {
         ]
     }
     
+    private var filterMenuItems: [MenuItem] {
+        [
+            .init(name: "Idle", systemImage: "stop.circle") {
+                filter = .idle
+            },
+            .init(name: "Downloading", systemImage: "arrow.down.forward.circle") {
+                filter = .downloading
+            },
+            .init(name: "Seeding", systemImage: "arrow.up.forward.circle") {
+                filter = .seeding
+            }
+        ]
+    }
+    
     @FetchRequest(
         entity: Server.entity(),
         sortDescriptors: [
@@ -76,6 +90,7 @@ struct TorrentsTabView: View {
     private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     
     @State private var selectedServer: Server?
+    @State private var filter: Filter?
     @State private var showingAlert: AlertIdentifier?
     @State private var showingAddMagnetModal: Bool = false
     
@@ -87,7 +102,7 @@ struct TorrentsTabView: View {
     
     var body: some View {
         NavigationView {
-            TorrentListView(selectedServer: $selectedServer)
+            TorrentListView(server: $selectedServer, filter: $filter)
                 .navigationTitle(selectedServer?.name ?? "Torrents")
                 .navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
                     ForEach(serverConnections, id: \.self) { server in
@@ -100,17 +115,40 @@ struct TorrentsTabView: View {
                     }
                 } label: {
                     Image(systemName: "text.justify")
-                }) : AnyView(EmptyView()), trailing: serverConnections.count > 0 ? AnyView(Menu {
-                    ForEach(addMenuItems, id: \.self) { item in
+                }) : AnyView(EmptyView()), trailing: serverConnections.count > 0 ? AnyView(HStack {
+                    Menu {
                         Button {
-                            item.action()
+                            filter = nil
                         } label: {
-                            Text(item.name)
-                            Image(systemName: item.systemImage)
+                            Text("Show All")
+                            Image(systemName: "circle.fill")
                         }
+                        Divider()
+                        
+                        ForEach(filterMenuItems, id: \.self) { item in
+                            Button {
+                                item.action()
+                            } label: {
+                                Text(item.name)
+                                Image(systemName: item.systemImage)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: filter != nil ? "tag.fill" : "tag")
+                    }.padding(.trailing, 5)
+                    
+                    Menu {
+                        ForEach(addMenuItems, id: \.self) { item in
+                            Button {
+                                item.action()
+                            } label: {
+                                Text(item.name)
+                                Image(systemName: item.systemImage)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "link.badge.plus")
                     }
-                } label: {
-                    Image(systemName: "link.badge.plus")
                 }) : AnyView(EmptyView()))
         }
         .navigationViewStyle(StackNavigationViewStyle())

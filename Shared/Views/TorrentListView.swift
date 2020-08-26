@@ -17,14 +17,15 @@ struct TorrentListView: View {
         case noError
     }
     
-    @Binding var selectedServer: Server?
+    @Binding var server: Server?
+    @Binding var filter: Filter?
     
     @State private var status: Status = .noError
     @State private var timer: Timer? = nil
     @State private var torrents: [RemoteTorrent] = []
     
     func updateData() {
-        if let server = selectedServer {
+        if let server = server {
             server.connection.getTorrents { result in
                 guard case let Result.success(torrents) = result else {
                     self.status = .error
@@ -34,7 +35,8 @@ struct TorrentListView: View {
                 }
                 
                 self.status = .noError
-                self.torrents = torrents.sorted { $0.name < $1.name }
+                self.torrents = torrents
+                    .sorted { $0.name < $1.name }
             }
         }
     }
@@ -74,18 +76,24 @@ struct TorrentListView: View {
                 LoadingView()
                 
             case .noError:
-                if selectedServer != nil {
+                if server != nil {
                     VStack {
                         #if os(watchOS)
                         ServerStatusViewSmall(torrents: torrents)
                         #endif
                         
                         List {
-                            ForEach(torrents) { torrent in
+                            ForEach(torrents.filter {
+                                guard let filter = filter else {
+                                    return true
+                                }
+                                
+                                return $0.status.simple == filter
+                            }) { torrent in
                                 ZStack {
                                     #if os(tvOS)
                                     NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                                   actionHandler: .init(server: selectedServer!,
+                                                                                   actionHandler: .init(server: server!,
                                                                                                         torrent: torrent))) {
                                         TorrentItemView(torrent: torrent)
                                             .padding(.all, 5)
@@ -94,7 +102,7 @@ struct TorrentListView: View {
                                     TorrentItemView(torrent: torrent)
                                         .padding(.all, 5)
                                     NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                                   actionHandler: .init(server: selectedServer!,
+                                                                                   actionHandler: .init(server: server!,
                                                                                                         torrent: torrent))) {
                                         EmptyView()
                                     }.buttonStyle(PlainButtonStyle())
@@ -115,8 +123,10 @@ struct TorrentListView: View {
         }
         .onAppear(perform: onAppear)
         .onDisappear(perform: onDisappear)
-        .onChange(of: selectedServer) { _ in
+        .onChange(of: server) { _ in
             status = .loading
+            
+            updateData()
         }
     }
 }
@@ -124,6 +134,6 @@ struct TorrentListView: View {
 struct TorrentListView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TorrentListView(selectedServer: .constant(PreviewMockData.server))
+        TorrentListView(server: .constant(PreviewMockData.server), filter: .constant(nil))
     }
 }
