@@ -1,6 +1,6 @@
 # Seed Truck
 
-A seedbox management application for iOS and macOS.
+A seedbox management application for the whole family of Apple devices - iOS, macOS, tvOS and watchOS.
 
 This is not the kind of project Apple allows on the App Store, so I'm open-sourcing it, hopefully it's useful for someone. You may also (and should!) use the app if you want, but you'll need to compile and install it yourself though.
 
