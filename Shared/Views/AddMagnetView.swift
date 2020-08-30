@@ -18,7 +18,7 @@ struct AddMagnetView: View {
     @Binding var server: Server?
     
     var body: some View {
-        var innerView = ScrollView {
+        var innerView = AnyView(ScrollView {
             GroupBox(label: Label("What is this?", systemImage: "questionmark.circle")) {
                 HStack {
                     Text("Use this form to add a magnet link to your remote torrent client by simply pasting the link below!")
@@ -48,20 +48,20 @@ struct AddMagnetView: View {
                 Text("Start Download")
             }
         }
-        .navigationTitle("Add Magnet")
+        .navigationTitle("Add Magnet"))
         
         #if !os(macOS)
         
-        innerView = innerView.navigationBarItems(trailing: Button(action: {
+        innerView = AnyView(innerView.navigationBarItems(trailing: Button(action: {
             self.presentation.wrappedValue.dismiss()
         }) {
             Text("Cancel")
                 .fontWeight(.medium)
-        })
+        }))
         
         #endif
         
-        NavigationView {
+        return NavigationView {
             if isLoading {
                 ProgressView {
                     Text("Processing...")

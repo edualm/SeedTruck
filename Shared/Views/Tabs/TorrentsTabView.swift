@@ -103,12 +103,12 @@ struct TorrentsTabView: View {
     }
     
     var body: some View {
-        var listView = TorrentListView(server: $selectedServer, filter: $filter)
-            .navigationTitle(selectedServer?.name ?? "Torrents")
+        var listView = AnyView(TorrentListView(server: $selectedServer, filter: $filter)
+            .navigationTitle(selectedServer?.name ?? "Torrents"))
         
         #if !os(macOS)
         
-        listView = listView.navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
+        listView = AnyView(listView.navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
             ForEach(serverConnections, id: \.self) { server in
                 Button {
                     selectedServer = server
@@ -153,11 +153,11 @@ struct TorrentsTabView: View {
             } label: {
                 Image(systemName: "link.badge.plus")
             }
-        }) : AnyView(EmptyView()))
+        }) : AnyView(EmptyView())))
         
         #endif
         
-        NavigationView {
+        return NavigationView {
             listView
         }
         .navigationViewStyle(Style.navigationView)

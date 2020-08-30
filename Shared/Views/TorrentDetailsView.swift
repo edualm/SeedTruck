@@ -112,7 +112,7 @@ struct TorrentDetailsView: View {
             set: { self.actionHandler.currentAlert = $0 }
         )
         
-        var view = ScrollView {
+        var view = AnyView(ScrollView {
             NameView(torrent: torrent)
             
             #if os(watchOS) || os(tvOS)
@@ -162,10 +162,10 @@ struct TorrentDetailsView: View {
                              message: Text("The requested action couldn't be completed."),
                              dismissButton: .default(Text("Ok")))
             }
-        }
+        })
         
         #if !os(macOS)
-        view = view.navigationBarTitle("Torrent Detail")
+        view = AnyView(view.navigationBarTitle("Torrent Detail"))
         #endif
         
         #if os(watchOS) || os(tvOS)
