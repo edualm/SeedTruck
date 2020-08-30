@@ -83,7 +83,7 @@ struct NewServerView: View {
     }
     
     var body: some View {
-        Form {
+        var form = Form {
             Section(header: Text("Metadata")) {
                 TextField("Name", text: $name)
             }
@@ -94,8 +94,12 @@ struct NewServerView: View {
                         Text(ServerType.allCases[$0].rawValue)
                     }
                 }
+                #if os(macOS)
+                TextField("Endpoint", text: $endpoint)
+                #else
                 TextField("Endpoint", text: $endpoint)
                     .keyboardType(.URL)
+                #endif
                 TextField("Username", text: $username)
                 SecureField("Password", text: $password)
             }
@@ -118,7 +122,6 @@ struct NewServerView: View {
                 }
             }
         }
-        .navigationBarTitle("New Server")
         .alert(item: $showingAlert) {
             switch $0.id {
             case .success:
@@ -132,6 +135,12 @@ struct NewServerView: View {
                       dismissButton: .default(Text("Ok")))
             }
         }
+        
+        #if os(macOS)
+        return form
+        #else
+        return form.navigationBarTitle("New Server")
+        #endif
     }
 }
 

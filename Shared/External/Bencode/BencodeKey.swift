@@ -22,10 +22,6 @@ public struct BencodeKey {
 
 extension BencodeKey: Hashable {
     
-    public var hashValue: Int {
-        return key.hashValue
-    }
-    
     public static func ==(lhs: BencodeKey, rhs: BencodeKey) -> Bool {
         return lhs.key == rhs.key
     }

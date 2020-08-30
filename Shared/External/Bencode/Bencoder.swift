@@ -59,7 +59,7 @@ final class Bencoder {
 
     /** Encoding to Bencoded Data */
     func asciiEncoding(bencode: Bencode) -> Data {
-        return Data(bytes: encoded(bencode: bencode).ascii)
+        return Data(encoded(bencode: bencode).ascii)
     }
 }
 
@@ -90,7 +90,7 @@ private extension Bencoder {
     }
 
     func parseInt(_ data: ArraySlice<Byte>, from index: Int) throws -> ParseResult {
-        guard let end = data.index(of: tokens.e)
+        guard let end = data.firstIndex(of: tokens.e)
             else { throw BencoderError.tokenNotFound(tokens.e) }
         guard let num = Array(data[..<end]).int
             else { throw BencoderError.invalidNumber }
@@ -98,7 +98,7 @@ private extension Bencoder {
     }
 
     func parseString(_ data: ArraySlice<Byte>, from index: Int) throws -> ParseResult {
-        guard let sep = data.index(of: tokens.colon)
+        guard let sep = data.firstIndex(of: tokens.colon)
             else { throw BencoderError.tokenNotFound(tokens.colon) }
         guard let len = Array(data[..<sep]).int
             else { throw BencoderError.invalidNumber }

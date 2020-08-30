@@ -62,7 +62,7 @@ struct URLHandlerView: View {
             }
         )
         
-        return NavigationView {
+        let view = NavigationView {
             Form {
                 Section(header: Text("Torrent Metadata")) {
                     if let name = torrent.name {
@@ -142,16 +142,21 @@ struct URLHandlerView: View {
                 }
             }
             .navigationTitle("Add Torrent")
-            .navigationBarItems(trailing: Button(action: {
-                self.presentation.wrappedValue.dismiss()
-            }) {
-                Text("Cancel")
-                    .fontWeight(.medium)
-            })
             .alert(isPresented: showingError) {
                 Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
             }
         }
+        
+        #if os(macOS)
+        return view
+        #else
+        return view.navigationBarItems(trailing: Button(action: {
+            self.presentation.wrappedValue.dismiss()
+        }) {
+            Text("Cancel")
+                .fontWeight(.medium)
+        })
+        #endif
     }
 }
 

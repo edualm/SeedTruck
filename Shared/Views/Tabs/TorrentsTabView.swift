@@ -38,6 +38,7 @@ struct TorrentsTabView: View {
                 self.showingAddMagnetModal = true
             },
             .init(name: "Torrent File", systemImage: "doc") {
+                #if !os(macOS)
                 let picker = DocumentPickerViewController(
                     torrentPickerWithOnPick: { url in
                         guard url.lastPathComponent.split(separator: ".").last == "torrent" else {
@@ -62,6 +63,7 @@ struct TorrentsTabView: View {
                 )
                 
                 UIApplication.shared.windows.first?.rootViewController?.present(picker, animated: true)
+                #endif
             }
         ]
     }
@@ -101,57 +103,64 @@ struct TorrentsTabView: View {
     }
     
     var body: some View {
-        NavigationView {
-            TorrentListView(server: $selectedServer, filter: $filter)
-                .navigationTitle(selectedServer?.name ?? "Torrents")
-                .navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
-                    ForEach(serverConnections, id: \.self) { server in
-                        Button {
-                            selectedServer = server
-                        } label: {
-                            Text(server.name)
-                            Image(systemName: "server.rack")
-                        }
-                    }
+        var listView = TorrentListView(server: $selectedServer, filter: $filter)
+            .navigationTitle(selectedServer?.name ?? "Torrents")
+        
+        #if !os(macOS)
+        
+        listView = listView.navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
+            ForEach(serverConnections, id: \.self) { server in
+                Button {
+                    selectedServer = server
                 } label: {
-                    Image(systemName: "text.justify")
-                }) : AnyView(EmptyView()), trailing: serverConnections.count > 0 ? AnyView(HStack {
-                    Menu {
-                        Button {
-                            filter = nil
-                        } label: {
-                            Text("Show All")
-                            Image(systemName: "circle.fill")
-                        }
-                        Divider()
-                        
-                        ForEach(filterMenuItems, id: \.self) { item in
-                            Button {
-                                item.action()
-                            } label: {
-                                Text(item.name)
-                                Image(systemName: item.systemImage)
-                            }
-                        }
+                    Text(server.name)
+                    Image(systemName: "server.rack")
+                }
+            }
+        } label: {
+            Image(systemName: "text.justify")
+        }) : AnyView(EmptyView()), trailing: serverConnections.count > 0 ? AnyView(HStack {
+            Menu {
+                Button {
+                    filter = nil
+                } label: {
+                    Text("Show All")
+                    Image(systemName: "circle.fill")
+                }
+                Divider()
+                
+                ForEach(filterMenuItems, id: \.self) { item in
+                    Button {
+                        item.action()
                     } label: {
-                        Image(systemName: filter != nil ? "tag.fill" : "tag")
-                    }.padding(.trailing, 5)
-                    
-                    Menu {
-                        ForEach(addMenuItems, id: \.self) { item in
-                            Button {
-                                item.action()
-                            } label: {
-                                Text(item.name)
-                                Image(systemName: item.systemImage)
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "link.badge.plus")
+                        Text(item.name)
+                        Image(systemName: item.systemImage)
                     }
-                }) : AnyView(EmptyView()))
+                }
+            } label: {
+                Image(systemName: filter != nil ? "tag.fill" : "tag")
+            }.padding(.trailing, 5)
+            
+            Menu {
+                ForEach(addMenuItems, id: \.self) { item in
+                    Button {
+                        item.action()
+                    } label: {
+                        Text(item.name)
+                        Image(systemName: item.systemImage)
+                    }
+                }
+            } label: {
+                Image(systemName: "link.badge.plus")
+            }
+        }) : AnyView(EmptyView()))
+        
+        #endif
+        
+        NavigationView {
+            listView
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationViewStyle(Style.navigationView)
         .onAppear(perform: onAppear)
         .onReceive(managedContextDidSave) { _ in
             selectedServer = serverConnections.first

@@ -112,7 +112,7 @@ struct TorrentDetailsView: View {
             set: { self.actionHandler.currentAlert = $0 }
         )
         
-        let view = ScrollView {
+        var view = ScrollView {
             NameView(torrent: torrent)
             
             #if os(watchOS) || os(tvOS)
@@ -146,7 +146,6 @@ struct TorrentDetailsView: View {
             }
             #endif
         }
-        .navigationBarTitle("Torrent Detail")
         .alert(item: currentAlert) {
             switch $0.id {
             case .confirmation:
@@ -164,6 +163,10 @@ struct TorrentDetailsView: View {
                              dismissButton: .default(Text("Ok")))
             }
         }
+        
+        #if !os(macOS)
+        view = view.navigationBarTitle("Torrent Detail")
+        #endif
         
         #if os(watchOS) || os(tvOS)
         return view
