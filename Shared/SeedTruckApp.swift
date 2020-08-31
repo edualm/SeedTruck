@@ -21,6 +21,7 @@ import UniformTypeIdentifiers
     @State private var dataTransferManager: DataTransferManager? = nil
     #endif
     
+    @SceneBuilder
     var body: some Scene {
         let showingURLHandlerSheet = Binding<Bool>(
             get: { openedTorrent != nil },
@@ -77,6 +78,12 @@ import UniformTypeIdentifiers
                 ()
             }
         }
+        
+        #if os(macOS)
+        Settings {
+            EmptyView()
+        }
+        #endif
     }
     
     var persistentContainer: NSPersistentContainer = {

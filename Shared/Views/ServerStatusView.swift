@@ -26,7 +26,7 @@ struct ServerStatusView: View {
             Spacer()
             Group {
                 Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.downloadSpeed), systemImage: "arrow.down.forward")
-                Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.downloadSpeed), systemImage: "arrow.up.forward")
+                Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.uploadSpeed), systemImage: "arrow.up.forward")
             }
             .padding(Self.rectanglePadding)
             .background(Color.secondary.opacity(0.5))

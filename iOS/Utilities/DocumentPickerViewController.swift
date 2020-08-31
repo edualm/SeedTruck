@@ -1,6 +1,6 @@
 //
 //  DocumentPickerViewController.swift
-//  SeedTruck
+//  SeedTruck (iOS)
 //
 //  Created by Eduardo Almeida on 24/08/2020.
 //

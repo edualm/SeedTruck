@@ -1,6 +1,6 @@
 //
 //  MainView.swift
-//  SeedTruck
+//  SeedTruck (iOS)
 //
 //  Created by Eduardo Almeida on 23/08/2020.
 //

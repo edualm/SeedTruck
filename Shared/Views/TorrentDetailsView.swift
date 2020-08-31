@@ -30,7 +30,12 @@ struct TorrentDetailsView: View {
         var body: some View {
             Box(label: Label("Status", systemImage: "exclamationmark.bubble")) {
                 HStack {
-                    Text(torrent.status.displayableStatus)
+                    if case RemoteTorrent.Status.downloading = torrent.status {
+                        Text("\(torrent.status.displayableStatus) (\(String(format: "%.2f", torrent.progress * 100))%)")
+                    } else {
+                        Text(torrent.status.displayableStatus)
+                    }
+                    
                     Spacer()
                 }.padding(.top)
             }
