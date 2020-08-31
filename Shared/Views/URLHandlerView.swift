@@ -62,100 +62,100 @@ struct URLHandlerView: View {
             }
         )
         
-        let view = NavigationView {
-            Form {
-                Section(header: Text("Torrent Metadata")) {
-                    if let name = torrent.name {
-                        HStack {
-                            Text("Name")
-                            Spacer()
-                            Text(name)
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    
-                    if let size = torrent.size {
-                        HStack {
-                            Text("Size")
-                            Spacer()
-                            Text(ByteCountFormatter.humanReadableFileSize(bytes: size))
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    
-                    if let files = torrent.files {
-                        HStack {
-                            Text("Files")
-                            Spacer()
-                            Text("\(files.count)")
-                                .foregroundColor(.secondary)
-                        }
-                    }
-                    
-                    if let isPrivate = torrent.isPrivate {
-                        HStack {
-                            Text("Private")
-                            Spacer()
-                            Text(isPrivate ? "Yes" : "No")
-                                .foregroundColor(.secondary)
-                        }
+        let form = Form {
+            Section(header: Text("Torrent Metadata")) {
+                if let name = torrent.name {
+                    HStack {
+                        Text("Name")
+                        Spacer()
+                        Text(name)
+                            .foregroundColor(.secondary)
                     }
                 }
                 
-                if serverConnections.count > 0 {
-                    Section(header: Text("Server(s)")) {
-                        ForEach(0 ..< serverConnections.count) { index in
-                            Button(action: {
-                                let server = serverConnections[index]
-                                
-                                if selectedServers.contains(server) {
-                                    selectedServers.removeAll { $0 == server }
-                                } else {
-                                    selectedServers.append(server)
-                                }
-                            }) {
-                                HStack {
-                                    Text(serverConnections[index].name)
+                if let size = torrent.size {
+                    HStack {
+                        Text("Size")
+                        Spacer()
+                        Text(ByteCountFormatter.humanReadableFileSize(bytes: size))
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                if let files = torrent.files {
+                    HStack {
+                        Text("Files")
+                        Spacer()
+                        Text("\(files.count)")
+                            .foregroundColor(.secondary)
+                    }
+                }
+                
+                if let isPrivate = torrent.isPrivate {
+                    HStack {
+                        Text("Private")
+                        Spacer()
+                        Text(isPrivate ? "Yes" : "No")
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+            
+            if serverConnections.count > 0 {
+                Section(header: Text("Server(s)")) {
+                    ForEach(0 ..< serverConnections.count) { index in
+                        Button(action: {
+                            let server = serverConnections[index]
+                            
+                            if selectedServers.contains(server) {
+                                selectedServers.removeAll { $0 == server }
+                            } else {
+                                selectedServers.append(server)
+                            }
+                        }) {
+                            HStack {
+                                Text(serverConnections[index].name)
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                if selectedServers.contains(serverConnections[index]) {
+                                    Image(systemName: "checkmark")
                                         .foregroundColor(.primary)
-                                    Spacer()
-                                    if selectedServers.contains(serverConnections[index]) {
-                                        Image(systemName: "checkmark")
-                                            .foregroundColor(.primary)
-                                    }
                                 }
                             }
                         }
                     }
-                    
-                    Section {
-                        Button(action: startDownload) {
-                            Label("Start Download", systemImage: "square.and.arrow.down.on.square")
-                        }.disabled(selectedServers.count == 0)
-                    }
-                } else {
-                    GroupBox(label: Label("Oops!", systemImage: "exclamationmark.triangle")) {
-                        HStack {
-                            Text("You must first configure at least one server in the app in order to be able to add a torrent!")
-                            Spacer()
-                        }.padding(.top)
-                    }
+                }
+                
+                Section {
+                    Button(action: startDownload) {
+                        Label("Start Download", systemImage: "square.and.arrow.down.on.square")
+                    }.disabled(selectedServers.count == 0)
+                }
+            } else {
+                GroupBox(label: Label("Oops!", systemImage: "exclamationmark.triangle")) {
+                    HStack {
+                        Text("You must first configure at least one server in the app in order to be able to add a torrent!")
+                        Spacer()
+                    }.padding(.top)
                 }
             }
-            .navigationTitle("Add Torrent")
-            .alert(isPresented: showingError) {
-                Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
-            }
+        }
+        .navigationTitle("Add Torrent")
+        .alert(isPresented: showingError) {
+            Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
         }
         
         #if os(macOS)
-        return view
+        return form
         #else
-        return view.navigationBarItems(trailing: Button(action: {
-            self.presentation.wrappedValue.dismiss()
-        }) {
-            Text("Cancel")
-                .fontWeight(.medium)
-        })
+        return NavigationView {
+            form.navigationBarItems(trailing: Button(action: {
+                self.presentation.wrappedValue.dismiss()
+            }) {
+                Text("Cancel")
+                    .fontWeight(.medium)
+            })
+        }
         #endif
     }
 }

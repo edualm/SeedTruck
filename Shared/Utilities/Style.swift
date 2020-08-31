@@ -11,6 +11,8 @@ enum Style {
     
     #if os(iOS)
     static let list = InsetGroupedListStyle()
+    #elseif os(macOS)
+    static let list = SidebarListStyle()
     #else
     static let list = DefaultListStyle()
     #endif

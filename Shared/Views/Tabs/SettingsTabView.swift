@@ -56,6 +56,10 @@ struct SettingsTabView: View {
             set: { _ in }
         )
         
+        let newServerLink = NavigationLink(destination: NewServerView()) {
+            Text("New Server")
+        }
+        
         NavigationView {
             VStack {
                 List {
@@ -95,11 +99,15 @@ struct SettingsTabView: View {
                         }
                     }
                     
-                    Section {
-                        NavigationLink(destination: NewServerView()) {
-                            Text("New Server")
-                        }
+                    #if os(macOS)
+                    Section(header: Text("New...")) {
+                        newServerLink
                     }
+                    #else
+                    Section {
+                        newServerLink
+                    }
+                    #endif
                 }
                 .listStyle(Style.list)
             }

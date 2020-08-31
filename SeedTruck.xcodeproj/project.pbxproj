@@ -459,6 +459,7 @@
 		A045C8AB24F2006500B3B1CD /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A06DEFA224FC7F2F004B2DC9 /* Utilities */,
 				A045C8AC24F2006500B3B1CD /* Info.plist */,
 			);
 			path = iOS;
@@ -495,6 +496,7 @@
 		A045C8EB24F208AC00B3B1CD /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A09638A524F56BDA00F2062F /* Box.swift */,
 				A045C8E824F205B100B3B1CD /* ProgressBarView.swift */,
 			);
 			path = Components;
@@ -516,13 +518,20 @@
 			path = Tabs;
 			sourceTree = "<group>";
 		};
+		A06DEFA224FC7F2F004B2DC9 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A09638AD24F5762700F2062F /* DataTransferManager.swift */,
+				A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		A071CAC724F3110200B6AC0C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */,
 				A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */,
-				A09638AD24F5762700F2062F /* DataTransferManager.swift */,
-				A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */,
 				A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */,
 				A01056AA24F491B600DA056D /* String+Extensions.swift */,
 				A071CC6D24FBC9BF00E46065 /* Style.swift */,
@@ -574,6 +583,7 @@
 			children = (
 				A096386824F568CF00F2062F /* MainView.swift */,
 				A09638B624F58BD300F2062F /* ServerView.swift */,
+				A0C0720324F5B03700CEC1DA /* ServerStatusViewSmall.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -629,14 +639,12 @@
 			children = (
 				A05FE16824F446E200B57E45 /* Tabs */,
 				A073DD2024F4658700BA37C9 /* AddMagnetView.swift */,
-				A09638A524F56BDA00F2062F /* Box.swift */,
 				A05FE16924F45B2700B57E45 /* LoadingView.swift */,
 				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
 				A02C585824F3446100C82D68 /* NewServerView.swift */,
 				A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */,
 				A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */,
 				A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */,
-				A0C0720324F5B03700CEC1DA /* ServerStatusViewSmall.swift */,
 				A0C1DB3824F4358500C76682 /* TorrentListView.swift */,
 				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
 				A045C8E524F2021100B3B1CD /* TorrentItemView.swift */,

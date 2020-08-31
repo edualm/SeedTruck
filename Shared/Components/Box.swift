@@ -35,7 +35,12 @@ struct Box<Label: View, Content: View>: View {
         }
         #else
         GroupBox(label: label) {
+            #if os(macOS)
             content
+                .padding(.bottom)
+            #else
+            content
+            #endif
         }
         #endif
     }

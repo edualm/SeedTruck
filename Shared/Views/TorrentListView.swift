@@ -91,7 +91,7 @@ struct TorrentListView: View {
                                 return $0.status.simple == filter
                             }) { torrent in
                                 ZStack {
-                                    #if os(tvOS)
+                                    #if os(macOS) || os(tvOS)
                                     NavigationLink(destination: TorrentDetailsView(torrent: torrent,
                                                                                    actionHandler: .init(server: server!,
                                                                                                         torrent: torrent))) {
