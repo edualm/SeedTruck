@@ -1,5 +1,5 @@
 //
-//  ServerStatusViewSmall.swift
+//  ServerStatusView.swift
 //  SeedTruck (watchOS) Extension
 //
 //  Created by Eduardo Almeida on 25/08/2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ServerStatusViewSmall: View {
+struct ServerStatusView: View {
     
     let torrents: [RemoteTorrent]
     
@@ -20,15 +20,15 @@ struct ServerStatusViewSmall: View {
     }
 }
 
-struct ServerStatusViewSmall_Previews: PreviewProvider {
+struct ServerStatusView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ServerStatusViewSmall(torrents:
-                                [
-                                    PreviewMockData.remoteTorrent,
-                                    PreviewMockData.remoteTorrent,
-                                    PreviewMockData.remoteTorrent
-                                ]
+        ServerStatusView(torrents:
+                            [
+                                PreviewMockData.remoteTorrent,
+                                PreviewMockData.remoteTorrent,
+                                PreviewMockData.remoteTorrent
+                            ]
         )
     }
 }

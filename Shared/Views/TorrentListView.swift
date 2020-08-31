@@ -79,7 +79,7 @@ struct TorrentListView: View {
                 if server != nil {
                     VStack {
                         #if os(watchOS)
-                        ServerStatusViewSmall(torrents: torrents)
+                        ServerStatusView(torrents: torrents)
                         #endif
                         
                         List {

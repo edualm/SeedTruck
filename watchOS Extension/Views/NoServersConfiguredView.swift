@@ -2,7 +2,7 @@
 //  NoServersConfiguredView.swift
 //  SeedTruck
 //
-//  Created by Eduardo Almeida on 24/08/2020.
+//  Created by Eduardo Almeida on 31/08/2020.
 //
 
 import SwiftUI
@@ -11,13 +11,12 @@ struct NoServersConfiguredView: View {
     
     var body: some View {
         VStack {
-            Text("😞")
-                .font(.largeTitle)
-            Text("No servers configured!")
+            Text("No servers!")
                 .font(.headline)
                 .padding()
-            Text("Please add a server using the Settings tab.")
+            Text("Please configure at least one server using your iPhone and then try again.")
                 .fontWeight(.light)
+                .multilineTextAlignment(.center)
         }
     }
 }
