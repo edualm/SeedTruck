@@ -13,12 +13,12 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            TorrentsTabView()
+            TorrentsView()
                 .tabItem {
                     Image(systemName: "tray.and.arrow.down")
                     Text("Torrents")
                 }
-            SettingsTabView(actionHandler: SettingsActionHandler(managedObjectContext: managedObjectContext))
+            SettingsView(actionHandler: SettingsActionHandler(managedObjectContext: managedObjectContext))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")

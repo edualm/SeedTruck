@@ -81,7 +81,8 @@ import UniformTypeIdentifiers
         
         #if os(macOS)
         Settings {
-            EmptyView()
+            SettingsContainerView()
+                .environment(\.managedObjectContext, persistentContainer.viewContext)
         }
         #endif
     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SettingsTabView: View {
+struct SettingsView: View {
     
     private enum ConnectionResult {
         case connecting
@@ -124,6 +124,6 @@ struct SettingsTabView: View {
 struct SettingsTabView_Previews: PreviewProvider {
     
     static var previews: some View {
-        SettingsTabView(actionHandler: SettingsActionHandler(managedObjectContext: MockCoreDataManagedObjectDeleter()))
+        SettingsView(actionHandler: SettingsActionHandler(managedObjectContext: MockCoreDataManagedObjectDeleter()))
     }
 }

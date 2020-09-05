@@ -1,5 +1,5 @@
 //
-//  TorrentsTabView.swift
+//  TorrentsView.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 23/08/2020.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TorrentsTabView: View {
+struct TorrentsView: View {
     
     private struct AlertIdentifier: Identifiable {
         enum Choice {
@@ -23,7 +23,7 @@ struct TorrentsTabView: View {
         let systemImage: String
         let action: () -> ()
         
-        static func == (lhs: TorrentsTabView.MenuItem, rhs: TorrentsTabView.MenuItem) -> Bool {
+        static func == (lhs: TorrentsView.MenuItem, rhs: TorrentsView.MenuItem) -> Bool {
             lhs.name == rhs.name
         }
         
@@ -180,11 +180,11 @@ struct TorrentsTabView: View {
     }
 }
 
-struct TorrentsTabView_Previews: PreviewProvider {
+struct TorrentsView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            TorrentsTabView()
+            TorrentsView()
         }
     }
 }
