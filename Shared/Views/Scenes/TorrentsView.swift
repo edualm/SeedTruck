@@ -158,7 +158,28 @@ struct TorrentsView: View {
         #endif
         
         return NavigationView {
-            listView
+            VStack {
+                #if os(macOS)
+                
+                if let s = selectedServer {
+                    Menu(s.name) {
+                        ForEach(serverConnections, id: \.self) { server in
+                            Button {
+                                selectedServer = server
+                            } label: {
+                                Text(server.name)
+                                Image(systemName: "server.rack")
+                            }
+                        }
+                    }.padding()
+                }
+                
+                Spacer()
+                
+                #endif
+                
+                listView
+            }
         }
         .navigationViewStyle(Style.navigationView)
         .onAppear(perform: onAppear)

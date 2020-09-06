@@ -1,6 +1,6 @@
 //
 //  SeedTruckApp.swift
-//  Shared
+//  SeedTruck (iOS)
 //
 //  Created by Eduardo Almeida on 23/08/2020.
 //
@@ -16,10 +16,7 @@ import UniformTypeIdentifiers
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var openedTorrent: LocalTorrent? = nil
-    
-    #if os(iOS)
     @State private var dataTransferManager: DataTransferManager? = nil
-    #endif
     
     @SceneBuilder
     var body: some Scene {
@@ -63,11 +60,9 @@ import UniformTypeIdentifiers
                     return true
                 }
                 .onAppear {
-                    #if os(iOS)
                     if dataTransferManager == nil {
                         dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
                     }
-                    #endif
                 }
         }.onChange(of: scenePhase) { phase in
             switch phase {
@@ -78,13 +73,6 @@ import UniformTypeIdentifiers
                 ()
             }
         }
-        
-        #if os(macOS)
-        Settings {
-            SettingsContainerView()
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
-        }
-        #endif
     }
     
     var persistentContainer: NSPersistentContainer = {

@@ -9,6 +9,12 @@ import SwiftUI
 
 struct TorrentDetailsView: View {
     
+    #if os(macOS)
+    static private let innerDetailPadding: Edge.Set = .horizontal
+    #else
+    static private let innerDetailPadding: Edge.Set = Edge.Set()
+    #endif
+    
     private struct NameView: View {
         
         let torrent: RemoteTorrent
@@ -17,6 +23,7 @@ struct TorrentDetailsView: View {
             Box(label: Label("Name", systemImage: "pencil.and.ellipsis.rectangle")) {
                 HStack {
                     Text(torrent.name)
+                        .padding(TorrentDetailsView.innerDetailPadding)
                     Spacer()
                 }.padding(.top)
             }
@@ -32,8 +39,10 @@ struct TorrentDetailsView: View {
                 HStack {
                     if case RemoteTorrent.Status.downloading = torrent.status {
                         Text("\(torrent.status.displayableStatus) (\(String(format: "%.2f", torrent.progress * 100))%)")
+                            .padding(TorrentDetailsView.innerDetailPadding)
                     } else {
                         Text(torrent.status.displayableStatus)
+                            .padding(TorrentDetailsView.innerDetailPadding)
                     }
                     
                     Spacer()
@@ -54,7 +63,7 @@ struct TorrentDetailsView: View {
                         VStack(alignment: .leading) {
                             Label("Download: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
                             Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
-                        }
+                        }.padding(TorrentDetailsView.innerDetailPadding)
                         Spacer()
                     }.padding(.top)
                 }
@@ -64,7 +73,7 @@ struct TorrentDetailsView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
-                        }
+                        }.padding(TorrentDetailsView.innerDetailPadding)
                         Spacer()
                     }.padding(.top)
                 }
@@ -146,7 +155,11 @@ struct TorrentDetailsView: View {
             #else
             Box(label: Label("Actions", systemImage: "wrench")) {
                 VStack {
-                    ActionsView(actionHandler: actionHandler)
+                    HStack {
+                        Spacer()
+                        ActionsView(actionHandler: actionHandler)
+                        Spacer()
+                    }
                 }.padding(.top)
             }
             #endif

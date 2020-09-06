@@ -10,8 +10,8 @@ import SwiftUI
 struct LoadingView: View {
     
     var body: some View {
-        
         VStack {
+            Spacer()
             Image(systemName: "globe")
                 .font(.largeTitle)
             Text("Loading...")
@@ -19,6 +19,7 @@ struct LoadingView: View {
                 .padding()
             Text("Your data's coming!")
                 .fontWeight(.light)
+            Spacer()
         }
     }
 }

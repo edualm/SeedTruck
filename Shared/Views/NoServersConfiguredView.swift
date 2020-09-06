@@ -11,6 +11,7 @@ struct NoServersConfiguredView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Text("😞")
                 .font(.largeTitle)
             Text("No servers configured!")
@@ -18,6 +19,7 @@ struct NoServersConfiguredView: View {
                 .padding()
             Text("Please add a server using the Settings tab.")
                 .fontWeight(.light)
+            Spacer()
         }
     }
 }

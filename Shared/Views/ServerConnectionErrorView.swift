@@ -11,6 +11,7 @@ struct ServerConnectionErrorView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Image(systemName: "questionmark.folder")
                 .font(.largeTitle)
             Text("Error!")
@@ -18,6 +19,7 @@ struct ServerConnectionErrorView: View {
                 .padding()
             Text("Data could not be retrieved from the server.")
                 .fontWeight(.light)
+            Spacer()
         }
     }
 }
