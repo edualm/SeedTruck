@@ -119,7 +119,7 @@
 		A09638B724F58BD300F2062F /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638B624F58BD300F2062F /* ServerView.swift */; };
 		A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
-		A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */; };
+		A0B8C13324F3FF4E00ACD713 /* DocumentPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */; };
 		A0C071AD24F59CC700CEC1DA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AC24F59CC700CEC1DA /* MainView.swift */; };
 		A0C071AF24F59CC800CEC1DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071AE24F59CC800CEC1DA /* Assets.xcassets */; };
 		A0C071B224F59CC800CEC1DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */; };
@@ -299,7 +299,7 @@
 		A09638B024F5804100F2062F /* Server+Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Serialization.swift"; sourceTree = "<group>"; };
 		A09638B624F58BD300F2062F /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
-		A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerViewController.swift; sourceTree = "<group>"; };
+		A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerAdapter.swift; sourceTree = "<group>"; };
 		A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeedTruck (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
 		A0C071AC24F59CC700CEC1DA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -530,7 +530,7 @@
 			isa = PBXGroup;
 			children = (
 				A09638AD24F5762700F2062F /* DataTransferManager.swift */,
-				A0B8C13224F3FF4E00ACD713 /* DocumentPickerViewController.swift */,
+				A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -985,7 +985,7 @@
 				A01056A524F48D5E00DA056D /* URLHandlerView.swift in Sources */,
 				A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */,
-				A0B8C13324F3FF4E00ACD713 /* DocumentPickerViewController.swift in Sources */,
+				A0B8C13324F3FF4E00ACD713 /* DocumentPickerAdapter.swift in Sources */,
 				A096389A24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
 				A0C071FA24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,

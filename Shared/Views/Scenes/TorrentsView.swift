@@ -32,6 +32,8 @@ struct TorrentsView: View {
         }
     }
     
+    @State var pickerAdapter: DocumentPickerAdapter?
+    
     private var addMenuItems: [MenuItem] {
         [
             .init(name: "Magnet Link", systemImage: "link") {
@@ -39,7 +41,7 @@ struct TorrentsView: View {
             },
             .init(name: "Torrent File", systemImage: "doc") {
                 #if !os(macOS)
-                let picker = DocumentPickerViewController(
+                self.pickerAdapter = DocumentPickerAdapter(
                     torrentPickerWithOnPick: { url in
                         guard url.lastPathComponent.split(separator: ".").last == "torrent" else {
                             self.showingAlert = .init(id: .addTorrentError)
@@ -62,7 +64,7 @@ struct TorrentsView: View {
                     onDismiss: {}
                 )
                 
-                UIApplication.shared.windows.first?.rootViewController?.present(picker, animated: true)
+                UIApplication.shared.windows.first?.rootViewController?.present(pickerAdapter!.picker, animated: true)
                 #endif
             }
         ]

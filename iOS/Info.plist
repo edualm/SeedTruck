@@ -106,6 +106,6 @@
 		</dict>
 	</array>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
+	<false/>
 </dict>
 </plist>
