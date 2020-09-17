@@ -22,10 +22,10 @@ extension LocalTorrent {
             return magnet.slice(from: "dn=", to: "&")?.replacingOccurrences(of: "+", with: " ")
             
         case .torrent(let torrent):
-            guard let decoded = try? Bencoder().decode(bytes: torrent.map { $0 }) else {
+            guard let decoded = try? Bencoder().decode(bytes: [UInt8](torrent)) else {
                 return nil
             }
-            
+
             return decoded["info"]["name"].string
         }
     }
@@ -36,13 +36,15 @@ extension LocalTorrent {
             return nil
             
         case .torrent(let torrent):
-            guard let decoded = try? Bencoder().decode(bytes: torrent.map { $0 }) else {
+            guard let decoded = try? Bencoder().decode(bytes: [UInt8](torrent)) else {
                 return nil
             }
             
-            print(decoded["info"])
+            guard let result = decoded["info"]["private"].int else {
+                return nil
+            }
             
-            return decoded["info"]["private"].int == 1
+            return result == 1
         }
     }
     
@@ -52,7 +54,7 @@ extension LocalTorrent {
             return nil
             
         case .torrent(let torrent):
-            guard let decoded = try? Bencoder().decode(bytes: torrent.map { $0 }) else {
+            guard let decoded = try? Bencoder().decode(bytes: [UInt8](torrent)) else {
                 return nil
             }
             

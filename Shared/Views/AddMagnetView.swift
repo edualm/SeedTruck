@@ -11,8 +11,8 @@ struct AddMagnetView: View {
     
     @Environment(\.presentationMode) private var presentation
     
-    @State private var isLoading = false
     @State private var magnetLink: String = ""
+    @State private var navigationLinkActive = false
     @State private var showingErrorAlert = false
     
     @Binding var server: Server?
@@ -30,20 +30,18 @@ struct AddMagnetView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
+            NavigationLink(
+                destination: TorrentHandlerView(presentation: presentation,
+                                                torrent: .magnet(magnetLink),
+                                                server: server),
+                isActive: $navigationLinkActive)
+            {
+                EmptyView()
+            }
+            .hidden()
+            
             Button(action: {
-                isLoading = true
-                
-                server?.connection.addTorrent(.magnet(magnetLink)) {
-                    isLoading = false
-                    
-                    switch $0 {
-                    case .success:
-                        self.presentation.wrappedValue.dismiss()
-                        
-                    case .failure:
-                        showingErrorAlert = true
-                    }
-                }
+                navigationLinkActive = true
             }) {
                 Text("Start Download")
             }
@@ -62,13 +60,7 @@ struct AddMagnetView: View {
         #endif
         
         return NavigationView {
-            if isLoading {
-                ProgressView {
-                    Text("Processing...")
-                }
-            } else {
-                innerView
-            }
+            innerView
         }
         .alert(isPresented: $showingErrorAlert) {
             Alert(title: Text("Error!"),

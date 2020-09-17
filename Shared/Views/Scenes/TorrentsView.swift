@@ -32,12 +32,17 @@ struct TorrentsView: View {
         }
     }
     
+    private enum PresentedSheet {
+        case addMagnet
+        case addTorrent(LocalTorrent)
+    }
+    
     @State var pickerAdapter: DocumentPickerAdapter?
     
     private var addMenuItems: [MenuItem] {
         [
             .init(name: "Magnet Link", systemImage: "link") {
-                self.showingAddMagnetModal = true
+                self.presentedSheet = .addMagnet
             },
             .init(name: "Torrent File", systemImage: "doc") {
                 #if !os(macOS)
@@ -55,11 +60,7 @@ struct TorrentsView: View {
                             return
                         }
                         
-                        selectedServer?.connection.addTorrent(.torrent(fileData)) { result in
-                            if case Result.failure = result {
-                                self.showingAlert = .init(id: .addTorrentError)
-                            }
-                        }
+                        self.presentedSheet = .addTorrent(.torrent(fileData))
                     },
                     onDismiss: {}
                 )
@@ -96,7 +97,7 @@ struct TorrentsView: View {
     @State private var selectedServer: Server?
     @State private var filter: Filter?
     @State private var showingAlert: AlertIdentifier?
-    @State private var showingAddMagnetModal: Bool = false
+    @State private var presentedSheet: PresentedSheet?
     
     func onAppear() {
         if selectedServer == nil {
@@ -105,6 +106,11 @@ struct TorrentsView: View {
     }
     
     var body: some View {
+        let isPresentingModal = Binding<Bool>(
+            get: { presentedSheet != nil },
+            set: { _ in presentedSheet = nil }
+        )
+        
         var listView = AnyView(TorrentListView(server: $selectedServer, filter: $filter)
             .navigationTitle(selectedServer?.name ?? "Torrents"))
         
@@ -197,8 +203,15 @@ struct TorrentsView: View {
                 
             }
         }
-        .sheet(isPresented: $showingAddMagnetModal) {
-            AddMagnetView(server: $selectedServer)
+        .sheet(isPresented: isPresentingModal) {
+            switch presentedSheet {
+            case .addMagnet:
+                AddMagnetView(server: $selectedServer)
+            case .addTorrent(let torrent):
+                TorrentHandlerNavigationView(torrent: torrent, server: selectedServer)
+            case .none:
+                EmptyView()
+            }
         }
     }
 }

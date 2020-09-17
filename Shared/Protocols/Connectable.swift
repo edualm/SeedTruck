@@ -1,21 +1,24 @@
 //
-//  Server+Convenience.swift
+//  Connectable.swift
 //  SeedTruck
 //
-//  Created by Eduardo Almeida on 25/08/2020.
+//  Created by Eduardo Almeida on 16/09/2020.
 //
 
-import Foundation
+protocol Connectable {
+    
+    var connectionDetails: ConnectionDetails { get }
+}
 
-extension Server {
+extension Connectable {
     
     var connection: ServerConnection {
         switch connectionDetails.type {
         case .transmission:
             let credentials: TransmissionConnection.ConnectionDetails.Credentials?
             
-            if let c = connectionDetails.credentials, let username = c.user, let password = c.password {
-                credentials = TransmissionConnection.ConnectionDetails.Credentials(username: username, password: password)
+            if let c = connectionDetails.credentials {
+                credentials = TransmissionConnection.ConnectionDetails.Credentials(username: c.username, password: c.password)
             } else {
                 credentials = nil
             }

@@ -89,7 +89,7 @@ struct TorrentDetailsView: View {
         let actionHandler: TorrentDetailsActionHandler
         
         var body: some View {
-            Button(action: {
+            let removeTorrentButton = Button(action: {
                 actionHandler.perform(.prepareForRemoval(deletingFiles: false))
             }) {
                 #if os(watchOS)
@@ -99,7 +99,7 @@ struct TorrentDetailsView: View {
                 #endif
             }.padding(4)
             
-            Button(action: {
+            let removeTorrentAndDataButton = Button(action: {
                 actionHandler.perform(.prepareForRemoval(deletingFiles: true))
             }) {
                 #if os(watchOS)
@@ -111,6 +111,18 @@ struct TorrentDetailsView: View {
                     .foregroundColor(.red)
                 #endif
             }.padding(4)
+            
+            #if (os(iOS) || os(watchOS))
+            VStack {
+                removeTorrentButton
+                removeTorrentAndDataButton
+            }
+            #else
+            Group {
+                removeTorrentButton
+                removeTorrentAndDataButton
+            }
+            #endif
         }
     }
     

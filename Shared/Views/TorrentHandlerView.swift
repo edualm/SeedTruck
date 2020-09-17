@@ -1,5 +1,5 @@
 //
-//  URLHandlerView.swift
+//  TorrentHandlerView.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 25/08/2020.
@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct URLHandlerView: View {
-    
-    @Environment(\.presentationMode) private var presentation
+struct TorrentHandlerView: View {
     
     @FetchRequest(
         entity: Server.entity(),
@@ -21,7 +19,10 @@ struct URLHandlerView: View {
     @State var errorMessage: String? = nil
     @State var selectedServers: [Server] = []
     
+    @Binding var presentation: PresentationMode
+    
     let torrent: LocalTorrent
+    let server: Server?
     
     func startDownload() {
         var remaining = selectedServers.count
@@ -41,7 +42,7 @@ struct URLHandlerView: View {
                 
                 if remaining == 0 {
                     if errors.count == 0 {
-                        self.presentation.wrappedValue.dismiss()
+                        presentation.dismiss()
                     } else {
                         errorMessage = "An error has occurred while adding the torrent to the following servers:\n\n" +
                             "\(errors.map { "\"\($0.0.name)\": \($0.1.localizedDescription)\n" })\n" +
@@ -101,68 +102,98 @@ struct URLHandlerView: View {
                 }
             }
             
-            if serverConnections.count > 0 {
-                Section(header: Text("Server(s)")) {
-                    ForEach(0 ..< serverConnections.count) { index in
-                        Button(action: {
-                            let server = serverConnections[index]
-                            
-                            if selectedServers.contains(server) {
-                                selectedServers.removeAll { $0 == server }
-                            } else {
-                                selectedServers.append(server)
-                            }
-                        }) {
-                            HStack {
-                                Text(serverConnections[index].name)
-                                    .foregroundColor(.primary)
-                                Spacer()
-                                if selectedServers.contains(serverConnections[index]) {
-                                    Image(systemName: "checkmark")
+            if server == nil {
+                if serverConnections.count > 0 {
+                    Section(header: Text("Server(s)")) {
+                        ForEach(0 ..< serverConnections.count) { index in
+                            Button(action: {
+                                let server = serverConnections[index]
+                                
+                                if selectedServers.contains(server) {
+                                    selectedServers.removeAll { $0 == server }
+                                } else {
+                                    selectedServers.append(server)
+                                }
+                            }) {
+                                HStack {
+                                    Text(serverConnections[index].name)
                                         .foregroundColor(.primary)
+                                    Spacer()
+                                    if selectedServers.contains(serverConnections[index]) {
+                                        Image(systemName: "checkmark")
+                                            .foregroundColor(.primary)
+                                    }
                                 }
                             }
                         }
                     }
+                } else {
+                    GroupBox(label: Label("Oops!", systemImage: "exclamationmark.triangle")) {
+                        HStack {
+                            Text("You must first configure at least one server in the app in order to be able to add a torrent!")
+                            Spacer()
+                        }.padding(.top)
+                    }
                 }
-                
+            }
+            
+            if serverConnections.count > 0 {
                 Section {
                     Button(action: startDownload) {
                         Label("Start Download", systemImage: "square.and.arrow.down.on.square")
                     }.disabled(selectedServers.count == 0)
-                }
-            } else {
-                GroupBox(label: Label("Oops!", systemImage: "exclamationmark.triangle")) {
-                    HStack {
-                        Text("You must first configure at least one server in the app in order to be able to add a torrent!")
-                        Spacer()
-                    }.padding(.top)
                 }
             }
         }
         .navigationTitle("Add Torrent")
         .alert(isPresented: showingError) {
             Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
+        }.onAppear {
+            if let s = server {
+                selectedServers = [s]
+            }
         }
         
         #if os(macOS)
         return form
         #else
-        return NavigationView {
+        return
             form.navigationBarItems(trailing: Button(action: {
-                self.presentation.wrappedValue.dismiss()
+                presentation.dismiss()
             }) {
                 Text("Cancel")
                     .fontWeight(.medium)
             })
+        #endif
+    }
+}
+
+struct TorrentHandlerNavigationView: View {
+    
+    @Environment(\.presentationMode) private var presentation
+    
+    let torrent: LocalTorrent
+    let server: Server?
+    
+    var body: some View {
+        let form = TorrentHandlerView(presentation: presentation,
+                                      torrent: torrent,
+                                      server: server)
+        
+        #if os(macOS)
+        return form
+        #else
+        return NavigationView {
+            form
         }
         #endif
     }
 }
 
-struct URLHandlerView_Previews: PreviewProvider {
-    
+struct TorrentHandlerNavigationView_Previews: PreviewProvider {
+
     static var previews: some View {
-        URLHandlerView(torrent: PreviewMockData.localTorrentMagnet)
+        TorrentHandlerNavigationView(torrent: PreviewMockData.localTorrentMagnet,
+                                     server: nil)
     }
 }

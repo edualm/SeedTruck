@@ -33,7 +33,7 @@ import UniformTypeIdentifiers
             MainView()
                 .sheet(isPresented: showingURLHandlerSheet) {
                     if let torrent = openedTorrent {
-                        URLHandlerView(torrent: torrent)
+                        TorrentHandlerNavigationView(torrent: torrent, server: nil)
                     } else {
                         EmptyView()
                     }

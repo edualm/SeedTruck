@@ -29,21 +29,16 @@ struct NewServerView: View {
     
     @State private var showingAlert: AlertIdentifier?
     
-    var server: Server? {
+    var server: TemporaryServer? {
         guard let endpoint = URL(string: endpoint) else {
             return nil
         }
         
-        let newServer = Server.new(withManagedContext: managedObjectContext)
-        
-        newServer.name = name
-        newServer.endpoint = endpoint
-        newServer.type = Int16(type)
-        
-        newServer.credentialUsername = !username.isEmpty ? username : nil
-        newServer.credentialPassword = !password.isEmpty ? password : nil
-        
-        return newServer
+        return TemporaryServer(endpoint: endpoint,
+                               name: name,
+                               type: Int16(type),
+                               credentialUsername: !username.isEmpty ? username : nil,
+                               credentialPassword: !password.isEmpty ? password : nil)
     }
     
     func testConnection(completion: @escaping (Bool) -> ()) {
@@ -55,10 +50,6 @@ struct NewServerView: View {
         
         server.connection.test { result in
             DispatchQueue.main.async {
-                defer {
-                    managedObjectContext.delete(server)
-                }
-                
                 completion(result)
             }
         }
@@ -72,7 +63,9 @@ struct NewServerView: View {
         }
         
         do {
-            managedObjectContext.insert(server)
+            let coreDataServer = server.convertToServer(withManagedContext: managedObjectContext)
+            
+            managedObjectContext.insert(coreDataServer)
             
             try managedObjectContext.save()
             

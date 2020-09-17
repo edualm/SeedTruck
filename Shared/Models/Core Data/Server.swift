@@ -8,14 +8,7 @@
 import Foundation
 import CoreData
 
-class Server: NSManagedObject, Identifiable {
-    
-    struct ConnectionDetails {
-        
-        let type: ServerType
-        let endpoint: URL
-        let credentials: URLCredential?
-    }
+class Server: NSManagedObject, Identifiable, Connectable {
     
     @NSManaged var endpoint: URL
     @NSManaged var name: String
@@ -25,10 +18,10 @@ class Server: NSManagedObject, Identifiable {
     @NSManaged var credentialPassword: String?
     
     var connectionDetails: ConnectionDetails {
-        let credentials: URLCredential?
+        let credentials: (String, String)?
         
         if let username = credentialUsername, let password = credentialPassword {
-            credentials = URLCredential(user: username, password: password, persistence: .none)
+            credentials = (username, password)
         } else {
             credentials = nil
         }

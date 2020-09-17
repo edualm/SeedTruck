@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TorrentListView: View {
     
+    @Environment(\.scenePhase) private var scenePhase
+    
     private enum Status {
         
         case loading
@@ -127,6 +129,15 @@ struct TorrentListView: View {
             status = .loading
             
             updateData()
+        }
+        .onChange(of: scenePhase) {
+            switch $0 {
+            case .active:
+                updateData()
+                
+            default:
+                ()
+            }
         }
     }
 }
