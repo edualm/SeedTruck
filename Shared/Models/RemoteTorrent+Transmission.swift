@@ -22,6 +22,7 @@ extension RemoteTorrent {
         self.id = String(id)
         self.name = name
         self.progress = progress
+        self.size = size
         
         switch status {
         case 0:
@@ -40,16 +41,14 @@ extension RemoteTorrent {
             self.status = .downloading(peers: peers, peersSending: peersSending, peersReceiving: peersReceiving, downloadRate: downloadRate, uploadRate: uploadRate)
             
         case 6:
-            guard let peers = transmissionTorrent.peersConnected, let uploadRate = transmissionTorrent.rateUpload else {
+            guard let peers = transmissionTorrent.peersConnected, let uploadRate = transmissionTorrent.rateUpload, let ratio = transmissionTorrent.uploadRatio else {
                 return nil
             }
             
-            self.status = .seeding(peers: peers, uploadRate: uploadRate)
+            self.status = .seeding(peers: peers, uploadRate: uploadRate, ratio: ratio, totalUploaded: transmissionTorrent.uploadedEver)
             
         default:
             return nil
         }
-        
-        self.size = size
     }
 }

@@ -85,6 +85,8 @@
 		A08BFB9424FC0CE6002D424A /* Bencode in Frameworks */ = {isa = PBXBuildFile; productRef = A08BFB9324FC0CE6002D424A /* Bencode */; };
 		A08BFB9624FC0CE9002D424A /* Bencode in Frameworks */ = {isa = PBXBuildFile; productRef = A08BFB9524FC0CE9002D424A /* Bencode */; };
 		A08BFB9824FC0CF1002D424A /* Bencode in Frameworks */ = {isa = PBXBuildFile; productRef = A08BFB9724FC0CF1002D424A /* Bencode */; };
+		A093B94A25142ACB00F499B4 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
+		A093B95325142B2400F499B4 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
 		A096385B24F568CF00F2062F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096385A24F568CF00F2062F /* Assets.xcassets */; };
 		A096386224F568CF00F2062F /* SeedTruck (watchOS) Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A096386724F568CF00F2062F /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096386624F568CF00F2062F /* SeedTruckApp.swift */; };
@@ -1089,6 +1091,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A093B94A25142ACB00F499B4 /* Transmission.swift in Sources */,
+				A093B95325142B2400F499B4 /* Transmission+Extensions.swift in Sources */,
 				A045C8BE24F2006500B3B1CD /* Tests_iOS.swift in Sources */,
 				A07FFC7324F306AC002A78B5 /* TransmissionModelTests.swift in Sources */,
 			);

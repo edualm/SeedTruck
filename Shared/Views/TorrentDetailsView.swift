@@ -61,18 +61,22 @@ struct TorrentDetailsView: View {
                 Box(label: Label("Speed", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Label("Download: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
-                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
+                            Label("Download Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
+                            Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
                         }.padding(TorrentDetailsView.innerDetailPadding)
                         Spacer()
                     }.padding(.top)
                 }
                 
-            case let .seeding(_, uploadRate):
+            case let .seeding(_, uploadRate, ratio, totalUploaded):
                 Box(label: Label("Speed", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Label("Upload: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
+                            Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
+                            
+                            if let totalUploaded = totalUploaded {
+                                Label("Uploaded: \(ByteCountFormatter.humanReadableFileSize(bytes: totalUploaded)) (Ratio: \(String(format: "%.2f", ratio)))", systemImage: "arrow.up.to.line")
+                            }
                         }.padding(TorrentDetailsView.innerDetailPadding)
                         Spacer()
                     }.padding(.top)

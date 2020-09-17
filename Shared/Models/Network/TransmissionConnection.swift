@@ -44,7 +44,7 @@ class TransmissionConnection: ServerConnection {
     
     static private let CSRFTokenHeaderName = "X-Transmission-Session-Id"
     
-    static private let TorrentFields = ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload"]
+    static private let TorrentFields = ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload", "uploadedEver", "secondsSeeding", "uploadRatio"]
     
     private let connectionDetails: ConnectionDetails
     private var csrfToken: String?

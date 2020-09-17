@@ -27,8 +27,8 @@ struct TorrentItemView: View {
                         .font(.footnote)
                 }
                 
-            case let .seeding(_, uploadRate):
-                HStack {
+            case let .seeding(_, uploadRate, _, _):
+                VStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
                         .font(.footnote)
                 }

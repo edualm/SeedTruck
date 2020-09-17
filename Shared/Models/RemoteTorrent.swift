@@ -22,7 +22,7 @@ struct RemoteTorrent: Identifiable {
         
         case idle
         case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int)
-        case seeding(peers: Int, uploadRate: Int)
+        case seeding(peers: Int, uploadRate: Int, ratio: Double, totalUploaded: Int?)
         
         var simple: Simple {
             switch self {

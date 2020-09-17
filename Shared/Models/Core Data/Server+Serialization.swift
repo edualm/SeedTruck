@@ -18,7 +18,7 @@ extension Server {
         newServer.type = Int16(serializedData["type"] as! Int)
         
         if let username = serializedData["credentialUsername"] as? String, let password = serializedData["credentialPassword"] as? String {
-            newServer.credentialPassword = username
+            newServer.credentialUsername = username
             newServer.credentialPassword = password
         }
         
