@@ -11,10 +11,13 @@ import SwiftUI
 @main
 struct SeedTruckApp: App {
     
+    @StateObject private var sharedBucket: SharedBucket = SharedBucket()
+    
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
+                .environmentObject(sharedBucket)
         }
     }
     

@@ -13,11 +13,14 @@ struct SeedTruckApp: App {
     
     @State private var dataTransferManager: DataTransferManager? = nil
     
+    @StateObject private var sharedBucket: SharedBucket = SharedBucket()
+    
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 MainView()
                     .environment(\.managedObjectContext, persistentContainer.viewContext)
+                    .environmentObject(sharedBucket)
                     .onAppear {
                         if dataTransferManager == nil {
                             dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)

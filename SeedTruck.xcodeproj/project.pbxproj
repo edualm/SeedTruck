@@ -175,6 +175,14 @@
 		A0C1DB3C24F436A500C76682 /* CoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */; };
 		A0C1DB3D24F436A500C76682 /* CoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */; };
 		A0D8F3AD250445AE00481E43 /* SettingsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8F3AC250445AE00481E43 /* SettingsContainerView.swift */; };
+		A0E7426525154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
+		A0E7426625154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
+		A0E7426725154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
+		A0E7426825154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
+		A0E7427A2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
+		A0E7427B2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
+		A0E7427C2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
+		A0E7427D2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +332,8 @@
 		A0C1DB3824F4358500C76682 /* TorrentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentListView.swift; sourceTree = "<group>"; };
 		A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagedObjectDeleter.swift; sourceTree = "<group>"; };
 		A0D8F3AC250445AE00481E43 /* SettingsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsContainerView.swift; sourceTree = "<group>"; };
+		A0E7426425154FCB0029FFD6 /* SharedBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedBucket.swift; sourceTree = "<group>"; };
+		A0E742792515501F0029FFD6 /* DataTransferManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferManageable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -567,6 +577,7 @@
 				A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */,
 				A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */,
 				A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */,
+				A0E7426425154FCB0029FFD6 /* SharedBucket.swift */,
 				A01056AA24F491B600DA056D /* String+Extensions.swift */,
 				A071CC6D24FBC9BF00E46065 /* Style.swift */,
 			);
@@ -577,6 +588,7 @@
 			isa = PBXGroup;
 			children = (
 				A07DD0BE2512C96600559D9A /* Connectable.swift */,
+				A0E742792515501F0029FFD6 /* DataTransferManageable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -993,6 +1005,7 @@
 				A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
 				A096389024F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
 				A09638A624F56BDA00F2062F /* Box.swift in Sources */,
+				A0E7426525154FCB0029FFD6 /* SharedBucket.swift in Sources */,
 				A0C071FF24F5AFC400CEC1DA /* ServerStatusView.swift in Sources */,
 				A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */,
 				A09638AE24F5762700F2062F /* DataTransferManager.swift in Sources */,
@@ -1004,6 +1017,7 @@
 				A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */,
 				A07DD1012512C9E900559D9A /* ConnectionDetails.swift in Sources */,
 				A0B8C13324F3FF4E00ACD713 /* DocumentPickerAdapter.swift in Sources */,
+				A0E7427A2515501F0029FFD6 /* DataTransferManageable.swift in Sources */,
 				A096389A24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A07DD0BF2512C96600559D9A /* Connectable.swift in Sources */,
 				A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
@@ -1053,6 +1067,7 @@
 				A01056A624F48D5E00DA056D /* TorrentHandlerView.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
+				A0E7426625154FCB0029FFD6 /* SharedBucket.swift in Sources */,
 				A07DD1022512C9E900559D9A /* ConnectionDetails.swift in Sources */,
 				A096389B24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
@@ -1066,6 +1081,7 @@
 				A012561325046F0D00C7D51B /* SeedTruckApp.swift in Sources */,
 				A07DD0F52512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A07FFC7124F30044002A78B5 /* Transmission+Extensions.swift in Sources */,
+				A0E7427B2515501F0029FFD6 /* DataTransferManageable.swift in Sources */,
 				A02C585A24F3446100C82D68 /* NewServerView.swift in Sources */,
 				A07FFC6E24F2F34E002A78B5 /* Transmission.swift in Sources */,
 				A0C1DB3D24F436A500C76682 /* CoreDataManagedObjectDeleter.swift in Sources */,
@@ -1111,6 +1127,7 @@
 				A096388924F569CA00F2062F /* ServerType.swift in Sources */,
 				A09638A424F56BAE00F2062F /* ByteCountFormatter+Extensions.swift in Sources */,
 				A09638A124F56A9C00F2062F /* TransmissionConnection.swift in Sources */,
+				A0E7427C2515501F0029FFD6 /* DataTransferManageable.swift in Sources */,
 				A096388424F5699900F2062F /* RemoteTorrent.swift in Sources */,
 				A096389424F56A2500F2062F /* TorrentDetailsActionHandler.swift in Sources */,
 				A096386924F568CF00F2062F /* MainView.swift in Sources */,
@@ -1132,6 +1149,7 @@
 				A09638A824F56BDA00F2062F /* Box.swift in Sources */,
 				A096388524F569A900F2062F /* Server.swift in Sources */,
 				A09638AA24F5718C00F2062F /* DataModel.xcdatamodeld in Sources */,
+				A0E7426725154FCB0029FFD6 /* SharedBucket.swift in Sources */,
 				A09638B324F5804100F2062F /* Server+Serialization.swift in Sources */,
 				A0C0720424F5B03700CEC1DA /* ServerStatusView.swift in Sources */,
 				A096388324F5697600F2062F /* TorrentListView.swift in Sources */,
@@ -1152,6 +1170,7 @@
 				A0C071E924F5A05900CEC1DA /* String+Extensions.swift in Sources */,
 				A0C071D624F5A03500CEC1DA /* TorrentDetailsActionHandler.swift in Sources */,
 				A0C0720524F5B04500CEC1DA /* ServerStatusView.swift in Sources */,
+				A0E7426825154FCB0029FFD6 /* SharedBucket.swift in Sources */,
 				A0C071F324F5A06100CEC1DA /* TorrentDetailsView.swift in Sources */,
 				A0C071E424F5A05900CEC1DA /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A0C071EE24F5A06100CEC1DA /* ServerConnectionErrorView.swift in Sources */,
@@ -1169,6 +1188,7 @@
 				A07DD0C22512C96600559D9A /* Connectable.swift in Sources */,
 				A0C071D924F5A04700CEC1DA /* Server+CoreData.swift in Sources */,
 				A0C071F724F5A15D00CEC1DA /* TorrentListView.swift in Sources */,
+				A0E7427D2515501F0029FFD6 /* DataTransferManageable.swift in Sources */,
 				A0C071D724F5A04700CEC1DA /* Server.swift in Sources */,
 				A07DD0F72512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A0C071EF24F5A06100CEC1DA /* SettingsView.swift in Sources */,

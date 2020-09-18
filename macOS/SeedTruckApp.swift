@@ -17,6 +17,8 @@ import UniformTypeIdentifiers
     
     @State private var openedTorrent: LocalTorrent? = nil
     
+    @StateObject private var sharedBucket: SharedBucket = SharedBucket()
+    
     @SceneBuilder
     var body: some Scene {
         let showingURLHandlerSheet = Binding<Bool>(
@@ -38,6 +40,7 @@ import UniformTypeIdentifiers
                     }
                 }
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
+                .environmentObject(sharedBucket)
                 .onOpenURL { url in
                     openedTorrent = LocalTorrent(url: url)
                 }

@@ -18,6 +18,8 @@ import UniformTypeIdentifiers
     @State private var openedTorrent: LocalTorrent? = nil
     @State private var dataTransferManager: DataTransferManager? = nil
     
+    @StateObject private var sharedBucket: SharedBucket = SharedBucket()
+    
     @SceneBuilder
     var body: some Scene {
         let showingURLHandlerSheet = Binding<Bool>(
@@ -39,6 +41,7 @@ import UniformTypeIdentifiers
                     }
                 }
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
+                .environmentObject(sharedBucket)
                 .onOpenURL { url in
                     openedTorrent = LocalTorrent(url: url)
                 }
@@ -62,6 +65,8 @@ import UniformTypeIdentifiers
                 .onAppear {
                     if dataTransferManager == nil {
                         dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
+                        
+                        sharedBucket.dataTransferManager = dataTransferManager
                     }
                 }
         }.onChange(of: scenePhase) { phase in

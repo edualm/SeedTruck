@@ -10,10 +10,21 @@ import SwiftUI
 struct SettingsView: View {
     
     private enum ConnectionResult {
+        
         case connecting
         
         case success
         case failure
+    }
+    
+    private struct AlertData: Identifiable {
+        
+        var id: String {
+            return title + message
+        }
+        
+        let title: String
+        let message: String
     }
     
     @FetchRequest(
@@ -25,10 +36,13 @@ struct SettingsView: View {
     
     @Environment(\.managedObjectContext) private var managedObjectContext
     
+    @State private var showingAlert: AlertData?
     @State private var showingNewServer = false
     @State private var connectionResults: [Server: ConnectionResult] = [:]
     
     @ObservedObject private var actionHandler: SettingsActionHandler
+    
+    @EnvironmentObject private var sharedBucket: SharedBucket
     
     private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     
@@ -108,6 +122,22 @@ struct SettingsView: View {
                         newServerLink
                     }
                     #endif
+                    
+                    if let dataTransferManager = sharedBucket.dataTransferManager {
+                        Button(action: {
+                            dataTransferManager.sendUpdateToWatch {
+                                switch $0 {
+                                case .success:
+                                    showingAlert = .init(title: "Success!", message: "Successfully synced servers with your Apple Watch.")
+                                case .failure(let error):
+                                    showingAlert = .init(title: "Error!", message: error.localizedDescription)
+                                }
+                            }
+                        }) {
+                            Label("Force Sync to Apple Watch", systemImage: "applewatch.radiowaves.left.and.right")
+                                .foregroundColor(.primary)
+                        }
+                    }
                 }
                 .listStyle(Style.list)
             }
@@ -117,6 +147,11 @@ struct SettingsView: View {
         .onAppear(perform: onAppear)
         .onReceive(managedContextDidSave) { _ in
             onAppear()
+        }
+        .alert(item: $showingAlert) {
+            Alert(title: Text($0.title),
+                  message: Text($0.message),
+                  dismissButton: .default(Text("Ok")))
         }
     }
 }

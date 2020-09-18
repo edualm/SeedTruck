@@ -9,7 +9,7 @@ import Combine
 import CoreData
 import WatchConnectivity
 
-class DataTransferManager: NSObject {
+class DataTransferManager: NSObject, DataTransferManageable {
     
     let managedObjectContext: NSManagedObjectContext
     var mocDidChange: AnyCancellable!
@@ -35,11 +35,17 @@ class DataTransferManager: NSObject {
         }
     }
     
-    func sendUpdateToWatch() {
+    func sendUpdateToWatch(completionHandler: ((Result<Int, Error>) -> ())? = nil) {
         WCSession.default.sendMessage(["connections": Server.get(withManagedContext: managedObjectContext).map { $0.serialized }], replyHandler: {
-            print($0)
+            guard let updatedRecords = $0["records"] as? Int else {
+                assertionFailure("Received an invalid response from the Apple Watch!")
+                
+                return
+            }
+            
+            completionHandler?(.success(updatedRecords))
         }, errorHandler: {
-            print($0)
+            completionHandler?(.failure($0))
         })
     }
 }
