@@ -17,10 +17,10 @@ struct ProgressBarView: View {
         GeometryReader { geometry in
             HStack {
                 ZStack {
-                    RoundedRectangle(cornerRadius: cornerRadius)
+                    Rectangle()
                         .foregroundColor(progress > 0 ? .gray : .red)
                     HStack {
-                        RoundedRectangle(cornerRadius: cornerRadius)
+                        Rectangle()
                             .foregroundColor(progress < 1 ? .blue : .green)
                             .frame(minWidth: geometry.size.width * progress,
                                    idealWidth: geometry.size.width * progress,
@@ -28,7 +28,7 @@ struct ProgressBarView: View {
                         Spacer()
                             .frame(minWidth: 0)
                     }
-                }
+                }.cornerRadius(cornerRadius)
             }
         }
     }
