@@ -92,8 +92,12 @@ struct NewServerView: View {
                 #else
                 TextField("Endpoint", text: $endpoint)
                     .keyboardType(.URL)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
                 #endif
                 TextField("Username", text: $username)
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
                 SecureField("Password", text: $password)
             }
             

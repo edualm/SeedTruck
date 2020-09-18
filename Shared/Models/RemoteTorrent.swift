@@ -22,7 +22,7 @@ struct RemoteTorrent: Identifiable {
         
         case idle
         case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int)
-        case seeding(peers: Int, uploadRate: Int, ratio: Double, totalUploaded: Int?)
+        case seeding(peers: Int, uploadRate: Int, ratio: Double, totalUploaded: Int64?)
         
         var simple: Simple {
             switch self {
@@ -42,5 +42,5 @@ struct RemoteTorrent: Identifiable {
     let name: String
     let progress: Double
     let status: Status
-    let size: Int
+    let size: Int64
 }

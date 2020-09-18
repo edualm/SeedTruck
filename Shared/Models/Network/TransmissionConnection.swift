@@ -115,10 +115,10 @@ class TransmissionConnection: ServerConnection {
             
             guard let parsedResponse = try? JSONDecoder().decode(T.self, from: data) else {
                 completionHandler(.failure(.invalidResponse))
-                
+
                 return
             }
-            
+
             completionHandler(.success(parsedResponse))
         }
         

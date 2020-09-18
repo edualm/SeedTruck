@@ -52,6 +52,11 @@ struct TorrentListView: View {
         let refreshInterval = 2.0
         #endif
         
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
+        
         timer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: true) { _ in
             updateData()
         }
@@ -133,9 +138,12 @@ struct TorrentListView: View {
         .onChange(of: scenePhase) {
             switch $0 {
             case .active:
-                updateData()
+                onAppear()
                 
-            default:
+            case .background, .inactive:
+                onDisappear()
+                
+            @unknown default:
                 ()
             }
         }

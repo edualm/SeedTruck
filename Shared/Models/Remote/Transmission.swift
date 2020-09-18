@@ -151,7 +151,7 @@ enum Transmission {
         let desiredAvailable: Int?
         let doneDate: Int?
         let downloadDir: String?
-        let downloadedEver: Int?
+        let downloadedEver: Int64?
         let downloadLimit: Int?
         let downloadLimited: Bool?
         let editDate: Int?
@@ -197,14 +197,14 @@ enum Transmission {
         let seedIdleMode: Int?
         let seedRatioLimit: Double?
         let seedRatioMode: Int?
-        let sizeWhenDone: Int?
+        let sizeWhenDone: Int64?
         let startDate: Int?
         let status: Int?
         let trackers: [Tracker]?
         let trackerStats: [TrackerStats]?
         let totalSize: Int?
         let torrentFile: String?
-        let uploadedEver: Int?
+        let uploadedEver: Int64?
         let uploadLimit: Int?
         let uploadLimited: Bool?
         let uploadRatio: Double?

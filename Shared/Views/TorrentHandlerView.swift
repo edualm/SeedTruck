@@ -78,7 +78,7 @@ struct TorrentHandlerView: View {
                     HStack {
                         Text("Size")
                         Spacer()
-                        Text(ByteCountFormatter.humanReadableFileSize(bytes: size))
+                        Text(ByteCountFormatter.humanReadableFileSize(bytes: Int64(size)))
                             .foregroundColor(.secondary)
                     }
                 }

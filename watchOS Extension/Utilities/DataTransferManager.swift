@@ -42,14 +42,36 @@ extension DataTransferManager: WCSessionDelegate {
             return
         }
         
-        try! managedObjectContext.execute(NSBatchDeleteRequest(fetchRequest: Server.fetchRequest()))
-        
-        connectionDataPackage.forEach {
-            _ = Server.new(withManagedContext: managedObjectContext, serializedData: $0)
+        do {
+            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: Server.fetchRequest())
+            batchDeleteRequest.resultType = .resultTypeObjectIDs
+            
+            let deletionResult = try managedObjectContext.execute(batchDeleteRequest) as! NSBatchDeleteResult
+            
+            let changes: [AnyHashable: Any] = [
+                NSDeletedObjectsKey: deletionResult.result as! [NSManagedObjectID]
+            ]
+            
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [managedObjectContext])
+            
+            connectionDataPackage.forEach {
+                let server = Server.new(withManagedContext: managedObjectContext, serializedData: $0)
+                
+                managedObjectContext.insert(server)
+            }
+            
+            try managedObjectContext.save()
+            
+            replyHandler([
+                "success": true,
+                "records": try managedObjectContext.count(for: Server.fetchRequest()),
+                "updatedData": Server.get(withManagedContext: managedObjectContext).map { $0.serialized }
+            ])
+        } catch {
+            replyHandler([
+                "success": false,
+                "error": error.localizedDescription
+            ])
         }
-        
-        try! managedObjectContext.save()
-        
-        replyHandler(["success": true])
     }
 }
