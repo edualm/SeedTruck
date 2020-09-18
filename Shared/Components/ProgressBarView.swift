@@ -10,6 +10,7 @@ import SwiftUI
 struct ProgressBarView: View {
     
     let cornerRadius: CGFloat
+    let barColorBuilder: ((CGFloat) -> (Color))
     
     @State var progress: CGFloat
     
@@ -21,7 +22,7 @@ struct ProgressBarView: View {
                         .foregroundColor(progress > 0 ? .gray : .red)
                     HStack {
                         Rectangle()
-                            .foregroundColor(progress < 1 ? .blue : .green)
+                            .foregroundColor(barColorBuilder(progress))
                             .frame(minWidth: geometry.size.width * progress,
                                    idealWidth: geometry.size.width * progress,
                                    maxWidth: geometry.size.width * progress)
@@ -36,11 +37,13 @@ struct ProgressBarView: View {
 
 struct ProgressBarView_Previews: PreviewProvider {
     
+    static private let defaultBarColorBuilder: ((CGFloat) -> (Color)) = { $0 < 1 ? .blue : .green }
+    
     static var previews: some View {
         Group {
-            ProgressBarView(cornerRadius: 10.0, progress: 0)
-            ProgressBarView(cornerRadius: 10.0, progress: 0.5)
-            ProgressBarView(cornerRadius: 10.0, progress: 1)
+            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0)
+            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0.5)
+            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 1)
         }.previewLayout(.fixed(width: 300, height: 10))
     }
 }

@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="256" height="256" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Shared/Assets.xcassets/AppIcon.appiconset/Icon-1024.png">
+</p>
+
 # Seed Truck
 
 A seedbox management application for the whole family of Apple devices - iOS, macOS, tvOS and watchOS.
@@ -6,15 +10,20 @@ This is not the kind of project Apple allows on the App Store, so I'm open-sourc
 
 It uses SwiftUI 2, and as such, can only run on iOS/tvOS 14+, watchOS 7+ and macOS 11+.
 
-The app should be useable on iOS, tvOS and watchOS. macOS support will be worked on as soon as macOS 11 is released to the public.
+The app should be useable on iOS, tvOS and watchOS. 
+macOS support will be worked on as soon as macOS 11 is released to the public.
 
 ## Screenshots
 
-These will appear eventually.
+iOS screenshots for now; screenshots for other platforms will appear eventually.
+
+<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Listing%20-%20Light.png">&nbsp;&nbsp;&nbsp;<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Detail%20-%20Light.png">
+
+<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Listing%20-%20Dark.png">&nbsp;&nbsp;&nbsp;<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Detail%20-%20Dark.png">
 
 ## Features
 
- - Connect to Transmission seedboxes (support for other types of seedboxes is easy to add, but not implemented)
+ - Connect to Transmission seedboxes (support for other types of seedboxes is easy to add, but not implemented).
  - View torrents, their status, and remove them.
  - Import torrents, either using a torrent file or magnet link.
  

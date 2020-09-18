@@ -17,7 +17,7 @@ struct TorrentItemView: View {
             switch torrent.status {
             case .idle:
                 Text("Idle")
-                    .fontWeight(.light)
+                    .font(.footnote)
                 
             case let .downloading(_, _, _, downloadRate, uploadRate):
                 HStack {
@@ -43,7 +43,14 @@ struct TorrentItemView: View {
             Text(torrent.name)
                 .bold()
                 .lineLimit(1)
-            ProgressBarView(cornerRadius: 10.0, progress: CGFloat(torrent.progress))
+            ProgressBarView(cornerRadius: 10.0, barColorBuilder: {
+                switch torrent.status {
+                case .idle:
+                    return .orange
+                default:
+                    return $0 < 1 ? .blue : .green
+                }
+            }, progress: CGFloat(torrent.progress))
                 .frame(width: nil, height: 20, alignment: .center)
             SpeedView(torrent: torrent)
         }
