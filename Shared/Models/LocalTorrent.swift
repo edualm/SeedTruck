@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftyBencode
 
 enum LocalTorrent {
     
     case magnet(String)
-    case torrent(Data)
+    case torrent(data: Data, parsedTorrent: SwiftyBencode.Torrent)
 }

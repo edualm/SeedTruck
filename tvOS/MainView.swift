@@ -22,13 +22,13 @@ struct MainView: View {
         TabView {
             ForEach(serverConnections, id: \.self) { server in
                 NavigationView {
-                    TorrentListView(selectedServer: .constant(server))
+                    TorrentListView(server: .constant(server), filter: .constant(nil))
                 }.tabItem {
                     Image(systemName: "server.rack")
                     Text(server.name)
                 }
             }
-            SettingsTabView(actionHandler: SettingsActionHandler(managedObjectContext: managedObjectContext))
+            SettingsView(actionHandler: SettingsActionHandler(managedObjectContext: managedObjectContext))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")

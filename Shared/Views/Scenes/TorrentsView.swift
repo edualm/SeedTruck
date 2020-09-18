@@ -54,13 +54,13 @@ struct TorrentsView: View {
                             return
                         }
                         
-                        guard let fileData = try? Data(contentsOf: url) else {
+                        guard let torrent = LocalTorrent(url: url) else {
                             self.showingAlert = .init(id: .addTorrentError)
                             
                             return
                         }
                         
-                        self.presentedSheet = .addTorrent(.torrent(fileData))
+                        self.presentedSheet = .addTorrent(torrent)
                     },
                     onDismiss: {}
                 )

@@ -137,6 +137,8 @@ class TransmissionConnection: ServerConnection {
         }
     }
     
+    #if os(iOS) || os(macOS)
+    
     func addTorrent(_ torrent: LocalTorrent, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
         let parameters: Parameters
         
@@ -144,8 +146,8 @@ class TransmissionConnection: ServerConnection {
         case .magnet(let magnet):
             parameters = ["filename": magnet]
             
-        case .torrent(let torrent):
-            parameters = ["metainfo": torrent.base64EncodedString()]
+        case .torrent(let data, _):
+            parameters = ["metainfo": data.base64EncodedString()]
         }
         
         performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentAdd, TransmissionError>) in
@@ -166,6 +168,8 @@ class TransmissionConnection: ServerConnection {
             }
         }
     }
+    
+    #endif
     
     private func getTorrents(ids: [Int], completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
         let parameters: Parameters

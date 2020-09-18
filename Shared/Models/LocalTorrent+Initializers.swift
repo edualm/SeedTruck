@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyBencode
 
 extension LocalTorrent {
     
@@ -15,11 +16,12 @@ extension LocalTorrent {
                 return nil
             }
             
-            do {
-                self = .torrent(try Data(contentsOf: url))
-            } catch {
+            guard let data = try? Data(contentsOf: url), let parsedTorrent = Torrent(data: data) else {
                 return nil
             }
+            
+            self = .torrent(data: data, parsedTorrent: parsedTorrent)
+            
         } else {
             let urlString = url.absoluteString
             

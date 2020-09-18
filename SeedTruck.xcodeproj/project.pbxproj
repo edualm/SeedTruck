@@ -81,12 +81,11 @@
 		A07FFC7024F30044002A78B5 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
 		A07FFC7124F30044002A78B5 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
 		A07FFC7324F306AC002A78B5 /* TransmissionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */; };
-		A08BFB9224FC0CE0002D424A /* Bencode in Frameworks */ = {isa = PBXBuildFile; productRef = A08BFB9124FC0CE0002D424A /* Bencode */; };
-		A08BFB9424FC0CE6002D424A /* Bencode in Frameworks */ = {isa = PBXBuildFile; productRef = A08BFB9324FC0CE6002D424A /* Bencode */; };
-		A08BFB9624FC0CE9002D424A /* Bencode in Frameworks */ = {isa = PBXBuildFile; productRef = A08BFB9524FC0CE9002D424A /* Bencode */; };
-		A08BFB9824FC0CF1002D424A /* Bencode in Frameworks */ = {isa = PBXBuildFile; productRef = A08BFB9724FC0CF1002D424A /* Bencode */; };
 		A093B94A25142ACB00F499B4 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
 		A093B95325142B2400F499B4 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
+		A093B95E2514303700F499B4 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A093B95D2514303700F499B4 /* SwiftyBencode */; };
+		A093B9682514304500F499B4 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A093B9672514304500F499B4 /* SwiftyBencode */; };
+		A093B96C2514305100F499B4 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A093B96B2514305100F499B4 /* SwiftyBencode */; };
 		A096385B24F568CF00F2062F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096385A24F568CF00F2062F /* Assets.xcassets */; };
 		A096386224F568CF00F2062F /* SeedTruck (watchOS) Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A096386724F568CF00F2062F /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096386624F568CF00F2062F /* SeedTruckApp.swift */; };
@@ -106,7 +105,6 @@
 		A096388D24F569E900F2062F /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A096389024F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */; };
 		A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */; };
-		A096389324F56A1B00F2062F /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
 		A096389424F56A2500F2062F /* TorrentDetailsActionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A073DD2324F4768400BA37C9 /* TorrentDetailsActionHandler.swift */; };
 		A096389A24F56A5100F2062F /* Server+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389924F56A5100F2062F /* Server+CoreData.swift */; };
 		A096389B24F56A5100F2062F /* Server+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389924F56A5100F2062F /* Server+CoreData.swift */; };
@@ -141,10 +139,8 @@
 		A0C071D724F5A04700CEC1DA /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585524F3400200C82D68 /* Server.swift */; };
 		A0C071D924F5A04700CEC1DA /* Server+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096389924F56A5100F2062F /* Server+CoreData.swift */; };
 		A0C071DA24F5A05300CEC1DA /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
-		A0C071DB24F5A05300CEC1DA /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
 		A0C071DC24F5A05300CEC1DA /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
 		A0C071DD24F5A05300CEC1DA /* RemoteTorrent+Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */; };
-		A0C071DE24F5A05300CEC1DA /* LocalTorrent+Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */; };
 		A0C071DF24F5A05300CEC1DA /* RemoteTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7E424F20C8D009D72C6 /* RemoteTorrent.swift */; };
 		A0C071E024F5A05300CEC1DA /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388624F569CA00F2062F /* ServerType.swift */; };
 		A0C071E224F5A05900CEC1DA /* ByteCountFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */; };
@@ -335,7 +331,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A08BFB9224FC0CE0002D424A /* Bencode in Frameworks */,
+				A093B95E2514303700F499B4 /* SwiftyBencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +339,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A08BFB9424FC0CE6002D424A /* Bencode in Frameworks */,
+				A093B9682514304500F499B4 /* SwiftyBencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,7 +361,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A08BFB9624FC0CE9002D424A /* Bencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +368,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A08BFB9824FC0CF1002D424A /* Bencode in Frameworks */,
+				A093B96C2514305100F499B4 /* SwiftyBencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,7 +714,7 @@
 			);
 			name = "SeedTruck (iOS)";
 			packageProductDependencies = (
-				A08BFB9124FC0CE0002D424A /* Bencode */,
+				A093B95D2514303700F499B4 /* SwiftyBencode */,
 			);
 			productName = "SeedTruck (iOS)";
 			productReference = A045C8A924F2006500B3B1CD /* SeedTruck.app */;
@@ -739,7 +734,7 @@
 			);
 			name = "SeedTruck (macOS)";
 			packageProductDependencies = (
-				A08BFB9324FC0CE6002D424A /* Bencode */,
+				A093B9672514304500F499B4 /* SwiftyBencode */,
 			);
 			productName = "SeedTruck (macOS)";
 			productReference = A045C8B124F2006500B3B1CD /* SeedTruck.app */;
@@ -812,7 +807,6 @@
 			);
 			name = "SeedTruck (watchOS) Extension";
 			packageProductDependencies = (
-				A08BFB9524FC0CE9002D424A /* Bencode */,
 			);
 			productName = "SeedTruck (watchOS) Extension";
 			productReference = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */;
@@ -832,7 +826,7 @@
 			);
 			name = "SeedTruck (tvOS)";
 			packageProductDependencies = (
-				A08BFB9724FC0CF1002D424A /* Bencode */,
+				A093B96B2514305100F499B4 /* SwiftyBencode */,
 			);
 			productName = SeedTruck;
 			productReference = A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */;
@@ -904,7 +898,7 @@
 			);
 			mainGroup = A045C89C24F2006400B3B1CD;
 			packageReferences = (
-				A08BFB9024FC0CE0002D424A /* XCRemoteSwiftPackageReference "Bencode" */,
+				A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */,
 			);
 			productRefGroup = A045C8AA24F2006500B3B1CD /* Products */;
 			projectDirPath = "";
@@ -1137,7 +1131,6 @@
 				A096388D24F569E900F2062F /* PreviewMockData.swift in Sources */,
 				A09638A824F56BDA00F2062F /* Box.swift in Sources */,
 				A096388524F569A900F2062F /* Server.swift in Sources */,
-				A096389324F56A1B00F2062F /* LocalTorrent.swift in Sources */,
 				A09638AA24F5718C00F2062F /* DataModel.xcdatamodeld in Sources */,
 				A09638B324F5804100F2062F /* Server+Serialization.swift in Sources */,
 				A0C0720424F5B03700CEC1DA /* ServerStatusView.swift in Sources */,
@@ -1180,12 +1173,10 @@
 				A07DD0F72512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A0C071EF24F5A06100CEC1DA /* SettingsView.swift in Sources */,
 				A0C071EA24F5A06100CEC1DA /* NewServerView.swift in Sources */,
-				A0C071DB24F5A05300CEC1DA /* LocalTorrent.swift in Sources */,
 				A0C071D424F5A03500CEC1DA /* SettingsActionHandler.swift in Sources */,
 				A0C071E324F5A05900CEC1DA /* ServerConnection.swift in Sources */,
 				A071CC7124FBC9BF00E46065 /* Style.swift in Sources */,
 				A0C071E824F5A05900CEC1DA /* PreviewMockData.swift in Sources */,
-				A0C071DE24F5A05300CEC1DA /* LocalTorrent+Initializers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1792,36 +1783,31 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A08BFB9024FC0CE0002D424A /* XCRemoteSwiftPackageReference "Bencode" */ = {
+		A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/edualm/Bencode";
+			repositoryURL = "https://github.com/edualm/SwiftyBencode";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.8.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A08BFB9124FC0CE0002D424A /* Bencode */ = {
+		A093B95D2514303700F499B4 /* SwiftyBencode */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A08BFB9024FC0CE0002D424A /* XCRemoteSwiftPackageReference "Bencode" */;
-			productName = Bencode;
+			package = A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
+			productName = SwiftyBencode;
 		};
-		A08BFB9324FC0CE6002D424A /* Bencode */ = {
+		A093B9672514304500F499B4 /* SwiftyBencode */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A08BFB9024FC0CE0002D424A /* XCRemoteSwiftPackageReference "Bencode" */;
-			productName = Bencode;
+			package = A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
+			productName = SwiftyBencode;
 		};
-		A08BFB9524FC0CE9002D424A /* Bencode */ = {
+		A093B96B2514305100F499B4 /* SwiftyBencode */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A08BFB9024FC0CE0002D424A /* XCRemoteSwiftPackageReference "Bencode" */;
-			productName = Bencode;
-		};
-		A08BFB9724FC0CF1002D424A /* Bencode */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A08BFB9024FC0CE0002D424A /* XCRemoteSwiftPackageReference "Bencode" */;
-			productName = Bencode;
+			package = A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
+			productName = SwiftyBencode;
 		};
 /* End XCSwiftPackageProductDependency section */
 

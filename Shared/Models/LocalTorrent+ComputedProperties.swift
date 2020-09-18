@@ -5,8 +5,8 @@
 //  Created by Eduardo Almeida on 25/08/2020.
 //
 
-import Bencode
 import Foundation
+import SwiftyBencode
 
 extension LocalTorrent {
     
@@ -21,12 +21,8 @@ extension LocalTorrent {
         case .magnet(let magnet):
             return magnet.slice(from: "dn=", to: "&")?.replacingOccurrences(of: "+", with: " ")
             
-        case .torrent(let torrent):
-            guard let decoded = try? Bencoder().decode(bytes: [UInt8](torrent)) else {
-                return nil
-            }
-
-            return decoded["info"]["name"].string
+        case .torrent(_, let parsedTorrent):
+            return parsedTorrent.name
         }
     }
     
@@ -35,16 +31,8 @@ extension LocalTorrent {
         case .magnet:
             return nil
             
-        case .torrent(let torrent):
-            guard let decoded = try? Bencoder().decode(bytes: [UInt8](torrent)) else {
-                return nil
-            }
-            
-            guard let result = decoded["info"]["private"].int else {
-                return nil
-            }
-            
-            return result == 1
+        case .torrent(_, let parsedTorrent):
+            return parsedTorrent.dictionary?["info"]?["private"]?.integer == 1
         }
     }
     
@@ -53,29 +41,11 @@ extension LocalTorrent {
         case .magnet:
             return nil
             
-        case .torrent(let torrent):
-            guard let decoded = try? Bencoder().decode(bytes: [UInt8](torrent)) else {
-                return nil
-            }
-            
-            guard let fileList = decoded["info"]["files"].list else {
-                return nil
-            }
-            
-            return fileList.compactMap {
-                guard let pathComponents = $0["path"].list else {
-                    return nil
-                }
+        case .torrent(_, let parsedTorrent):
+            return parsedTorrent.files.compactMap {
+                let path = $0.path.joined(separator: "/")
                 
-                let path = pathComponents
-                    .compactMap { $0.string }
-                    .joined(separator: "/")
-                
-                guard let length = $0["length"].int else {
-                    return nil
-                }
-                
-                return File(path: path, size: length)
+                return File(path: path, size: $0.length)
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-//  SettingsTabView.swift
+//  SettingsView.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 23/08/2020.
@@ -121,7 +121,7 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsTabView_Previews: PreviewProvider {
+struct SettingsView_Previews: PreviewProvider {
     
     static var previews: some View {
         SettingsView(actionHandler: SettingsActionHandler(managedObjectContext: MockCoreDataManagedObjectDeleter()))
