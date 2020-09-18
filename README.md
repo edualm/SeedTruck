@@ -6,7 +6,7 @@ This is not the kind of project Apple allows on the App Store, so I'm open-sourc
 
 It uses SwiftUI 2, and as such, can only run on iOS/tvOS 14+, watchOS 7+ and macOS 11+.
 
-The app should be useable, but please keep in mind that it's still under active development, and won't have a tagged release until a bit after the official versions of the OS versions described above are released.
+The app should be useable on iOS, tvOS and watchOS. macOS support will be worked on as soon as macOS 11 is released to the public.
 
 ## Screenshots
 
@@ -22,7 +22,7 @@ iOS, tvOS and watchOS support are practically done. macOS support will only prob
 
 ## Tests
 
-Coming soon. Reason is that I am not being able to run them under Xcode 12, so not much point in writing them unfortunately.
+Not many were written since I wasn't being able to run them under Xcode 12. I should fix that probably...
 
 ## License
 
