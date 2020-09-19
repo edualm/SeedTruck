@@ -1,5 +1,5 @@
 //
-//  TorrentDetailsActionHandler.swift
+//  TorrentDetailsPresenter.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 24/08/2020.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TorrentDetailsActionHandler: ObservableObject {
+class TorrentDetailsPresenter: ObservableObject {
     
     enum Action {
         

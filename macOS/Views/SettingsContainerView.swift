@@ -12,7 +12,7 @@ struct SettingsContainerView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     
     var body: some View {
-        SettingsView(actionHandler: SettingsActionHandler(managedObjectContext: managedObjectContext))
+        SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
     }
 }
 

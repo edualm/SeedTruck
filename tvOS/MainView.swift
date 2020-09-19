@@ -28,7 +28,7 @@ struct MainView: View {
                     Text(server.name)
                 }
             }
-            SettingsView(actionHandler: SettingsActionHandler(managedObjectContext: managedObjectContext))
+            SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")

@@ -100,8 +100,8 @@ struct TorrentListView: View {
                                 ZStack {
                                     #if os(macOS) || os(tvOS)
                                     NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                                   actionHandler: .init(server: server!,
-                                                                                                        torrent: torrent))) {
+                                                                                   presenter: .init(server: server!,
+                                                                                                    torrent: torrent))) {
                                         TorrentItemView(torrent: torrent)
                                             .padding(.all, 5)
                                     }
@@ -109,8 +109,8 @@ struct TorrentListView: View {
                                     TorrentItemView(torrent: torrent)
                                         .padding(.all, 5)
                                     NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                                   actionHandler: .init(server: server!,
-                                                                                                        torrent: torrent))) {
+                                                                                   presenter: .init(server: server!,
+                                                                                                    torrent: torrent))) {
                                         EmptyView()
                                     }.buttonStyle(PlainButtonStyle())
                                     #endif

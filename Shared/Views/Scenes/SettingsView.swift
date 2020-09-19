@@ -40,14 +40,14 @@ struct SettingsView: View {
     @State private var showingNewServer = false
     @State private var connectionResults: [Server: ConnectionResult] = [:]
     
-    @ObservedObject private var actionHandler: SettingsActionHandler
+    @ObservedObject private var presenter: SettingsPresenter
     
     @EnvironmentObject private var sharedBucket: SharedBucket
     
     private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     
-    init(actionHandler: SettingsActionHandler) {
-        self.actionHandler = actionHandler
+    init(presenter: SettingsPresenter) {
+        self.presenter = presenter
     }
     
     func onAppear() {
@@ -66,7 +66,7 @@ struct SettingsView: View {
     
     var body: some View {
         let showingDeleteAlertBinding = Binding<Bool>(
-            get: { self.actionHandler.showingDeleteAlert },
+            get: { self.presenter.showingDeleteAlert },
             set: { _ in }
         )
         
@@ -96,18 +96,18 @@ struct SettingsView: View {
                                 EmptyView()
                             }
                             Button(action: {
-                                self.actionHandler.perform(.delete(server))
+                                self.presenter.perform(.delete(server))
                             }) {
                                 Label("Delete", systemImage: "trash")
                                     .foregroundColor(.red)
                             }.alert(isPresented: showingDeleteAlertBinding) {
-                                Alert(title: Text("Are you sure you want to delete \"\(actionHandler.serverUnderModification?.name ?? "Unknown")\"?"),
+                                Alert(title: Text("Are you sure you want to delete \"\(presenter.serverUnderModification?.name ?? "Unknown")\"?"),
                                       message: nil,
                                       primaryButton: .destructive(Text("Delete")) {
-                                        self.actionHandler.perform(.confirmDeletion)
+                                        self.presenter.perform(.confirmDeletion)
                                       },
                                       secondaryButton: .cancel() {
-                                        self.actionHandler.perform(.abortDeletion)
+                                        self.presenter.perform(.abortDeletion)
                                       })
                             }
                         }
@@ -159,6 +159,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     
     static var previews: some View {
-        SettingsView(actionHandler: SettingsActionHandler(managedObjectContext: MockCoreDataManagedObjectDeleter()))
+        SettingsView(presenter: SettingsPresenter(managedObjectContext: MockCoreDataManagedObjectDeleter()))
     }
 }

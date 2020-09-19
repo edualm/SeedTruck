@@ -92,11 +92,11 @@ struct TorrentDetailsView: View {
         
         @Binding var presentation: PresentationMode
         
-        let actionHandler: TorrentDetailsActionHandler
+        let presenter: TorrentDetailsPresenter
         
         var body: some View {
             let startTorrentButton = Button(action: {
-                actionHandler.perform(.start) {
+                presenter.perform(.start) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                         presentation.dismiss()
                     }
@@ -110,7 +110,7 @@ struct TorrentDetailsView: View {
             }.padding(4)
             
             let pauseTorrentButton = Button(action: {
-                actionHandler.perform(.pause) {
+                presenter.perform(.pause) {
                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                         presentation.dismiss()
                     }
@@ -124,7 +124,7 @@ struct TorrentDetailsView: View {
             }.padding(4)
             
             let removeTorrentButton = Button(action: {
-                actionHandler.perform(.prepareForRemoval(deletingFiles: false))
+                presenter.perform(.prepareForRemoval(deletingFiles: false))
             }) {
                 #if os(watchOS)
                 Text("Remove Torrent")
@@ -136,7 +136,7 @@ struct TorrentDetailsView: View {
             }.padding(4)
             
             let removeTorrentAndDataButton = Button(action: {
-                actionHandler.perform(.prepareForRemoval(deletingFiles: true))
+                presenter.perform(.prepareForRemoval(deletingFiles: true))
             }) {
                 #if os(watchOS)
                 Text("Remove Torrent and Data")
@@ -149,7 +149,7 @@ struct TorrentDetailsView: View {
             }.padding(4)
             
             let items = Group {
-                switch actionHandler.torrent.status {
+                switch presenter.torrent.status {
                 case .downloading, .seeding:
                     pauseTorrentButton
                 case .stopped:
@@ -176,12 +176,12 @@ struct TorrentDetailsView: View {
     
     let torrent: RemoteTorrent
     
-    @ObservedObject var actionHandler: TorrentDetailsActionHandler
+    @ObservedObject var presenter: TorrentDetailsPresenter
     
     var body: some View {
-        let currentAlert = Binding<TorrentDetailsActionHandler.AlertIdentifier?>(
-            get: { self.actionHandler.currentAlert },
-            set: { self.actionHandler.currentAlert = $0 }
+        let currentAlert = Binding<TorrentDetailsPresenter.AlertIdentifier?>(
+            get: { self.presenter.currentAlert },
+            set: { self.presenter.currentAlert = $0 }
         )
         
         var view = AnyView(ScrollView {
@@ -211,21 +211,21 @@ struct TorrentDetailsView: View {
             }
             #endif
             
-            if actionHandler.isLoading {
+            if presenter.isLoading {
                 ProgressView()
                     .progressViewStyle(CircularProgressViewStyle())
                     .padding()
             } else {
                 #if os(tvOS)
                 HStack {
-                    ActionsView(presentation: presentation, actionHandler: actionHandler)
+                    ActionsView(presentation: presentation, presenter: presenter)
                 }
                 #else
                 Box(label: Label("Actions", systemImage: "wrench")) {
                     VStack {
                         HStack {
                             Spacer()
-                            ActionsView(presentation: presentation, actionHandler: actionHandler)
+                            ActionsView(presentation: presentation, presenter: presenter)
                             Spacer()
                         }
                     }.padding(.top)
@@ -241,7 +241,7 @@ struct TorrentDetailsView: View {
                 return Alert(title: Text("Are you sure?"),
                              message: Text("You are about to perform a destructive action.\n\nAre you really sure?"),
                              primaryButton: .destructive(Text("Confirm")) {
-                                self.actionHandler.perform(.commit) {
+                                self.presenter.perform(.commit) {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                                         self.presentation.wrappedValue.dismiss()
                                     }
@@ -271,7 +271,7 @@ struct TorrentDetailsView_Previews: PreviewProvider {
     
     static var previews: some View {
         TorrentDetailsView(torrent: PreviewMockData.remoteTorrent,
-                           actionHandler: .init(server: PreviewMockData.server,
+                           presenter: .init(server: PreviewMockData.server,
                                                 torrent: PreviewMockData.remoteTorrent))
         
     }
