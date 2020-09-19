@@ -42,6 +42,16 @@ class TorrentDetailsActionHandler: ObservableObject {
     }
     
     func perform(_ action: Action, onSuccess: (() -> ())? = nil) {
+        let successCheck: ((Result<Bool, ServerCommunicationError>) -> ()) = {
+            if case let Result.success(success) = $0, success {
+                DispatchQueue.main.async {
+                    self.currentAlert = nil
+                    
+                    onSuccess?()
+                }
+            }
+        }
+        
         switch action {
         case .abort:
             actionToCommit = nil
@@ -55,48 +65,20 @@ class TorrentDetailsActionHandler: ObservableObject {
                 return
                 
             case .prepareForRemoval(let deletingFiles):
-                server.connection.perform(.remove(deletingData: deletingFiles), on: torrent) { result in
+                server.connection.perform(.remove(deletingData: deletingFiles), on: torrent) {
                     self.actionToCommit = nil
                     
-                    if case let Result.success(success) = result, success {
-                        DispatchQueue.main.async {
-                            self.currentAlert = nil
-                            
-                            onSuccess?()
-                        }
-                        
-                        return
-                    }
+                    successCheck($0)
                     
                     self.currentAlert = .init(id: .error)
                 }
             }
             
         case .pause:
-            server.connection.perform(.pause, on: torrent) {
-                if case let Result.success(success) = $0, success {
-                    DispatchQueue.main.async {
-                        self.currentAlert = nil
-                        
-                        onSuccess?()
-                    }
-                    
-                    return
-                }
-            }
+            server.connection.perform(.pause, on: torrent, completionHandler: successCheck)
             
         case .start:
-            server.connection.perform(.start, on: torrent) {
-                if case let Result.success(success) = $0, success {
-                    DispatchQueue.main.async {
-                        self.currentAlert = nil
-                        
-                        onSuccess?()
-                    }
-                    
-                    return
-                }
-            }
+            server.connection.perform(.start, on: torrent, completionHandler: successCheck)
             
         case .prepareForRemoval:
             actionToCommit = action
