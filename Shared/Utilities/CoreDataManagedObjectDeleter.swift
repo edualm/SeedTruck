@@ -14,9 +14,3 @@ protocol CoreDataManagedObjectDeleter {
 }
 
 extension NSManagedObjectContext: CoreDataManagedObjectDeleter {}
-
-class MockCoreDataManagedObjectDeleter: CoreDataManagedObjectDeleter {
-    
-    func delete(_ object: NSManagedObject) {}
-    func save() {}
-}
