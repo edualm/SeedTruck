@@ -15,25 +15,30 @@ struct RemoteTorrent: Identifiable {
         
         enum Simple {
             
-            case idle
+            case stopped
             case downloading
             case seeding
+            case other
         }
         
-        case idle
+        case stopped
         case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int)
         case seeding(peers: Int, uploadRate: Int, ratio: Double, totalUploaded: Int64?)
+        case other(_ status: String)
         
         var simple: Simple {
             switch self {
-            case .idle:
-                return .idle
+            case .stopped:
+                return .stopped
                 
             case .downloading:
                 return .downloading
                 
             case .seeding:
                 return .seeding
+                
+            case .other:
+                return .other
             }
         }
     }

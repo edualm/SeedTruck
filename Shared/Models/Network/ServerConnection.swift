@@ -7,6 +7,15 @@
 
 import Foundation
 
+extension RemoteTorrent {
+    
+    enum Action {
+        case pause
+        case remove(deletingData: Bool)
+        case start
+    }
+}
+
 enum ServerCommunicationError: Error {
     
     case notImplemented
@@ -25,5 +34,6 @@ protocol ServerConnection {
     
     func getTorrent(id: String, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ())
     func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ())
-    func removeTorrent(_ torrent: RemoteTorrent, deletingData: Bool, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
+    
+    func perform(_ action: RemoteTorrent.Action, on torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
 }

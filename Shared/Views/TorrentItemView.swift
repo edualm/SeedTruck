@@ -15,8 +15,8 @@ struct TorrentItemView: View {
         
         var body: some View {
             switch torrent.status {
-            case .idle:
-                Text("Idle")
+            case .stopped:
+                Text("Stopped")
                     .font(.footnote)
                 
             case let .downloading(_, _, _, downloadRate, uploadRate):
@@ -32,6 +32,10 @@ struct TorrentItemView: View {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
                         .font(.footnote)
                 }
+                
+            case let .other(status):
+                Text(status)
+                    .font(.footnote)
             }
         }
     }
@@ -45,7 +49,9 @@ struct TorrentItemView: View {
                 .lineLimit(1)
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: {
                 switch torrent.status {
-                case .idle:
+                case .stopped:
+                    return .gray
+                case .other:
                     return .orange
                 default:
                     return $0 < 1 ? .blue : .green

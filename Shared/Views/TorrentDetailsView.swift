@@ -51,14 +51,14 @@ struct TorrentDetailsView: View {
         }
     }
     
-    private struct SpeedView: View {
+    private struct StatsView: View {
         
         let torrent: RemoteTorrent
         
         var body: some View {
             switch torrent.status {
             case let .downloading(_, _, _, downloadRate, uploadRate):
-                Box(label: Label("Speed", systemImage: "speedometer")) {
+                Box(label: Label("Statistics", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
                             Label("Download Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
@@ -69,7 +69,7 @@ struct TorrentDetailsView: View {
                 }
                 
             case let .seeding(_, uploadRate, ratio, totalUploaded):
-                Box(label: Label("Speed", systemImage: "speedometer")) {
+                Box(label: Label("Statistics", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
                             Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
@@ -90,16 +90,48 @@ struct TorrentDetailsView: View {
     
     private struct ActionsView: View {
         
+        @Binding var presentation: PresentationMode
+        
         let actionHandler: TorrentDetailsActionHandler
         
         var body: some View {
+            let startTorrentButton = Button(action: {
+                actionHandler.perform(.start) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+                        presentation.dismiss()
+                    }
+                }
+            }) {
+                #if os(watchOS)
+                Text("Start Torrent")
+                #else
+                Label("Start Torrent", systemImage: "play")
+                #endif
+            }.padding(4)
+            
+            let pauseTorrentButton = Button(action: {
+                actionHandler.perform(.pause) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+                        presentation.dismiss()
+                    }
+                }
+            }) {
+                #if os(watchOS)
+                Text("Pause Torrent")
+                #else
+                Label("Pause Torrent", systemImage: "pause")
+                #endif
+            }.padding(4)
+            
             let removeTorrentButton = Button(action: {
                 actionHandler.perform(.prepareForRemoval(deletingFiles: false))
             }) {
                 #if os(watchOS)
                 Text("Remove Torrent")
+                    .foregroundColor(.red)
                 #else
                 Label("Remove Torrent", systemImage: "xmark")
+                    .foregroundColor(.red)
                 #endif
             }.padding(4)
             
@@ -116,16 +148,26 @@ struct TorrentDetailsView: View {
                 #endif
             }.padding(4)
             
+            let items = Group {
+                switch actionHandler.torrent.status {
+                case .downloading, .seeding:
+                    pauseTorrentButton
+                case .stopped:
+                    startTorrentButton
+                default:
+                    EmptyView()
+                }
+                
+                removeTorrentButton
+                removeTorrentAndDataButton
+            }
+            
             #if (os(iOS) || os(watchOS))
             VStack {
-                removeTorrentButton
-                removeTorrentAndDataButton
+                items
             }
             #else
-            Group {
-                removeTorrentButton
-                removeTorrentAndDataButton
-            }
+            items
             #endif
         }
     }
@@ -157,11 +199,16 @@ struct TorrentDetailsView: View {
                 .padding()
             #endif
             
-            SpeedView(torrent: torrent)
+            StatsView(torrent: torrent)
             
             #if os(watchOS) || os(tvOS)
-            Divider()
-                .padding()
+            switch torrent.status {
+            case .downloading, .seeding:
+                Divider()
+                    .padding()
+            default:
+                EmptyView()
+            }
             #endif
             
             #if os(tvOS)
@@ -173,7 +220,7 @@ struct TorrentDetailsView: View {
                 VStack {
                     HStack {
                         Spacer()
-                        ActionsView(actionHandler: actionHandler)
+                        ActionsView(presentation: presentation, actionHandler: actionHandler)
                         Spacer()
                     }
                 }.padding(.top)
@@ -187,7 +234,9 @@ struct TorrentDetailsView: View {
                              message: Text("You are about to perform a destructive action.\n\nAre you really sure?"),
                              primaryButton: .destructive(Text("Confirm")) {
                                 self.actionHandler.perform(.commit) {
-                                    self.presentation.wrappedValue.dismiss()
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+                                        self.presentation.wrappedValue.dismiss()
+                                    }
                                 }
                              }, secondaryButton: .cancel())
                 

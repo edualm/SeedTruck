@@ -13,6 +13,8 @@ class TorrentDetailsActionHandler: ObservableObject {
         
         case abort
         case commit
+        case pause
+        case start
         
         case prepareForRemoval(deletingFiles: Bool)
     }
@@ -30,7 +32,7 @@ class TorrentDetailsActionHandler: ObservableObject {
     let server: Server
     let torrent: RemoteTorrent
     
-    var actionToCommit: Action?
+    private var actionToCommit: Action?
     
     @Published var currentAlert: AlertIdentifier? = nil
     
@@ -47,15 +49,13 @@ class TorrentDetailsActionHandler: ObservableObject {
             
         case .commit:
             switch actionToCommit {
-            case .abort, .commit, .none:
+            case .abort, .commit, .pause, .start, .none:
                 assertionFailure("Can't commit an un-commitable mode!")
                 
                 return
                 
             case .prepareForRemoval(let deletingFiles):
-                server.connection.removeTorrent(torrent,
-                                                deletingData: deletingFiles) { result in
-                    
+                server.connection.perform(.remove(deletingData: deletingFiles), on: torrent) { result in
                     self.actionToCommit = nil
                     
                     if case let Result.success(success) = result, success {
@@ -69,6 +69,32 @@ class TorrentDetailsActionHandler: ObservableObject {
                     }
                     
                     self.currentAlert = .init(id: .error)
+                }
+            }
+            
+        case .pause:
+            server.connection.perform(.pause, on: torrent) {
+                if case let Result.success(success) = $0, success {
+                    DispatchQueue.main.async {
+                        self.currentAlert = nil
+                        
+                        onSuccess?()
+                    }
+                    
+                    return
+                }
+            }
+            
+        case .start:
+            server.connection.perform(.start, on: torrent) {
+                if case let Result.success(success) = $0, success {
+                    DispatchQueue.main.async {
+                        self.currentAlert = nil
+                        
+                        onSuccess?()
+                    }
+                    
+                    return
                 }
             }
             

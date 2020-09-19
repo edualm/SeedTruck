@@ -11,14 +11,17 @@ extension RemoteTorrent.Status {
     
     var displayableStatus: String {
         switch self {
-        case .idle:
-            return "Idle"
+        case .stopped:
+            return "Stopped"
             
         case .downloading:
             return "Downloading"
             
         case .seeding:
             return "Seeding"
+            
+        case .other(let status):
+            return status
         }
     }
 }

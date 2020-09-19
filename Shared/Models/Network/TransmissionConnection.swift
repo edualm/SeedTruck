@@ -250,7 +250,39 @@ class TransmissionConnection: ServerConnection {
         }
     }
     
-    func removeTorrent(_ torrent: RemoteTorrent, deletingData: Bool, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
-        removeTorrents(byId: [torrent.id], deletingData: deletingData, completionHandler: completionHandler)
+    private func performGenericAction(withMethodName methodName: String, torrentIds: [String], completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
+        let parameters: Parameters = [
+            "ids": torrentIds.map { Int($0) }
+        ]
+        
+        performCall(withMethod: methodName, parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
+            switch result {
+            case .success(let response):
+                switch response.result {
+                case .success:
+                    completionHandler(.success(true))
+                case .error:
+                    completionHandler(.success(false))
+                }
+                
+            case .failure(let error):
+                completionHandler(.failure(.serverError(error.localizedDescription)))
+            }
+        }
+    }
+    
+    func perform(_ action: RemoteTorrent.Action, on torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
+        let torrentIds = [torrent.id]
+        
+        switch action {
+        case .pause:
+            performGenericAction(withMethodName: "torrent-stop", torrentIds: torrentIds, completionHandler: completionHandler)
+            
+        case .remove(let deletingData):
+            removeTorrents(byId: torrentIds, deletingData: deletingData, completionHandler: completionHandler)
+            
+        case .start:
+            performGenericAction(withMethodName: "torrent-start-now", torrentIds: torrentIds, completionHandler: completionHandler)
+        }
     }
 }

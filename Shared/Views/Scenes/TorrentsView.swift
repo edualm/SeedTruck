@@ -73,14 +73,17 @@ struct TorrentsView: View {
     
     private var filterMenuItems: [MenuItem] {
         [
-            .init(name: "Idle", systemImage: "stop.circle") {
-                filter = .idle
+            .init(name: "Stopped", systemImage: "stop.circle") {
+                filter = .stopped
             },
             .init(name: "Downloading", systemImage: "arrow.down.forward.circle") {
                 filter = .downloading
             },
             .init(name: "Seeding", systemImage: "arrow.up.forward.circle") {
                 filter = .seeding
+            },
+            .init(name: "Other", systemImage: "questionmark.circle") {
+                filter = .other
             }
         ]
     }
