@@ -133,6 +133,12 @@
 		A0B9B8092516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
 		A0B9B8442516369600E3486A /* CoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */; };
 		A0B9B84D2516369600E3486A /* CoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */; };
+		A0B9B85F2516373300E3486A /* Box+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B85E2516373300E3486A /* Box+View.swift */; };
+		A0B9B88B251637D500E3486A /* Box+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B88A251637D500E3486A /* Box+View.swift */; };
+		A0B9B89E2516380C00E3486A /* Box+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B89D2516380C00E3486A /* Box+View.swift */; };
+		A0B9B8AF2516384300E3486A /* CoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */; };
+		A0B9B8B82516385F00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
+		A0B9B8C32516388000E3486A /* Box+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8C22516388000E3486A /* Box+View.swift */; };
 		A0C071AD24F59CC700CEC1DA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AC24F59CC700CEC1DA /* MainView.swift */; };
 		A0C071AF24F59CC800CEC1DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071AE24F59CC800CEC1DA /* Assets.xcassets */; };
 		A0C071B224F59CC800CEC1DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */; };
@@ -318,6 +324,10 @@
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
 		A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerAdapter.swift; sourceTree = "<group>"; };
 		A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManagedObjectDeleter.swift; sourceTree = "<group>"; };
+		A0B9B85E2516373300E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
+		A0B9B88A251637D500E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
+		A0B9B89D2516380C00E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
+		A0B9B8C22516388000E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
 		A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeedTruck (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
 		A0C071AC24F59CC700CEC1DA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -485,6 +495,7 @@
 		A045C8AB24F2006500B3B1CD /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A0B9B880251637BE00E3486A /* Components */,
 				A06DEFA224FC7F2F004B2DC9 /* Utilities */,
 				A06DEFA624FD7EDC004B2DC9 /* Views */,
 				A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */,
@@ -496,6 +507,7 @@
 		A045C8B224F2006500B3B1CD /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				A0B9B8C12516387100E3486A /* Components */,
 				A06DEFA524FD7ED9004B2DC9 /* Views */,
 				A012561225046F0D00C7D51B /* SeedTruckApp.swift */,
 				A045C8B324F2006500B3B1CD /* Info.plist */,
@@ -616,6 +628,7 @@
 		A096386524F568CF00F2062F /* watchOS Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A0B9B889251637C900E3486A /* Components */,
 				A09638B924F5901000F2062F /* Utilities */,
 				A09638B824F5900900F2062F /* Views */,
 				A096386624F568CF00F2062F /* SeedTruckApp.swift */,
@@ -662,9 +675,42 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
+		A0B9B880251637BE00E3486A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0B9B85E2516373300E3486A /* Box+View.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A0B9B889251637C900E3486A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0B9B88A251637D500E3486A /* Box+View.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A0B9B89C251637FD00E3486A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0B9B89D2516380C00E3486A /* Box+View.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A0B9B8C12516387100E3486A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A0B9B8C22516388000E3486A /* Box+View.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		A0C071A924F59CC700CEC1DA /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
+				A0B9B89C251637FD00E3486A /* Components */,
 				A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */,
 				A0C071AC24F59CC700CEC1DA /* MainView.swift */,
 				A0C071AE24F59CC800CEC1DA /* Assets.xcassets */,
@@ -1048,6 +1094,7 @@
 				A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */,
 				A09638B124F5804100F2062F /* Server+Serialization.swift in Sources */,
 				A02C584F24F325A400C82D68 /* DataModel.xcdatamodeld in Sources */,
+				A0B9B85F2516373300E3486A /* Box+View.swift in Sources */,
 				A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
 				A02C585624F3400200C82D68 /* Server.swift in Sources */,
@@ -1104,6 +1151,7 @@
 				A02C585724F3400200C82D68 /* Server.swift in Sources */,
 				A011C7F024F21078009D72C6 /* ServerConnection.swift in Sources */,
 				A023BAE824F294EF00B82FB3 /* SettingsView.swift in Sources */,
+				A0B9B8C32516388000E3486A /* Box+View.swift in Sources */,
 				A01056AC24F491B600DA056D /* String+Extensions.swift in Sources */,
 				A0C1DB3724F42E4100C76682 /* SettingsActionHandler.swift in Sources */,
 				A073DD2224F4658700BA37C9 /* AddMagnetView.swift in Sources */,
@@ -1159,6 +1207,7 @@
 				A096388224F5697600F2062F /* TorrentDetailsView.swift in Sources */,
 				A071CC7024FBC9BF00E46065 /* Style.swift in Sources */,
 				A096388D24F569E900F2062F /* PreviewMockData.swift in Sources */,
+				A0B9B88B251637D500E3486A /* Box+View.swift in Sources */,
 				A09638A824F56BDA00F2062F /* Box.swift in Sources */,
 				A096388524F569A900F2062F /* Server.swift in Sources */,
 				A09638AA24F5718C00F2062F /* DataModel.xcdatamodeld in Sources */,
@@ -1206,8 +1255,11 @@
 				A0C071EF24F5A06100CEC1DA /* SettingsView.swift in Sources */,
 				A0C071EA24F5A06100CEC1DA /* NewServerView.swift in Sources */,
 				A0C071D424F5A03500CEC1DA /* SettingsActionHandler.swift in Sources */,
+				A0B9B89E2516380C00E3486A /* Box+View.swift in Sources */,
 				A0C071E324F5A05900CEC1DA /* ServerConnection.swift in Sources */,
 				A071CC7124FBC9BF00E46065 /* Style.swift in Sources */,
+				A0B9B8B82516385F00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */,
+				A0B9B8AF2516384300E3486A /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A0C071E824F5A05900CEC1DA /* PreviewMockData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

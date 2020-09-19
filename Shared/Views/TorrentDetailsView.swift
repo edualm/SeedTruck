@@ -213,7 +213,7 @@ struct TorrentDetailsView: View {
             
             #if os(tvOS)
             HStack {
-                ActionsView(actionHandler: actionHandler)
+                ActionsView(presentation: presentation, actionHandler: actionHandler)
             }
             #else
             Box(label: Label("Actions", systemImage: "wrench")) {
