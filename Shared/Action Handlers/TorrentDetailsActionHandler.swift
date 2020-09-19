@@ -35,6 +35,7 @@ class TorrentDetailsActionHandler: ObservableObject {
     private var actionToCommit: Action?
     
     @Published var currentAlert: AlertIdentifier? = nil
+    @Published var isLoading: Bool = false
     
     init(server: Server, torrent: RemoteTorrent) {
         self.server = server
@@ -42,12 +43,16 @@ class TorrentDetailsActionHandler: ObservableObject {
     }
     
     func perform(_ action: Action, onSuccess: (() -> ())? = nil) {
-        let successCheck: ((Result<Bool, ServerCommunicationError>) -> ()) = {
-            if case let Result.success(success) = $0, success {
-                DispatchQueue.main.async {
+        let successCheck: ((Result<Bool, ServerCommunicationError>) -> ()) = { result in
+            DispatchQueue.main.async {
+                if case let Result.success(success) = result, success {
                     self.currentAlert = nil
                     
                     onSuccess?()
+                } else {
+                    self.currentAlert = .init(id: .error)
+                    
+                    self.isLoading = false
                 }
             }
         }
@@ -65,20 +70,21 @@ class TorrentDetailsActionHandler: ObservableObject {
                 return
                 
             case .prepareForRemoval(let deletingFiles):
-                server.connection.perform(.remove(deletingData: deletingFiles), on: torrent) {
-                    self.actionToCommit = nil
-                    
-                    successCheck($0)
-                    
-                    self.currentAlert = .init(id: .error)
-                }
+                server.connection.perform(.remove(deletingData: deletingFiles), on: torrent, completionHandler: successCheck)
+                
+                actionToCommit = nil
+                isLoading = true
             }
             
         case .pause:
             server.connection.perform(.pause, on: torrent, completionHandler: successCheck)
             
+            isLoading = true
+            
         case .start:
             server.connection.perform(.start, on: torrent, completionHandler: successCheck)
+            
+            isLoading = true
             
         case .prepareForRemoval:
             actionToCommit = action

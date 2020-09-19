@@ -97,7 +97,7 @@ struct TorrentDetailsView: View {
         var body: some View {
             let startTorrentButton = Button(action: {
                 actionHandler.perform(.start) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                         presentation.dismiss()
                     }
                 }
@@ -111,7 +111,7 @@ struct TorrentDetailsView: View {
             
             let pauseTorrentButton = Button(action: {
                 actionHandler.perform(.pause) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                         presentation.dismiss()
                     }
                 }
@@ -211,21 +211,29 @@ struct TorrentDetailsView: View {
             }
             #endif
             
-            #if os(tvOS)
-            HStack {
-                ActionsView(presentation: presentation, actionHandler: actionHandler)
+            if actionHandler.isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle())
+                    .padding()
+            } else {
+                #if os(tvOS)
+                HStack {
+                    ActionsView(presentation: presentation, actionHandler: actionHandler)
+                }
+                #else
+                Box(label: Label("Actions", systemImage: "wrench")) {
+                    VStack {
+                        HStack {
+                            Spacer()
+                            ActionsView(presentation: presentation, actionHandler: actionHandler)
+                            Spacer()
+                        }
+                    }.padding(.top)
+                }
+                #endif
             }
-            #else
-            Box(label: Label("Actions", systemImage: "wrench")) {
-                VStack {
-                    HStack {
-                        Spacer()
-                        ActionsView(presentation: presentation, actionHandler: actionHandler)
-                        Spacer()
-                    }
-                }.padding(.top)
-            }
-            #endif
+            
+            
         }
         .alert(item: currentAlert) {
             switch $0.id {
@@ -234,7 +242,7 @@ struct TorrentDetailsView: View {
                              message: Text("You are about to perform a destructive action.\n\nAre you really sure?"),
                              primaryButton: .destructive(Text("Confirm")) {
                                 self.actionHandler.perform(.commit) {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
                                         self.presentation.wrappedValue.dismiss()
                                     }
                                 }
