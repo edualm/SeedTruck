@@ -22,7 +22,8 @@ enum PreviewMockData {
                                                                   peersSending: 1,
                                                                   peersReceiving: 0,
                                                                   downloadRate: 2448765,
-                                                                  uploadRate: 125000),
+                                                                  uploadRate: 125000,
+                                                                  eta: 0),
                                              size: 1000000)
     
     static var server: Server {

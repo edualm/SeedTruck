@@ -59,18 +59,24 @@ struct TorrentDetailsView: View {
         
         var body: some View {
             switch torrent.status {
-            case let .downloading(_, _, _, downloadRate, uploadRate):
+            case let .downloading(_, _, _, downloadRate, uploadRate, eta):
                 Box(label: Label("Statistics", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
                             Label("Download Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
+                                .padding(.top)
                             Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
+                                .padding(.top)
+                            
+                            if let humanReadableETA = eta.humanReadableDate {
+                                Label("Time Remaining: \(humanReadableETA)", systemImage: "deskclock")
+                            }
                         }.padding(TorrentDetailsView.innerDetailPadding)
                         Spacer()
                     }.padding(.top)
                 }
                 
-            case let .seeding(_, uploadRate, ratio, totalUploaded):
+            case let .seeding(_, uploadRate, ratio, totalUploaded, secondsSeeding, _):
                 Box(label: Label("Statistics", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
@@ -78,6 +84,12 @@ struct TorrentDetailsView: View {
                             
                             if let totalUploaded = totalUploaded {
                                 Label("Uploaded: \(ByteCountFormatter.humanReadableFileSize(bytes: totalUploaded)) (Ratio: \(String(format: "%.2f", ratio)))", systemImage: "arrow.up.to.line")
+                                    .padding(.top)
+                            }
+                            
+                            if let humanReadableSeedingTime = secondsSeeding?.humanReadableDate {
+                                Label("Seeding Time: \(humanReadableSeedingTime)", systemImage: "deskclock")
+                                    .padding(.top)
                             }
                         }.padding(TorrentDetailsView.innerDetailPadding)
                         Spacer()

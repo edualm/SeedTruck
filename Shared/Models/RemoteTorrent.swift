@@ -22,8 +22,8 @@ struct RemoteTorrent: Identifiable {
         }
         
         case stopped
-        case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int)
-        case seeding(peers: Int, uploadRate: Int, ratio: Double, totalUploaded: Int64?)
+        case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int, eta: Int64)
+        case seeding(peers: Int, uploadRate: Int, ratio: Double, totalUploaded: Int64?, secondsSeeding: Int64?, etaIdle: Int64?)
         case other(_ status: String)
         
         var simple: Simple {

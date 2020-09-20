@@ -19,7 +19,7 @@ struct TorrentItemView: View {
                 Text("Stopped")
                     .font(.footnote)
                 
-            case let .downloading(_, _, _, downloadRate, uploadRate):
+            case let .downloading(_, _, _, downloadRate, uploadRate, _):
                 HStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "arrow.down.forward")
                         .font(.footnote)
@@ -27,7 +27,7 @@ struct TorrentItemView: View {
                         .font(.footnote)
                 }
                 
-            case let .seeding(_, uploadRate, _, _):
+            case let .seeding(_, uploadRate, _, _, _, _):
                 VStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
                         .font(.footnote)

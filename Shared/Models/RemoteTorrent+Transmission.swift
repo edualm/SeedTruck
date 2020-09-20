@@ -42,22 +42,26 @@ extension RemoteTorrent {
                   let uploadRate = transmissionTorrent.rateUpload,
                   let peersSending = transmissionTorrent.peersSendingToUs,
                   let peersReceiving = transmissionTorrent.peersGettingFromUs,
-                  let downloadRate = transmissionTorrent.rateDownload else {
+                  let downloadRate = transmissionTorrent.rateDownload,
+                  let eta = transmissionTorrent.eta else {
                 
                 return nil
             }
             
-            self.status = .downloading(peers: peers, peersSending: peersSending, peersReceiving: peersReceiving, downloadRate: downloadRate, uploadRate: uploadRate)
+            self.status = .downloading(peers: peers, peersSending: peersSending, peersReceiving: peersReceiving, downloadRate: downloadRate, uploadRate: uploadRate, eta: eta)
             
         case 5:
             self.status = .other("Preparing/waiting to seed")
             
         case 6:
-            guard let peers = transmissionTorrent.peersConnected, let uploadRate = transmissionTorrent.rateUpload, let ratio = transmissionTorrent.uploadRatio else {
+            guard let peers = transmissionTorrent.peersConnected,
+                  let uploadRate = transmissionTorrent.rateUpload,
+                  let ratio = transmissionTorrent.uploadRatio else {
+                
                 return nil
             }
             
-            self.status = .seeding(peers: peers, uploadRate: uploadRate, ratio: ratio, totalUploaded: transmissionTorrent.uploadedEver)
+            self.status = .seeding(peers: peers, uploadRate: uploadRate, ratio: ratio, totalUploaded: transmissionTorrent.uploadedEver, secondsSeeding: transmissionTorrent.secondsSeeding, etaIdle: transmissionTorrent.etaIdle)
             
         default:
             return nil

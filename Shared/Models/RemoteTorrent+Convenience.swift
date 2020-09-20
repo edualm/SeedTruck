@@ -31,7 +31,7 @@ extension Array where Iterator.Element == RemoteTorrent {
     var downloadSpeed: Int {
         self.reduce(0) {
             switch $1.status {
-            case let .downloading(_, _, _, speed, _):
+            case let .downloading(_, _, _, speed, _, _):
                 return $0 + speed
                 
             default:
@@ -43,7 +43,7 @@ extension Array where Iterator.Element == RemoteTorrent {
     var uploadSpeed: Int {
         self.reduce(0) {
             switch $1.status {
-            case let .downloading(_, _, _, _, speed), let .seeding(_, speed, _, _):
+            case let .downloading(_, _, _, _, speed, _), let .seeding(_, speed, _, _, _, _):
                 return $0 + speed
                 
             default:

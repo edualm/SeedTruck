@@ -157,8 +157,8 @@ enum Transmission {
         let editDate: Int?
         let error: Int?
         let errorString: String?
-        let eta: Int?
-        let etaIdle: Int?
+        let eta: Int64?
+        let etaIdle: Int64?
         let files: [File]?
         let fileStats: [FileStats]?
         let hashString: String?
@@ -192,7 +192,7 @@ enum Transmission {
         let rateUpload: Int?
         let recheckProgress: Double?
         let secondsDownloading: Int?
-        let secondsSeeding: Int?
+        let secondsSeeding: Int64?
         let seedIdleLimit: Int?
         let seedIdleMode: Int?
         let seedRatioLimit: Double?

@@ -46,6 +46,10 @@
 		A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
 		A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
 		A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
+		A0589FED251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
+		A0589FEE251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
+		A0589FEF251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
+		A0589FF0251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
 		A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
 		A05FE16424F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
 		A05FE16624F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */; };
@@ -289,6 +293,7 @@
 		A045C8E224F2013100B3B1CD /* TorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsView.swift; sourceTree = "<group>"; };
 		A045C8E524F2021100B3B1CD /* TorrentItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentItemView.swift; sourceTree = "<group>"; };
 		A045C8E824F205B100B3B1CD /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+Extensions.swift"; sourceTree = "<group>"; };
 		A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoServersConfiguredView.swift; sourceTree = "<group>"; };
 		A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionErrorView.swift; sourceTree = "<group>"; };
 		A05FE16924F45B2700B57E45 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
@@ -589,6 +594,7 @@
 		A071CAC724F3110200B6AC0C /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */,
 				A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */,
 				A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */,
 				A0E7426425154FCB0029FFD6 /* SharedBucket.swift */,
@@ -1073,6 +1079,7 @@
 				A07DD0F42512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A0B9B8442516369600E3486A /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
+				A0589FED251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */,
 				A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */,
 				A07DD1012512C9E900559D9A /* ConnectionDetails.swift in Sources */,
 				A0B8C13324F3FF4E00ACD713 /* DocumentPickerAdapter.swift in Sources */,
@@ -1153,6 +1160,7 @@
 				A023BAE824F294EF00B82FB3 /* SettingsView.swift in Sources */,
 				A0B9B8C32516388000E3486A /* Box+View.swift in Sources */,
 				A01056AC24F491B600DA056D /* String+Extensions.swift in Sources */,
+				A0589FEE251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */,
 				A0C1DB3724F42E4100C76682 /* SettingsPresenter.swift in Sources */,
 				A073DD2224F4658700BA37C9 /* AddMagnetView.swift in Sources */,
 			);
@@ -1186,6 +1194,7 @@
 				A096389F24F56A8A00F2062F /* RemoteTorrent+Transmission.swift in Sources */,
 				A09638AC24F5746600F2062F /* DataTransferManager.swift in Sources */,
 				A096388924F569CA00F2062F /* ServerType.swift in Sources */,
+				A0589FEF251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */,
 				A09638A424F56BAE00F2062F /* ByteCountFormatter+Extensions.swift in Sources */,
 				A09638A124F56A9C00F2062F /* TransmissionConnection.swift in Sources */,
 				A0E7427C2515501F0029FFD6 /* DataTransferManageable.swift in Sources */,
@@ -1252,6 +1261,7 @@
 				A0E7427D2515501F0029FFD6 /* DataTransferManageable.swift in Sources */,
 				A0C071D724F5A04700CEC1DA /* Server.swift in Sources */,
 				A07DD0F72512C9D400559D9A /* TemporaryServer.swift in Sources */,
+				A0589FF0251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */,
 				A0C071EF24F5A06100CEC1DA /* SettingsView.swift in Sources */,
 				A0C071EA24F5A06100CEC1DA /* NewServerView.swift in Sources */,
 				A0C071D424F5A03500CEC1DA /* SettingsPresenter.swift in Sources */,
