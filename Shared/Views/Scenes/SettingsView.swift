@@ -37,7 +37,6 @@ struct SettingsView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     
     @State private var showingAlert: AlertData?
-    @State private var showingNewServer = false
     @State private var connectionResults: [Server: ConnectionResult] = [:]
     
     @ObservedObject private var presenter: SettingsPresenter
@@ -123,7 +122,7 @@ struct SettingsView: View {
                     }
                     #endif
                     
-                    if let dataTransferManager = sharedBucket.dataTransferManager {
+                    if UIDevice.current.userInterfaceIdiom == .phone, let dataTransferManager = sharedBucket.dataTransferManager {
                         Button(action: {
                             dataTransferManager.sendUpdateToWatch {
                                 switch $0 {
@@ -146,7 +145,7 @@ struct SettingsView: View {
         .navigationViewStyle(Style.navigationView)
         .onAppear(perform: onAppear)
         .onReceive(managedContextDidSave) { _ in
-            onAppear()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250), execute: onAppear)
         }
         .alert(item: $showingAlert) {
             Alert(title: Text($0.title),
