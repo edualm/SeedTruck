@@ -15,15 +15,17 @@ struct TorrentDetailsView: View {
     static private let innerDetailPadding: Edge.Set = Edge.Set()
     #endif
     
-    private struct NameView: View {
+    private struct MetadataView: View {
         
         let torrent: RemoteTorrent
         
         var body: some View {
-            Box(label: Label("Name", systemImage: "pencil.and.ellipsis.rectangle")) {
+            Box(label: Label("Metadata", systemImage: "doc.text.viewfinder")) {
                 HStack {
-                    Text(torrent.name)
-                        .padding(TorrentDetailsView.innerDetailPadding)
+                    VStack(alignment: .leading) {
+                        Text(torrent.name).padding(.bottom)
+                        Label("Size: \(ByteCountFormatter.humanReadableFileSize(bytes: torrent.size))", systemImage: "shippingbox")
+                    }.padding(TorrentDetailsView.innerDetailPadding)
                     Spacer()
                 }.padding(.top)
             }
@@ -185,7 +187,7 @@ struct TorrentDetailsView: View {
         )
         
         var view = AnyView(ScrollView {
-            NameView(torrent: torrent)
+            MetadataView(torrent: torrent)
             
             #if os(watchOS) || os(tvOS)
             Divider()
