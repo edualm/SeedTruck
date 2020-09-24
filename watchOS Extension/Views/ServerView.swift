@@ -11,15 +11,19 @@ struct ServerView: View {
     
     @Binding var server: Server?
     
+    let shouldShowBackButton: Bool
+    
     var body: some View {
         TorrentListView(server: $server, filter: .constant(nil))
             .navigationBarTitle(server?.name ?? "Torrents")
+            .navigationBarBackButtonHidden(!shouldShowBackButton)
     }
 }
 
 struct ServerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ServerView(server: .constant(PreviewMockData.server))
+        ServerView(server: .constant(PreviewMockData.server),
+                   shouldShowBackButton: false)
     }
 }

@@ -17,16 +17,14 @@ struct SeedTruckApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                MainView()
-                    .environment(\.managedObjectContext, persistentContainer.viewContext)
-                    .environmentObject(sharedBucket)
-                    .onAppear {
-                        if dataTransferManager == nil {
-                            dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
-                        }
+            MainView()
+                .environment(\.managedObjectContext, persistentContainer.viewContext)
+                .environmentObject(sharedBucket)
+                .onAppear {
+                    if dataTransferManager == nil {
+                        dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
                     }
-            }
+                }
         }
     }
     

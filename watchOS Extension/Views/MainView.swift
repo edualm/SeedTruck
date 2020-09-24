@@ -46,7 +46,8 @@ struct MainView: View {
                     }
                     
                     NavigationLink(
-                        destination: ServerView(server: $selectedServer),
+                        destination: ServerView(server: $selectedServer,
+                                                shouldShowBackButton: serverConnections.count > 1),
                         isActive: navigationLinkActive)
                     {
                         EmptyView()
