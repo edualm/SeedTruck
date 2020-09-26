@@ -64,12 +64,13 @@ struct TorrentDetailsView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Label("Download Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
-                                .padding(.top)
+                                
                             Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
                                 .padding(.top)
                             
                             if let humanReadableETA = eta.humanReadableDate {
                                 Label("Time Remaining: \(humanReadableETA)", systemImage: "deskclock")
+                                    .padding(.top)
                             }
                         }.padding(TorrentDetailsView.innerDetailPadding)
                         Spacer()
