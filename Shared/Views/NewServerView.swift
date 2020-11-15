@@ -89,15 +89,16 @@ struct NewServerView: View {
                 }
                 #if os(macOS)
                 TextField("Endpoint", text: $endpoint)
+                TextField("Username", text: $username)
                 #else
                 TextField("Endpoint", text: $endpoint)
                     .keyboardType(.URL)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
-                #endif
                 TextField("Username", text: $username)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
+                #endif
                 SecureField("Password", text: $password)
             }
             

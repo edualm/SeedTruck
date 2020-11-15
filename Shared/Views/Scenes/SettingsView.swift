@@ -120,7 +120,6 @@ struct SettingsView: View {
                     Section {
                         newServerLink
                     }
-                    #endif
                     
                     if UIDevice.current.userInterfaceIdiom == .phone, let dataTransferManager = sharedBucket.dataTransferManager {
                         Button(action: {
@@ -137,6 +136,7 @@ struct SettingsView: View {
                                 .foregroundColor(.primary)
                         }
                     }
+                    #endif
                 }
                 .listStyle(Style.list)
             }

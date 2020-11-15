@@ -5,7 +5,7 @@
 //  Created by Eduardo Almeida on 19/09/2020.
 //
 
-import Foundation
+import SwiftUI
 
 extension Box: View {
     

@@ -37,7 +37,9 @@ struct TorrentsView: View {
         case addTorrent(LocalTorrent)
     }
     
+    #if !os(macOS)
     @State var pickerAdapter: DocumentPickerAdapter?
+    #endif
     
     private var addMenuItems: [MenuItem] {
         [
