@@ -15,6 +15,8 @@ struct SeedTruckApp: App {
     
     @StateObject private var sharedBucket: SharedBucket = SharedBucket()
     
+    private let persistentContainer: NSPersistentContainer = .default
+    
     var body: some Scene {
         WindowGroup {
             MainView()
@@ -27,16 +29,4 @@ struct SeedTruckApp: App {
                 }
         }
     }
-    
-    var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "DataModel")
-        
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        
-        return container
-    }()
 }

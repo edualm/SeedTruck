@@ -16,11 +16,11 @@ extension LocalTorrent {
                 return nil
             }
             
-            guard let data = try? Data(contentsOf: url), let parsedTorrent = Torrent(data: data) else {
+            guard let data = try? Data(contentsOf: url), let lt = LocalTorrent(data: data) else {
                 return nil
             }
             
-            self = .torrent(data: data, parsedTorrent: parsedTorrent)
+            self = lt
             
         } else {
             let urlString = url.absoluteString
@@ -31,5 +31,13 @@ extension LocalTorrent {
             
             self = .magnet(urlString)
         }
+    }
+    
+    init?(data: Data) {
+        guard let parsedTorrent = Torrent(data: data) else {
+            return nil
+        }
+        
+        self = .torrent(data: data, parsedTorrent: parsedTorrent)
     }
 }

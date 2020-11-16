@@ -64,11 +64,6 @@ struct SettingsView: View {
     }
     
     var body: some View {
-        let showingDeleteAlertBinding = Binding<Bool>(
-            get: { self.presenter.showingDeleteAlert },
-            set: { _ in }
-        )
-        
         let newServerLink = NavigationLink(destination: NewServerView()) {
             Text("New Server")
         }
@@ -99,7 +94,7 @@ struct SettingsView: View {
                             }) {
                                 Label("Delete", systemImage: "trash")
                                     .foregroundColor(.red)
-                            }.alert(isPresented: showingDeleteAlertBinding) {
+                            }.alert(isPresented: self.$presenter.showingDeleteAlert) {
                                 Alert(title: Text("Are you sure you want to delete \"\(presenter.serverUnderModification?.name ?? "Unknown")\"?"),
                                       message: nil,
                                       primaryButton: .destructive(Text("Delete")) {

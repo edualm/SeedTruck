@@ -7,7 +7,6 @@
 
 import UIKit
 import MobileCoreServices
-import UniformTypeIdentifiers
 
 class DocumentPickerAdapter: NSObject, UIDocumentPickerDelegate {
     
@@ -20,7 +19,7 @@ class DocumentPickerAdapter: NSObject, UIDocumentPickerDelegate {
         self.onDismiss = onDismiss
         self.onPick = onPick
         
-        self.picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTType(exportedAs: "io.edr.seedtruck.torrent")],
+        self.picker = UIDocumentPickerViewController(forOpeningContentTypes: [UTI.torrent],
                                                      asCopy: true)
         
         super.init()

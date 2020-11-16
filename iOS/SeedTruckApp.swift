@@ -7,11 +7,10 @@
 
 import CoreData
 import SwiftUI
-import UniformTypeIdentifiers
 
 @main struct SeedTruckApp: App {
     
-    private static let torrentUTI = "io.edr.seedtruck.torrent"
+    private let persistentContainer: NSPersistentContainer = .default
     
     @Environment(\.scenePhase) private var scenePhase
     
@@ -45,7 +44,7 @@ import UniformTypeIdentifiers
                 .onOpenURL { url in
                     openedTorrent = LocalTorrent(url: url)
                 }
-                .onDrop(of: [UTType(exportedAs: Self.torrentUTI)], isTargeted: nil) { providers in
+                .onDrop(of: [UTI.torrent], isTargeted: nil) { providers in
                     guard providers.count == 1 else {
                         return false
                     }
@@ -72,34 +71,10 @@ import UniformTypeIdentifiers
         }.onChange(of: scenePhase) { phase in
             switch phase {
             case .background:
-                saveContext()
+                persistentContainer.save()
                 
             default:
                 ()
-            }
-        }
-    }
-    
-    var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "DataModel")
-        
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        
-        return container
-    }()
-    
-    func saveContext() {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }

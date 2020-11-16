@@ -194,11 +194,6 @@ struct TorrentDetailsView: View {
     @ObservedObject var presenter: TorrentDetailsPresenter
     
     var body: some View {
-        let currentAlert = Binding<TorrentDetailsPresenter.AlertIdentifier?>(
-            get: { self.presenter.currentAlert },
-            set: { self.presenter.currentAlert = $0 }
-        )
-        
         var view = AnyView(ScrollView {
             MetadataView(torrent: torrent)
             
@@ -250,7 +245,7 @@ struct TorrentDetailsView: View {
             
             
         }
-        .alert(item: currentAlert) {
+        .alert(item: $presenter.currentAlert) {
             switch $0.id {
             case .confirmation:
                 return Alert(title: Text("Are you sure?"),
