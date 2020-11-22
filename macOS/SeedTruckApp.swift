@@ -5,6 +5,8 @@
 //  Created by Eduardo Almeida on 06/09/2020.
 //
 
+//  TODO: Missing URL handler.
+
 import CoreData
 import SwiftUI
 
@@ -12,38 +14,22 @@ import SwiftUI
     
     private let persistentContainer: NSPersistentContainer = .default
     
-    @Environment(\.scenePhase) private var scenePhase
-    
     @State private var openedTorrent: LocalTorrent? = nil
+    
+    @Environment(\.scenePhase) private var scenePhase
     
     @StateObject private var sharedBucket: SharedBucket = SharedBucket()
     
     @SceneBuilder
-    var body: some Scene {        
+    var body: some Scene {
+        //
+        //  Main Window
+        //
+        
         WindowGroup {
             MainView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
                 .environmentObject(sharedBucket)
-                .onOpenURL { url in
-                    openedTorrent = LocalTorrent(url: url)
-                }
-                .onDrop(of: [UTI.torrent], isTargeted: nil) { providers in
-                    guard providers.count == 1 else {
-                        return false
-                    }
-                    
-                    let provider = providers[0]
-                    
-                    provider.loadInPlaceFileRepresentation(forTypeIdentifier: "public.item") { url, success, _ in
-                        guard success, let url = url else {
-                            return
-                        }
-                        
-                        openedTorrent = LocalTorrent(url: url)
-                    }
-                    
-                    return true
-                }
         }.onChange(of: scenePhase) { phase in
             switch phase {
             case .background:
@@ -54,11 +40,38 @@ import SwiftUI
             }
         }
         
+        //
+        //  Magnet Link Handler
+        //
+        
+        WindowGroup {
+            Group {
+                if let torrent = openedTorrent {
+                    TorrentHandlerNavigationView(torrent: torrent, server: nil)
+                        .frame(minWidth: 400)
+                } else {
+                    EmptyView()
+                }
+            }
+            .environment(\.managedObjectContext, persistentContainer.viewContext)
+            .onOpenURL { url in
+                openedTorrent = LocalTorrent(url: url)
+            }
+        }.handlesExternalEvents(matching: Set(arrayLiteral: "*"))
+        
+        //
+        //  Torrent File Handler
+        //
+        
         DocumentGroup(viewing: TorrentFile.self) {
             TorrentHandlerNavigationView(torrent: $0.document.localTorrent,
                                          server: nil)
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
         }
+        
+        //
+        //  Settings
+        //
         
         Settings {
             SettingsContainerView()

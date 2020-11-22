@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TorrentHandlerView: View {
     
+    typealias CloseHandler = () -> ()
+    
     @FetchRequest(
         entity: Server.entity(),
         sortDescriptors: [
@@ -19,10 +21,9 @@ struct TorrentHandlerView: View {
     @State var errorMessage: String? = nil
     @State var selectedServers: [Server] = []
     
-    @Binding var presentation: PresentationMode
-    
     let torrent: LocalTorrent
     let server: Server?
+    let closeHandler: CloseHandler?
     
     func startDownload() {
         var remaining = selectedServers.count
@@ -42,7 +43,7 @@ struct TorrentHandlerView: View {
                 
                 if remaining == 0 {
                     if errors.count == 0 {
-                        presentation.dismiss()
+                        closeHandler?()
                     } else {
                         errorMessage = "An error has occurred while adding the torrent to the following servers:\n\n" +
                             "\(errors.map { "\"\($0.0.name)\": \($0.1.localizedDescription)\n" })\n" +
@@ -63,8 +64,18 @@ struct TorrentHandlerView: View {
             }
         )
         
+        #if os(macOS)
+        let formHeader = Text("Torrent Metadata")
+            .font(.largeTitle)
+        let serversHeader = Text("Server(s)")
+            .font(.largeTitle)
+        #else
+        let formHeader = Text("Torrent Metadata")
+        let serversHeader = Text("Server(s)")
+        #endif
+        
         let form = Form {
-            Section(header: Text("Torrent Metadata")) {
+            Section(header: formHeader) {
                 if let name = torrent.name {
                     HStack {
                         Text("Name")
@@ -100,11 +111,17 @@ struct TorrentHandlerView: View {
                             .foregroundColor(.secondary)
                     }
                 }
+                
+                #if os(macOS)
+                VStack {}
+                    .opacity(0.01)
+                    .padding(2)
+                #endif
             }
             
             if server == nil {
                 if serverConnections.count > 0 {
-                    Section(header: Text("Server(s)")) {
+                    Section(header: serversHeader) {
                         ForEach(0 ..< serverConnections.count) { index in
                             Button(action: {
                                 let server = serverConnections[index]
@@ -137,6 +154,12 @@ struct TorrentHandlerView: View {
                 }
             }
             
+            #if os(macOS)
+            VStack {}
+                .opacity(0.01)
+                .padding(2)
+            #endif
+            
             if serverConnections.count > 0 {
                 Section {
                     Button(action: startDownload) {
@@ -155,12 +178,10 @@ struct TorrentHandlerView: View {
         }
         
         #if os(macOS)
-        return form
+        return form.padding()
         #else
         return
-            form.navigationBarItems(trailing: Button(action: {
-                presentation.dismiss()
-            }) {
+            form.navigationBarItems(trailing: Button(action: { closeHandler?() }) {
                 Text("Cancel")
                     .fontWeight(.medium)
             })
@@ -176,9 +197,17 @@ struct TorrentHandlerNavigationView: View {
     let server: Server?
     
     var body: some View {
-        let form = TorrentHandlerView(presentation: presentation,
-                                      torrent: torrent,
-                                      server: server)
+        let closeHandler: TorrentHandlerView.CloseHandler = {
+            #if os(macOS)
+            Application.closeMainWindow()
+            #else
+            presentation.dismiss()
+            #endif
+        }
+        
+        let form = TorrentHandlerView(torrent: torrent,
+                                      server: server,
+                                      closeHandler: closeHandler)
         
         #if os(macOS)
         return form

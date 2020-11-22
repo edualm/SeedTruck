@@ -31,9 +31,15 @@ struct AddMagnetView: View {
                 .padding()
             
             NavigationLink(
-                destination: TorrentHandlerView(presentation: presentation,
-                                                torrent: .magnet(magnetLink),
-                                                server: server),
+                destination: TorrentHandlerView(torrent: .magnet(magnetLink),
+                                                server: server,
+                                                closeHandler: {
+                                                    #if os(macOS)
+                                                    Application.closeMainWindow()
+                                                    #else
+                                                    presentation.wrappedValue.dismiss()
+                                                    #endif
+                                                }),
                 isActive: $navigationLinkActive)
             {
                 EmptyView()

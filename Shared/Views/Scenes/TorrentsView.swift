@@ -174,20 +174,22 @@ struct TorrentsView: View {
             VStack {
                 #if os(macOS)
                 
-                if let s = selectedServer {
-                    Menu(s.name) {
-                        ForEach(serverConnections, id: \.self) { server in
-                            Button {
-                                selectedServer = server
-                            } label: {
-                                Text(server.name)
-                                Image(systemName: "server.rack")
+                if serverConnections.count > 1 {
+                    if let s = selectedServer {
+                        Menu(s.name) {
+                            ForEach(serverConnections, id: \.self) { server in
+                                Button {
+                                    selectedServer = server
+                                } label: {
+                                    Text(server.name)
+                                    Image(systemName: "server.rack")
+                                }
                             }
-                        }
-                    }.padding()
+                        }.padding()
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
                 
                 #endif
                 

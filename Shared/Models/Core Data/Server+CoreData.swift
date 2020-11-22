@@ -25,6 +25,6 @@ extension Server {
     class func get(withManagedContext managedContext: NSManagedObjectContext) -> [Server] {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Server")
         
-        return (try? managedContext.fetch(fetchRequest) as? [Server]) ?? []
+        return ((try? managedContext.fetch(fetchRequest)) as? [Server]) ?? []
     }
 }

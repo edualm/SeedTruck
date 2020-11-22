@@ -38,7 +38,6 @@
 		A045C8C924F2006500B3B1CD /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8C824F2006500B3B1CD /* Tests_macOS.swift */; };
 		A045C8CB24F2006500B3B1CD /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */; };
 		A045C8CF24F2006500B3B1CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A045C8A424F2006500B3B1CD /* Assets.xcassets */; };
-		A045C8D024F2006500B3B1CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A045C8A424F2006500B3B1CD /* Assets.xcassets */; };
 		A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8DF24F2011E00B3B1CD /* MainView.swift */; };
 		A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E224F2013100B3B1CD /* TorrentsView.swift */; };
 		A045C8E424F2013100B3B1CD /* TorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E224F2013100B3B1CD /* TorrentsView.swift */; };
@@ -201,6 +200,8 @@
 		A0F99C2825620933002D7BC6 /* UTI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F99C2725620933002D7BC6 /* UTI.swift */; };
 		A0F99C2925620933002D7BC6 /* UTI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F99C2725620933002D7BC6 /* UTI.swift */; };
 		A0F99C3425620981002D7BC6 /* TorrentFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F99C3325620981002D7BC6 /* TorrentFile.swift */; };
+		A0F99D152569EAD6002D7BC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0F99D142569EACF002D7BC6 /* Assets.xcassets */; };
+		A0F99D512569F676002D7BC6 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F99D3F2569F666002D7BC6 /* Application.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -361,6 +362,8 @@
 		A0F99C122562028C002D7BC6 /* NSPersistentContainer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Extensions.swift"; sourceTree = "<group>"; };
 		A0F99C2725620933002D7BC6 /* UTI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UTI.swift; sourceTree = "<group>"; };
 		A0F99C3325620981002D7BC6 /* TorrentFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentFile.swift; sourceTree = "<group>"; };
+		A0F99D142569EACF002D7BC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A0F99D3F2569F666002D7BC6 /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,7 +489,6 @@
 				A07DD11D2512CAB300559D9A /* Protocols */,
 				A071CAC724F3110200B6AC0C /* Utilities */,
 				A0C1DB3F24F4376D00C76682 /* Views */,
-				A045C8A424F2006500B3B1CD /* Assets.xcassets */,
 				A02C584D24F325A400C82D68 /* DataModel.xcdatamodeld */,
 			);
 			path = Shared;
@@ -514,6 +516,7 @@
 				A06DEFA224FC7F2F004B2DC9 /* Utilities */,
 				A06DEFA624FD7EDC004B2DC9 /* Views */,
 				A045C8A224F2006400B3B1CD /* SeedTruckApp.swift */,
+				A045C8A424F2006500B3B1CD /* Assets.xcassets */,
 				A045C8AC24F2006500B3B1CD /* Info.plist */,
 			);
 			path = iOS;
@@ -524,8 +527,10 @@
 			children = (
 				A0B9B8C12516387100E3486A /* Components */,
 				A0F99C3225620974002D7BC6 /* Models */,
+				A0F99D3E2569F654002D7BC6 /* Utilities */,
 				A06DEFA524FD7ED9004B2DC9 /* Views */,
 				A012561225046F0D00C7D51B /* SeedTruckApp.swift */,
+				A0F99D142569EACF002D7BC6 /* Assets.xcassets */,
 				A045C8B324F2006500B3B1CD /* Info.plist */,
 				A045C8B424F2006500B3B1CD /* macOS.entitlements */,
 			);
@@ -791,6 +796,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		A0F99D3E2569F654002D7BC6 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				A0F99D3F2569F666002D7BC6 /* Application.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1025,7 +1038,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A045C8D024F2006500B3B1CD /* Assets.xcassets in Resources */,
+				A0F99D152569EAD6002D7BC6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1150,6 +1163,7 @@
 				A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
 				A09638A724F56BDA00F2062F /* Box.swift in Sources */,
 				A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */,
+				A0F99D512569F676002D7BC6 /* Application.swift in Sources */,
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A0C0720024F5AFC400CEC1DA /* ServerStatusView.swift in Sources */,
 				A0D8F3AD250445AE00481E43 /* SettingsContainerView.swift in Sources */,
