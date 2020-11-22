@@ -14,11 +14,11 @@ It uses SwiftUI 2, and as such, can only run on iOS/iPadOS/tvOS 14+, watchOS 7+ 
 
 | Platform | Status | Development Status | Additional Info |
 | --- | :---: | --- | --- |
-| iOS | ✅ | "Released" | Appears to be stable on day-to-day use. |
-| iPadOS | ✅ | "Released" | Appears to be stable, but was not throughly tested. |
+| iOS | ✅ | Beta | Appears to be stable on day-to-day use. |
+| iPadOS | ✅ | Beta | Appears to be stable, but was not throughly tested. |
 | macOS | ⚠️ | Alpha | Feature complete, but probably buggy. |
-| tvOS | ✅ | "Released". | Appears to be stable, but was not throughly tested. |
-| watchOS | ✅ | "Released" | Appears to be stable on day-to-day use. |
+| tvOS | ✅ | Beta | Appears to be stable, but was not throughly tested. |
+| watchOS | ✅ | Beta | Appears to be stable on day-to-day use. |
 
 ## Screenshots
 
