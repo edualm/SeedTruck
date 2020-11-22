@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="256" height="256" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Shared/Assets.xcassets/AppIcon.appiconset/Icon-1024.png">
+  <img width="256" height="256" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/macOS/Assets.xcassets/AppIcon.appiconset/Icon-1024.png">
 </p>
 
 # Seed Truck
@@ -16,7 +16,7 @@ It uses SwiftUI 2, and as such, can only run on iOS/iPadOS/tvOS 14+, watchOS 7+ 
 | --- | :---: | --- | --- |
 | iOS | ✅ | "Released" | Appears to be stable on day-to-day use. |
 | iPadOS | ✅ | "Released" | Appears to be stable, but was not throughly tested. |
-| macOS | ⚠️ | Alpha / Under active development. | Alpha. Feature complete, but probably buggy. |
+| macOS | ⚠️ | Alpha | Feature complete, but probably buggy. |
 | tvOS | ✅ | "Released". | Appears to be stable, but was not throughly tested. |
 | watchOS | ✅ | "Released" | Appears to be stable on day-to-day use. |
 
@@ -33,8 +33,6 @@ iOS screenshots for now; screenshots for other platforms will appear eventually.
  - Connect to Transmission seedboxes (support for other types of seedboxes is easy to add, but not implemented).
  - View torrents, their status, and remove them.
  - Import torrents, either using a torrent file or magnet link.
- 
-iOS, tvOS and watchOS support are practically done. macOS support will only probably be worked on when macOS 11 is released.
 
 ## Tests
 
