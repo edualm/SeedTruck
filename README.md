@@ -8,10 +8,17 @@ A seedbox management application for the whole family of Apple devices - iOS, ma
 
 This is not the kind of project Apple allows on the App Store, so I'm open-sourcing it, hopefully it's useful for someone. You may also (and should!) use the app if you want, but you'll need to compile and install it yourself though.
 
-It uses SwiftUI 2, and as such, can only run on iOS/tvOS 14+, watchOS 7+ and macOS 11+.
+It uses SwiftUI 2, and as such, can only run on iOS/iPadOS/tvOS 14+, watchOS 7+ and macOS 11+.
 
-The app should be useable on iOS, tvOS and watchOS. 
-macOS support will be worked on as soon as macOS 11 is released to the public.
+## Status
+
+| Platform | Status | Development Status | Additional Info |
+| --- | --- | --- |
+| iOS | ✅ | "Released" | Appears to be stable on day-to-day use. |
+| iPadOS | ✅ | "Released" | Appears to be stable, but was not throughly tested. |
+| macOS | ⚠️ | Alpha / Under active development. | Alpha. Feature complete, but probably buggy. |
+| tvOS | ✅ | "Released". | Appears to be stable, but was not throughly tested. |
+| watchOS | ✅ | "Released" | Appears to be stable on day-to-day use. |
 
 ## Screenshots
 
