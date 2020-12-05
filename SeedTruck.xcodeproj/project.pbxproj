@@ -131,6 +131,10 @@
 		A09638B724F58BD300F2062F /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638B624F58BD300F2062F /* ServerView.swift */; };
 		A09656AC24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
+		A0AAF2AA257BB39600A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
+		A0AAF2BB257BB44A00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
+		A0AAF2C4257BB44B00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
+		A0AAF2C5257BB44C00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
 		A0B8C13324F3FF4E00ACD713 /* DocumentPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */; };
 		A0B9B8082516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
 		A0B9B8092516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
@@ -335,6 +339,7 @@
 		A09638B024F5804100F2062F /* Server+Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+Serialization.swift"; sourceTree = "<group>"; };
 		A09638B624F58BD300F2062F /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
+		A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTorrentsView.swift; sourceTree = "<group>"; };
 		A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerAdapter.swift; sourceTree = "<group>"; };
 		A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManagedObjectDeleter.swift; sourceTree = "<group>"; };
 		A0B9B85E2516373300E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
@@ -778,6 +783,7 @@
 				A05FE16924F45B2700B57E45 /* LoadingView.swift */,
 				A02C585824F3446100C82D68 /* NewServerView.swift */,
 				A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */,
+				A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */,
 				A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */,
 				A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */,
 				A0C1DB3824F4358500C76682 /* TorrentListView.swift */,
@@ -1114,6 +1120,7 @@
 				A07DD0F42512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A0B9B8442516369600E3486A /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A071CAC924F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
+				A0AAF2AA257BB39600A2217A /* NoTorrentsView.swift in Sources */,
 				A0589FED251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */,
 				A0C1DB3924F4358500C76682 /* TorrentListView.swift in Sources */,
 				A07DD1012512C9E900559D9A /* ConnectionDetails.swift in Sources */,
@@ -1171,6 +1178,7 @@
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0E7426625154FCB0029FFD6 /* SharedBucket.swift in Sources */,
+				A0AAF2BB257BB44A00A2217A /* NoTorrentsView.swift in Sources */,
 				A07DD1022512C9E900559D9A /* ConnectionDetails.swift in Sources */,
 				A096389B24F56A5100F2062F /* Server+CoreData.swift in Sources */,
 				A09656AD24F2C8E8009D0FE1 /* PreviewMockData.swift in Sources */,
@@ -1241,6 +1249,7 @@
 				A096388424F5699900F2062F /* RemoteTorrent.swift in Sources */,
 				A096389424F56A2500F2062F /* TorrentDetailsPresenter.swift in Sources */,
 				A096386924F568CF00F2062F /* MainView.swift in Sources */,
+				A0AAF2C4257BB44B00A2217A /* NoTorrentsView.swift in Sources */,
 				A07DD0F62512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A07DD0C12512C96600559D9A /* Connectable.swift in Sources */,
 				A096388B24F569DE00F2062F /* LoadingView.swift in Sources */,
@@ -1290,6 +1299,7 @@
 				A0C071DC24F5A05300CEC1DA /* Transmission.swift in Sources */,
 				A0C071F024F5A06100CEC1DA /* Box.swift in Sources */,
 				A0C071F824F5A17C00CEC1DA /* SeedTruckApp.swift in Sources */,
+				A0AAF2C5257BB44C00A2217A /* NoTorrentsView.swift in Sources */,
 				A0C071E024F5A05300CEC1DA /* ServerType.swift in Sources */,
 				A0C071D524F5A03500CEC1DA /* ProgressBarView.swift in Sources */,
 				A0C071AD24F59CC700CEC1DA /* MainView.swift in Sources */,
@@ -1522,6 +1532,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1531,7 +1542,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1549,6 +1560,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1558,7 +1570,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";

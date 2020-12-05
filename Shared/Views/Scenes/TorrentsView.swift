@@ -75,19 +75,35 @@ struct TorrentsView: View {
     
     private var filterMenuItems: [MenuItem] {
         [
-            .init(name: "Stopped", systemImage: "stop.circle") {
+            menuItem(forFilter: .stopped),
+            menuItem(forFilter: .downloading),
+            menuItem(forFilter: .seeding),
+            menuItem(forFilter: .other)
+        ].compactMap { $0 }
+    }
+    
+    private func menuItem(forFilter f: Filter) -> MenuItem? {
+        switch f {
+        case .stopped:
+            return .init(name: "Stopped", systemImage: "stop.circle") {
                 filter = .stopped
-            },
-            .init(name: "Downloading", systemImage: "arrow.down.forward.circle") {
+            }
+            
+        case .downloading:
+            return .init(name: "Downloading", systemImage: "arrow.down.forward.circle") {
                 filter = .downloading
-            },
-            .init(name: "Seeding", systemImage: "arrow.up.forward.circle") {
+            }
+            
+        case .seeding:
+            return .init(name: "Seeding", systemImage: "arrow.up.forward.circle") {
                 filter = .seeding
-            },
-            .init(name: "Other", systemImage: "questionmark.circle") {
+            }
+            
+        case .other:
+            return .init(name: "Other", systemImage: "questionmark.circle") {
                 filter = .other
             }
-        ]
+        }
     }
     
     @FetchRequest(
@@ -189,6 +205,36 @@ struct TorrentsView: View {
                     }
                     
                     Spacer()
+                }
+                
+                if serverConnections.count > 0 {
+                    Menu {
+                        Button {
+                            filter = nil
+                        } label: {
+                            Text("Show All")
+                            Image(systemName: "circle.fill")
+                        }
+                        
+                        Divider()
+                        
+                        ForEach(filterMenuItems, id: \.self) { item in
+                            Button {
+                                item.action()
+                            } label: {
+                                Text(item.name)
+                                Image(systemName: item.systemImage)
+                            }
+                        }
+                    } label: {
+                        if let f = filter, let item = menuItem(forFilter: f) {
+                            Text(item.name)
+                            Image(systemName: item.systemImage)
+                        } else {
+                            Text("Show All")
+                            Image(systemName: "circle.fill")
+                        }
+                    }.padding([.top, .leading, .trailing])
                 }
                 
                 #endif

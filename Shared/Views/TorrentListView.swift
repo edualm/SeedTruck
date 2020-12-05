@@ -84,40 +84,47 @@ struct TorrentListView: View {
                 
             case .noError:
                 if server != nil {
+                    let filteredTorrents = torrents.filter {
+                        guard let filter = filter else {
+                            return true
+                        }
+                        
+                        return $0.status.simple == filter
+                    }
+                    
                     VStack {
                         #if os(watchOS)
                         ServerStatusView(torrents: torrents)
                         #endif
                         
-                        List {
-                            ForEach(torrents.filter {
-                                guard let filter = filter else {
-                                    return true
-                                }
-                                
-                                return $0.status.simple == filter
-                            }) { torrent in
-                                ZStack {
-                                    #if os(macOS) || os(tvOS)
-                                    NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                                   presenter: .init(server: server!,
-                                                                                                    torrent: torrent))) {
+                        if filteredTorrents.count > 0 {
+                            List {
+                                ForEach(filteredTorrents) { torrent in
+                                    ZStack {
+                                        #if os(macOS) || os(tvOS)
+                                        NavigationLink(destination: TorrentDetailsView(torrent: torrent,
+                                                                                       presenter: .init(server: server!,
+                                                                                                        torrent: torrent))) {
+                                            TorrentItemView(torrent: torrent)
+                                                .padding(.all, 5)
+                                        }
+                                        #else
                                         TorrentItemView(torrent: torrent)
                                             .padding(.all, 5)
+                                        NavigationLink(destination: TorrentDetailsView(torrent: torrent,
+                                                                                       presenter: .init(server: server!,
+                                                                                                        torrent: torrent))) {
+                                            EmptyView()
+                                        }.buttonStyle(PlainButtonStyle())
+                                        #endif
                                     }
-                                    #else
-                                    TorrentItemView(torrent: torrent)
-                                        .padding(.all, 5)
-                                    NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                                   presenter: .init(server: server!,
-                                                                                                    torrent: torrent))) {
-                                        EmptyView()
-                                    }.buttonStyle(PlainButtonStyle())
-                                    #endif
                                 }
                             }
+                            .listStyle(Self.listStyle)
+                        } else {
+                            NoTorrentsView()
+                                .padding()
                         }
-                        .listStyle(Self.listStyle)
                         
                         #if !os(watchOS)
                         ServerStatusView(torrents: torrents)
