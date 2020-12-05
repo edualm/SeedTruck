@@ -239,7 +239,12 @@ struct TorrentsView: View {
                 
                 #endif
                 
+                #if os(macOS)
                 listView
+                    .frame(minWidth: 300)
+                #else
+                listView
+                #endif
             }
         }
         .navigationViewStyle(Style.navigationView)

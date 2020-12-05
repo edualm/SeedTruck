@@ -30,6 +30,7 @@ import SwiftUI
             MainView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
                 .environmentObject(sharedBucket)
+                .frame(minWidth: 700)
         }.onChange(of: scenePhase) { phase in
             switch phase {
             case .background:
