@@ -203,6 +203,7 @@
 		A0CE018525855834002777BF /* NewServerView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE018225855834002777BF /* NewServerView+Extensions.swift */; };
 		A0CE01A725855871002777BF /* NewServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE01A625855871002777BF /* NewServerView.swift */; };
 		A0CE01C1258559DD002777BF /* NewServerDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE01C0258559DD002777BF /* NewServerDoneView.swift */; };
+		A0CE01CA25855BA1002777BF /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE016D25854D44002777BF /* NotificationName+Extensions.swift */; };
 		A0D87FF1258456260031E898 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D87FF0258456260031E898 /* SettingsView.swift */; };
 		A0D88003258457300031E898 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D88002258457300031E898 /* GeneralSettingsView.swift */; };
 		A0D8800D258457370031E898 /* ServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8800C258457370031E898 /* ServerSettingsView.swift */; };
@@ -1313,6 +1314,7 @@
 				A0AAF2C4257BB44B00A2217A /* NoTorrentsView.swift in Sources */,
 				A07DD0F62512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A07DD0C12512C96600559D9A /* Connectable.swift in Sources */,
+				A0CE01CA25855BA1002777BF /* NotificationName+Extensions.swift in Sources */,
 				A096388B24F569DE00F2062F /* LoadingView.swift in Sources */,
 				A096388C24F569DE00F2062F /* ServerConnectionErrorView.swift in Sources */,
 				A07DD1032512C9E900559D9A /* ConnectionDetails.swift in Sources */,
