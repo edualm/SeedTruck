@@ -32,7 +32,7 @@ struct SettingsView: View {
                 .tag(Tabs.servers)
         }
         .padding(20)
-        .frame(minWidth: 500, minHeight: 250)
+        .frame(width: 700, height: 300)
     }
 }
 
