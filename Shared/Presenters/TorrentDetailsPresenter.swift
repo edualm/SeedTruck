@@ -48,6 +48,10 @@ class TorrentDetailsPresenter: ObservableObject {
                 if case let Result.success(success) = result, success {
                     self.currentAlert = nil
                     
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .updateTorrentListView, object: nil)
+                    }
+                    
                     onSuccess?()
                 } else {
                     self.currentAlert = .init(id: .error)
@@ -71,10 +75,6 @@ class TorrentDetailsPresenter: ObservableObject {
                 
             case .prepareForRemoval(let deletingFiles):
                 server.connection.perform(.remove(deletingData: deletingFiles), on: torrent, completionHandler: successCheck)
-                
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: .updateTorrentListView, object: nil)
-                }
                 
                 actionToCommit = nil
                 isLoading = true

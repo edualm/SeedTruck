@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A01056A524F48D5E00DA056D /* TorrentHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A424F48D5E00DA056D /* TorrentHandlerView.swift */; };
-		A01056A624F48D5E00DA056D /* TorrentHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A424F48D5E00DA056D /* TorrentHandlerView.swift */; };
 		A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */; };
 		A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */; };
 		A01056AB24F491B600DA056D /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056AA24F491B600DA056D /* String+Extensions.swift */; };
@@ -25,6 +24,7 @@
 		A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
 		A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
 		A023BAE724F294EF00B82FB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE624F294EF00B82FB3 /* SettingsView.swift */; };
+		A024CF9D258583500068844E /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
 		A02C584F24F325A400C82D68 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02C584D24F325A400C82D68 /* DataModel.xcdatamodeld */; };
 		A02C585024F325A400C82D68 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A02C584D24F325A400C82D68 /* DataModel.xcdatamodeld */; };
 		A02C585224F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585124F326EA00C82D68 /* RemoteTorrent+Transmission.swift */; };
@@ -198,12 +198,15 @@
 		A0CE016E25854D44002777BF /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE016D25854D44002777BF /* NotificationName+Extensions.swift */; };
 		A0CE016F25854D44002777BF /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE016D25854D44002777BF /* NotificationName+Extensions.swift */; };
 		A0CE017025854D44002777BF /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE016D25854D44002777BF /* NotificationName+Extensions.swift */; };
-		A0CE018325855834002777BF /* NewServerView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE018225855834002777BF /* NewServerView+Extensions.swift */; };
-		A0CE018425855834002777BF /* NewServerView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE018225855834002777BF /* NewServerView+Extensions.swift */; };
-		A0CE018525855834002777BF /* NewServerView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE018225855834002777BF /* NewServerView+Extensions.swift */; };
+		A0CE018325855834002777BF /* NewServerView+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE018225855834002777BF /* NewServerView+Shared.swift */; };
+		A0CE018425855834002777BF /* NewServerView+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE018225855834002777BF /* NewServerView+Shared.swift */; };
+		A0CE018525855834002777BF /* NewServerView+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE018225855834002777BF /* NewServerView+Shared.swift */; };
 		A0CE01A725855871002777BF /* NewServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE01A625855871002777BF /* NewServerView.swift */; };
 		A0CE01C1258559DD002777BF /* NewServerDoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE01C0258559DD002777BF /* NewServerDoneView.swift */; };
 		A0CE01CA25855BA1002777BF /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE016D25854D44002777BF /* NotificationName+Extensions.swift */; };
+		A0CE01FC25857C9D002777BF /* TorrentHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE01FB25857C9D002777BF /* TorrentHandlerView.swift */; };
+		A0CE020625857E0C002777BF /* TorrentHandlerView+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE020525857E0C002777BF /* TorrentHandlerView+Shared.swift */; };
+		A0CE020725857E0C002777BF /* TorrentHandlerView+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CE020525857E0C002777BF /* TorrentHandlerView+Shared.swift */; };
 		A0D87FF1258456260031E898 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D87FF0258456260031E898 /* SettingsView.swift */; };
 		A0D88003258457300031E898 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D88002258457300031E898 /* GeneralSettingsView.swift */; };
 		A0D8800D258457370031E898 /* ServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8800C258457370031E898 /* ServerSettingsView.swift */; };
@@ -212,7 +215,6 @@
 		A0E7426725154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
 		A0E7426825154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
 		A0E7427A2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
-		A0E7427B2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
 		A0E7427C2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
 		A0E7427D2515501F0029FFD6 /* DataTransferManageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E742792515501F0029FFD6 /* DataTransferManageable.swift */; };
 		A0F99C132562028C002D7BC6 /* NSPersistentContainer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F99C122562028C002D7BC6 /* NSPersistentContainer+Extensions.swift */; };
@@ -385,9 +387,11 @@
 		A0CE013625854916002777BF /* ServerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailsView.swift; sourceTree = "<group>"; };
 		A0CE01412585494A002777BF /* ConnectionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		A0CE016D25854D44002777BF /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
-		A0CE018225855834002777BF /* NewServerView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewServerView+Extensions.swift"; sourceTree = "<group>"; };
+		A0CE018225855834002777BF /* NewServerView+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewServerView+Shared.swift"; sourceTree = "<group>"; };
 		A0CE01A625855871002777BF /* NewServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewServerView.swift; sourceTree = "<group>"; };
 		A0CE01C0258559DD002777BF /* NewServerDoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewServerDoneView.swift; sourceTree = "<group>"; };
+		A0CE01FB25857C9D002777BF /* TorrentHandlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentHandlerView.swift; sourceTree = "<group>"; };
+		A0CE020525857E0C002777BF /* TorrentHandlerView+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TorrentHandlerView+Shared.swift"; sourceTree = "<group>"; };
 		A0D87FF0258456260031E898 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A0D88002258457300031E898 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		A0D8800C258457370031E898 /* ServerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettingsView.swift; sourceTree = "<group>"; };
@@ -622,6 +626,7 @@
 			children = (
 				A0D880162584573B0031E898 /* Settings */,
 				A06DEFA724FD7EF5004B2DC9 /* MainView.swift */,
+				A0CE01FB25857C9D002777BF /* TorrentHandlerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -631,6 +636,7 @@
 			children = (
 				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
 				A045C8E224F2013100B3B1CD /* TorrentsView.swift */,
+				A01056A424F48D5E00DA056D /* TorrentHandlerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -815,7 +821,6 @@
 				A0C1DB3824F4358500C76682 /* TorrentListView.swift */,
 				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
 				A045C8E524F2021100B3B1CD /* TorrentItemView.swift */,
-				A01056A424F48D5E00DA056D /* TorrentHandlerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -823,8 +828,9 @@
 		A0CE018125855825002777BF /* Shared Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A0CE018225855834002777BF /* NewServerView+Extensions.swift */,
+				A0CE018225855834002777BF /* NewServerView+Shared.swift */,
 				A0CE011B25853DD2002777BF /* TorrentsView+Shared.swift */,
+				A0CE020525857E0C002777BF /* TorrentHandlerView+Shared.swift */,
 			);
 			path = "Shared Extensions";
 			sourceTree = "<group>";
@@ -1163,7 +1169,7 @@
 				A09638AE24F5762700F2062F /* DataTransferManager.swift in Sources */,
 				A011C7F224F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A071CC6E24FBC9BF00E46065 /* Style.swift in Sources */,
-				A0CE018325855834002777BF /* NewServerView+Extensions.swift in Sources */,
+				A0CE018325855834002777BF /* NewServerView+Shared.swift in Sources */,
 				A01056A524F48D5E00DA056D /* TorrentHandlerView.swift in Sources */,
 				A0B9B8082516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */,
 				A07DD0F42512C9D400559D9A /* TemporaryServer.swift in Sources */,
@@ -1183,6 +1189,7 @@
 				A0C071FA24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,
 				A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
 				A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */,
+				A0CE020625857E0C002777BF /* TorrentHandlerView+Shared.swift in Sources */,
 				A05FE16624F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */,
 				A05FE16A24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */,
@@ -1217,11 +1224,13 @@
 				A0CE01A725855871002777BF /* NewServerView.swift in Sources */,
 				A02C585324F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */,
 				A073DD2524F4768400BA37C9 /* TorrentDetailsPresenter.swift in Sources */,
+				A024CF9D258583500068844E /* DataTransferManageable.swift in Sources */,
 				A011C7E624F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A0C071FB24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,
 				A0CE011225853D93002777BF /* MenuItem.swift in Sources */,
 				A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
 				A06DEFA824FD7EF5004B2DC9 /* MainView.swift in Sources */,
+				A0CE01FC25857C9D002777BF /* TorrentHandlerView.swift in Sources */,
 				A071CC6F24FBC9BF00E46065 /* Style.swift in Sources */,
 				A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
 				A0CE013825854916002777BF /* ServerDetailsView.swift in Sources */,
@@ -1232,7 +1241,6 @@
 				A011C7F324F21088009D72C6 /* TransmissionConnection.swift in Sources */,
 				A0C0720024F5AFC400CEC1DA /* ServerStatusView.swift in Sources */,
 				A0CE016F25854D44002777BF /* NotificationName+Extensions.swift in Sources */,
-				A01056A624F48D5E00DA056D /* TorrentHandlerView.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
 				A0E7426625154FCB0029FFD6 /* SharedBucket.swift in Sources */,
@@ -1252,11 +1260,11 @@
 				A07DD0F52512C9D400559D9A /* TemporaryServer.swift in Sources */,
 				A0B9B84D2516369600E3486A /* CoreDataManagedObjectDeleter.swift in Sources */,
 				A07FFC7124F30044002A78B5 /* Transmission+Extensions.swift in Sources */,
-				A0E7427B2515501F0029FFD6 /* DataTransferManageable.swift in Sources */,
 				A0B9B8092516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */,
 				A0F99C142562028C002D7BC6 /* NSPersistentContainer+Extensions.swift in Sources */,
 				A0CE011D25853DD2002777BF /* TorrentsView+Shared.swift in Sources */,
 				A07FFC6E24F2F34E002A78B5 /* Transmission.swift in Sources */,
+				A0CE020725857E0C002777BF /* TorrentHandlerView+Shared.swift in Sources */,
 				A02C585024F325A400C82D68 /* DataModel.xcdatamodeld in Sources */,
 				A0D87FF1258456260031E898 /* SettingsView.swift in Sources */,
 				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
@@ -1271,7 +1279,7 @@
 				A0589FEE251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */,
 				A0C1DB3724F42E4100C76682 /* SettingsPresenter.swift in Sources */,
 				A0D8800D258457370031E898 /* ServerSettingsView.swift in Sources */,
-				A0CE018425855834002777BF /* NewServerView+Extensions.swift in Sources */,
+				A0CE018425855834002777BF /* NewServerView+Shared.swift in Sources */,
 				A073DD2224F4658700BA37C9 /* AddMagnetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1369,7 +1377,7 @@
 				A0CE017025854D44002777BF /* NotificationName+Extensions.swift in Sources */,
 				A0C071FD24F5AC7000CEC1DA /* RemoteTorrent+Convenience.swift in Sources */,
 				A07DD1042512C9E900559D9A /* ConnectionDetails.swift in Sources */,
-				A0CE018525855834002777BF /* NewServerView+Extensions.swift in Sources */,
+				A0CE018525855834002777BF /* NewServerView+Shared.swift in Sources */,
 				A0C071DF24F5A05300CEC1DA /* RemoteTorrent.swift in Sources */,
 				A0C071F424F5A06100CEC1DA /* TorrentItemView.swift in Sources */,
 				A07DD0C22512C96600559D9A /* Connectable.swift in Sources */,
@@ -1548,7 +1556,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1557,7 +1565,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1572,7 +1580,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1581,7 +1589,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1600,7 +1608,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1610,7 +1618,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1628,7 +1636,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1638,7 +1646,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1743,11 +1751,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1765,11 +1773,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1786,7 +1794,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1796,7 +1804,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1812,7 +1820,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1822,7 +1830,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1840,7 +1848,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1849,7 +1857,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1865,7 +1873,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1874,7 +1882,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

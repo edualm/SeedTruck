@@ -191,6 +191,8 @@ struct TorrentDetailsView: View {
     
     let torrent: RemoteTorrent
     
+    @State var shouldShowEmptyView: Bool = false
+    
     @ObservedObject var presenter: TorrentDetailsPresenter
     
     var innerBody: some View {
@@ -251,6 +253,8 @@ struct TorrentDetailsView: View {
                              primaryButton: .destructive(Text("Confirm")) {
                                 self.presenter.perform(.commit) {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                                        shouldShowEmptyView = true
+                                        
                                         self.presentation.wrappedValue.dismiss()
                                     }
                                 }
@@ -265,13 +269,17 @@ struct TorrentDetailsView: View {
     }
     
     var body: some View {
-        #if os(macOS)
-        innerBody.padding()
-        #elseif os(tvOS) || os(watchOS)
-        innerBody.navigationBarTitle("Torrent Detail")
-        #else
-        innerBody.navigationBarTitle("Torrent Detail").padding()
-        #endif
+        if shouldShowEmptyView {
+            EmptyView()
+        } else {
+            #if os(macOS)
+            innerBody.padding()
+            #elseif os(tvOS) || os(watchOS)
+            innerBody.navigationBarTitle("Torrent Detail")
+            #else
+            innerBody.navigationBarTitle("Torrent Detail").padding()
+            #endif
+        }
     }
 }
 

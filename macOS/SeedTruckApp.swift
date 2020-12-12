@@ -49,9 +49,12 @@ import SwiftUI
             Group {
                 if let torrent = openedTorrent {
                     TorrentHandlerNavigationView(torrent: torrent, server: nil)
-                        .frame(minWidth: 400)
                 } else {
-                    EmptyView()
+                    //  Apparently, adding some text here instead of making this
+                    //  an `EmptyView()` fixes a whole myriad of issues... 🤷
+                    
+                    Text("Something weird happened.")
+                        .padding()
                 }
             }
             .environment(\.managedObjectContext, persistentContainer.viewContext)
