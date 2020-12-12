@@ -75,7 +75,7 @@ import SwiftUI
         //
         
         Settings {
-            SettingsContainerView()
+            SettingsView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
         }
     }
