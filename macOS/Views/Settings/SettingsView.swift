@@ -21,18 +21,18 @@ struct SettingsView: View {
         TabView {
             GeneralSettingsView()
                 .tabItem {
-                    Label("General", systemImage: "gear")                }
+                    Label("General", systemImage: "gear")
+                }
                 .tag(Tabs.general)
             
             ServerSettingsView()
                 .tabItem {
                     Label("Servers", systemImage: "server.rack")
-
                 }
                 .tag(Tabs.servers)
         }
         .padding(20)
-        .frame(width: 700, height: 300)
+        .frame(width: 700, height: 375)
     }
 }
 

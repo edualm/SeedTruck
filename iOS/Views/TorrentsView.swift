@@ -17,29 +17,12 @@ struct TorrentsView: View {
         var id: Choice
     }
     
-    private struct MenuItem: Hashable {
-        
-        let name: String
-        let systemImage: String
-        let action: () -> ()
-        
-        static func == (lhs: TorrentsView.MenuItem, rhs: TorrentsView.MenuItem) -> Bool {
-            lhs.name == rhs.name
-        }
-        
-        func hash(into hasher: inout Hasher) {
-            hasher.combine(name)
-        }
-    }
-    
     private enum PresentedSheet {
         case addMagnet
         case addTorrent(LocalTorrent)
     }
     
-    #if !os(macOS)
     @State var pickerAdapter: DocumentPickerAdapter?
-    #endif
     
     private var addMenuItems: [MenuItem] {
         [
@@ -47,7 +30,6 @@ struct TorrentsView: View {
                 self.presentedSheet = .addMagnet
             },
             .init(name: "Torrent File", systemImage: "doc") {
-                #if !os(macOS)
                 self.pickerAdapter = DocumentPickerAdapter(
                     torrentPickerWithOnPick: { url in
                         guard url.lastPathComponent.split(separator: ".").last == "torrent" else {
@@ -68,42 +50,8 @@ struct TorrentsView: View {
                 )
                 
                 UIApplication.shared.windows.first?.rootViewController?.present(pickerAdapter!.picker, animated: true)
-                #endif
             }
         ]
-    }
-    
-    private var filterMenuItems: [MenuItem] {
-        [
-            menuItem(forFilter: .stopped),
-            menuItem(forFilter: .downloading),
-            menuItem(forFilter: .seeding),
-            menuItem(forFilter: .other)
-        ].compactMap { $0 }
-    }
-    
-    private func menuItem(forFilter f: Filter) -> MenuItem? {
-        switch f {
-        case .stopped:
-            return .init(name: "Stopped", systemImage: "stop.circle") {
-                filter = .stopped
-            }
-            
-        case .downloading:
-            return .init(name: "Downloading", systemImage: "arrow.down.forward.circle") {
-                filter = .downloading
-            }
-            
-        case .seeding:
-            return .init(name: "Seeding", systemImage: "arrow.up.forward.circle") {
-                filter = .seeding
-            }
-            
-        case .other:
-            return .init(name: "Other", systemImage: "questionmark.circle") {
-                filter = .other
-            }
-        }
     }
     
     @FetchRequest(
@@ -115,16 +63,11 @@ struct TorrentsView: View {
     
     private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     
-    @State private var selectedServer: Server?
-    @State private var filter: Filter?
     @State private var showingAlert: AlertIdentifier?
     @State private var presentedSheet: PresentedSheet?
     
-    func onAppear() {
-        if selectedServer == nil {
-            selectedServer = serverConnections.first
-        }
-    }
+    @State var filter: Filter?
+    @State var selectedServer: Server?
     
     var leadingNavigationBarItems: some View {
         Group {
@@ -191,20 +134,6 @@ struct TorrentsView: View {
         }
     }
     
-    var listView: some View {
-        let listView = TorrentListView(server: $selectedServer, filter: $filter)
-            .navigationTitle(selectedServer?.name ?? "Torrents")
-        
-        #if !os(macOS)
-        return listView.navigationBarItems(
-            leading: leadingNavigationBarItems,
-            trailing: trailingNavigationBarItems
-        )
-        #else
-        return listView
-        #endif
-    }
-    
     var body: some View {
         let isPresentingModal = Binding<Bool>(
             get: { presentedSheet != nil },
@@ -212,73 +141,12 @@ struct TorrentsView: View {
         )
         
         return NavigationView {
-            VStack {
-                #if os(macOS)
-                
-                if serverConnections.count > 1 {
-                    if let s = selectedServer {
-                        Menu(s.name) {
-                            ForEach(serverConnections, id: \.self) { server in
-                                Button {
-                                    selectedServer = server
-                                } label: {
-                                    Text(server.name)
-                                    Image(systemName: "server.rack")
-                                }
-                            }
-                        }.padding()
-                    }
-                    
-                    Spacer()
-                }
-                
-                HStack {
-                    if serverConnections.count > 0 {
-                        Menu {
-                            Button {
-                                filter = nil
-                            } label: {
-                                Text("Show All")
-                                Image(systemName: "circle.fill")
-                            }
-                            
-                            Divider()
-                            
-                            ForEach(filterMenuItems, id: \.self) { item in
-                                Button {
-                                    item.action()
-                                } label: {
-                                    Text(item.name)
-                                    Image(systemName: item.systemImage)
-                                }
-                            }
-                        } label: {
-                            if let f = filter, let item = menuItem(forFilter: f) {
-                                Text(item.name)
-                                Image(systemName: item.systemImage)
-                            } else {
-                                Text("Show All")
-                                Image(systemName: "circle.fill")
-                            }
-                        }
-                    }
-                    
-                    Button {
-                        print("TODO: Refresh data...")
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
-                    }
-                }.padding([.top, .leading, .trailing])
-                
-                #endif
-                
-                #if os(macOS)
-                listView
-                    .frame(minWidth: 300)
-                #else
-                listView
-                #endif
-            }
+            TorrentListView(server: $selectedServer, filter: $filter)
+                .navigationTitle(selectedServer?.name ?? "Torrents")
+                .navigationBarItems(
+                    leading: leadingNavigationBarItems,
+                    trailing: trailingNavigationBarItems
+                )
         }
         .navigationViewStyle(Style.navigationView)
         .onAppear(perform: onAppear)

@@ -9,74 +9,19 @@ import SwiftUI
 
 struct NewServerView: View {
     
-    private struct AlertIdentifier: Identifiable {
-        enum Choice {
-            case failure
-            case success
-        }
-        
-        var id: Choice
-    }
-    
     @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.presentationMode) private var presentation
+    @Environment(\.presentationMode) var presentation
     
-    @State private var name = ""
-    @State private var endpoint = ""
-    @State private var type = 0
-    @State private var username = ""
-    @State private var password = ""
+    @State var name = ""
+    @State var endpoint = ""
+    @State var type = 0
+    @State var username = ""
+    @State var password = ""
     
-    @State private var showingAlert: AlertIdentifier?
-    
-    var server: TemporaryServer? {
-        guard let endpoint = URL(string: endpoint) else {
-            return nil
-        }
-        
-        return TemporaryServer(endpoint: endpoint,
-                               name: name,
-                               type: Int16(type),
-                               credentialUsername: !username.isEmpty ? username : nil,
-                               credentialPassword: !password.isEmpty ? password : nil)
-    }
-    
-    func testConnection(completion: @escaping (Bool) -> ()) {
-        guard let server = server else {
-            completion(false)
-            
-            return
-        }
-        
-        server.connection.test { result in
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-    }
-    
-    func save() {
-        guard let server = server else {
-            showingAlert = .init(id: .failure)
-            
-            return
-        }
-        
-        do {
-            let coreDataServer = server.convertToServer(withManagedContext: managedObjectContext)
-            
-            managedObjectContext.insert(coreDataServer)
-            
-            try managedObjectContext.save()
-            
-            self.presentation.wrappedValue.dismiss()
-        } catch {
-            showingAlert = .init(id: .failure)
-        }
-    }
+    @State var showingAlert: AlertIdentifier?
     
     var body: some View {
-        var form = Form {
+        Form {
             Section(header: Text("Metadata")) {
                 TextField("Name", text: $name)
             }
@@ -87,10 +32,6 @@ struct NewServerView: View {
                         Text(ServerType.allCases[$0].rawValue)
                     }
                 }
-                #if os(macOS)
-                TextField("Endpoint", text: $endpoint)
-                TextField("Username", text: $username)
-                #else
                 TextField("Endpoint", text: $endpoint)
                     .keyboardType(.URL)
                     .disableAutocorrection(true)
@@ -98,7 +39,6 @@ struct NewServerView: View {
                 TextField("Username", text: $username)
                     .disableAutocorrection(true)
                     .autocapitalization(.none)
-                #endif
                 SecureField("Password", text: $password)
             }
             
@@ -115,7 +55,7 @@ struct NewServerView: View {
                     Label("Test Connection", systemImage: "wand.and.rays")
                 }
                 
-                Button(action: save) {
+                Button(action: { save(onSuccess: { self.presentation.wrappedValue.dismiss() }) }) {
                     Label("Save", systemImage: "tag")
                 }
             }
@@ -133,12 +73,7 @@ struct NewServerView: View {
                       dismissButton: .default(Text("Ok")))
             }
         }
-        
-        #if os(macOS)
-        return form
-        #else
-        return form.navigationBarTitle("New Server")
-        #endif
+        .navigationBarTitle("New Server")
     }
 }
 

@@ -198,6 +198,10 @@ struct TorrentHandlerNavigationView: View {
     
     var body: some View {
         let closeHandler: TorrentHandlerView.CloseHandler = {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .updateTorrentListView, object: nil)
+            }
+            
             #if os(macOS)
             Application.closeMainWindow()
             #else

@@ -48,6 +48,19 @@ struct GeneralSettingsView: View {
     
     var body: some View {
         Form {
+            HStack {
+                Spacer()
+                Text("⚠️ These settings do not work yet!")
+                    .foregroundColor(.black)
+                    .padding()
+                Spacer()
+            }
+            .background(Color.orange)
+            .clipShape(RoundedRectangle(cornerRadius: 25.0))
+            
+            Divider()
+                .padding([.top, .bottom])
+            
             Section(header: Text("Refresh/update data every...").font(.headline)) {
                 Slider(value: $autoUpdateIntervalSliderValue, in: 0...Double(AutoUpdateInterval.allCases.count - 1), step: 1)
                 HStack {
@@ -60,7 +73,10 @@ struct GeneralSettingsView: View {
             Divider()
                 .padding([.top, .bottom])
             
-            Section(header: Text("Do not prompt me when adding...").font(.headline), footer: Text("These settings only apply when you only have one server.\nYou will always be prompted when you have multiple servers configured.").font(.caption).lineLimit(2)) {
+            Section(header: Text("Do not prompt me when adding...")
+                        .font(.headline),
+                    footer: Text("These settings only apply when you only have one server.\nYou will always be prompted when you have multiple servers configured.")
+                        .font(.caption)) {
                 Toggle("Magnet Links", isOn: .constant(false))
                 Toggle("Torrents", isOn: .constant(false))
             }

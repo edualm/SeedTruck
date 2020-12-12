@@ -34,6 +34,10 @@ struct AddMagnetView: View {
                 destination: TorrentHandlerView(torrent: .magnet(magnetLink),
                                                 server: server,
                                                 closeHandler: {
+                                                    DispatchQueue.main.async {
+                                                        NotificationCenter.default.post(name: .updateTorrentListView, object: nil)
+                                                    }
+                                                    
                                                     #if os(macOS)
                                                     Application.closeMainWindow()
                                                     #else

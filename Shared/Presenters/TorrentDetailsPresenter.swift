@@ -72,6 +72,10 @@ class TorrentDetailsPresenter: ObservableObject {
             case .prepareForRemoval(let deletingFiles):
                 server.connection.perform(.remove(deletingData: deletingFiles), on: torrent, completionHandler: successCheck)
                 
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: .updateTorrentListView, object: nil)
+                }
+                
                 actionToCommit = nil
                 isLoading = true
             }

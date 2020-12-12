@@ -10,6 +10,12 @@ This is not the kind of project Apple allows on the App Store, so I'm open-sourc
 
 It uses SwiftUI 2, and as such, can only run on iOS/iPadOS/tvOS 14+, watchOS 7+ and macOS 11+.
 
+## Supported Seedbox Software
+
+ - Transmission
+ 
+ And that's it, for now. The app's code is technically ready to easily support other torrent software, it just isn't implemented. Open a PR if you'd like to see support for others! 
+
 ## Status
 
 | Platform | Status | Development Status | Additional Info |
@@ -19,7 +25,6 @@ It uses SwiftUI 2, and as such, can only run on iOS/iPadOS/tvOS 14+, watchOS 7+ 
 | macOS | ⚠️ | Alpha | Feature complete, but probably buggy. |
 | tvOS | ✅ | Beta | Appears to be stable, but was not throughly tested. |
 | watchOS | ✅ | Beta | Appears to be stable on day-to-day use. |
-
 ## Screenshots
 
 iOS screenshots for now; screenshots for other platforms will appear eventually.

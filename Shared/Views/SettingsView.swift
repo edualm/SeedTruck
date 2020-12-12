@@ -9,14 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    private enum ConnectionResult {
-        
-        case connecting
-        
-        case success
-        case failure
-    }
-    
     private struct AlertData: Identifiable {
         
         var id: String {
@@ -107,11 +99,6 @@ struct SettingsView: View {
                         }
                     }
                     
-                    #if os(macOS)
-                    Section(header: Text("New...")) {
-                        newServerLink
-                    }
-                    #else
                     Section {
                         newServerLink
                     }
@@ -131,7 +118,6 @@ struct SettingsView: View {
                                 .foregroundColor(.primary)
                         }
                     }
-                    #endif
                 }
                 .listStyle(Style.list)
             }

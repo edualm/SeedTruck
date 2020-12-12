@@ -154,6 +154,9 @@ struct TorrentListView: View {
                 ()
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .updateTorrentListView)) { _ in
+            updateData()
+        }
     }
 }
 
