@@ -201,7 +201,7 @@ struct TorrentHandlerNavigationView: View {
             #if os(macOS)
             Application.closeMainWindow()
             #else
-            presentation.dismiss()
+            presentation.wrappedValue.dismiss()
             #endif
         }
         
