@@ -193,8 +193,8 @@ struct TorrentDetailsView: View {
     
     @ObservedObject var presenter: TorrentDetailsPresenter
     
-    var body: some View {
-        var view = AnyView(ScrollView {
+    var innerBody: some View {
+        ScrollView {
             MetadataView(torrent: torrent)
             
             #if os(watchOS) || os(tvOS)
@@ -242,8 +242,6 @@ struct TorrentDetailsView: View {
                 }
                 #endif
             }
-            
-            
         }
         .alert(item: $presenter.currentAlert) {
             switch $0.id {
@@ -263,16 +261,16 @@ struct TorrentDetailsView: View {
                              message: Text("The requested action couldn't be completed."),
                              dismissButton: .default(Text("Ok")))
             }
-        })
-        
-        #if !os(macOS)
-        view = AnyView(view.navigationBarTitle("Torrent Detail"))
-        #endif
-        
-        #if os(watchOS) || os(tvOS)
-        return view
+        }
+    }
+    
+    var body: some View {
+        #if os(macOS)
+        innerBody.padding()
+        #elseif os(tvOS) || os(watchOS)
+        innerBody.navigationBarTitle("Torrent Detail")
         #else
-        return view.padding()
+        innerBody.navigationBarTitle("Torrent Detail").padding()
         #endif
     }
 }

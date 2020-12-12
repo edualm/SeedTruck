@@ -126,65 +126,90 @@ struct TorrentsView: View {
         }
     }
     
+    var leadingNavigationBarItems: some View {
+        Group {
+            if serverConnections.count > 1 {
+                Menu {
+                    ForEach(serverConnections, id: \.self) { server in
+                        Button {
+                            selectedServer = server
+                        } label: {
+                            Text(server.name)
+                            Image(systemName: "server.rack")
+                        }
+                    }
+                } label: {
+                    Image(systemName: "text.justify")
+                }
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
+    var trailingNavigationBarItems: some View {
+        Group {
+            if serverConnections.count > 0 {
+                HStack {
+                    Menu {
+                        Button {
+                            filter = nil
+                        } label: {
+                            Text("Show All")
+                            Image(systemName: "circle.fill")
+                        }
+                        Divider()
+                        
+                        ForEach(filterMenuItems, id: \.self) { item in
+                            Button {
+                                item.action()
+                            } label: {
+                                Text(item.name)
+                                Image(systemName: item.systemImage)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: filter != nil ? "tag.fill" : "tag")
+                    }.padding(.trailing, 5)
+                    
+                    Menu {
+                        ForEach(addMenuItems, id: \.self) { item in
+                            Button {
+                                item.action()
+                            } label: {
+                                Text(item.name)
+                                Image(systemName: item.systemImage)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "link.badge.plus")
+                    }
+                }
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
+    var listView: some View {
+        let listView = TorrentListView(server: $selectedServer, filter: $filter)
+            .navigationTitle(selectedServer?.name ?? "Torrents")
+        
+        #if !os(macOS)
+        return listView.navigationBarItems(
+            leading: leadingNavigationBarItems,
+            trailing: trailingNavigationBarItems
+        )
+        #else
+        return listView
+        #endif
+    }
+    
     var body: some View {
         let isPresentingModal = Binding<Bool>(
             get: { presentedSheet != nil },
             set: { _ in presentedSheet = nil }
         )
-        
-        var listView = AnyView(TorrentListView(server: $selectedServer, filter: $filter)
-            .navigationTitle(selectedServer?.name ?? "Torrents"))
-        
-        #if !os(macOS)
-        
-        listView = AnyView(listView.navigationBarItems(leading: serverConnections.count > 1 ? AnyView(Menu {
-            ForEach(serverConnections, id: \.self) { server in
-                Button {
-                    selectedServer = server
-                } label: {
-                    Text(server.name)
-                    Image(systemName: "server.rack")
-                }
-            }
-        } label: {
-            Image(systemName: "text.justify")
-        }) : AnyView(EmptyView()), trailing: serverConnections.count > 0 ? AnyView(HStack {
-            Menu {
-                Button {
-                    filter = nil
-                } label: {
-                    Text("Show All")
-                    Image(systemName: "circle.fill")
-                }
-                Divider()
-                
-                ForEach(filterMenuItems, id: \.self) { item in
-                    Button {
-                        item.action()
-                    } label: {
-                        Text(item.name)
-                        Image(systemName: item.systemImage)
-                    }
-                }
-            } label: {
-                Image(systemName: filter != nil ? "tag.fill" : "tag")
-            }.padding(.trailing, 5)
-            
-            Menu {
-                ForEach(addMenuItems, id: \.self) { item in
-                    Button {
-                        item.action()
-                    } label: {
-                        Text(item.name)
-                        Image(systemName: item.systemImage)
-                    }
-                }
-            } label: {
-                Image(systemName: "link.badge.plus")
-            }
-        }) : AnyView(EmptyView())))
-        
-        #endif
         
         return NavigationView {
             VStack {
@@ -207,35 +232,43 @@ struct TorrentsView: View {
                     Spacer()
                 }
                 
-                if serverConnections.count > 0 {
-                    Menu {
-                        Button {
-                            filter = nil
-                        } label: {
-                            Text("Show All")
-                            Image(systemName: "circle.fill")
-                        }
-                        
-                        Divider()
-                        
-                        ForEach(filterMenuItems, id: \.self) { item in
+                HStack {
+                    if serverConnections.count > 0 {
+                        Menu {
                             Button {
-                                item.action()
+                                filter = nil
                             } label: {
+                                Text("Show All")
+                                Image(systemName: "circle.fill")
+                            }
+                            
+                            Divider()
+                            
+                            ForEach(filterMenuItems, id: \.self) { item in
+                                Button {
+                                    item.action()
+                                } label: {
+                                    Text(item.name)
+                                    Image(systemName: item.systemImage)
+                                }
+                            }
+                        } label: {
+                            if let f = filter, let item = menuItem(forFilter: f) {
                                 Text(item.name)
                                 Image(systemName: item.systemImage)
+                            } else {
+                                Text("Show All")
+                                Image(systemName: "circle.fill")
                             }
                         }
+                    }
+                    
+                    Button {
+                        print("TODO: Refresh data...")
                     } label: {
-                        if let f = filter, let item = menuItem(forFilter: f) {
-                            Text(item.name)
-                            Image(systemName: item.systemImage)
-                        } else {
-                            Text("Show All")
-                            Image(systemName: "circle.fill")
-                        }
-                    }.padding([.top, .leading, .trailing])
-                }
+                        Image(systemName: "arrow.clockwise")
+                    }
+                }.padding([.top, .leading, .trailing])
                 
                 #endif
                 
