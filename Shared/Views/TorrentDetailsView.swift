@@ -235,11 +235,8 @@ struct TorrentDetailsView: View {
                 #else
                 Box(label: Label("Actions", systemImage: "wrench")) {
                     VStack {
-                        HStack {
-                            Spacer()
-                            ActionsView(presentation: presentation, presenter: presenter)
-                            Spacer()
-                        }
+                        ActionsView(presentation: presentation, presenter: presenter)
+                            .centered()
                     }.padding(.top)
                 }
                 #endif

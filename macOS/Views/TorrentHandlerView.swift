@@ -70,15 +70,11 @@ struct TorrentHandlerView: View {
                 .padding([.top, .bottom])
             
             if serverConnections.count > 0 {
-                HStack {
-                    Spacer()
-                    Section {
-                        Button(action: startDownload) {
-                            Label("Start Download", systemImage: "square.and.arrow.down.on.square")
-                        }.disabled(selectedServers.count == 0)
-                    }
-                    Spacer()
-                }
+                Section {
+                    Button(action: startDownload) {
+                        Label("Start Download", systemImage: "square.and.arrow.down.on.square")
+                    }.disabled(selectedServers.count == 0)
+                }.centered()
             }
         }
         .alert(isPresented: showingError) {

@@ -9,78 +9,45 @@ import SwiftUI
 
 struct GeneralSettingsView: View {
     
-    enum AutoUpdateInterval: Int, CaseIterable, Hashable {
-        
-        case twoSeconds
-        case fiveSeconds
-        case tenSeconds
-        case thirtySeconds
-        case oneMinute
-        case twoMinutes
-        case fiveMinutes
-        case never
-        
-        var userFacingString: String {
-            switch self {
-            case .twoSeconds:
-                return "2 seconds"
-            case .fiveSeconds:
-                return "5 seconds"
-            case .tenSeconds:
-                return "10 seconds"
-            case .thirtySeconds:
-                return "30 seconds"
-            case .oneMinute:
-                return "1 minute"
-            case .twoMinutes:
-                return "2 minutes"
-            case .fiveMinutes:
-                return "5 minutes"
-            case .never:
-                return "Never (manually)"
-            }
-        }
+    @AppStorage(Constants.StorageKeys.autoUpdateInterval) var autoUpdateIntervalInSeconds: Int = 2
+    
+    @State private var autoUpdateIntervalSliderValue: Double = 0
+    
+    func onAppear() {
+        autoUpdateIntervalSliderValue = Double(AutoUpdateInterval(seconds: autoUpdateIntervalInSeconds).rawValue)
     }
     
-    /* @AppStorage("autoUpdateInterval") */ var autoUpdateInterval: Int = 5
-    
-    @State private var autoUpdateIntervalSliderValue: Double = 1
+    func onSliderChange() {
+        guard let newInterval = AutoUpdateInterval(rawValue: Int(autoUpdateIntervalSliderValue)) else {
+            autoUpdateIntervalSliderValue = 0
+            autoUpdateIntervalInSeconds = 2
+            
+            return
+        }
+        
+        autoUpdateIntervalInSeconds = newInterval.secondsValue
+    }
     
     var body: some View {
         Form {
-            HStack {
-                Spacer()
-                Text("⚠️ These settings do not work yet!")
-                    .foregroundColor(.black)
-                    .padding()
-                Spacer()
-            }
-            .background(Color.orange)
-            .clipShape(RoundedRectangle(cornerRadius: 25.0))
-            
-            Divider()
-                .padding([.top, .bottom])
-            
             Section(header: Text("Refresh/update data every...").font(.headline)) {
-                Slider(value: $autoUpdateIntervalSliderValue, in: 0...Double(AutoUpdateInterval.allCases.count - 1), step: 1)
-                HStack {
-                    Spacer()
-                    Text(AutoUpdateInterval(rawValue: Int(autoUpdateIntervalSliderValue))!.userFacingString)
-                    Spacer()
+                Slider(value: $autoUpdateIntervalSliderValue,
+                       in: 0...Double(AutoUpdateInterval.allCases.count - 1),
+                       step: 1,
+                       onEditingChanged: { _ in onSliderChange() })
+                Text(AutoUpdateInterval(rawValue: Int(autoUpdateIntervalSliderValue))!.userFacingString)
+                    .centered()
+                VStack {
+                    Text("Changes will be reflected the next time an update is triggered.")
+                    Text("This setting also affects the rate at which a torrent detail is updated.")
                 }
-            }
-            
-            Divider()
-                .padding([.top, .bottom])
-            
-            Section(header: Text("Do not prompt me when adding...")
-                        .font(.headline),
-                    footer: Text("These settings only apply when you only have one server.\nYou will always be prompted when you have multiple servers configured.")
-                        .font(.caption)) {
-                Toggle("Magnet Links", isOn: .constant(false))
-                Toggle("Torrents", isOn: .constant(false))
+                    .font(.caption)
+                    .padding(.top)
+                    .centered()
             }
         }
+        .onAppear(perform: onAppear)
+        .frame(height: 100)
     }
 }
 

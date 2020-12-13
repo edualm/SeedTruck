@@ -61,7 +61,7 @@ struct ServerDetailsView: View {
                 Divider()
                     .padding([.top, .bottom])
                 
-                Label("Edit coming soon...", systemImage: "pencil")
+                Label("To edit a connection, just delete and create it again.", systemImage: "pencil")
                     .padding([.leading, .trailing, .bottom])
                 
                 Button {

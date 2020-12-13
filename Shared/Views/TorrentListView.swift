@@ -26,6 +26,12 @@ struct TorrentListView: View {
     @State private var timer: Timer? = nil
     @State private var torrents: [RemoteTorrent] = []
     
+    #if os(watchOS)
+    let refreshInterval: Int = 10
+    #else
+    @AppStorage(Constants.StorageKeys.autoUpdateInterval) var refreshInterval: Int = 2
+    #endif
+    
     func updateData() {
         if let server = server {
             server.connection.getTorrents { result in
@@ -43,28 +49,24 @@ struct TorrentListView: View {
         }
     }
     
-    func onAppear() {
-        updateData()
-        
-        #if os(watchOS)
-        let refreshInterval = 10.0
-        #else
-        let refreshInterval = 2.0
-        #endif
-        
+    func invalidateTimer() {
         if timer != nil {
             timer?.invalidate()
             timer = nil
         }
+    }
+    
+    func onAppear() {
+        updateData()
+        invalidateTimer()
         
-        timer = Timer.scheduledTimer(withTimeInterval: refreshInterval, repeats: true) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: TimeInterval(refreshInterval), repeats: true) { _ in
             updateData()
         }
     }
     
     func onDisappear() {
-        timer?.invalidate()
-        timer = nil
+        invalidateTimer()
     }
     
     #if os(iOS)
@@ -115,7 +117,9 @@ struct TorrentListView: View {
                                                                                        presenter: .init(server: server!,
                                                                                                         torrent: torrent))) {
                                             EmptyView()
-                                        }.buttonStyle(PlainButtonStyle())
+                                        }
+                                        .opacity(0.0)
+                                        .buttonStyle(PlainButtonStyle())
                                         #endif
                                     }
                                 }
@@ -155,7 +159,7 @@ struct TorrentListView: View {
             }
         }
         .onReceive(NotificationCenter.default.publisher(for: .updateTorrentListView)) { _ in
-            updateData()
+            onAppear()
         }
     }
 }

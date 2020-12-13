@@ -24,15 +24,16 @@ struct SettingsView: View {
                     Label("General", systemImage: "gear")
                 }
                 .tag(Tabs.general)
+                .frame(width: 700, height: 150)
             
             ServerSettingsView()
                 .tabItem {
                     Label("Servers", systemImage: "server.rack")
                 }
                 .tag(Tabs.servers)
+                .frame(width: 700, height: 375)
         }
         .padding(20)
-        .frame(width: 700, height: 375)
     }
 }
 
