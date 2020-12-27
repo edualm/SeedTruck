@@ -12,7 +12,7 @@ struct ProgressBarView: View {
     let cornerRadius: CGFloat
     let barColorBuilder: ((CGFloat) -> (Color))
     
-    @State var progress: CGFloat
+    let progress: CGFloat
     
     var body: some View {
         GeometryReader { geometry in

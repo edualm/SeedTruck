@@ -104,10 +104,15 @@ struct TorrentHandlerNavigationView: View {
         Application.closeMainWindow()
     }
     
+    func onDisappear() {
+        NSDocumentController().clearRecentDocuments(nil)
+    }
+    
     var body: some View {
         TorrentHandlerView(torrent: torrent,
                            server: server,
                            closeHandler: closeHandler)
+            .onDisappear(perform: onDisappear)
     }
 }
 
