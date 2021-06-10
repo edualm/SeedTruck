@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="256" height="256" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/macOS/Assets.xcassets/AppIcon.appiconset/Icon-1024.png">
+  <img width="256" height="256" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/macOS/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x.png">
 </p>
 
 # Seed Truck
