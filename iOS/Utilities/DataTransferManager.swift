@@ -35,18 +35,14 @@ class DataTransferManager: NSObject, DataTransferManageable {
         }
     }
     
-    func sendUpdateToWatch(completionHandler: ((Result<Int, Error>) -> ())? = nil) {
-        WCSession.default.sendMessage(["connections": Server.get(withManagedContext: managedObjectContext).map { $0.serialized }], replyHandler: {
-            guard let updatedRecords = $0["records"] as? Int else {
-                assertionFailure("Received an invalid response from the Apple Watch!")
-                
-                return
-            }
+    func sendUpdateToWatch(completionHandler: ((Result<Void, Error>) -> ())? = nil) {
+        do {
+            try WCSession.default.updateApplicationContext(["connections": Server.get(withManagedContext: managedObjectContext).map { $0.serialized }])
             
-            completionHandler?(.success(updatedRecords))
-        }, errorHandler: {
-            completionHandler?(.failure($0))
-        })
+            completionHandler?(.success(()))
+        } catch {
+            completionHandler?(.failure(error))
+        }
     }
 }
 
@@ -58,11 +54,6 @@ extension DataTransferManager: WCSessionDelegate {
         }
     }
     
-    func sessionDidBecomeInactive(_ session: WCSession) {
-        
-    }
-    
-    func sessionDidDeactivate(_ session: WCSession) {
-        
-    }
+    func sessionDidBecomeInactive(_ session: WCSession) {}
+    func sessionDidDeactivate(_ session: WCSession) {}
 }
