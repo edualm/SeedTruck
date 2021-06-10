@@ -9,5 +9,5 @@ import Foundation
 
 protocol DataTransferManageable {
     
-    func sendUpdateToWatch(completionHandler: ((Result<Int, Error>) -> ())?)
+    func sendUpdateToWatch(completionHandler: ((Result<Void, Error>) -> ())?)
 }
