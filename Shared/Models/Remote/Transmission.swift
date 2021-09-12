@@ -48,11 +48,19 @@ enum Transmission {
             let tag: Int?
         }
         
-        struct SessionArguments {
+        struct SessionArgumentsBoolean: Codable {
             
             let result: Result
             
-            let arguments: Dictionary<String, Any>?
+            let arguments: Dictionary<String, Bool>?
+            let tag: Int?
+        }
+        
+        struct SessionArgumentsNumber: Codable {
+            
+            let result: Result
+            
+            let arguments: Dictionary<String, Double>?
             let tag: Int?
         }
     }

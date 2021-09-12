@@ -154,7 +154,7 @@ class TransmissionConnection: ServerConnection {
             parameters = ["metainfo": data.base64EncodedString()]
         }
         
-        performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.SessionArguments, TransmissionError>) in
+        performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentAdd, TransmissionError>) in
             switch result {
             case .success(let response):
                 guard let torrentAdded = response.arguments?["torrent-added"] else {
@@ -254,20 +254,47 @@ class TransmissionConnection: ServerConnection {
         }
     }
     
-    func getSpeedLimitState(completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
+    func getSpeedLimitConfiguration(completionHandler: @escaping (Result<(down: Double, up: Double), ServerCommunicationError>) -> ()) {
         let parameters: Parameters = [
-            "fields": ["speed-limit-up", "speed-limit-up-enabled", "speed-limit-down", "speed-limit-down-enabled"],
+            "fields": ["speed-limit-up", "speed-limit-down"],
         ]
         
-        performCall(withMethod: "session-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
+        performCall(withMethod: "session-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.SessionArgumentsNumber, TransmissionError>) in
             switch result {
             case .success(let response):
-                switch response.result {
-                case .success:
-                    completionHandler(.success(true))
-                case .error:
-                    completionHandler(.success(false))
+                guard let responseArguments = response.arguments,
+                      let speedLimitDown = responseArguments["speed-limit-down"],
+                      let speedLimitUp = responseArguments["speed-limit-up"] else {
+                    completionHandler(.failure(.parseError))
+                    
+                    return
                 }
+                
+                completionHandler(.success((speedLimitDown, speedLimitUp)))
+                
+            case .failure(let error):
+                completionHandler(.failure(.serverError(error.localizedDescription)))
+            }
+        }
+    }
+    
+    func getSpeedLimitState(completionHandler: @escaping (Result<(down: Bool, up: Bool), ServerCommunicationError>) -> ()) {
+        let parameters: Parameters = [
+            "fields": ["speed-limit-up-enabled", "speed-limit-down-enabled"],
+        ]
+        
+        performCall(withMethod: "session-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.SessionArgumentsBoolean, TransmissionError>) in
+            switch result {
+            case .success(let response):
+                guard let responseArguments = response.arguments,
+                      let speedLimitDownEnabled = responseArguments["speed-limit-down-enabled"],
+                      let speedLimitUpEnabled = responseArguments["speed-limit-up-enabled"] else {
+                    completionHandler(.failure(.parseError))
+                    
+                    return
+                }
+                
+                completionHandler(.success((speedLimitDownEnabled, speedLimitUpEnabled)))
                 
             case .failure(let error):
                 completionHandler(.failure(.serverError(error.localizedDescription)))
