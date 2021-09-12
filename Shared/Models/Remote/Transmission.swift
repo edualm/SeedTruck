@@ -47,6 +47,14 @@ enum Transmission {
             let arguments: Dictionary<String, [Torrent]>?
             let tag: Int?
         }
+        
+        struct SessionArguments {
+            
+            let result: Result
+            
+            let arguments: Dictionary<String, Any>?
+            let tag: Int?
+        }
     }
     
     struct TorrentAdded: Codable {

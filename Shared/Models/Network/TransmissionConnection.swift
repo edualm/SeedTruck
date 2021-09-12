@@ -154,7 +154,7 @@ class TransmissionConnection: ServerConnection {
             parameters = ["metainfo": data.base64EncodedString()]
         }
         
-        performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentAdd, TransmissionError>) in
+        performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.SessionArguments, TransmissionError>) in
             switch result {
             case .success(let response):
                 guard let torrentAdded = response.arguments?["torrent-added"] else {
@@ -239,6 +239,49 @@ class TransmissionConnection: ServerConnection {
         ]
         
         performCall(withMethod: "torrent-remove", parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
+            switch result {
+            case .success(let response):
+                switch response.result {
+                case .success:
+                    completionHandler(.success(true))
+                case .error:
+                    completionHandler(.success(false))
+                }
+                
+            case .failure(let error):
+                completionHandler(.failure(.serverError(error.localizedDescription)))
+            }
+        }
+    }
+    
+    func getSpeedLimitState(completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
+        let parameters: Parameters = [
+            "fields": ["speed-limit-up", "speed-limit-up-enabled", "speed-limit-down", "speed-limit-down-enabled"],
+        ]
+        
+        performCall(withMethod: "session-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
+            switch result {
+            case .success(let response):
+                switch response.result {
+                case .success:
+                    completionHandler(.success(true))
+                case .error:
+                    completionHandler(.success(false))
+                }
+                
+            case .failure(let error):
+                completionHandler(.failure(.serverError(error.localizedDescription)))
+            }
+        }
+    }
+    
+    func setSpeedLimitState(_ enabled: (down: Bool, up: Bool), completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
+        let parameters: Parameters = [
+            "speed-limit-down-enabled": enabled.down,
+            "speed-limit-up-enabled": enabled.up
+        ]
+        
+        performCall(withMethod: "session-set", parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
             switch result {
             case .success(let response):
                 switch response.result {
