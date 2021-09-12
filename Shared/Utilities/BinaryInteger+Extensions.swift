@@ -10,6 +10,8 @@ import Foundation
 extension BinaryInteger {
     
     var humanReadableDate: String? {
+        guard self > 0 else { return nil }
+        
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.year, .month, .day, .hour, .minute]
         formatter.unitsStyle = .abbreviated

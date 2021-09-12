@@ -59,11 +59,17 @@ struct TorrentDetailsView: View {
         
         var body: some View {
             switch torrent.status {
-            case let .downloading(_, _, _, downloadRate, uploadRate, eta):
+            case let .downloading(_, peersSending, peersReceiving, downloadRate, uploadRate, eta):
                 Box(label: Label("Statistics", systemImage: "speedometer")) {
                     HStack {
                         VStack(alignment: .leading) {
+                            Label("Seeders: \(peersSending)", systemImage: "person.and.arrow.left.and.arrow.right")
+                            
+                            Label("Leechers: \(peersReceiving)", systemImage: "person.3")
+                                .padding(.top)
+                            
                             Label("Download Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
+                                .padding(.top)
                                 
                             Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
                                 .padding(.top)

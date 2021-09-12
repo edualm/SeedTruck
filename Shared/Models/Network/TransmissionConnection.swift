@@ -78,7 +78,11 @@ class TransmissionConnection: ServerConnection {
             urlRequest.addValue(csrfToken, forHTTPHeaderField: Header.CSRFToken.name)
         }
         
-        let task = URLSession.shared.dataTask(with: urlRequest) { [self] data, response, error in
+        let sessionConfig = URLSessionConfiguration.default
+        sessionConfig.timeoutIntervalForRequest = 5.0
+        sessionConfig.timeoutIntervalForResource = 10.0
+        
+        let task = URLSession(configuration: sessionConfig).dataTask(with: urlRequest) { [self] data, response, error in
             guard error == nil, let response = response as? HTTPURLResponse else {
                 completionHandler(.failure(.invalidResponse))
                 

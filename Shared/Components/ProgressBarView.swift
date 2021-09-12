@@ -29,6 +29,9 @@ struct ProgressBarView: View {
                         Spacer()
                             .frame(minWidth: 0)
                     }
+                    Text("\(String(format: "%.2f", progress * 100))%")
+                        .font(.caption2)
+                        .padding(.top, -1)
                 }.cornerRadius(cornerRadius)
             }
         }
@@ -42,6 +45,7 @@ struct ProgressBarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0)
+            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0.1)
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0.5)
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 1)
         }.previewLayout(.fixed(width: 300, height: 10))
