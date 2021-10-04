@@ -10,7 +10,9 @@ import SwiftUI
 struct TorrentsView: View {
     
     private struct AlertIdentifier: Identifiable {
+        
         enum Choice {
+            
             case addTorrentError
         }
         
@@ -18,6 +20,7 @@ struct TorrentsView: View {
     }
     
     private enum PresentedSheet {
+        
         case addMagnet
         case addTorrent(LocalTorrent)
         case serverSettings
@@ -177,7 +180,7 @@ struct TorrentsView: View {
                 TorrentHandlerNavigationView(torrent: torrent, server: selectedServer)
             case .serverSettings:
                 if let server = selectedServer {
-                    ServerSettingsView(presenter: ServerSettingsPresenter(server: server))
+                    RemoteServerSettingsView(presenter: RemoteServerSettingsPresenter(server: server))
                 } else {
                     EmptyView()
                 }

@@ -9,6 +9,11 @@ import SwiftUI
 
 struct TorrentsView: View {
     
+    private enum PresentedSheet {
+        
+        case serverSettings
+    }
+    
     @FetchRequest(
         entity: Server.entity(),
         sortDescriptors: [
@@ -21,6 +26,8 @@ struct TorrentsView: View {
     @State var selectedServer: Server?
     @State var filter: Filter?
     
+    @State private var presentedSheet: PresentedSheet?
+    
     private func reloadData() {
         DispatchQueue.main.async {
             NotificationCenter.default.post(name: .updateTorrentListView, object: nil)
@@ -28,7 +35,12 @@ struct TorrentsView: View {
     }
     
     var body: some View {
-        NavigationView {
+        let isPresentingModal = Binding<Bool>(
+            get: { presentedSheet != nil },
+            set: { _ in presentedSheet = nil }
+        )
+        
+        return NavigationView {
             VStack {
                 if serverConnections.count > 1 {
                     if let s = selectedServer {
@@ -79,6 +91,12 @@ struct TorrentsView: View {
                     }
                     
                     Button {
+                        self.presentedSheet = .serverSettings
+                    } label: {
+                        Image(systemName: "dial.max")
+                    }
+                    
+                    Button {
                         reloadData()
                     } label: {
                         Image(systemName: "arrow.clockwise")
@@ -88,6 +106,18 @@ struct TorrentsView: View {
                 TorrentListView(server: $selectedServer, filter: $filter)
                     .navigationTitle(selectedServer?.name ?? "Torrents")
                     .frame(minWidth: 300)
+                    .sheet(isPresented: isPresentingModal) {
+                        switch presentedSheet {
+                        case .serverSettings:
+                            if let server = selectedServer {
+                                RemoteServerSettingsView(presenter: RemoteServerSettingsPresenter(server: server))
+                            } else {
+                                EmptyView()
+                            }
+                        case .none:
+                            EmptyView()
+                        }
+                    }
             }
         }
         .navigationViewStyle(Style.navigationView)

@@ -1,5 +1,5 @@
 //
-//  ServerSettingsPresenter.swift
+//  RemoteServerSettingsPresenter.swift
 //  SeedTruck
 //
 //  Created by Eduardo Almeida on 04/10/2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ServerSettingsPresenter: ObservableObject {
+class RemoteServerSettingsPresenter: ObservableObject {
     
     enum Action {
         
