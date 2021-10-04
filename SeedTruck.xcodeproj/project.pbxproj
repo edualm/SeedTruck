@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0001B6F270B879400F40C2F /* RemoteServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0001B6E270B879400F40C2F /* RemoteServerSettingsView.swift */; };
 		A01056A524F48D5E00DA056D /* TorrentHandlerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A424F48D5E00DA056D /* TorrentHandlerView.swift */; };
 		A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */; };
 		A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */; };
@@ -153,7 +154,6 @@
 		A0B9B8B82516385F00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
 		A0B9B8C32516388000E3486A /* Box+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8C22516388000E3486A /* Box+View.swift */; };
 		A0BD79AC270B71CB00E05093 /* RemoteServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AB270B71CB00E05093 /* RemoteServerSettingsView.swift */; };
-		A0BD79AD270B71CB00E05093 /* RemoteServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AB270B71CB00E05093 /* RemoteServerSettingsView.swift */; };
 		A0BD79AF270B73C000E05093 /* RemoteServerSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AE270B73BF00E05093 /* RemoteServerSettingsPresenter.swift */; };
 		A0BD79B0270B73C000E05093 /* RemoteServerSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AE270B73BF00E05093 /* RemoteServerSettingsPresenter.swift */; };
 		A0C071AD24F59CC700CEC1DA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AC24F59CC700CEC1DA /* MainView.swift */; };
@@ -305,6 +305,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A0001B6E270B879400F40C2F /* RemoteServerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteServerSettingsView.swift; sourceTree = "<group>"; };
 		A01056A424F48D5E00DA056D /* TorrentHandlerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentHandlerView.swift; sourceTree = "<group>"; };
 		A01056A724F4901700DA056D /* LocalTorrent+Initializers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTorrent+Initializers.swift"; sourceTree = "<group>"; };
 		A01056AA24F491B600DA056D /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -645,6 +646,7 @@
 				A0D880162584573B0031E898 /* Settings */,
 				A06DEFA724FD7EF5004B2DC9 /* MainView.swift */,
 				A0CE01FB25857C9D002777BF /* TorrentHandlerView.swift */,
+				A0001B6E270B879400F40C2F /* RemoteServerSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -655,6 +657,7 @@
 				A045C8DF24F2011E00B3B1CD /* MainView.swift */,
 				A045C8E224F2013100B3B1CD /* TorrentsView.swift */,
 				A01056A424F48D5E00DA056D /* TorrentHandlerView.swift */,
+				A0BD79AB270B71CB00E05093 /* RemoteServerSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -837,7 +840,6 @@
 				A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */,
 				A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */,
 				A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */,
-				A0BD79AB270B71CB00E05093 /* RemoteServerSettingsView.swift */,
 				A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */,
 				A023BAE624F294EF00B82FB3 /* SettingsView.swift */,
 				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
@@ -1257,6 +1259,7 @@
 				A0CE011225853D93002777BF /* MenuItem.swift in Sources */,
 				A01056A924F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
 				A06DEFA824FD7EF5004B2DC9 /* MainView.swift in Sources */,
+				A0001B6F270B879400F40C2F /* RemoteServerSettingsView.swift in Sources */,
 				A0CE01FC25857C9D002777BF /* TorrentHandlerView.swift in Sources */,
 				A071CC6F24FBC9BF00E46065 /* Style.swift in Sources */,
 				A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
@@ -1271,7 +1274,6 @@
 				A0CE016F25854D44002777BF /* NotificationName+Extensions.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
-				A0BD79AD270B71CB00E05093 /* RemoteServerSettingsView.swift in Sources */,
 				A0E7426625154FCB0029FFD6 /* SharedBucket.swift in Sources */,
 				A0AAF2BB257BB44A00A2217A /* NoTorrentsView.swift in Sources */,
 				A07DD1022512C9E900559D9A /* ConnectionDetails.swift in Sources */,

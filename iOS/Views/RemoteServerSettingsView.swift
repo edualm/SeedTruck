@@ -1,6 +1,6 @@
 //
 //  RemoteServerSettingsView.swift
-//  SeedTruck
+//  SeedTruck (iOS)
 //
 //  Created by Eduardo Almeida on 04/10/2021.
 //
@@ -22,18 +22,6 @@ struct RemoteServerSettingsView: View {
     @ViewBuilder
     var innerView: some View {
         VStack {
-            #if os(macOS)
-            HStack {
-                Button {
-                    presentation.wrappedValue.dismiss()
-                } label: {
-                    Text("Close")
-                }
-                
-                Spacer()
-            }
-            #endif
-            
             if presenter.isLoading {
                 LoadingView()
             } else {
@@ -91,17 +79,11 @@ struct RemoteServerSettingsView: View {
     }
     
     var body: some View {
-        #if !os(macOS)
         NavigationView {
             innerView
                 .navigationTitle("Server Settings")
                 .navigationBarItems(leading: leadingNavigationBarItems)
         }
-        #else
-        innerView
-            .padding()
-            .frame(minWidth: 500)
-        #endif
     }
 }
 
