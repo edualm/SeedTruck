@@ -20,6 +20,7 @@ struct TorrentsView: View {
     private enum PresentedSheet {
         case addMagnet
         case addTorrent(LocalTorrent)
+        case serverSettings
     }
     
     @State var pickerAdapter: DocumentPickerAdapter?
@@ -94,6 +95,12 @@ struct TorrentsView: View {
         Group {
             if serverConnections.count > 0 {
                 HStack {
+                    Button {
+                        self.presentedSheet = .serverSettings
+                    } label: {
+                        Image(systemName: "dial.max")
+                    }
+                    
                     Menu {
                         Button {
                             filter = nil
@@ -168,6 +175,12 @@ struct TorrentsView: View {
                 AddMagnetView(server: $selectedServer)
             case .addTorrent(let torrent):
                 TorrentHandlerNavigationView(torrent: torrent, server: selectedServer)
+            case .serverSettings:
+                if let server = selectedServer {
+                    ServerSettingsView(presenter: ServerSettingsPresenter(server: server))
+                } else {
+                    EmptyView()
+                }
             case .none:
                 EmptyView()
             }

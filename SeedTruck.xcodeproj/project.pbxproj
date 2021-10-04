@@ -152,6 +152,10 @@
 		A0B9B8AF2516384300E3486A /* CoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C1DB3B24F436A400C76682 /* CoreDataManagedObjectDeleter.swift */; };
 		A0B9B8B82516385F00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
 		A0B9B8C32516388000E3486A /* Box+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8C22516388000E3486A /* Box+View.swift */; };
+		A0BD79AC270B71CB00E05093 /* ServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AB270B71CB00E05093 /* ServerSettingsView.swift */; };
+		A0BD79AD270B71CB00E05093 /* ServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AB270B71CB00E05093 /* ServerSettingsView.swift */; };
+		A0BD79AF270B73C000E05093 /* ServerSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AE270B73BF00E05093 /* ServerSettingsPresenter.swift */; };
+		A0BD79B0270B73C000E05093 /* ServerSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BD79AE270B73BF00E05093 /* ServerSettingsPresenter.swift */; };
 		A0C071AD24F59CC700CEC1DA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C071AC24F59CC700CEC1DA /* MainView.swift */; };
 		A0C071AF24F59CC800CEC1DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071AE24F59CC800CEC1DA /* Assets.xcassets */; };
 		A0C071B224F59CC800CEC1DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0C071B124F59CC800CEC1DA /* Preview Assets.xcassets */; };
@@ -378,6 +382,8 @@
 		A0B9B88A251637D500E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
 		A0B9B89D2516380C00E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
 		A0B9B8C22516388000E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
+		A0BD79AB270B71CB00E05093 /* ServerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettingsView.swift; sourceTree = "<group>"; };
+		A0BD79AE270B73BF00E05093 /* ServerSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettingsPresenter.swift; sourceTree = "<group>"; };
 		A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeedTruck (tvOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0C071AA24F59CC700CEC1DA /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
 		A0C071AC24F59CC700CEC1DA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -814,6 +820,7 @@
 		A0C1DB3E24F4376800C76682 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
+				A0BD79AE270B73BF00E05093 /* ServerSettingsPresenter.swift */,
 				A0C1DB3524F42E4100C76682 /* SettingsPresenter.swift */,
 				A073DD2324F4768400BA37C9 /* TorrentDetailsPresenter.swift */,
 			);
@@ -830,6 +837,7 @@
 				A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */,
 				A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */,
 				A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */,
+				A0BD79AB270B71CB00E05093 /* ServerSettingsView.swift */,
 				A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */,
 				A023BAE624F294EF00B82FB3 /* SettingsView.swift */,
 				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
@@ -1171,11 +1179,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0BD79AF270B73C000E05093 /* ServerSettingsPresenter.swift in Sources */,
 				A0F99C2825620933002D7BC6 /* UTI.swift in Sources */,
 				A02C585224F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */,
 				A073DD2424F4768400BA37C9 /* TorrentDetailsPresenter.swift in Sources */,
 				A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
+				A0BD79AC270B71CB00E05093 /* ServerSettingsView.swift in Sources */,
 				A096389024F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
 				A09638A624F56BDA00F2062F /* Box.swift in Sources */,
 				A0E7426525154FCB0029FFD6 /* SharedBucket.swift in Sources */,
@@ -1250,6 +1260,7 @@
 				A0CE01FC25857C9D002777BF /* TorrentHandlerView.swift in Sources */,
 				A071CC6F24FBC9BF00E46065 /* Style.swift in Sources */,
 				A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */,
+				A0BD79B0270B73C000E05093 /* ServerSettingsPresenter.swift in Sources */,
 				A0CE013825854916002777BF /* ServerDetailsView.swift in Sources */,
 				A0CE01C1258559DD002777BF /* NewServerDoneView.swift in Sources */,
 				A09638A724F56BDA00F2062F /* Box.swift in Sources */,
@@ -1260,6 +1271,7 @@
 				A0CE016F25854D44002777BF /* NotificationName+Extensions.swift in Sources */,
 				A071CACA24F3113800B6AC0C /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C1DB3A24F4358500C76682 /* TorrentListView.swift in Sources */,
+				A0BD79AD270B71CB00E05093 /* ServerSettingsView.swift in Sources */,
 				A0E7426625154FCB0029FFD6 /* SharedBucket.swift in Sources */,
 				A0AAF2BB257BB44A00A2217A /* NoTorrentsView.swift in Sources */,
 				A07DD1022512C9E900559D9A /* ConnectionDetails.swift in Sources */,

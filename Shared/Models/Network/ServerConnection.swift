@@ -37,3 +37,11 @@ protocol ServerConnection {
     
     func perform(_ action: RemoteTorrent.Action, on torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
 }
+
+protocol HasSpeedLimitSupport {
+    
+    func getSpeedLimitConfiguration(completionHandler: @escaping (Result<(down: Double, up: Double), ServerCommunicationError>) -> ())
+    func getSpeedLimitState(completionHandler: @escaping (Result<(down: Bool, up: Bool), ServerCommunicationError>) -> ())
+    
+    func setSpeedLimitState(_ enabled: (down: Bool, up: Bool), completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ())
+}
