@@ -27,6 +27,8 @@ struct RemoteServerSettingsView: View {
             } else {
                 if !presenter.hasServerSupport {
                     Text("No server support.")
+                } else if presenter.isErrored {
+                    ErrorView(type: .noConnection)
                 } else {
                     Form {
                         Section(header: Text("Speed Limit"), footer: Text("To edit these values, please do it in Transmission itself.")) {
