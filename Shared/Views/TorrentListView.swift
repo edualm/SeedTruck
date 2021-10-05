@@ -79,7 +79,7 @@ struct TorrentListView: View {
         Group {
             switch status {
             case .error:
-                ServerConnectionErrorView()
+                ErrorView(type: .noConnection)
                 
             case .loading:
                 LoadingView()

@@ -36,10 +36,12 @@ struct RemoteServerSettingsView: View {
                 LoadingView()
             } else {
                 if !presenter.hasServerSupport {
-                    Text("No server support.")
+                    ErrorView(type: .notSupported)
+                } else if presenter.isErrored {
+                    ErrorView(type: .noConnection)
                 } else {
                     Form {
-                        Section(header: Text("Configuration").bold().padding(.bottom, 4), footer: Text("To edit these values, please do it in Transmission itself.")) {
+                        Section(header: Text("Speed Limit").bold().padding(.bottom, 4), footer: Text("To edit these values, please do it in Transmission itself.")) {
                             switch presenter.speedLimitConfiguration {
                             case .notConfigured:
                                 Text("Not configured.")
@@ -55,7 +57,7 @@ struct RemoteServerSettingsView: View {
                                     Text(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: Int(up * 1024)))
                                 }.padding(.bottom, 4)
                             case .none:
-                                Text("...")
+                                EmptyView()
                             }
                         }
                         

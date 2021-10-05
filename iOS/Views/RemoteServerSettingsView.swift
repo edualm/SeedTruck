@@ -29,7 +29,7 @@ struct RemoteServerSettingsView: View {
                     Text("No server support.")
                 } else {
                     Form {
-                        Section(header: Text("Configuration"), footer: Text("To edit these values, please do it in Transmission itself.")) {
+                        Section(header: Text("Speed Limit"), footer: Text("To edit these values, please do it in Transmission itself.")) {
                             switch presenter.speedLimitConfiguration {
                             case .notConfigured:
                                 Text("Not configured.")

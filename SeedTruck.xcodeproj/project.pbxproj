@@ -49,8 +49,8 @@
 		A0589FF0251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
 		A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
 		A05FE16424F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
-		A05FE16624F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */; };
-		A05FE16724F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */; };
+		A05FE16624F43A7300B57E45 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ErrorView.swift */; };
+		A05FE16724F43A7300B57E45 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ErrorView.swift */; };
 		A05FE16A24F45B2700B57E45 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16924F45B2700B57E45 /* LoadingView.swift */; };
 		A05FE16B24F45B2700B57E45 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16924F45B2700B57E45 /* LoadingView.swift */; };
 		A06DEFA424FC8219004B2DC9 /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06DEFA324FC8219004B2DC9 /* NoServersConfiguredView.swift */; };
@@ -111,7 +111,7 @@
 		A096388824F569CA00F2062F /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388624F569CA00F2062F /* ServerType.swift */; };
 		A096388924F569CA00F2062F /* ServerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388624F569CA00F2062F /* ServerType.swift */; };
 		A096388B24F569DE00F2062F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16924F45B2700B57E45 /* LoadingView.swift */; };
-		A096388C24F569DE00F2062F /* ServerConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */; };
+		A096388C24F569DE00F2062F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ErrorView.swift */; };
 		A096388D24F569E900F2062F /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A096389024F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */; };
 		A096389124F56A1200F2062F /* LocalTorrent+ComputedProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */; };
@@ -176,7 +176,7 @@
 		A0C071E824F5A05900CEC1DA /* PreviewMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */; };
 		A0C071E924F5A05900CEC1DA /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01056AA24F491B600DA056D /* String+Extensions.swift */; };
 		A0C071EA24F5A06100CEC1DA /* NewServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02C585824F3446100C82D68 /* NewServerView.swift */; };
-		A0C071EE24F5A06100CEC1DA /* ServerConnectionErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */; };
+		A0C071EE24F5A06100CEC1DA /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16524F43A7300B57E45 /* ErrorView.swift */; };
 		A0C071EF24F5A06100CEC1DA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE624F294EF00B82FB3 /* SettingsView.swift */; };
 		A0C071F024F5A06100CEC1DA /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09638A524F56BDA00F2062F /* Box.swift */; };
 		A0C071F124F5A06100CEC1DA /* NoServersConfiguredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */; };
@@ -341,7 +341,7 @@
 		A045C8E824F205B100B3B1CD /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+Extensions.swift"; sourceTree = "<group>"; };
 		A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoServersConfiguredView.swift; sourceTree = "<group>"; };
-		A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConnectionErrorView.swift; sourceTree = "<group>"; };
+		A05FE16524F43A7300B57E45 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		A05FE16924F45B2700B57E45 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		A06DEFA324FC8219004B2DC9 /* NoServersConfiguredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoServersConfiguredView.swift; sourceTree = "<group>"; };
 		A06DEFA724FD7EF5004B2DC9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -835,11 +835,11 @@
 			children = (
 				A0CE018125855825002777BF /* Shared Extensions */,
 				A073DD2024F4658700BA37C9 /* AddMagnetView.swift */,
+				A05FE16524F43A7300B57E45 /* ErrorView.swift */,
 				A05FE16924F45B2700B57E45 /* LoadingView.swift */,
 				A02C585824F3446100C82D68 /* NewServerView.swift */,
 				A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */,
 				A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */,
-				A05FE16524F43A7300B57E45 /* ServerConnectionErrorView.swift */,
 				A0C071FE24F5AFC400CEC1DA /* ServerStatusView.swift */,
 				A023BAE624F294EF00B82FB3 /* SettingsView.swift */,
 				A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */,
@@ -1218,7 +1218,7 @@
 				A05FE16324F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
 				A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */,
 				A0CE020625857E0C002777BF /* TorrentHandlerView+Shared.swift in Sources */,
-				A05FE16624F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */,
+				A05FE16624F43A7300B57E45 /* ErrorView.swift in Sources */,
 				A05FE16A24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */,
 				A0CE01422585494A002777BF /* ConnectionResult.swift in Sources */,
@@ -1283,7 +1283,7 @@
 				A0CE01432585494A002777BF /* ConnectionResult.swift in Sources */,
 				A05FE16424F43A5A00B57E45 /* NoServersConfiguredView.swift in Sources */,
 				A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */,
-				A05FE16724F43A7300B57E45 /* ServerConnectionErrorView.swift in Sources */,
+				A05FE16724F43A7300B57E45 /* ErrorView.swift in Sources */,
 				A08863D32585B66900443ECB /* View+Extensions.swift in Sources */,
 				A05FE16B24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A0CE00F725853C53002777BF /* TorrentsView.swift in Sources */,
@@ -1360,7 +1360,7 @@
 				A08863B72585AE1900443ECB /* Constants.swift in Sources */,
 				A0CE01CA25855BA1002777BF /* NotificationName+Extensions.swift in Sources */,
 				A096388B24F569DE00F2062F /* LoadingView.swift in Sources */,
-				A096388C24F569DE00F2062F /* ServerConnectionErrorView.swift in Sources */,
+				A096388C24F569DE00F2062F /* ErrorView.swift in Sources */,
 				A07DD1032512C9E900559D9A /* ConnectionDetails.swift in Sources */,
 				A09638AF24F5802800F2062F /* Server+CoreData.swift in Sources */,
 				A096389E24F56A8200F2062F /* Transmission.swift in Sources */,
@@ -1402,7 +1402,7 @@
 				A0C0720524F5B04500CEC1DA /* ServerStatusView.swift in Sources */,
 				A0E7426825154FCB0029FFD6 /* SharedBucket.swift in Sources */,
 				A0C071F324F5A06100CEC1DA /* TorrentDetailsView.swift in Sources */,
-				A0C071EE24F5A06100CEC1DA /* ServerConnectionErrorView.swift in Sources */,
+				A0C071EE24F5A06100CEC1DA /* ErrorView.swift in Sources */,
 				A0C071E224F5A05900CEC1DA /* ByteCountFormatter+Extensions.swift in Sources */,
 				A0C071DC24F5A05300CEC1DA /* Transmission.swift in Sources */,
 				A0C071F024F5A06100CEC1DA /* Box.swift in Sources */,
@@ -1594,7 +1594,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1603,7 +1603,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1618,7 +1618,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1627,7 +1627,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1646,7 +1646,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1656,7 +1656,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1674,7 +1674,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1684,7 +1684,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1789,11 +1789,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1811,11 +1811,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1832,7 +1832,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1842,7 +1842,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1858,7 +1858,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1868,7 +1868,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1886,7 +1886,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1895,7 +1895,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1911,7 +1911,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1920,7 +1920,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
