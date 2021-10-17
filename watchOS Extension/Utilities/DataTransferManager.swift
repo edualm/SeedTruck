@@ -30,9 +30,13 @@ extension DataTransferManager: WCSessionDelegate {
         //  Do nothing.
     }
     
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        guard let connectionDataPackage = applicationContext["connections"] as? [[String: Any]] else {
-            print("Invalid data received.")
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
+        self.session(session, didReceiveMessage: message) { _ in }
+    }
+    
+    func session(_ session: WCSession, didReceiveMessage message: [String : Any], replyHandler: @escaping ([String : Any]) -> Void) {
+        guard let connectionDataPackage = message["connections"] as? [[String: Any]] else {
+            replyHandler(["success": false, "error": "Invalid data received."])
             
             return
         }

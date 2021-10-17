@@ -36,20 +36,18 @@ class DataTransferManager: NSObject, DataTransferManageable {
     }
     
     func sendUpdateToWatch(completionHandler: ((Result<Void, Error>) -> ())? = nil) {
-        do {
-            try WCSession.default.updateApplicationContext(["connections": Server.get(withManagedContext: managedObjectContext).map { $0.serialized }])
-            
+        WCSession.default.sendMessage(["connections": Server.get(withManagedContext: managedObjectContext).map { $0.serialized }], replyHandler: { _ in
             completionHandler?(.success(()))
-        } catch {
+        }, errorHandler: { error in
             completionHandler?(.failure(error))
-        }
+        })
     }
 }
 
 extension DataTransferManager: WCSessionDelegate {
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        if activationState == .activated {
+        if activationState == .activated && session.isReachable {
             sendUpdateToWatch()
         }
     }
