@@ -105,7 +105,7 @@ struct TorrentsView: View {
                     }
                 }.padding(serverConnections.count > 1 ? [.leading, .trailing] : [.top, .leading, .trailing])
                 
-                TorrentListView(server: $selectedServer, filter: $filter, filterQuery: .constant(""))
+                TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery)
                     .navigationTitle(selectedServer?.name ?? "Torrents")
                     .frame(minWidth: 300)
                     .sheet(isPresented: isPresentingModal) {
@@ -132,7 +132,7 @@ struct TorrentsView: View {
     var body: some View {
         if #available(macOS 12.0, *) {
             innerBody
-                .searchable(text: $filterQuery)
+                .searchable(text: $filterQuery, placement: .sidebar)
         } else {
             innerBody
         }
