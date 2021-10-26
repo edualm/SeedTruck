@@ -73,6 +73,8 @@ struct TorrentsView: View {
     @State var filter: Filter?
     @State var selectedServer: Server?
     
+    @State var filterQuery: String = ""
+    
     var leadingNavigationBarItems: some View {
         Group {
             if serverConnections.count > 1 {
@@ -144,14 +146,14 @@ struct TorrentsView: View {
         }
     }
     
-    var body: some View {
+    var innerBody: some View {
         let isPresentingModal = Binding<Bool>(
             get: { presentedSheet != nil },
             set: { _ in presentedSheet = nil }
         )
         
         return NavigationView {
-            TorrentListView(server: $selectedServer, filter: $filter)
+            TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery)
                 .navigationTitle(selectedServer?.name ?? "Torrents")
                 .navigationBarItems(
                     leading: leadingNavigationBarItems,
@@ -187,6 +189,15 @@ struct TorrentsView: View {
             case .none:
                 EmptyView()
             }
+        }
+    }
+    
+    var body: some View {
+        if #available(iOS 15.0, *) {
+            innerBody
+                .searchable(text: $filterQuery)
+        } else {
+            innerBody
         }
     }
 }

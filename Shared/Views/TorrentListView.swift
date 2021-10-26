@@ -21,6 +21,7 @@ struct TorrentListView: View {
     
     @Binding var server: Server?
     @Binding var filter: Filter?
+    @Binding var filterQuery: String
     
     @State private var status: Status = .noError
     @State private var timer: Timer? = nil
@@ -87,11 +88,15 @@ struct TorrentListView: View {
             case .noError:
                 if server != nil {
                     let filteredTorrents = torrents.filter {
+                        let compliesToQuery = filterQuery != "" ?
+                            $0.name.lowercased().contains(filterQuery.lowercased()) :
+                            true
+                        
                         guard let filter = filter else {
-                            return true
+                            return compliesToQuery
                         }
                         
-                        return $0.status.simple == filter
+                        return compliesToQuery && $0.status.simple == filter
                     }
                     
                     VStack {
@@ -167,6 +172,6 @@ struct TorrentListView: View {
 struct TorrentListView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TorrentListView(server: .constant(PreviewMockData.server), filter: .constant(nil))
+        TorrentListView(server: .constant(PreviewMockData.server), filter: .constant(nil), filterQuery: .constant(""))
     }
 }

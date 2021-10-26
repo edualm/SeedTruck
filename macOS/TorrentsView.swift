@@ -26,6 +26,8 @@ struct TorrentsView: View {
     @State var selectedServer: Server?
     @State var filter: Filter?
     
+    @State var filterQuery: String = ""
+    
     @State private var presentedSheet: PresentedSheet?
     
     private func reloadData() {
@@ -34,7 +36,7 @@ struct TorrentsView: View {
         }
     }
     
-    var body: some View {
+    var innerBody: some View {
         let isPresentingModal = Binding<Bool>(
             get: { presentedSheet != nil },
             set: { _ in presentedSheet = nil }
@@ -103,7 +105,7 @@ struct TorrentsView: View {
                     }
                 }.padding(serverConnections.count > 1 ? [.leading, .trailing] : [.top, .leading, .trailing])
                 
-                TorrentListView(server: $selectedServer, filter: $filter)
+                TorrentListView(server: $selectedServer, filter: $filter, filterQuery: .constant(""))
                     .navigationTitle(selectedServer?.name ?? "Torrents")
                     .frame(minWidth: 300)
                     .sheet(isPresented: isPresentingModal) {
@@ -124,6 +126,15 @@ struct TorrentsView: View {
         .onAppear(perform: onAppear)
         .onReceive(managedContextDidSave) { _ in
             selectedServer = serverConnections.first
+        }
+    }
+    
+    var body: some View {
+        if #available(macOS 12.0, *) {
+            innerBody
+                .searchable(text: $filterQuery)
+        } else {
+            innerBody
         }
     }
 }
