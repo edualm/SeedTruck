@@ -40,7 +40,7 @@ struct NewServerView: View {
                             Text(ServerType.allCases[$0].rawValue)
                         }
                     }
-                    TextField("Endpoint (ex: http://your.server/transmission/rpc)", text: $endpoint)
+                    TextField("Endpoint", text: $endpoint)
                     TextField("Username", text: $username)
                     SecureField("Password", text: $password)
                 }

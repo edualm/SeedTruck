@@ -88,18 +88,18 @@ struct TorrentsView: View {
                                 Image(systemName: "circle.fill")
                             }
                         }
-                    }
-                    
-                    Button {
-                        self.presentedSheet = .serverSettings
-                    } label: {
-                        Image(systemName: "dial.max")
-                    }
-                    
-                    Button {
-                        reloadData()
-                    } label: {
-                        Image(systemName: "arrow.clockwise")
+                        
+                        Button {
+                            self.presentedSheet = .serverSettings
+                        } label: {
+                            Image(systemName: "dial.max")
+                        }
+                        
+                        Button {
+                            reloadData()
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                        }
                     }
                 }.padding(serverConnections.count > 1 ? [.leading, .trailing] : [.top, .leading, .trailing])
                 

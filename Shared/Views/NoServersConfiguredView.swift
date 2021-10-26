@@ -9,6 +9,14 @@ import SwiftUI
 
 struct NoServersConfiguredView: View {
     
+    var text: Text {
+        #if os(macOS)
+        Text("Please add a server using the Settings window of the app.")
+        #else
+        Text("Please add a server using the Settings tab.")
+        #endif
+    }
+    
     var body: some View {
         VStack {
             Spacer()
@@ -17,8 +25,10 @@ struct NoServersConfiguredView: View {
             Text("No servers configured!")
                 .font(.headline)
                 .padding()
-            Text("Please add a server using the Settings tab.")
+            text
                 .fontWeight(.light)
+                .multilineTextAlignment(.center)
+                .padding([.leading, .trailing])
             Spacer()
         }
     }
