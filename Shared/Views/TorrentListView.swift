@@ -36,6 +36,10 @@ struct TorrentListView: View {
     func updateData() {
         if let server = server {
             server.connection.getTorrents { result in
+                guard server == self.server else {
+                    return
+                }
+                
                 guard case let Result.success(torrents) = result else {
                     self.status = .error
                     self.torrents = []
