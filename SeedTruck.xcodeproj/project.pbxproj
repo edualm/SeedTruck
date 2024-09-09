@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,10 @@
 		A011C7F524F211C6009D72C6 /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
 		A011C7F624F211C6009D72C6 /* LocalTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011C7F424F211C6009D72C6 /* LocalTorrent.swift */; };
 		A012561325046F0D00C7D51B /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A012561225046F0D00C7D51B /* SeedTruckApp.swift */; };
+		A022E6522C8FBC7200BAEED3 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A022E6512C8FBC7200BAEED3 /* SwiftyBencode */; };
+		A022E6542C8FBC8400BAEED3 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A022E6532C8FBC8400BAEED3 /* SwiftyBencode */; };
+		A022E6562C8FBC9000BAEED3 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A022E6552C8FBC9000BAEED3 /* SwiftyBencode */; };
+		A022E6582C8FBCCE00BAEED3 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A022E6572C8FBCCE00BAEED3 /* SwiftyBencode */; };
 		A023BAE424F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
 		A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
 		A023BAE724F294EF00B82FB3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE624F294EF00B82FB3 /* SettingsView.swift */; };
@@ -93,9 +97,6 @@
 		A08864182585BB5500443ECB /* GeneralSettingsView+AutoUpdateInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08864062585BB4100443ECB /* GeneralSettingsView+AutoUpdateInterval.swift */; };
 		A093B94A25142ACB00F499B4 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
 		A093B95325142B2400F499B4 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
-		A093B95E2514303700F499B4 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A093B95D2514303700F499B4 /* SwiftyBencode */; };
-		A093B9682514304500F499B4 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A093B9672514304500F499B4 /* SwiftyBencode */; };
-		A093B96C2514305100F499B4 /* SwiftyBencode in Frameworks */ = {isa = PBXBuildFile; productRef = A093B96B2514305100F499B4 /* SwiftyBencode */; };
 		A096385B24F568CF00F2062F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096385A24F568CF00F2062F /* Assets.xcassets */; };
 		A096386224F568CF00F2062F /* SeedTruck (watchOS) Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A096386724F568CF00F2062F /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096386624F568CF00F2062F /* SeedTruckApp.swift */; };
@@ -428,7 +429,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A093B95E2514303700F499B4 /* SwiftyBencode in Frameworks */,
+				A022E6522C8FBC7200BAEED3 /* SwiftyBencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +437,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A093B9682514304500F499B4 /* SwiftyBencode in Frameworks */,
+				A022E6542C8FBC8400BAEED3 /* SwiftyBencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +459,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A022E6562C8FBC9000BAEED3 /* SwiftyBencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,7 +467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A093B96C2514305100F499B4 /* SwiftyBencode in Frameworks */,
+				A022E6582C8FBCCE00BAEED3 /* SwiftyBencode in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,7 +910,7 @@
 			);
 			name = "SeedTruck (iOS)";
 			packageProductDependencies = (
-				A093B95D2514303700F499B4 /* SwiftyBencode */,
+				A022E6512C8FBC7200BAEED3 /* SwiftyBencode */,
 			);
 			productName = "SeedTruck (iOS)";
 			productReference = A045C8A924F2006500B3B1CD /* SeedTruck.app */;
@@ -928,7 +930,7 @@
 			);
 			name = "SeedTruck (macOS)";
 			packageProductDependencies = (
-				A093B9672514304500F499B4 /* SwiftyBencode */,
+				A022E6532C8FBC8400BAEED3 /* SwiftyBencode */,
 			);
 			productName = "SeedTruck (macOS)";
 			productReference = A045C8B124F2006500B3B1CD /* SeedTruck.app */;
@@ -1001,6 +1003,7 @@
 			);
 			name = "SeedTruck (watchOS) Extension";
 			packageProductDependencies = (
+				A022E6552C8FBC9000BAEED3 /* SwiftyBencode */,
 			);
 			productName = "SeedTruck (watchOS) Extension";
 			productReference = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */;
@@ -1020,7 +1023,7 @@
 			);
 			name = "SeedTruck (tvOS)";
 			packageProductDependencies = (
-				A093B96B2514305100F499B4 /* SwiftyBencode */,
+				A022E6572C8FBCCE00BAEED3 /* SwiftyBencode */,
 			);
 			productName = SeedTruck;
 			productReference = A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */;
@@ -1092,7 +1095,7 @@
 			);
 			mainGroup = A045C89C24F2006400B3B1CD;
 			packageReferences = (
-				A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */,
+				A022E6502C8FBC7200BAEED3 /* XCRemoteSwiftPackageReference "SwiftyBencode" */,
 			);
 			productRefGroup = A045C8AA24F2006500B3B1CD /* Products */;
 			projectDirPath = "";
@@ -1594,16 +1597,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1618,16 +1621,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1646,7 +1649,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1656,7 +1659,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1674,7 +1677,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1684,7 +1687,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1789,11 +1792,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1811,11 +1814,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1832,7 +1835,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1842,7 +1845,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1858,7 +1861,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1868,7 +1871,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
@@ -1886,7 +1889,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1895,7 +1898,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1911,7 +1914,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1920,7 +1923,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -2065,7 +2068,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */ = {
+		A022E6502C8FBC7200BAEED3 /* XCRemoteSwiftPackageReference "SwiftyBencode" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/edualm/SwiftyBencode";
 			requirement = {
@@ -2076,19 +2079,24 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		A093B95D2514303700F499B4 /* SwiftyBencode */ = {
+		A022E6512C8FBC7200BAEED3 /* SwiftyBencode */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
+			package = A022E6502C8FBC7200BAEED3 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
 			productName = SwiftyBencode;
 		};
-		A093B9672514304500F499B4 /* SwiftyBencode */ = {
+		A022E6532C8FBC8400BAEED3 /* SwiftyBencode */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
+			package = A022E6502C8FBC7200BAEED3 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
 			productName = SwiftyBencode;
 		};
-		A093B96B2514305100F499B4 /* SwiftyBencode */ = {
+		A022E6552C8FBC9000BAEED3 /* SwiftyBencode */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A093B95C2514303700F499B4 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
+			package = A022E6502C8FBC7200BAEED3 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
+			productName = SwiftyBencode;
+		};
+		A022E6572C8FBCCE00BAEED3 /* SwiftyBencode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A022E6502C8FBC7200BAEED3 /* XCRemoteSwiftPackageReference "SwiftyBencode" */;
 			productName = SwiftyBencode;
 		};
 /* End XCSwiftPackageProductDependency section */

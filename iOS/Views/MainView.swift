@@ -13,16 +13,19 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            TorrentsView()
-                .tabItem {
-                    Image(systemName: "tray.and.arrow.down")
-                    Text("Torrents")
-                }
-            SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
-                .tabItem {
-                    Image(systemName: "wrench.and.screwdriver")
-                    Text("Settings")
-                }
+            Group {
+                TorrentsView()
+                    .tabItem {
+                        Image(systemName: "tray.and.arrow.down")
+                        Text("Torrents")
+                    }
+                SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
+                    .tabItem {
+                        Image(systemName: "wrench.and.screwdriver")
+                        Text("Settings")
+                    }
+            }
+                .toolbar(.visible, for: .tabBar)
         }
     }
 }
