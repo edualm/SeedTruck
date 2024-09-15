@@ -53,7 +53,13 @@ struct TorrentsView: View {
                     onDismiss: {}
                 )
                 
-                UIApplication.shared.windows.first?.rootViewController?.present(pickerAdapter!.picker, animated: true)
+                UIApplication
+                    .shared
+                    .connectedScenes
+                    .compactMap { ($0 as? UIWindowScene)?.keyWindow }
+                    .last?
+                    .rootViewController?
+                    .present(pickerAdapter!.picker, animated: true)
             }
         ]
     }
@@ -146,7 +152,7 @@ struct TorrentsView: View {
         }
     }
     
-    var innerBody: some View {
+    var body: some View {
         let isPresentingModal = Binding<Bool>(
             get: { presentedSheet != nil },
             set: { _ in presentedSheet = nil }
@@ -190,15 +196,7 @@ struct TorrentsView: View {
                 EmptyView()
             }
         }
-    }
-    
-    var body: some View {
-        if #available(iOS 15.0, *) {
-            innerBody
-                .searchable(text: $filterQuery)
-        } else {
-            innerBody
-        }
+        .searchable(text: $filterQuery)
     }
 }
 

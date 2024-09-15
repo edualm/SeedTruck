@@ -28,7 +28,7 @@ struct NewServerView: View {
             
             Section(header: Text("Connection Info")) {
                 Picker(selection: $type, label: Text("Type")) {
-                    ForEach(0 ..< ServerType.allCases.count) {
+                    ForEach(0 ..< ServerType.allCases.count, id: \.self) {
                         Text(ServerType.allCases[$0].rawValue)
                     }
                 }

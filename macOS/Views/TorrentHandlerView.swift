@@ -54,7 +54,7 @@ struct TorrentHandlerView: View {
             if server == nil {
                 if serverConnections.count > 0 {
                     Section(header: Text("Server(s)").font(.largeTitle)) {
-                        ForEach(0 ..< serverConnections.count) { index in
+                        ForEach(0 ..< serverConnections.count, id: \.self) { index in
                             Toggle(isOn: serverBindings[index]) {
                                 Text(serverConnections[index].name)
                                     .foregroundColor(.primary)

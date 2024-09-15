@@ -17,8 +17,9 @@ struct AddMagnetView: View {
     
     @Binding var server: Server?
     
+    @ViewBuilder
     var innerBody: some View {
-        let view = ScrollView {
+        VStack {
             GroupBox(label: Label("What is this?", systemImage: "questionmark.circle")) {
                 HStack {
                     Text("Use this form to add a magnet link to your remote torrent client by simply pasting the link below!")
@@ -30,8 +31,8 @@ struct AddMagnetView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            NavigationLink(
-                destination: TorrentHandlerView(torrent: .magnet(magnetLink),
+            NavigationLink(destination:
+                TorrentHandlerView(torrent: .magnet(magnetLink),
                                                 server: server,
                                                 closeHandler: {
                                                     DispatchQueue.main.async {
@@ -43,40 +44,31 @@ struct AddMagnetView: View {
                                                     #else
                                                     presentation.wrappedValue.dismiss()
                                                     #endif
-                                                }),
-                isActive: $navigationLinkActive)
-            {
-                EmptyView()
-            }
-            .hidden()
-            
-            Button(action: {
-                navigationLinkActive = true
-            }) {
+                                                })
+            ) {
                 Text("Start Download")
             }
+            
+            Spacer()
         }
-        .navigationTitle("Add Magnet")
-        
-        #if os(macOS)
-        
-        return view
-        
-        #else
-        
-        return view.navigationBarItems(trailing: Button(action: {
-            self.presentation.wrappedValue.dismiss()
-        }) {
-            Text("Cancel")
-                .fontWeight(.medium)
-        })
-        
-        #endif
     }
     
+    @ViewBuilder
     var body: some View {
-        return NavigationView {
+        NavigationView {
+            #if os(macOS)
             innerBody
+                .navigationTitle("Add Magnet")
+            #else
+            innerBody
+                .navigationTitle("Add Magnet")
+                .navigationBarItems(trailing: Button(action: {
+                    self.presentation.wrappedValue.dismiss()
+                }) {
+                    Text("Cancel")
+                        .fontWeight(.medium)
+                })
+            #endif
         }
         .alert(isPresented: $showingErrorAlert) {
             Alert(title: Text("Error!"),

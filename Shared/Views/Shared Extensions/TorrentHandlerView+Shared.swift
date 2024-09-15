@@ -133,7 +133,6 @@ extension TorrentHandlerView {
             }
         }
         .navigationTitle("Add Torrent")
-        .padding()
         .onAppear(perform: onAppear)
     }
 }

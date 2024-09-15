@@ -35,7 +35,7 @@ struct TorrentHandlerView: View {
             if server == nil {
                 if serverConnections.count > 0 {
                     Section(header: Text("Server(s)")) {
-                        ForEach(0 ..< serverConnections.count) { index in
+                        ForEach(0 ..< serverConnections.count, id: \.self) { index in
                             Button(action: {
                                 let server = serverConnections[index]
                                 
