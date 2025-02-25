@@ -276,11 +276,11 @@ struct TorrentDetailsView: View {
             EmptyView()
         } else {
             #if os(macOS)
-            innerBody.padding()
+            innerBody.padding(.horizontal)
             #elseif os(tvOS) || os(watchOS)
             innerBody.navigationBarTitle("Torrent Detail")
             #else
-            innerBody.navigationBarTitle("Torrent Detail").padding()
+            innerBody.navigationBarTitle("Torrent Detail").padding(.horizontal)
             #endif
         }
     }

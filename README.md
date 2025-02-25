@@ -30,10 +30,6 @@ iOS screenshots for now; screenshots for other platforms will appear eventually.
  - View torrents, their status, and remove them.
  - Import torrents, either using a torrent file or magnet link.
 
-## Tests
-
-Not many were written since I wasn't being able to run them under Xcode 12. I should fix that probably...
-
 ## License
 
 MIT

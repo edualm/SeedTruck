@@ -19,17 +19,16 @@ struct AddMagnetView: View {
     
     @ViewBuilder
     var innerBody: some View {
-        VStack {
+        VStack(spacing: 16) {
             GroupBox(label: Label("What is this?", systemImage: "questionmark.circle")) {
                 HStack {
-                    Text("Use this form to add a magnet link to your remote torrent client by simply pasting the link below!")
+                    Text("Add a magnet link to your remote torrent client by simply pasting the link below!")
                     Spacer()
                 }.padding(.top)
-            }.padding()
+            }
             
             TextField("Magnet Link", text: $magnetLink)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
             
             NavigationLink(destination:
                 TorrentHandlerView(torrent: .magnet(magnetLink),
@@ -47,10 +46,10 @@ struct AddMagnetView: View {
                                                 })
             ) {
                 Text("Start Download")
-            }
+            }.buttonStyle(.borderedProminent)
             
             Spacer()
-        }
+        }.padding(.horizontal)
     }
     
     @ViewBuilder

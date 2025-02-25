@@ -98,10 +98,8 @@
 		A093B94A25142ACB00F499B4 /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6C24F2F34E002A78B5 /* Transmission.swift */; };
 		A093B95325142B2400F499B4 /* Transmission+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07FFC6F24F30044002A78B5 /* Transmission+Extensions.swift */; };
 		A096385B24F568CF00F2062F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096385A24F568CF00F2062F /* Assets.xcassets */; };
-		A096386224F568CF00F2062F /* SeedTruck (watchOS) Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A096386724F568CF00F2062F /* SeedTruckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096386624F568CF00F2062F /* SeedTruckApp.swift */; };
 		A096386924F568CF00F2062F /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A096386824F568CF00F2062F /* MainView.swift */; };
-		A096387124F568D000F2062F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096387024F568D000F2062F /* Assets.xcassets */; };
 		A096387424F568D000F2062F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A096387324F568D000F2062F /* Preview Assets.xcassets */; };
 		A096387924F568D000F2062F /* SeedTruck (watchOS).app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A096385824F568CF00F2062F /* SeedTruck (watchOS).app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A096388224F5697600F2062F /* TorrentDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A023BAE324F294E400B82FB3 /* TorrentDetailsView.swift */; };
@@ -257,13 +255,6 @@
 			remoteGlobalIDString = A045C8B024F2006500B3B1CD;
 			remoteInfo = "SeedTruck (macOS)";
 		};
-		A096386324F568CF00F2062F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A045C89D24F2006400B3B1CD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A096386024F568CF00F2062F;
-			remoteInfo = "SeedTruck (watchOS) Extension";
-		};
 		A096387724F568D000F2062F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A045C89D24F2006400B3B1CD /* Project object */;
@@ -290,17 +281,6 @@
 				A096387924F568D000F2062F /* SeedTruck (watchOS).app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A096387D24F568D000F2062F /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				A096386224F568CF00F2062F /* SeedTruck (watchOS) Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -362,12 +342,9 @@
 		A096385824F568CF00F2062F /* SeedTruck (watchOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeedTruck (watchOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A096385A24F568CF00F2062F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A096385C24F568CF00F2062F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SeedTruck (watchOS) Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A096386624F568CF00F2062F /* SeedTruckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeedTruckApp.swift; sourceTree = "<group>"; };
 		A096386824F568CF00F2062F /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		A096387024F568D000F2062F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A096387324F568D000F2062F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A096387524F568D000F2062F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A096388624F569CA00F2062F /* ServerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerType.swift; sourceTree = "<group>"; };
 		A096388F24F56A1200F2062F /* LocalTorrent+ComputedProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocalTorrent+ComputedProperties.swift"; sourceTree = "<group>"; };
 		A096389924F56A5100F2062F /* Server+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Server+CoreData.swift"; sourceTree = "<group>"; };
@@ -529,7 +506,6 @@
 				A045C8AB24F2006500B3B1CD /* iOS */,
 				A045C8B224F2006500B3B1CD /* macOS */,
 				A096385924F568CF00F2062F /* watchOS */,
-				A096386524F568CF00F2062F /* watchOS Extension */,
 				A0C071A924F59CC700CEC1DA /* tvOS */,
 				A045C8BC24F2006500B3B1CD /* Tests iOS */,
 				A045C8C724F2006500B3B1CD /* Tests macOS */,
@@ -562,7 +538,6 @@
 				A045C8B924F2006500B3B1CD /* Tests iOS.xctest */,
 				A045C8C424F2006500B3B1CD /* Tests macOS.xctest */,
 				A096385824F568CF00F2062F /* SeedTruck (watchOS).app */,
-				A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */,
 				A0C071A824F59CC700CEC1DA /* SeedTruck (tvOS).app */,
 				A0C071B824F59CC800CEC1DA /* Tests tvOS.xctest */,
 			);
@@ -704,24 +679,15 @@
 		A096385924F568CF00F2062F /* watchOS */ = {
 			isa = PBXGroup;
 			children = (
-				A096385A24F568CF00F2062F /* Assets.xcassets */,
-				A096385C24F568CF00F2062F /* Info.plist */,
-			);
-			path = watchOS;
-			sourceTree = "<group>";
-		};
-		A096386524F568CF00F2062F /* watchOS Extension */ = {
-			isa = PBXGroup;
-			children = (
 				A0B9B889251637C900E3486A /* Components */,
 				A09638B924F5901000F2062F /* Utilities */,
 				A09638B824F5900900F2062F /* Views */,
 				A096386624F568CF00F2062F /* SeedTruckApp.swift */,
-				A096387024F568D000F2062F /* Assets.xcassets */,
-				A096387524F568D000F2062F /* Info.plist */,
 				A096387224F568D000F2062F /* Preview Content */,
+				A096385A24F568CF00F2062F /* Assets.xcassets */,
+				A096385C24F568CF00F2062F /* Info.plist */,
 			);
-			path = "watchOS Extension";
+			path = watchOS;
 			sourceTree = "<group>";
 		};
 		A096387224F568D000F2062F /* Preview Content */ = {
@@ -977,37 +943,17 @@
 			buildConfigurationList = A096388124F568D000F2062F /* Build configuration list for PBXNativeTarget "SeedTruck (watchOS)" */;
 			buildPhases = (
 				A096385624F568CF00F2062F /* Resources */,
-				A096387D24F568D000F2062F /* Embed App Extensions */,
+				A096385D24F568CF00F2062F /* Sources */,
+				A096385E24F568CF00F2062F /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A096386424F568CF00F2062F /* PBXTargetDependency */,
 			);
 			name = "SeedTruck (watchOS)";
 			productName = "SeedTruck (watchOS)";
 			productReference = A096385824F568CF00F2062F /* SeedTruck (watchOS).app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		A096386024F568CF00F2062F /* SeedTruck (watchOS) Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A096388024F568D000F2062F /* Build configuration list for PBXNativeTarget "SeedTruck (watchOS) Extension" */;
-			buildPhases = (
-				A096385D24F568CF00F2062F /* Sources */,
-				A096385E24F568CF00F2062F /* Frameworks */,
-				A096385F24F568CF00F2062F /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "SeedTruck (watchOS) Extension";
-			packageProductDependencies = (
-				A022E6552C8FBC9000BAEED3 /* SwiftyBencode */,
-			);
-			productName = "SeedTruck (watchOS) Extension";
-			productReference = A096386124F568CF00F2062F /* SeedTruck (watchOS) Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
+			productType = "com.apple.product-type.application";
 		};
 		A0C071A724F59CC700CEC1DA /* SeedTruck (tvOS) */ = {
 			isa = PBXNativeTarget;
@@ -1053,8 +999,9 @@
 		A045C89D24F2006400B3B1CD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					A045C8A824F2006500B3B1CD = {
 						CreatedOnToolsVersion = 12.0;
@@ -1071,9 +1018,6 @@
 						TestTargetID = A045C8B024F2006500B3B1CD;
 					};
 					A096385724F568CF00F2062F = {
-						CreatedOnToolsVersion = 12.0;
-					};
-					A096386024F568CF00F2062F = {
 						CreatedOnToolsVersion = 12.0;
 					};
 					A0C071A724F59CC700CEC1DA = {
@@ -1106,7 +1050,6 @@
 				A045C8B824F2006500B3B1CD /* Tests iOS */,
 				A045C8C324F2006500B3B1CD /* Tests macOS */,
 				A096385724F568CF00F2062F /* SeedTruck (watchOS) */,
-				A096386024F568CF00F2062F /* SeedTruck (watchOS) Extension */,
 				A0C071A724F59CC700CEC1DA /* SeedTruck (tvOS) */,
 				A0C071B724F59CC800CEC1DA /* Tests tvOS */,
 			);
@@ -1148,16 +1091,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A096385B24F568CF00F2062F /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A096385F24F568CF00F2062F /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 				A096387424F568D000F2062F /* Preview Assets.xcassets in Resources */,
-				A096387124F568D000F2062F /* Assets.xcassets in Resources */,
+				A096385B24F568CF00F2062F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,11 +1397,6 @@
 			target = A045C8B024F2006500B3B1CD /* SeedTruck (macOS) */;
 			targetProxy = A045C8C524F2006500B3B1CD /* PBXContainerItemProxy */;
 		};
-		A096386424F568CF00F2062F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A096386024F568CF00F2062F /* SeedTruck (watchOS) Extension */;
-			targetProxy = A096386324F568CF00F2062F /* PBXContainerItemProxy */;
-		};
 		A096387824F568D000F2062F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A096385724F568CF00F2062F /* SeedTruck (watchOS) */;
@@ -1514,9 +1444,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1573,9 +1505,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -1597,7 +1531,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1606,7 +1540,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1621,7 +1555,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1630,7 +1564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1649,7 +1583,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1659,7 +1594,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1677,7 +1612,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -1687,7 +1623,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1699,11 +1635,10 @@
 		A045C8DA24F2006500B3B1CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1721,11 +1656,10 @@
 		A045C8DB24F2006500B3B1CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1744,9 +1678,9 @@
 		A045C8DD24F2006500B3B1CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				INFOPLIST_FILE = "Tests macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1754,7 +1688,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.edr.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1766,9 +1700,9 @@
 		A045C8DE24F2006500B3B1CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				INFOPLIST_FILE = "Tests macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1776,7 +1710,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.edr.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1788,15 +1722,18 @@
 		A096387B24F568D000F2062F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
-				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 1.2.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1810,70 +1747,20 @@
 		A096387C24F568D000F2062F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
-				IBSC_MODULE = SeedTruck__watchOS__Extension;
 				INFOPLIST_FILE = watchOS/Info.plist;
-				MARKETING_VERSION = 1.2.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				VALIDATE_PRODUCT = YES;
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
-			};
-			name = Release;
-		};
-		A096387E24F568D000F2062F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 3D7R27DBRZ;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "watchOS Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 7.0;
-			};
-			name = Debug;
-		};
-		A096387F24F568D000F2062F /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
-				DEVELOPMENT_ASSET_PATHS = "\"watchOS Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = 3D7R27DBRZ;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = "watchOS Extension/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp.watchkitextension;
-				PRODUCT_NAME = "${TARGET_NAME}";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -1889,7 +1776,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1898,7 +1785,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1914,7 +1801,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1923,7 +1810,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.2;
+				MARKETING_VERSION = 1.2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1937,7 +1824,6 @@
 		A0C071CC24F59CC800CEC1DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
@@ -1960,7 +1846,6 @@
 		A0C071CD24F59CC800CEC1DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
@@ -2025,15 +1910,6 @@
 			buildConfigurations = (
 				A045C8DD24F2006500B3B1CD /* Debug */,
 				A045C8DE24F2006500B3B1CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A096388024F568D000F2062F /* Build configuration list for PBXNativeTarget "SeedTruck (watchOS) Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A096387E24F568D000F2062F /* Debug */,
-				A096387F24F568D000F2062F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
