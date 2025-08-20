@@ -21,6 +21,7 @@ struct TorrentHandlerView: View {
     @State var errorMessage: String? = nil
     @State var processing: Bool = false
     @State var selectedServers: [Server] = []
+    @State var selectedLabels: [String] = []
     
     let torrent: LocalTorrent
     let server: Server?
@@ -46,6 +47,13 @@ struct TorrentHandlerView: View {
         Form {
             Section(header: Text("Torrent Metadata").font(.largeTitle).padding(.bottom, 8)) {
                 InfoSectionView(torrent: torrent)
+            }
+            
+            Divider()
+                .padding([.top, .bottom])
+            
+            Section(header: Text("Labels (Optional)").font(.largeTitle)) {
+                LabelPickerView(selectedLabels: $selectedLabels, server: server ?? selectedServers.first)
             }
             
             Divider()

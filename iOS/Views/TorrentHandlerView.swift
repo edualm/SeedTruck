@@ -21,6 +21,8 @@ struct TorrentHandlerView: View {
     @State var errorMessage: String? = nil
     @State var processing: Bool = false
     @State var selectedServers: [Server] = []
+    @State var selectedLabels: [String] = []
+    @State var hasServerLabels: Bool = false
     
     let torrent: LocalTorrent
     let server: Server?
@@ -30,6 +32,12 @@ struct TorrentHandlerView: View {
         Form {
             Section(header: Text("Torrent Metadata")) {
                 InfoSectionView(torrent: torrent)
+            }
+            
+            if hasServerLabels {
+                Section(header: Text("Labels (Optional)")) {
+                    LabelPickerView(selectedLabels: $selectedLabels, server: server ?? selectedServers.first)
+                }
             }
             
             if server == nil {
@@ -73,6 +81,9 @@ struct TorrentHandlerView: View {
         .alert(isPresented: showingError) {
             Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
         }
+        .onAppear {
+            loadLabelsFromServer()
+        }
     }
     
     var body: some View {
@@ -81,6 +92,27 @@ struct TorrentHandlerView: View {
                 Text("Cancel")
                     .fontWeight(.medium)
             })
+    }
+    
+    private func loadLabelsFromServer() {
+        guard let serverToUse = server ?? selectedServers.first else {
+            hasServerLabels = false
+            return
+        }
+        
+        serverToUse.connection.getTorrents { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let torrents):
+                    let allLabels = torrents.flatMap { $0.labels }
+                    let uniqueLabels = Array(Set(allLabels)).sorted()
+                    hasServerLabels = !uniqueLabels.isEmpty
+                    
+                case .failure(_):
+                    hasServerLabels = false
+                }
+            }
+        }
     }
 }
 

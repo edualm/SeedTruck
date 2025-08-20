@@ -48,4 +48,5 @@ struct RemoteTorrent: Identifiable {
     let progress: Double
     let status: Status
     let size: Int64
+    let labels: [String]
 }

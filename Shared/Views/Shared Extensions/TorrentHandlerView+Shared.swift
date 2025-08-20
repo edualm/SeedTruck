@@ -83,6 +83,9 @@ extension TorrentHandlerView {
         } else if serverConnections.count == 1 {
             selectedServers = [serverConnections[0]]
         }
+        
+        // Initialize with any labels already in the torrent
+        selectedLabels = torrent.labels
     }
     
     func startDownload() {
@@ -92,7 +95,7 @@ extension TorrentHandlerView {
         var errors: [(Server, Error)] = []
         
         selectedServers.forEach { server in
-            server.connection.addTorrent(torrent) {
+            server.connection.addTorrent(torrent, labels: selectedLabels) {
                 switch $0 {
                 case .success:
                     ()

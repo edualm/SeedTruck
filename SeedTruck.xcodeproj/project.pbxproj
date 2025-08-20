@@ -47,6 +47,8 @@
 		A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
 		A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
 		A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
+		A051D54F2E563EF800A94EDA /* LabelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A051D54C2E563EF800A94EDA /* LabelPickerView.swift */; };
+		A051D5502E563EF800A94EDA /* LabelPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A051D54C2E563EF800A94EDA /* LabelPickerView.swift */; };
 		A0589FED251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
 		A0589FEE251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
 		A0589FEF251799F30022D839 /* BinaryInteger+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */; };
@@ -320,6 +322,7 @@
 		A045C8E224F2013100B3B1CD /* TorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsView.swift; sourceTree = "<group>"; };
 		A045C8E524F2021100B3B1CD /* TorrentItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentItemView.swift; sourceTree = "<group>"; };
 		A045C8E824F205B100B3B1CD /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
+		A051D54C2E563EF800A94EDA /* LabelPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelPickerView.swift; sourceTree = "<group>"; };
 		A0589FEC251799F30022D839 /* BinaryInteger+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinaryInteger+Extensions.swift"; sourceTree = "<group>"; };
 		A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoServersConfiguredView.swift; sourceTree = "<group>"; };
 		A05FE16524F43A7300B57E45 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -804,6 +807,7 @@
 				A0CE018125855825002777BF /* Shared Extensions */,
 				A073DD2024F4658700BA37C9 /* AddMagnetView.swift */,
 				A05FE16524F43A7300B57E45 /* ErrorView.swift */,
+				A051D54C2E563EF800A94EDA /* LabelPickerView.swift */,
 				A05FE16924F45B2700B57E45 /* LoadingView.swift */,
 				A02C585824F3446100C82D68 /* NewServerView.swift */,
 				A05FE16224F43A5A00B57E45 /* NoServersConfiguredView.swift */,
@@ -1179,6 +1183,7 @@
 				A0C1DB3624F42E4100C76682 /* SettingsPresenter.swift in Sources */,
 				A0CE016E25854D44002777BF /* NotificationName+Extensions.swift in Sources */,
 				A073DD2124F4658700BA37C9 /* AddMagnetView.swift in Sources */,
+				A051D54F2E563EF800A94EDA /* LabelPickerView.swift in Sources */,
 				A08863CA2585B65E00443ECB /* View+Extensions.swift in Sources */,
 				A0F99C132562028C002D7BC6 /* NSPersistentContainer+Extensions.swift in Sources */,
 			);
@@ -1239,6 +1244,7 @@
 				A0CE020725857E0C002777BF /* TorrentHandlerView+Shared.swift in Sources */,
 				A02C585024F325A400C82D68 /* DataModel.xcdatamodeld in Sources */,
 				A0D87FF1258456260031E898 /* SettingsView.swift in Sources */,
+				A051D5502E563EF800A94EDA /* LabelPickerView.swift in Sources */,
 				A045C8EA24F205B100B3B1CD /* ProgressBarView.swift in Sources */,
 				A0F99C2925620933002D7BC6 /* UTI.swift in Sources */,
 				A023BAE524F294E400B82FB3 /* TorrentDetailsView.swift in Sources */,
@@ -1531,7 +1537,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1540,7 +1546,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1555,7 +1561,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
@@ -1564,7 +1570,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				SDKROOT = iphoneos;
@@ -1583,7 +1589,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1593,8 +1599,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1612,7 +1618,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -1622,8 +1628,8 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.2.3;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1726,14 +1732,14 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				INFOPLIST_FILE = watchOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1751,14 +1757,14 @@
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				INFOPLIST_FILE = watchOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
@@ -1776,7 +1782,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1785,7 +1791,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
@@ -1801,7 +1807,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_ASSET_PATHS = "\"tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
 				ENABLE_PREVIEWS = YES;
@@ -1810,7 +1816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.3;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.SeedTruck;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;

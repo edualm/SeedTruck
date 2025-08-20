@@ -23,6 +23,7 @@ extension RemoteTorrent {
         self.name = name
         self.progress = progress
         self.size = size
+        self.labels = transmissionTorrent.labels ?? []
         
         switch status {
         case 0:

@@ -71,6 +71,14 @@ struct TorrentDetailsView: View {
                             icon: "externaldrive"
                         )
                         
+                        if !torrent.labels.isEmpty {
+                            MetadataRow(
+                                label: "Labels",
+                                value: torrent.labels.joined(separator: ", "),
+                                icon: "tag"
+                            )
+                        }
+                        
                         if torrent.status.simple == .downloading {
                             MetadataRow(
                                 label: "Progress",
@@ -304,6 +312,9 @@ struct TorrentDetailsView: View {
     var innerBody: some View {
         ScrollView {
             MetadataView(torrent: torrent)
+            #if os(macOS)
+                .padding(.top)
+            #endif
             
             #if os(watchOS) || os(tvOS)
             switch torrent.status {
@@ -331,6 +342,9 @@ struct TorrentDetailsView: View {
                             .centered()
                     }.padding(.top)
                 }
+                #if os(macOS)
+                    .padding(.top)
+                #endif
                 #endif
             }
         }

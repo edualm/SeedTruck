@@ -29,7 +29,7 @@ extension LocalTorrent {
                 return nil
             }
             
-            self = .magnet(urlString)
+            self = .magnet(urlString, labels: [])
         }
     }
     
@@ -38,6 +38,6 @@ extension LocalTorrent {
             return nil
         }
         
-        self = .torrent(data: data, parsedTorrent: parsedTorrent)
+        self = .torrent(data: data, parsedTorrent: parsedTorrent, labels: [])
     }
 }

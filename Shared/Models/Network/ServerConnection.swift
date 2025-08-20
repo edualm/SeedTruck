@@ -29,7 +29,7 @@ protocol ServerConnection {
     func test(completionHandler: @escaping (Bool) -> ())
     
     #if os(iOS) || os(macOS)
-    func addTorrent(_ torrent: LocalTorrent, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ())
+    func addTorrent(_ torrent: LocalTorrent, labels: [String], completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ())
     #endif
     
     func getTorrent(id: String, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ())

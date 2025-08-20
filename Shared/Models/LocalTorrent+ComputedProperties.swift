@@ -18,10 +18,10 @@ extension LocalTorrent {
     
     var name: String? {
         switch self {
-        case .magnet(let magnet):
+        case .magnet(let magnet, _):
             return magnet.slice(from: "dn=", to: "&")?.replacingOccurrences(of: "+", with: " ")
             
-        case .torrent(_, let parsedTorrent):
+        case .torrent(_, let parsedTorrent, _):
             return parsedTorrent.name
         }
     }
@@ -31,7 +31,7 @@ extension LocalTorrent {
         case .magnet:
             return nil
             
-        case .torrent(_, let parsedTorrent):
+        case .torrent(_, let parsedTorrent, _):
             return parsedTorrent.dictionary?["info"]?["private"]?.integer == 1
         }
     }
@@ -41,7 +41,7 @@ extension LocalTorrent {
         case .magnet:
             return nil
             
-        case .torrent(_, let parsedTorrent):
+        case .torrent(_, let parsedTorrent, _):
             return parsedTorrent.files.compactMap {
                 let path = $0.path.joined(separator: "/")
                 

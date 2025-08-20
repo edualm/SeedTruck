@@ -44,7 +44,7 @@ class TransmissionConnection: ServerConnection {
     
     static private let CSRFTokenHeaderName = "X-Transmission-Session-Id"
     
-    static private let TorrentFields = ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload", "uploadedEver", "uploadRatio", "secondsSeeding", "eta", "etaIdle"]
+    static private let TorrentFields = ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload", "uploadedEver", "uploadRatio", "secondsSeeding", "eta", "etaIdle", "labels"]
     
     private let connectionDetails: ConnectionDetails
     private var csrfToken: String?
@@ -143,15 +143,21 @@ class TransmissionConnection: ServerConnection {
     
     #if os(iOS) || os(macOS)
     
-    func addTorrent(_ torrent: LocalTorrent, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
-        let parameters: Parameters
+    func addTorrent(_ torrent: LocalTorrent, labels: [String] = [], completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
+        var parameters: Parameters
         
         switch torrent {
-        case .magnet(let magnet):
+        case .magnet(let magnet, _):
             parameters = ["filename": magnet]
             
-        case .torrent(let data, _):
+        case .torrent(let data, _, _):
             parameters = ["metainfo": data.base64EncodedString()]
+        }
+        
+        // Use provided labels or fall back to torrent's labels
+        let finalLabels = !labels.isEmpty ? labels : torrent.labels
+        if !finalLabels.isEmpty {
+            parameters["labels"] = finalLabels
         }
         
         performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentAdd, TransmissionError>) in
