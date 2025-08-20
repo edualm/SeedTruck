@@ -19,92 +19,136 @@ struct TorrentDetailsView: View {
         
         let torrent: RemoteTorrent
         
-        var body: some View {
-            Box(label: Label("Metadata", systemImage: "doc.text.viewfinder")) {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(torrent.name).padding(.bottom)
-                        Label("Size: \(ByteCountFormatter.humanReadableFileSize(bytes: torrent.size))", systemImage: "shippingbox")
-                    }.padding(TorrentDetailsView.innerDetailPadding)
-                    Spacer()
-                }.padding(.top)
-            }
-        }
-    }
-    
-    private struct StatusView: View {
-        
-        let torrent: RemoteTorrent
-        
-        var body: some View {
-            Box(label: Label("Status", systemImage: "exclamationmark.bubble")) {
-                HStack {
-                    if case RemoteTorrent.Status.downloading = torrent.status {
-                        Text("\(torrent.status.displayableStatus) (\(String(format: "%.2f", torrent.progress * 100))%)")
-                            .padding(TorrentDetailsView.innerDetailPadding)
-                    } else {
-                        Text(torrent.status.displayableStatus)
-                            .padding(TorrentDetailsView.innerDetailPadding)
+        private struct MetadataRow: View {
+            let label: String
+            let value: String
+            let icon: String
+            
+            var body: some View {
+                HStack(alignment: .center, spacing: 8) {
+                    HStack(spacing: 4) {
+                        Image(systemName: icon)
+                            .foregroundColor(.secondary)
+                            .font(.caption)
+                            .frame(width: 12, alignment: .center)
+                            .padding(.trailing, 4)
+                        Text(label)
+                            .foregroundColor(.secondary)
+                            .font(.caption)
                     }
-                    
                     Spacer()
-                }.padding(.top)
+                    Text(value)
+                        .font(.caption)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.trailing)
+                }
+                .padding(.vertical, 2)
             }
         }
-    }
-    
-    private struct StatsView: View {
-        
-        let torrent: RemoteTorrent
         
         var body: some View {
-            switch torrent.status {
-            case let .downloading(_, peersSending, peersReceiving, downloadRate, uploadRate, eta):
-                Box(label: Label("Statistics", systemImage: "speedometer")) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Label("Seeders: \(peersSending)", systemImage: "person.and.arrow.left.and.arrow.right")
+            Box(label: Label("Details", systemImage: "doc.text.viewfinder")) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(torrent.name)
+                        .font(.headline)
+                        .fontWeight(.regular)
+                        .lineLimit(nil)
+                        .multilineTextAlignment(.leading)
+                    
+                    Divider()
+                        .padding(.vertical, 4)
+                    
+                    VStack(spacing: 6) {
+                        MetadataRow(
+                            label: "Status",
+                            value: torrent.status.displayableStatus,
+                            icon: "circle.fill"
+                        )
+                        
+                        MetadataRow(
+                            label: "Size",
+                            value: ByteCountFormatter.humanReadableFileSize(bytes: torrent.size),
+                            icon: "externaldrive"
+                        )
+                        
+                        if torrent.status.simple == .downloading {
+                            MetadataRow(
+                                label: "Progress",
+                                value: "\(String(format: "%.1f", torrent.progress * 100))%",
+                                icon: "chart.bar.fill"
+                            )
+                        }
+                        
+                        switch torrent.status {
+                        case let .downloading(_, peersSending, peersReceiving, downloadRate, uploadRate, eta):
+                            MetadataRow(
+                                label: "Seeders",
+                                value: "\(peersSending)",
+                                icon: "person.and.arrow.left.and.arrow.right"
+                            )
                             
-                            Label("Leechers: \(peersReceiving)", systemImage: "person.3")
-                                .padding(.top)
+                            MetadataRow(
+                                label: "Leechers",
+                                value: "\(peersReceiving)",
+                                icon: "person.3"
+                            )
                             
-                            Label("Download Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate))", systemImage: "arrow.down.forward")
-                                .padding(.top)
-                                
-                            Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
-                                .padding(.top)
+                            MetadataRow(
+                                label: "Download Speed",
+                                value: ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate),
+                                icon: "arrow.down.forward"
+                            )
+                            
+                            MetadataRow(
+                                label: "Upload Speed",
+                                value: ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate),
+                                icon: "arrow.up.forward"
+                            )
                             
                             if let humanReadableETA = eta.humanReadableDate {
-                                Label("Time Remaining: \(humanReadableETA)", systemImage: "deskclock")
-                                    .padding(.top)
+                                MetadataRow(
+                                    label: "Time Remaining",
+                                    value: humanReadableETA,
+                                    icon: "clock"
+                                )
                             }
-                        }.padding(TorrentDetailsView.innerDetailPadding)
-                        Spacer()
-                    }.padding(.top)
-                }
-                
-            case let .seeding(_, uploadRate, ratio, totalUploaded, secondsSeeding, _):
-                Box(label: Label("Statistics", systemImage: "speedometer")) {
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Label("Upload Rate: \(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate))", systemImage: "arrow.up.forward")
+                            
+                        case let .seeding(_, uploadRate, ratio, totalUploaded, secondsSeeding, _):
+                            MetadataRow(
+                                label: "Upload Speed",
+                                value: ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate),
+                                icon: "arrow.up.forward"
+                            )
+                            
+                            MetadataRow(
+                                label: "Ratio",
+                                value: String(format: "%.2f", ratio),
+                                icon: "arrow.up.arrow.down"
+                            )
                             
                             if let totalUploaded = totalUploaded {
-                                Label("Uploaded: \(ByteCountFormatter.humanReadableFileSize(bytes: totalUploaded)) (Ratio: \(String(format: "%.2f", ratio)))", systemImage: "arrow.up.to.line")
-                                    .padding(.top)
+                                MetadataRow(
+                                    label: "Uploaded",
+                                    value: ByteCountFormatter.humanReadableFileSize(bytes: totalUploaded),
+                                    icon: "arrow.up.to.line"
+                                )
                             }
                             
                             if let humanReadableSeedingTime = secondsSeeding?.humanReadableDate {
-                                Label("Seeding Time: \(humanReadableSeedingTime)", systemImage: "deskclock")
-                                    .padding(.top)
+                                MetadataRow(
+                                    label: "Seeding Time",
+                                    value: humanReadableSeedingTime,
+                                    icon: "deskclock"
+                                )
                             }
-                        }.padding(TorrentDetailsView.innerDetailPadding)
-                        Spacer()
-                    }.padding(.top)
+                            
+                        default:
+                            EmptyView()
+                        }
+                    }
                 }
-                
-            default:
-                EmptyView()
+                .padding(TorrentDetailsView.innerDetailPadding)
+                .padding(.top)
             }
         }
     }
@@ -260,20 +304,6 @@ struct TorrentDetailsView: View {
     var innerBody: some View {
         ScrollView {
             MetadataView(torrent: torrent)
-            
-            #if os(watchOS) || os(tvOS)
-            Divider()
-                .padding()
-            #endif
-            
-            StatusView(torrent: torrent)
-            
-            #if os(watchOS) || os(tvOS)
-            Divider()
-                .padding()
-            #endif
-            
-            StatsView(torrent: torrent)
             
             #if os(watchOS) || os(tvOS)
             switch torrent.status {

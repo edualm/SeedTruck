@@ -47,14 +47,16 @@ struct RemoteServerSettingsView: View {
                                 Text("Not configured.")
                             case .configured(let down, let up):
                                 HStack {
-                                    Text("Down")
+                                    Text("Download")
                                     Spacer()
                                     Text(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: Int(down * 1024)))
+                                        .foregroundColor(.secondary)
                                 }.padding(.bottom, 4)
                                 HStack {
-                                    Text("Up")
+                                    Text("Upload")
                                     Spacer()
                                     Text(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: Int(up * 1024)))
+                                        .foregroundColor(.secondary)
                                 }.padding(.bottom, 4)
                             case .none:
                                 EmptyView()
@@ -65,27 +67,17 @@ struct RemoteServerSettingsView: View {
                             .padding(.bottom)
                         
                         Section(header: Text("State").bold()) {
-                            HStack {
-                                Text("Down")
-                                Spacer()
-                                Toggle(isOn: Binding<Bool>(
-                                    get: { presenter.speedLimitState!.down },
-                                    set: { _ in presenter.perform(.toggleDownSpeedLimit) }
-                                )) {
-                                    EmptyView()
-                                }
-                            }
+                            Toggle("Download Speed Limit", isOn: Binding<Bool>(
+                                get: { presenter.speedLimitState!.down },
+                                set: { _ in presenter.perform(.toggleDownSpeedLimit) }
+                            ))
+                            .padding(.bottom, 4)
                             
-                            HStack {
-                                Text("Up")
-                                Spacer()
-                                Toggle(isOn: Binding<Bool>(
-                                    get: { presenter.speedLimitState!.up },
-                                    set: { _ in presenter.perform(.toggleUpSpeedLimit) }
-                                )) {
-                                    EmptyView()
-                                }
-                            }
+                            Toggle("Upload Speed Limit", isOn: Binding<Bool>(
+                                get: { presenter.speedLimitState!.up },
+                                set: { _ in presenter.perform(.toggleUpSpeedLimit) }
+                            ))
+                            .padding(.bottom, 4)
                         }
                     }
                 }
