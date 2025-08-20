@@ -206,7 +206,7 @@ struct TorrentDetailsView: View {
             let startTorrentButton = actionButton(
                 action: {
                     presenter.perform(.start) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                        DispatchQueue.main.async {
                             presentation.dismiss()
                         }
                     }
@@ -225,7 +225,7 @@ struct TorrentDetailsView: View {
             let pauseTorrentButton = actionButton(
                 action: {
                     presenter.perform(.pause) {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                        DispatchQueue.main.async {
                             presentation.dismiss()
                         }
                     }
@@ -341,9 +341,8 @@ struct TorrentDetailsView: View {
                              message: Text("You are about to perform a destructive action.\n\nAre you really sure?"),
                              primaryButton: .destructive(Text("Confirm")) {
                                 self.presenter.perform(.commit) {
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                                    DispatchQueue.main.async {
                                         shouldShowEmptyView = true
-                                        
                                         self.presentation.wrappedValue.dismiss()
                                     }
                                 }
