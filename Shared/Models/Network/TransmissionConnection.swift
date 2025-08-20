@@ -154,7 +154,6 @@ class TransmissionConnection: ServerConnection {
             parameters = ["metainfo": data.base64EncodedString()]
         }
         
-        // Use provided labels or fall back to torrent's labels
         let finalLabels = !labels.isEmpty ? labels : torrent.labels
         if !finalLabels.isEmpty {
             parameters["labels"] = finalLabels

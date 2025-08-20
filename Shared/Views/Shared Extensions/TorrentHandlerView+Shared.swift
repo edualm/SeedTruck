@@ -84,7 +84,6 @@ extension TorrentHandlerView {
             selectedServers = [serverConnections[0]]
         }
         
-        // Initialize with any labels already in the torrent
         selectedLabels = torrent.labels
     }
     
