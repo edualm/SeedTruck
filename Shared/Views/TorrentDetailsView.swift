@@ -28,12 +28,10 @@ struct TorrentDetailsView: View {
                 HStack(alignment: .center, spacing: 8) {
                     HStack(spacing: 4) {
                         Image(systemName: icon)
-                            .foregroundColor(.secondary)
                             .font(.caption)
                             .frame(width: 12, alignment: .center)
                             .padding(.trailing, 4)
                         Text(label)
-                            .foregroundColor(.secondary)
                             .font(.caption)
                     }
                     Spacer()
@@ -41,6 +39,7 @@ struct TorrentDetailsView: View {
                         .font(.caption)
                         .fontWeight(.medium)
                         .multilineTextAlignment(.trailing)
+                        .foregroundColor(.secondary)
                 }
                 .padding(.vertical, 2)
             }
