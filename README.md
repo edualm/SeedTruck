@@ -18,7 +18,7 @@ It uses SwiftUI, and as such, can run on iOS/iPadOS/tvOS/watchOS/macOS.
 
 ## Screenshots
 
-iOS screenshots for now; screenshots for other platforms will appear eventually.
+iOS screenshots for now; screenshots for other platforms may appear eventually. Please note that these screenshots are a bit outdated too.
 
 <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Listing%20-%20Light.png">&nbsp;&nbsp;&nbsp;<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Detail%20-%20Light.png">
 
@@ -27,8 +27,8 @@ iOS screenshots for now; screenshots for other platforms will appear eventually.
 ## Features
 
  - Connect to Transmission seedboxes (support for other types of seedboxes is easy to add, but not implemented).
- - View torrents, their status, and remove them.
- - Import torrents, either using a torrent file or magnet link.
+ - View/manage torrents, their status, and remove them.
+ - Import torrents, either using a torrent file or magnet link, and assign labels to the torrents.
 
 ## License
 
