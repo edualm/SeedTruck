@@ -165,6 +165,7 @@ struct TorrentsView: View {
                     leading: leadingNavigationBarItems,
                     trailing: trailingNavigationBarItems
                 )
+                .searchable(text: $filterQuery)
         }
         .navigationViewStyle(Style.navigationView)
         .onAppear(perform: onAppear)
@@ -196,7 +197,6 @@ struct TorrentsView: View {
                 EmptyView()
             }
         }
-        .searchable(text: $filterQuery)
     }
 }
 

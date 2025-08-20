@@ -115,61 +115,120 @@ struct TorrentDetailsView: View {
         
         let presenter: TorrentDetailsPresenter
         
+        private func actionButton<Content: View>(
+            action: @escaping () -> Void,
+            style: ButtonStyle = .primary,
+            @ViewBuilder content: () -> Content
+        ) -> some View {
+            Button(action: action) {
+                content()
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 16)
+                    .background(style.backgroundColor)
+                    .foregroundColor(style.foregroundColor)
+                    .cornerRadius(8)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        
+        private enum ButtonStyle {
+            case primary
+            case secondary
+            case destructive
+            
+            var backgroundColor: Color {
+                switch self {
+                case .primary:
+                    return .blue
+                case .secondary:
+                    return .gray
+                case .destructive:
+                    return .red
+                }
+            }
+            
+            var foregroundColor: Color {
+                switch self {
+                case .primary, .destructive:
+                    return .white
+                case .secondary:
+                    return .primary
+                }
+            }
+        }
+        
         var body: some View {
-            let startTorrentButton = Button(action: {
-                presenter.perform(.start) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                        presentation.dismiss()
+            let startTorrentButton = actionButton(
+                action: {
+                    presenter.perform(.start) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                            presentation.dismiss()
+                        }
                     }
-                }
-            }) {
+                },
+                style: .primary
+            ) {
                 #if os(watchOS)
-                Text("Start Torrent")
+                Text("Start")
+                    .font(.headline)
                 #else
-                Label("Start Torrent", systemImage: "play")
+                Label("Start Torrent", systemImage: "play.fill")
+                    .font(.headline)
                 #endif
-            }.padding(4)
+            }
             
-            let pauseTorrentButton = Button(action: {
-                presenter.perform(.pause) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                        presentation.dismiss()
+            let pauseTorrentButton = actionButton(
+                action: {
+                    presenter.perform(.pause) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                            presentation.dismiss()
+                        }
                     }
-                }
-            }) {
+                },
+                style: .secondary
+            ) {
                 #if os(watchOS)
-                Text("Pause Torrent")
+                Text("Pause")
+                    .font(.headline)
                 #else
-                Label("Pause Torrent", systemImage: "pause")
+                Label("Pause Torrent", systemImage: "pause.fill")
+                    .font(.headline)
                 #endif
-            }.padding(4)
+            }
             
-            let removeTorrentButton = Button(action: {
-                presenter.perform(.prepareForRemoval(deletingFiles: false))
-            }) {
+            let removeTorrentButton = actionButton(
+                action: {
+                    presenter.perform(.prepareForRemoval(deletingFiles: false))
+                },
+                style: .destructive
+            ) {
                 #if os(watchOS)
-                Text("Remove Torrent")
-                    .foregroundColor(.red)
+                Text("Remove")
+                    .font(.headline)
                 #else
-                Label("Remove Torrent", systemImage: "xmark")
-                    .foregroundColor(.red)
+                Label("Remove Torrent", systemImage: "xmark.circle.fill")
+                    .font(.headline)
                 #endif
-            }.padding(4)
+            }
             
-            let removeTorrentAndDataButton = Button(action: {
-                presenter.perform(.prepareForRemoval(deletingFiles: true))
-            }) {
+            let removeTorrentAndDataButton = actionButton(
+                action: {
+                    presenter.perform(.prepareForRemoval(deletingFiles: true))
+                },
+                style: .destructive
+            ) {
                 #if os(watchOS)
-                Text("Remove Torrent and Data")
+                Text("Remove Data")
+                    .font(.headline)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.red)
                 #else
-                Label("Remove Torrent and Data", systemImage: "trash")
-                    .foregroundColor(.red)
+                Label("Remove Data", systemImage: "trash.fill")
+                    .font(.headline)
                 #endif
-            }.padding(4)
+            }
             
-            let items = Group {
+            VStack(spacing: 12) {
                 switch presenter.torrent.status {
                 case .downloading, .seeding:
                     pauseTorrentButton
@@ -179,17 +238,14 @@ struct TorrentDetailsView: View {
                     EmptyView()
                 }
                 
+                #if !os(watchOS)
+                Divider()
+                    .padding(.vertical, 4)
+                #endif
+                
                 removeTorrentButton
                 removeTorrentAndDataButton
             }
-            
-            #if (os(iOS) || os(watchOS))
-            VStack {
-                items
-            }
-            #else
-            items
-            #endif
         }
     }
     
