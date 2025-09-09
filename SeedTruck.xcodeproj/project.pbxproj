@@ -224,6 +224,10 @@
 		A0D87FF1258456260031E898 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D87FF0258456260031E898 /* SettingsView.swift */; };
 		A0D88003258457300031E898 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D88002258457300031E898 /* GeneralSettingsView.swift */; };
 		A0D8800D258457370031E898 /* ServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8800C258457370031E898 /* ServerSettingsView.swift */; };
+		A0D93F242E70CD670041FE7B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0D93F232E70CD670041FE7B /* AppIcon.icon */; };
+		A0D93F252E70CD670041FE7B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0D93F232E70CD670041FE7B /* AppIcon.icon */; };
+		A0D93F262E70CD670041FE7B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0D93F232E70CD670041FE7B /* AppIcon.icon */; };
+		A0D93F272E70CD670041FE7B /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0D93F232E70CD670041FE7B /* AppIcon.icon */; };
 		A0E7426525154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
 		A0E7426625154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
 		A0E7426725154FCB0029FFD6 /* SharedBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* SharedBucket.swift */; };
@@ -395,6 +399,7 @@
 		A0D87FF0258456260031E898 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A0D88002258457300031E898 /* GeneralSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsView.swift; sourceTree = "<group>"; };
 		A0D8800C258457370031E898 /* ServerSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettingsView.swift; sourceTree = "<group>"; };
+		A0D93F232E70CD670041FE7B /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		A0E7426425154FCB0029FFD6 /* SharedBucket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedBucket.swift; sourceTree = "<group>"; };
 		A0E742792515501F0029FFD6 /* DataTransferManageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTransferManageable.swift; sourceTree = "<group>"; };
 		A0F99C122562028C002D7BC6 /* NSPersistentContainer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+Extensions.swift"; sourceTree = "<group>"; };
@@ -529,6 +534,7 @@
 				A071CAC724F3110200B6AC0C /* Utilities */,
 				A0C1DB3F24F4376D00C76682 /* Views */,
 				A02C584D24F325A400C82D68 /* DataModel.xcdatamodeld */,
+				A0D93F232E70CD670041FE7B /* AppIcon.icon */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1065,6 +1071,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0D93F262E70CD670041FE7B /* AppIcon.icon in Resources */,
 				A045C8CF24F2006500B3B1CD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1073,6 +1080,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0D93F272E70CD670041FE7B /* AppIcon.icon in Resources */,
 				A0F99D152569EAD6002D7BC6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1095,6 +1103,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0D93F242E70CD670041FE7B /* AppIcon.icon in Resources */,
 				A096387424F568D000F2062F /* Preview Assets.xcassets in Resources */,
 				A096385B24F568CF00F2062F /* Assets.xcassets in Resources */,
 			);
@@ -1104,6 +1113,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0D93F252E70CD670041FE7B /* AppIcon.icon in Resources */,
 				A0C071B224F59CC800CEC1DA /* Preview Assets.xcassets in Resources */,
 				A0C071AF24F59CC800CEC1DA /* Assets.xcassets in Resources */,
 			);
