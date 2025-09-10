@@ -60,7 +60,7 @@ struct AddMagnetView: View {
                                                         #endif
                                                     })
                 ) {
-                    Label("Start Download", systemImage: "square.and.arrow.down.on.square")
+                    Label("Proceed", systemImage: "rectangle.portrait.and.arrow.right")
                 }
             }
         }

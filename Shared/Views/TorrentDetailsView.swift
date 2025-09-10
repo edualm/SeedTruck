@@ -212,11 +212,7 @@ struct TorrentDetailsView: View {
         var body: some View {
             let startTorrentButton = actionButton(
                 action: {
-                    presenter.perform(.start) {
-                        DispatchQueue.main.async {
-                            presentation.dismiss()
-                        }
-                    }
+                    presenter.perform(.start)
                 },
                 style: .primary
             ) {
@@ -231,11 +227,7 @@ struct TorrentDetailsView: View {
             
             let pauseTorrentButton = actionButton(
                 action: {
-                    presenter.perform(.pause) {
-                        DispatchQueue.main.async {
-                            presentation.dismiss()
-                        }
-                    }
+                    presenter.perform(.pause)
                 },
                 style: .secondary
             ) {
