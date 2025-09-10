@@ -12,20 +12,39 @@ struct MainView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     
     var body: some View {
-        TabView {
-            Group {
-                TorrentsView()
-                    .tabItem {
-                        Image(systemName: "tray.and.arrow.down")
-                        Text("Torrents")
-                    }
-                SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
-                    .tabItem {
-                        Image(systemName: "wrench.and.screwdriver")
-                        Text("Settings")
-                    }
+        if #available(iOS 26.0, *) {
+            TabView {
+                Group {
+                    TorrentsView()
+                        .tabItem {
+                            Image(systemName: "tray.and.arrow.down")
+                            Text("Torrents")
+                        }
+                    SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
+                        .tabItem {
+                            Image(systemName: "wrench.and.screwdriver")
+                            Text("Settings")
+                        }
+                }.toolbar(.visible, for: .tabBar)
             }
-                .toolbar(.visible, for: .tabBar)
+            .tabViewBottomAccessory {
+                FloatingServerStatusView(torrents: [])
+            }
+        } else {
+            TabView {
+                Group {
+                    TorrentsView()
+                        .tabItem {
+                            Image(systemName: "tray.and.arrow.down")
+                            Text("Torrents")
+                        }
+                    SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
+                        .tabItem {
+                            Image(systemName: "wrench.and.screwdriver")
+                            Text("Settings")
+                        }
+                }.toolbar(.visible, for: .tabBar)
+            }
         }
     }
 }

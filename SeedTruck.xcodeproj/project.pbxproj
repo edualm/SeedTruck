@@ -143,6 +143,7 @@
 		A0AAF2BB257BB44A00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
 		A0AAF2C4257BB44B00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
 		A0AAF2C5257BB44C00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
+		A0AC7BB92E710A79004C65AF /* FloatingServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC7BB82E710A79004C65AF /* FloatingServerStatusView.swift */; };
 		A0B8C13324F3FF4E00ACD713 /* DocumentPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */; };
 		A0B9B8082516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
 		A0B9B8092516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */; };
@@ -362,6 +363,7 @@
 		A09638B624F58BD300F2062F /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		A09656AB24F2C8E8009D0FE1 /* PreviewMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewMockData.swift; sourceTree = "<group>"; };
 		A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTorrentsView.swift; sourceTree = "<group>"; };
+		A0AC7BB82E710A79004C65AF /* FloatingServerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingServerStatusView.swift; sourceTree = "<group>"; };
 		A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerAdapter.swift; sourceTree = "<group>"; };
 		A0B9B8072516367E00E3486A /* MockCoreDataManagedObjectDeleter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCoreDataManagedObjectDeleter.swift; sourceTree = "<group>"; };
 		A0B9B85E2516373300E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 			isa = PBXGroup;
 			children = (
 				A0B9B85E2516373300E3486A /* Box+View.swift */,
+				A0AC7BB82E710A79004C65AF /* FloatingServerStatusView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1136,6 +1139,7 @@
 				A0BD79AF270B73C000E05093 /* RemoteServerSettingsPresenter.swift in Sources */,
 				A0F99C2825620933002D7BC6 /* UTI.swift in Sources */,
 				A02C585224F326EA00C82D68 /* RemoteTorrent+Transmission.swift in Sources */,
+				A0AC7BB92E710A79004C65AF /* FloatingServerStatusView.swift in Sources */,
 				A073DD2424F4768400BA37C9 /* TorrentDetailsPresenter.swift in Sources */,
 				A011C7E524F20C8D009D72C6 /* RemoteTorrent.swift in Sources */,
 				A01056A824F4901700DA056D /* LocalTorrent+Initializers.swift in Sources */,
