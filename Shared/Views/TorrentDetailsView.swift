@@ -171,16 +171,27 @@ struct TorrentDetailsView: View {
             style: ButtonStyle = .primary,
             @ViewBuilder content: () -> Content
         ) -> some View {
-            Button(action: action) {
+            let button = Button(action: action) {
                 content()
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 12)
                     .padding(.horizontal, 16)
-                    .background(style.backgroundColor)
+                    .background(style.backgroundView)
                     .foregroundColor(style.foregroundColor)
-                    .cornerRadius(8)
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(style.borderColor, lineWidth: style.borderWidth)
+                    )
             }
             .buttonStyle(PlainButtonStyle())
+
+            if #available(iOS 26.0, macOS 15.0, watchOS 26.0, tvOS 18.0, *) {
+                return button
+                    .glassEffect(.regular.tint(style.glassTintColor).interactive())
+            } else {
+                return button
+            }
         }
         
         private enum ButtonStyle {
@@ -188,23 +199,73 @@ struct TorrentDetailsView: View {
             case secondary
             case destructive
             
-            var backgroundColor: Color {
-                switch self {
-                case .primary:
-                    return .blue
-                case .secondary:
-                    return .gray
-                case .destructive:
-                    return .red
+            @ViewBuilder
+            var backgroundView: some View {
+                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
+                    // Use clear background for glass effect - the glassEffect modifier will handle the appearance
+                    Color.clear
+                } else {
+                    // Fallback solid colors for older OS versions
+                    switch self {
+                    case .primary:
+                        Color.blue
+                    case .secondary:
+                        Color.gray
+                    case .destructive:
+                        Color.red
+                    }
                 }
             }
             
             var foregroundColor: Color {
+                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
+                    // Enhanced colors for glass effect
+                    switch self {
+                    case .primary:
+                        return .primary
+                    case .secondary:
+                        return .primary
+                    case .destructive:
+                        return .primary
+                    }
+                } else {
+                    // Original colors for older versions
+                    switch self {
+                    case .primary, .destructive:
+                        return .white
+                    case .secondary:
+                        return .primary
+                    }
+                }
+            }
+            
+            var borderColor: Color {
+                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
+                    // No border needed with native glass effects
+                    return .clear
+                } else {
+                    return .clear
+                }
+            }
+            
+            var borderWidth: CGFloat {
+                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
+                    // No border needed with native glass effects
+                    return 0
+                } else {
+                    return 0
+                }
+            }
+
+            @available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *)
+            var glassTintColor: Color {
                 switch self {
-                case .primary, .destructive:
-                    return .white
+                case .primary:
+                    return .blue.opacity(0.8)
                 case .secondary:
-                    return .primary
+                    return .gray.opacity(0.6)
+                case .destructive:
+                    return .red.opacity(0.8)
                 }
             }
         }
@@ -219,9 +280,11 @@ struct TorrentDetailsView: View {
                 #if os(watchOS)
                 Text("Start")
                     .font(.headline)
+                    .fontWeight(.semibold)
                 #else
                 Label("Start Torrent", systemImage: "play.fill")
                     .font(.headline)
+                    .fontWeight(.semibold)
                 #endif
             }
             
@@ -234,9 +297,11 @@ struct TorrentDetailsView: View {
                 #if os(watchOS)
                 Text("Pause")
                     .font(.headline)
+                    .fontWeight(.semibold)
                 #else
                 Label("Pause Torrent", systemImage: "pause.fill")
                     .font(.headline)
+                    .fontWeight(.semibold)
                 #endif
             }
             
@@ -249,9 +314,11 @@ struct TorrentDetailsView: View {
                 #if os(watchOS)
                 Text("Remove")
                     .font(.headline)
+                    .fontWeight(.semibold)
                 #else
                 Label("Remove Torrent", systemImage: "xmark.circle.fill")
                     .font(.headline)
+                    .fontWeight(.semibold)
                 #endif
             }
             
@@ -264,10 +331,12 @@ struct TorrentDetailsView: View {
                 #if os(watchOS)
                 Text("Remove Data")
                     .font(.headline)
+                    .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
                 #else
                 Label("Remove Data", systemImage: "trash.fill")
                     .font(.headline)
+                    .fontWeight(.semibold)
                 #endif
             }
             
@@ -308,13 +377,8 @@ struct TorrentDetailsView: View {
             #endif
             
             #if os(watchOS) || os(tvOS)
-            switch torrent.status {
-            case .downloading, .seeding:
-                Divider()
-                    .padding()
-            default:
-                EmptyView()
-            }
+            Divider()
+                .padding()
             #endif
             
             if presenter.isLoading {
