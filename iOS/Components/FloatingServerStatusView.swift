@@ -28,8 +28,6 @@ struct FloatingServerStatusView: View {
             .padding(Self.rectanglePadding)
         }
         .padding(.horizontal)
-        .padding(.vertical, 5)
-        .padding(.bottom, 10)
     }
 }
 

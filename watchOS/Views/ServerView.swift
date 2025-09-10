@@ -16,6 +16,7 @@ struct ServerView: View {
     var body: some View {
         TorrentListView(server: $server, filter: .constant(nil), filterQuery: .constant(""))
             .navigationBarTitle(server?.name ?? "Torrents")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(!shouldShowBackButton)
     }
 }

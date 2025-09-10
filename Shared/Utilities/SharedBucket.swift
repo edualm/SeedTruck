@@ -9,7 +9,9 @@ import Foundation
 
 class SharedBucket: ObservableObject {
     
+    @Published var torrents: [RemoteTorrent] = []
     var dataTransferManager: DataTransferManageable?
     
     init() {}
 }
+

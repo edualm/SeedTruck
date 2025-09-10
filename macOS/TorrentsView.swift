@@ -36,7 +36,7 @@ struct TorrentsView: View {
         }
     }
     
-    var innerBody: some View {
+    var body: some View {
         let isPresentingModal = Binding<Bool>(
             get: { presentedSheet != nil },
             set: { _ in presentedSheet = nil }
@@ -127,15 +127,7 @@ struct TorrentsView: View {
         .onReceive(managedContextDidSave) { _ in
             selectedServer = serverConnections.first
         }
-    }
-    
-    var body: some View {
-        if #available(macOS 12.0, *) {
-            innerBody
-                .searchable(text: $filterQuery, placement: .sidebar)
-        } else {
-            innerBody
-        }
+        .searchable(text: $filterQuery, placement: .sidebar)
     }
 }
 

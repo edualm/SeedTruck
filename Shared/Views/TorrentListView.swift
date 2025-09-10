@@ -10,6 +10,7 @@ import SwiftUI
 struct TorrentListView: View {
     
     @Environment(\.scenePhase) private var scenePhase
+    @EnvironmentObject private var sharedBucket: SharedBucket
     
     private enum Status {
         
@@ -40,16 +41,18 @@ struct TorrentListView: View {
                     return
                 }
                 
-                guard case let Result.success(torrents) = result else {
-                    self.status = .error
-                    self.torrents = []
-                    
-                    return
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let torrents):
+                        self.status = .noError
+                        self.torrents = torrents.sorted { $0.name < $1.name }
+                        self.sharedBucket.torrents = self.torrents
+                    case .failure:
+                        self.status = .error
+                        self.torrents = []
+                        self.sharedBucket.torrents = []
+                    }
                 }
-                
-                self.status = .noError
-                self.torrents = torrents
-                    .sorted { $0.name < $1.name }
             }
         }
     }
@@ -140,7 +143,9 @@ struct TorrentListView: View {
                         }
                         
                         #if !os(watchOS)
-                        ServerStatusView(torrents: torrents)
+                        if #unavailable(iOS 26.0) {
+                            ServerStatusView(torrents: torrents)
+                        }
                         #endif
                     }
                 } else {
