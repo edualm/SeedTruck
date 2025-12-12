@@ -21,7 +21,11 @@ struct ServerStatusView: View {
         HStack {
             Label("\(torrents.count)", systemImage: "square.stack.3d.down.right.fill")
                 .padding(Self.rectanglePadding)
+                #if os(macOS)
+                .background(Color.secondary.opacity(0.2))
+                #else
                 .background(Color.secondary.opacity(0.5))
+                #endif
                 .clipShape(RoundedRectangle(cornerRadius: 5.0))
             Spacer()
             Group {
@@ -29,7 +33,11 @@ struct ServerStatusView: View {
                 Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: torrents.uploadSpeed), systemImage: "arrow.up.forward")
             }
             .padding(Self.rectanglePadding)
+            #if os(macOS)
+            .background(Color.secondary.opacity(0.2))
+            #else
             .background(Color.secondary.opacity(0.5))
+            #endif
             .clipShape(RoundedRectangle(cornerRadius: 5.0))
         }
         .padding(.horizontal)

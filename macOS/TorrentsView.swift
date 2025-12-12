@@ -83,13 +83,12 @@ struct TorrentsView: View {
                             }
                         } label: {
                             if let f = filter, let item = menuItem(forFilter: f) {
-                                Text(item.name)
-                                Image(systemName: item.systemImage)
+                                Label(item.name, systemImage: item.systemImage)
                             } else {
-                                Text("Show All")
-                                Image(systemName: "circle.fill")
+                                Label("Show All", systemImage: "circle.fill")
                             }
                         }
+                        .buttonStyle(.bordered)
                         
                         Button {
                             self.presentedSheet = .serverSettings

@@ -120,7 +120,8 @@ struct TorrentListView: View {
                                                                                        presenter: .init(server: server!,
                                                                                                         torrent: torrent))) {
                                             TorrentItemView(torrent: torrent)
-                                                .padding(.all, 5)
+                                                .padding(.vertical, 8)
+                                                .padding(.horizontal, 5)
                                         }
                                         #else
                                         TorrentItemView(torrent: torrent)

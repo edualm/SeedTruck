@@ -18,24 +18,29 @@ struct TorrentItemView: View {
             case .stopped:
                 Text("Stopped")
                     .font(.footnote)
+                    .foregroundColor(.secondary)
                 
             case let .downloading(_, _, _, downloadRate, uploadRate, _):
                 HStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "arrow.down.forward")
                         .font(.footnote)
+                        .foregroundColor(.secondary)
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
                         .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
                 
             case let .seeding(_, uploadRate, _, _, _, _):
                 VStack {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
                         .font(.footnote)
+                        .foregroundColor(.secondary)
                 }
                 
             case let .other(status):
                 Text(status)
                     .font(.footnote)
+                    .foregroundColor(.secondary)
             }
         }
     }
@@ -50,11 +55,15 @@ struct TorrentItemView: View {
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: {
                 switch torrent.status {
                 case .stopped:
-                    return .gray
+                    return Color.secondary
                 case .other:
-                    return .orange
+                    return Color.orange
                 default:
+                    #if os(macOS)
+                    return $0 < 1 ? Color.blue.opacity(0.8) : Color.green.opacity(0.8)
+                    #else
                     return $0 < 1 ? .blue : .green
+                    #endif
                 }
             }, progress: CGFloat(torrent.progress))
                 .frame(width: nil, height: 20, alignment: .center)

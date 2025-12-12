@@ -19,7 +19,11 @@ struct ProgressBarView: View {
             HStack {
                 ZStack {
                     Rectangle()
-                        .foregroundColor(progress > 0 ? .gray : .red)
+                        #if os(macOS)
+                        .foregroundColor(progress > 0 ? Color.secondary.opacity(0.25) : .red)
+                        #else
+                        .foregroundColor(progress > 0 ? Color.secondary.opacity(0.3) : .red)
+                        #endif
                     HStack {
                         Rectangle()
                             .foregroundColor(barColorBuilder(progress))
