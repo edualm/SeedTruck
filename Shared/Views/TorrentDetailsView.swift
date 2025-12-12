@@ -186,7 +186,7 @@ struct TorrentDetailsView: View {
             }
             .buttonStyle(PlainButtonStyle())
 
-            if #available(iOS 26.0, macOS 15.0, watchOS 26.0, tvOS 18.0, *) {
+            if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 18.0, *) {
                 return button
                     .glassEffect(.regular.tint(style.glassTintColor).interactive())
             } else {
