@@ -159,13 +159,13 @@ struct TorrentsView: View {
         )
         
         return NavigationView {
-            TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery)
-                .navigationTitle(selectedServer?.name ?? "Torrents")
-                .navigationBarItems(
-                    leading: leadingNavigationBarItems,
-                    trailing: trailingNavigationBarItems
-                )
-                .searchable(text: $filterQuery)
+            TorrentsViewContent(
+                selectedServer: $selectedServer,
+                filter: $filter,
+                filterQuery: $filterQuery,
+                leadingNavigationBarItems: leadingNavigationBarItems,
+                trailingNavigationBarItems: trailingNavigationBarItems
+            )
         }
         .navigationViewStyle(Style.navigationView)
         .onAppear(perform: onAppear)
@@ -197,6 +197,27 @@ struct TorrentsView: View {
                 EmptyView()
             }
         }
+    }
+}
+
+private struct TorrentsViewContent<LeadingItems: View, TrailingItems: View>: View {
+    
+    @Binding var selectedServer: Server?
+    @Binding var filter: Filter?
+    @Binding var filterQuery: String
+    
+    let leadingNavigationBarItems: LeadingItems
+    let trailingNavigationBarItems: TrailingItems
+    
+    var body: some View {
+        TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery)
+            .navigationTitle(filterQuery.isEmpty ? (selectedServer?.name ?? "Torrents") : "")
+            .navigationBarItems(
+                leading: leadingNavigationBarItems,
+                trailing: trailingNavigationBarItems
+            )
+            .searchable(text: $filterQuery)
+            .animation(.none, value: filterQuery)
     }
 }
 
