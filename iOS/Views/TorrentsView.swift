@@ -214,6 +214,7 @@ private struct TorrentsViewContent<LeadingItems: View, TrailingItems: View>: Vie
     
     var body: some View {
         TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery, selectedTorrentId: $selectedTorrentId)
+            .id("torrentListTop")
             .navigationTitle(selectedServer?.name ?? "Torrents")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(

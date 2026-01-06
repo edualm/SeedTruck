@@ -164,6 +164,10 @@ struct TorrentListView: View {
                             ServerStatusView(torrents: torrents)
                         }
                         #endif
+                        
+                        #if os(macOS)
+                        ServerStatusView(torrents: torrents)
+                        #endif
                     }
                 } else {
                     NoServersConfiguredView()

@@ -91,6 +91,8 @@ struct TorrentsView: View {
                         }
                         .buttonStyle(.bordered)
                         
+                        Spacer()
+                        
                         Button {
                             self.presentedSheet = .serverSettings
                         } label: {
@@ -103,11 +105,14 @@ struct TorrentsView: View {
                             Image(systemName: "arrow.clockwise")
                         }
                     }
-                }.padding(serverConnections.count > 1 ? [.leading, .trailing] : [.top, .leading, .trailing])
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 4)
                 
                 TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery, selectedTorrentId: $selectedTorrentId)
                     .navigationTitle(selectedServer?.name ?? "Torrents")
                     .frame(minWidth: 300)
+                    .searchable(text: $filterQuery, placement: .sidebar)
                     .sheet(isPresented: isPresentingModal) {
                         switch presentedSheet {
                         case .serverSettings:
@@ -127,7 +132,6 @@ struct TorrentsView: View {
         .onReceive(managedContextDidSave) { _ in
             selectedServer = serverConnections.first
         }
-        .searchable(text: $filterQuery, placement: .sidebar)
     }
 }
 
