@@ -230,6 +230,7 @@ private struct TorrentsViewContent<LeadingItems: View, TrailingItems: View>: Vie
 // Keeps the navigation bar visible while the search field is focused so the list does not get extra top padding.
 @available(iOS, introduced: 15)
 private struct SearchPresentationToolbarBehaviorModifier: ViewModifier {
+
     func body(content: Content) -> some View {
         if #available(iOS 17.1, *) {
             content.searchPresentationToolbarBehavior(.avoidHidingContent)
@@ -240,6 +241,7 @@ private struct SearchPresentationToolbarBehaviorModifier: ViewModifier {
 }
 
 private extension View {
+    
     func searchPresentationToolbarBehaviorIfAvailable() -> some View {
         modifier(SearchPresentationToolbarBehaviorModifier())
     }
