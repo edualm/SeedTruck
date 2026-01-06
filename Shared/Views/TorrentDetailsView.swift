@@ -183,6 +183,7 @@ struct TorrentDetailsView: View {
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(style.borderColor, lineWidth: style.borderWidth)
                     )
+                    .contentShape(Rectangle())
             }
             .buttonStyle(PlainButtonStyle())
 
