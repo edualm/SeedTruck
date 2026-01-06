@@ -9,9 +9,9 @@ import Foundation
 
 typealias Filter = RemoteTorrent.Status.Simple
 
-struct RemoteTorrent: Identifiable {
+struct RemoteTorrent: Identifiable, Hashable {
     
-    enum Status {
+    enum Status: Hashable {
         
         enum Simple {
             

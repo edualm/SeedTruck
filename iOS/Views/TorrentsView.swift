@@ -78,6 +78,7 @@ struct TorrentsView: View {
     
     @State var filter: Filter?
     @State var selectedServer: Server?
+    @State var selectedTorrentId: String?
     
     @State var filterQuery: String = ""
     
@@ -163,6 +164,7 @@ struct TorrentsView: View {
                 selectedServer: $selectedServer,
                 filter: $filter,
                 filterQuery: $filterQuery,
+                selectedTorrentId: $selectedTorrentId,
                 leadingNavigationBarItems: leadingNavigationBarItems,
                 trailingNavigationBarItems: trailingNavigationBarItems
             )
@@ -205,12 +207,13 @@ private struct TorrentsViewContent<LeadingItems: View, TrailingItems: View>: Vie
     @Binding var selectedServer: Server?
     @Binding var filter: Filter?
     @Binding var filterQuery: String
+    @Binding var selectedTorrentId: String?
     
     let leadingNavigationBarItems: LeadingItems
     let trailingNavigationBarItems: TrailingItems
     
     var body: some View {
-        TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery)
+        TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery, selectedTorrentId: $selectedTorrentId)
             .navigationTitle(filterQuery.isEmpty ? (selectedServer?.name ?? "Torrents") : "")
             .navigationBarItems(
                 leading: leadingNavigationBarItems,

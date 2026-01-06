@@ -33,12 +33,10 @@ struct MainView: View {
     }
     
     var body: some View {
-        if #available(iOS 26.0, *) {
+        if #available(iOS 26.1, *) {
             TabView(selection: $selectedTab) { tabContent }
-                .tabViewBottomAccessory {
-                    if selectedTab == 0 {
-                        FloatingServerStatusView(torrents: sharedBucket.torrents)
-                    }
+                .tabViewBottomAccessory(isEnabled: selectedTab == 0) {
+                    FloatingServerStatusView(torrents: sharedBucket.torrents)
                 }
         } else {
             TabView(selection: $selectedTab) { tabContent }

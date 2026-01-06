@@ -7,6 +7,33 @@
 
 import SwiftUI
 
+#if os(macOS)
+/// Wrapper to ensure presenter persists across view updates on macOS
+struct TorrentDetailsViewWrapper: View {
+    let torrent: RemoteTorrent
+    let server: Server
+    @Binding var selectedTorrentId: String?
+    
+    @StateObject private var presenter: TorrentDetailsPresenter
+    
+    init(torrent: RemoteTorrent, server: Server, selectedTorrentId: Binding<String?>) {
+        self.torrent = torrent
+        self.server = server
+        self._selectedTorrentId = selectedTorrentId
+        // StateObject will preserve this presenter across view updates
+        self._presenter = StateObject(wrappedValue: TorrentDetailsPresenter(server: server, torrent: torrent))
+    }
+    
+    var body: some View {
+        TorrentDetailsView(
+            torrent: torrent,
+            selectedTorrentId: $selectedTorrentId,
+            presenter: presenter
+        )
+    }
+}
+#endif
+
 struct TorrentDetailsView: View {
     
     #if os(macOS)
@@ -368,6 +395,10 @@ struct TorrentDetailsView: View {
     
     @State var shouldShowEmptyView: Bool = false
     
+    #if os(macOS)
+    @Binding var selectedTorrentId: String?
+    #endif
+    
     @ObservedObject var presenter: TorrentDetailsPresenter
     
     var innerBody: some View {
@@ -412,8 +443,13 @@ struct TorrentDetailsView: View {
                              primaryButton: .destructive(Text("Confirm")) {
                                 self.presenter.perform(.commit) {
                                     DispatchQueue.main.async {
+                                        #if os(macOS)
+                                        // Clear selection instead of dismissing on macOS
+                                        self.selectedTorrentId = nil
+                                        #else
                                         shouldShowEmptyView = true
                                         self.presentation.wrappedValue.dismiss()
+                                        #endif
                                     }
                                 }
                              }, secondaryButton: .cancel())
@@ -423,6 +459,10 @@ struct TorrentDetailsView: View {
                              message: Text("The requested action couldn't be completed."),
                              dismissButton: .default(Text("Ok")))
             }
+        }
+        .onChange(of: torrent) { newTorrent in
+            // Update presenter's torrent data when it refreshes
+            presenter.torrent = newTorrent
         }
     }
     
@@ -444,9 +484,15 @@ struct TorrentDetailsView: View {
 struct TorrentDetailsView_Previews: PreviewProvider {
     
     static var previews: some View {
+        #if os(macOS)
+        TorrentDetailsView(torrent: PreviewMockData.remoteTorrent,
+                           selectedTorrentId: .constant(nil),
+                           presenter: .init(server: PreviewMockData.server,
+                                                torrent: PreviewMockData.remoteTorrent))
+        #else
         TorrentDetailsView(torrent: PreviewMockData.remoteTorrent,
                            presenter: .init(server: PreviewMockData.server,
                                                 torrent: PreviewMockData.remoteTorrent))
-        
+        #endif
     }
 }

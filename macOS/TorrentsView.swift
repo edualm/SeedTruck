@@ -25,6 +25,7 @@ struct TorrentsView: View {
     
     @State var selectedServer: Server?
     @State var filter: Filter?
+    @State var selectedTorrentId: String?
     
     @State var filterQuery: String = ""
     
@@ -104,7 +105,7 @@ struct TorrentsView: View {
                     }
                 }.padding(serverConnections.count > 1 ? [.leading, .trailing] : [.top, .leading, .trailing])
                 
-                TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery)
+                TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery, selectedTorrentId: $selectedTorrentId)
                     .navigationTitle(selectedServer?.name ?? "Torrents")
                     .frame(minWidth: 300)
                     .sheet(isPresented: isPresentingModal) {

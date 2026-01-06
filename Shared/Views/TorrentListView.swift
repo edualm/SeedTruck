@@ -23,6 +23,7 @@ struct TorrentListView: View {
     @Binding var server: Server?
     @Binding var filter: Filter?
     @Binding var filterQuery: String
+    @Binding var selectedTorrentId: String?
     
     @State private var status: Status = .noError
     @State private var timer: Timer? = nil
@@ -115,7 +116,22 @@ struct TorrentListView: View {
                             List {
                                 ForEach(filteredTorrents) { torrent in
                                     ZStack {
-                                        #if os(macOS) || os(tvOS)
+                                        #if os(macOS)
+                                        NavigationLink(
+                                            destination: TorrentDetailsViewWrapper(
+                                                torrent: torrent,
+                                                server: server!,
+                                                selectedTorrentId: $selectedTorrentId
+                                            )
+                                            .id(torrent.id),
+                                            tag: torrent.id,
+                                            selection: $selectedTorrentId
+                                        ) {
+                                            TorrentItemView(torrent: torrent)
+                                                .padding(.vertical, 8)
+                                                .padding(.horizontal, 5)
+                                        }
+                                        #elseif os(tvOS)
                                         NavigationLink(destination: TorrentDetailsView(torrent: torrent,
                                                                                        presenter: .init(server: server!,
                                                                                                         torrent: torrent))) {
@@ -182,6 +198,6 @@ struct TorrentListView: View {
 struct TorrentListView_Previews: PreviewProvider {
     
     static var previews: some View {
-        TorrentListView(server: .constant(PreviewMockData.server), filter: .constant(nil), filterQuery: .constant(""))
+        TorrentListView(server: .constant(PreviewMockData.server), filter: .constant(nil), filterQuery: .constant(""), selectedTorrentId: .constant(nil))
     }
 }

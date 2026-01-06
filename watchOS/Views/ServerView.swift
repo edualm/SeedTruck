@@ -14,7 +14,7 @@ struct ServerView: View {
     let shouldShowBackButton: Bool
     
     var body: some View {
-        TorrentListView(server: $server, filter: .constant(nil), filterQuery: .constant(""))
+        TorrentListView(server: $server, filter: .constant(nil), filterQuery: .constant(""), selectedTorrentId: .constant(nil))
             .navigationBarTitle(server?.name ?? "Torrents")
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(!shouldShowBackButton)

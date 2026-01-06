@@ -30,7 +30,7 @@ class TorrentDetailsPresenter: ObservableObject {
     }
     
     let server: Server
-    let torrent: RemoteTorrent
+    var torrent: RemoteTorrent
     
     private var actionToCommit: Action?
     
