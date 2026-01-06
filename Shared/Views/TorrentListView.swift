@@ -11,6 +11,7 @@ struct TorrentListView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject private var sharedBucket: SharedBucket
+    @Environment(\.isSearching) private var isSearching
     
     private enum Status {
         
@@ -153,6 +154,8 @@ struct TorrentListView: View {
                                     }
                                 }
                             }
+                            .padding(.top, isSearching ? -32 : 0)
+                            .animation(.easeInOut(duration: 0.2), value: isSearching)
                             .listStyle(Self.listStyle)
                         } else {
                             NoTorrentsView()
