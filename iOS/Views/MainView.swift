@@ -12,6 +12,8 @@ struct MainView: View {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @EnvironmentObject private var sharedBucket: SharedBucket
     
+    @State private var selectedTab = 0
+    
     private var tabContent: some View {
         Group {
             TorrentsView()
@@ -19,23 +21,27 @@ struct MainView: View {
                     Image(systemName: "tray.and.arrow.down")
                     Text("Torrents")
                 }
+                .tag(0)
             SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")
                 }
+                .tag(1)
         }
         .toolbar(.visible, for: .tabBar)
     }
     
     var body: some View {
         if #available(iOS 26.0, *) {
-            TabView { tabContent }
+            TabView(selection: $selectedTab) { tabContent }
                 .tabViewBottomAccessory {
-                    FloatingServerStatusView(torrents: sharedBucket.torrents)
+                    if selectedTab == 0 {
+                        FloatingServerStatusView(torrents: sharedBucket.torrents)
+                    }
                 }
         } else {
-            TabView { tabContent }
+            TabView(selection: $selectedTab) { tabContent }
         }
     }
 }
