@@ -68,8 +68,8 @@ import SwiftUI
                         sharedBucket.dataTransferManager = dataTransferManager
                     }
                 }
-        }.onChange(of: scenePhase) { phase in
-            switch phase {
+        }.onChange(of: scenePhase) { oldPhase, newPhase in
+            switch newPhase {
             case .background:
                 persistentContainer.save()
                 

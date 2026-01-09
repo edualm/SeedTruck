@@ -25,16 +25,7 @@ struct MainView: View {
     }
     
     var body: some View {
-        let navigationLinkActive = Binding<Bool>(
-            get: { selectedServer != nil },
-            set: {
-                if !$0 {
-                    selectedServer = nil
-                }
-            }
-        )
-        
-        return NavigationView {
+        NavigationStack {
             if serverConnections.count > 0 {
                 ScrollView {
                     ForEach(serverConnections) { server in
@@ -44,17 +35,17 @@ struct MainView: View {
                             Label(server.name, systemImage: "server.rack")
                         })
                     }
-                    
-                    NavigationLink(
-                        destination: ServerView(server: $selectedServer,
-                                                shouldShowBackButton: serverConnections.count > 1),
-                        isActive: navigationLinkActive)
-                    {
-                        EmptyView()
-                    }
-                    .hidden()
                 }
                 .navigationBarTitle("Servers")
+                .navigationDestination(isPresented: Binding(
+                    get: { selectedServer != nil },
+                    set: { if !$0 { selectedServer = nil } }
+                )) {
+                    if let selectedServer = selectedServer {
+                        ServerView(server: .constant(selectedServer),
+                                   shouldShowBackButton: serverConnections.count > 1)
+                    }
+                }
             } else {
                 NoServersConfiguredView()
                     .navigationBarTitle("Error!")

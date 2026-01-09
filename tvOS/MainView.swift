@@ -22,7 +22,7 @@ struct MainView: View {
         TabView {
             ForEach(serverConnections, id: \.self) { server in
                 NavigationView {
-                    TorrentListView(server: .constant(server), filter: .constant(nil), filterQuery: .constant(""))
+                    TorrentListView(server: .constant(server), filter: .constant(nil), filterQuery: .constant(""), selectedTorrentId: .constant(nil))
                 }.tabItem {
                     Image(systemName: "server.rack")
                     Text(server.name)

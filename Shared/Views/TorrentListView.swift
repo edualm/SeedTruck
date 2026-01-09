@@ -114,20 +114,11 @@ struct TorrentListView: View {
                         #endif
                         
                         if filteredTorrents.count > 0 {
-                            List {
+                            List(selection: $selectedTorrentId) {
                                 ForEach(filteredTorrents) { torrent in
                                     ZStack {
                                         #if os(macOS)
-                                        NavigationLink(
-                                            destination: TorrentDetailsViewWrapper(
-                                                torrent: torrent,
-                                                server: server!,
-                                                selectedTorrentId: $selectedTorrentId
-                                            )
-                                            .id(torrent.id),
-                                            tag: torrent.id,
-                                            selection: $selectedTorrentId
-                                        ) {
+                                        NavigationLink(value: torrent.id) {
                                             TorrentItemView(torrent: torrent)
                                                 .padding(.vertical, 8)
                                                 .padding(.horizontal, 5)
@@ -181,13 +172,13 @@ struct TorrentListView: View {
         }
         .onAppear(perform: onAppear)
         .onDisappear(perform: onDisappear)
-        .onChange(of: server) { _ in
+        .onChange(of: server) { _, _ in
             status = .loading
             
             updateData()
         }
-        .onChange(of: scenePhase) {
-            switch $0 {
+        .onChange(of: scenePhase) { _, newPhase in
+            switch newPhase {
             case .active:
                 onAppear()
                 

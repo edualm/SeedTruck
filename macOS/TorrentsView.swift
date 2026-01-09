@@ -21,6 +21,8 @@ struct TorrentsView: View {
         ]
     ) var serverConnections: FetchedResults<Server>
     
+    @EnvironmentObject private var sharedBucket: SharedBucket
+    
     private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
     
     @State var selectedServer: Server?
@@ -43,7 +45,8 @@ struct TorrentsView: View {
             set: { _ in presentedSheet = nil }
         )
         
-        return NavigationView {
+        return NavigationSplitView {
+            // Sidebar
             VStack {
                 if serverConnections.count > 1 {
                     if let s = selectedServer {
@@ -110,24 +113,43 @@ struct TorrentsView: View {
                 .padding(.vertical, 4)
                 
                 TorrentListView(server: $selectedServer, filter: $filter, filterQuery: $filterQuery, selectedTorrentId: $selectedTorrentId)
-                    .navigationTitle(selectedServer?.name ?? "Torrents")
                     .frame(minWidth: 300)
-                    .searchable(text: $filterQuery, placement: .sidebar)
-                    .sheet(isPresented: isPresentingModal) {
-                        switch presentedSheet {
-                        case .serverSettings:
-                            if let server = selectedServer {
-                                RemoteServerSettingsView(presenter: RemoteServerSettingsPresenter(server: server))
-                            } else {
-                                EmptyView()
-                            }
-                        case .none:
-                            EmptyView()
-                        }
-                    }
+            }
+            .navigationTitle(selectedServer?.name ?? "Torrents")
+            .searchable(text: $filterQuery)
+        } detail: {
+            // Detail view
+            if let torrentId = selectedTorrentId,
+               let server = selectedServer,
+               let torrent = sharedBucket.torrents.first(where: { $0.id == torrentId }) {
+                TorrentDetailsViewWrapper(
+                    torrent: torrent,
+                    server: server,
+                    selectedTorrentId: $selectedTorrentId
+                )
+                .id(torrent.id)
+            } else {
+                VStack(spacing: 12) {
+                    Image(systemName: "arrow.left.circle")
+                        .font(.system(size: 48))
+                        .foregroundColor(.secondary)
+                    Text("Select a torrent to view its details.")
+                        .foregroundColor(.secondary)
+                }
             }
         }
-        .navigationViewStyle(Style.navigationView)
+        .sheet(isPresented: isPresentingModal) {
+            switch presentedSheet {
+            case .serverSettings:
+                if let server = selectedServer {
+                    RemoteServerSettingsView(presenter: RemoteServerSettingsPresenter(server: server))
+                } else {
+                    EmptyView()
+                }
+            case .none:
+                EmptyView()
+            }
+        }
         .onAppear(perform: onAppear)
         .onReceive(managedContextDidSave) { _ in
             selectedServer = serverConnections.first

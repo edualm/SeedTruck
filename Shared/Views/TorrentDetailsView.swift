@@ -214,7 +214,7 @@ struct TorrentDetailsView: View {
             }
             .buttonStyle(PlainButtonStyle())
 
-            if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 18.0, *) {
+            if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, *) {
                 return button
                     .glassEffect(.regular.tint(style.glassTintColor).interactive())
             } else {
@@ -460,7 +460,7 @@ struct TorrentDetailsView: View {
                              dismissButton: .default(Text("Ok")))
             }
         }
-        .onChange(of: torrent) { newTorrent in
+        .onChange(of: torrent) { _, newTorrent in
             // Update presenter's torrent data when it refreshes
             presenter.torrent = newTorrent
         }

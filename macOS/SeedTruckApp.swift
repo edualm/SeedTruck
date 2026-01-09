@@ -31,8 +31,8 @@ import SwiftUI
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
                 .environmentObject(sharedBucket)
                 .frame(minWidth: 700)
-        }.onChange(of: scenePhase) { phase in
-            switch phase {
+        }.onChange(of: scenePhase) { oldPhase, newPhase in
+            switch newPhase {
             case .background:
                 persistentContainer.save()
                 
