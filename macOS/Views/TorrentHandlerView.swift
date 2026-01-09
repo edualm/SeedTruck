@@ -22,6 +22,7 @@ struct TorrentHandlerView: View {
     @State var processing: Bool = false
     @State var selectedServers: [Server] = []
     @State var selectedLabels: [String] = []
+    @State var hasServerLabels: Bool = false
     
     let torrent: LocalTorrent
     let server: Server?
@@ -44,29 +45,56 @@ struct TorrentHandlerView: View {
     }
     
     var normalBody: some View {
-        Form {
-            Section(header: Text("Torrent Metadata").font(.largeTitle).padding(.bottom, 8)) {
-                InfoSectionView(torrent: torrent)
+        VStack(alignment: .leading, spacing: 16) {
+            // Torrent Metadata Section
+            GroupBox(label: Label("Torrent Metadata", systemImage: "doc.text").font(.headline)) {
+                VStack(alignment: .leading, spacing: 6) {
+                    if let name = torrent.name {
+                        MetadataRow(label: "Name", value: name)
+                    }
+                    
+                    if let size = torrent.size {
+                        MetadataRow(label: "Size", value: ByteCountFormatter.humanReadableFileSize(bytes: Int64(size)))
+                    }
+                    
+                    if let files = torrent.files {
+                        MetadataRow(label: "Files", value: "\(files.count)")
+                    }
+                    
+                    if let isPrivate = torrent.isPrivate {
+                        MetadataRow(label: "Private", value: isPrivate ? "Yes" : "No")
+                    }
+                }
+                .padding(10)
             }
             
-            Divider()
-                .padding([.top, .bottom])
-            
-            Section(header: Text("Labels (Optional)").font(.largeTitle)) {
-                LabelPickerView(selectedLabels: $selectedLabels, server: server ?? selectedServers.first)
+            // Labels Section
+            if hasServerLabels {
+                GroupBox(label: Label("Labels (Optional)", systemImage: "tag").font(.headline)) {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 4) {
+                            LabelPickerView(selectedLabels: $selectedLabels, server: server ?? selectedServers.first)
+                        }
+                        .padding(10)
+                    }
+                    .frame(maxHeight: 100)
+                }
             }
             
-            Divider()
-                .padding([.top, .bottom])
-            
+            // Server Selection Section
             if server == nil {
                 if serverConnections.count > 0 {
-                    Section(header: Text("Server(s)").font(.largeTitle)) {
-                        ForEach(0 ..< serverConnections.count, id: \.self) { index in
-                            Toggle(isOn: serverBindings[index]) {
-                                Text(serverConnections[index].name)
-                                    .foregroundColor(.primary)
+                    GroupBox(label: Label("Server(s)", systemImage: "server.rack").font(.headline)) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            ForEach(0 ..< serverConnections.count, id: \.self) { index in
+                                Toggle(isOn: serverBindings[index]) {
+                                    Text(serverConnections[index].name)
+                                        .foregroundColor(.primary)
+                                }
+                                .toggleStyle(.checkbox)
                             }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(10)
                         }
                     }
                 } else {
@@ -74,26 +102,76 @@ struct TorrentHandlerView: View {
                 }
             }
             
-            Divider()
-                .padding([.top, .bottom])
+            Spacer(minLength: 0)
             
+            // Action Button
             if serverConnections.count > 0 {
-                Section {
+                HStack {
+                    Spacer()
                     Button(action: startDownload) {
                         Label("Start Download", systemImage: "square.and.arrow.down.on.square")
-                    }.disabled(selectedServers.count == 0)
-                }.centered()
+                            .frame(minWidth: 140)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .controlSize(.large)
+                    .disabled(selectedServers.count == 0)
+                    Spacer()
+                }
             }
         }
+        .padding(16)
         .alert(isPresented: showingError) {
             Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
+        }
+        .onAppear {
+            loadLabelsFromServer()
+        }
+    }
+    
+    struct MetadataRow: View {
+        let label: String
+        let value: String
+        
+        var body: some View {
+            HStack(alignment: .top, spacing: 8) {
+                Text(label)
+                    .frame(width: 70, alignment: .leading)
+                    .foregroundColor(.secondary)
+                    .font(.system(size: 12))
+                Text(value)
+                    .foregroundColor(.primary)
+                    .font(.system(size: 12))
+                    .lineLimit(2)
+                Spacer(minLength: 0)
+            }
         }
     }
     
     var body: some View {
         sharedBody
-            .frame(minWidth: 500,
-                   minHeight: (torrent.size != nil ? 300 : 260) + CGFloat(serverConnections.count * 15))
+            .frame(minWidth: 450, idealWidth: 520, maxWidth: 800,
+                   minHeight: 350, idealHeight: 420, maxHeight: 700)
+    }
+    
+    private func loadLabelsFromServer() {
+        guard let serverToUse = server ?? selectedServers.first else {
+            hasServerLabels = false
+            return
+        }
+        
+        serverToUse.connection.getTorrents { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let torrents):
+                    let allLabels = torrents.flatMap { $0.labels }
+                    let uniqueLabels = Array(Set(allLabels)).sorted()
+                    hasServerLabels = !uniqueLabels.isEmpty
+                    
+                case .failure(_):
+                    hasServerLabels = false
+                }
+            }
+        }
     }
 }
 

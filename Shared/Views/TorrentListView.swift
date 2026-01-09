@@ -154,7 +154,9 @@ struct TorrentListView: View {
                                     }
                                 }
                             }
+                            #if os(iOS)
                             .padding(.top, isSearching ? -32 : 0)
+                            #endif
                             .animation(.easeInOut(duration: 0.2), value: isSearching)
                             .listStyle(Self.listStyle)
                         } else {

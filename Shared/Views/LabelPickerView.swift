@@ -27,11 +27,16 @@ struct LabelPickerView: View {
     var body: some View {
         Group {
             if isLoading {
-                Text("Loading labels...")
-                    .foregroundStyle(.secondary)
-                    .onAppear {
-                        loadLabelsFromServer()
-                    }
+                HStack {
+                    ProgressView()
+                        .controlSize(.small)
+                    Text("Loading labels...")
+                        .foregroundStyle(.secondary)
+                        .font(.caption)
+                }
+                .onAppear {
+                    loadLabelsFromServer()
+                }
             } else if hasLabels {
                 ForEach(serverLabels, id: \.self) { label in
                     Button(action: {
@@ -50,11 +55,14 @@ struct LabelPickerView: View {
                             }
                         }
                         .foregroundColor(.primary)
+                        .contentShape(Rectangle())
                     }
+                    .buttonStyle(.plain)
                 }
             } else {
-                Text("No labels available!")
+                Text("No labels available")
                     .foregroundStyle(.secondary)
+                    .font(.caption)
             }
         }
     }
