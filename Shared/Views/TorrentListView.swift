@@ -49,6 +49,9 @@ struct TorrentListView: View {
                         self.status = .noError
                         self.torrents = torrents.sorted { $0.name < $1.name }
                         self.sharedBucket.torrents = self.torrents
+                        #if os(iOS)
+                        self.selectedTorrentId = nil
+                        #endif
                     case .failure:
                         self.status = .error
                         self.torrents = []
