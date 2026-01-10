@@ -26,41 +26,39 @@ extension TorrentHandlerView {
         let torrent: LocalTorrent
         
         var body: some View {
-            Group {
-                if let name = torrent.name {
-                    HStack {
-                        Text("Name")
-                        Spacer()
-                        Text(name)
-                            .foregroundColor(.secondary)
-                    }
+            if let name = torrent.name {
+                HStack {
+                    Text("Name")
+                    Spacer()
+                    Text(name)
+                        .foregroundColor(.secondary)
                 }
-                
-                if let size = torrent.size {
-                    HStack {
-                        Text("Size")
-                        Spacer()
-                        Text(ByteCountFormatter.humanReadableFileSize(bytes: Int64(size)))
-                            .foregroundColor(.secondary)
-                    }
+            }
+            
+            if let size = torrent.size {
+                HStack {
+                    Text("Size")
+                    Spacer()
+                    Text(ByteCountFormatter.humanReadableFileSize(bytes: Int64(size)))
+                        .foregroundColor(.secondary)
                 }
-                
-                if let files = torrent.files {
-                    HStack {
-                        Text("Files")
-                        Spacer()
-                        Text("\(files.count)")
-                            .foregroundColor(.secondary)
-                    }
+            }
+            
+            if let files = torrent.files {
+                HStack {
+                    Text("Files")
+                    Spacer()
+                    Text("\(files.count)")
+                        .foregroundColor(.secondary)
                 }
-                
-                if let isPrivate = torrent.isPrivate {
-                    HStack {
-                        Text("Private")
-                        Spacer()
-                        Text(isPrivate ? "Yes" : "No")
-                            .foregroundColor(.secondary)
-                    }
+            }
+            
+            if let isPrivate = torrent.isPrivate {
+                HStack {
+                    Text("Private")
+                    Spacer()
+                    Text(isPrivate ? "Yes" : "No")
+                        .foregroundColor(.secondary)
                 }
             }
         }

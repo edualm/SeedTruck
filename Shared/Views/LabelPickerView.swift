@@ -2,7 +2,7 @@
 //  LabelPickerView.swift
 //  SeedTruck
 //
-//  Created by Claude on 20/08/2025.
+//  Created by Eduardo Almeida on 20/08/2025.
 //
 
 import SwiftUI
@@ -20,10 +20,6 @@ struct LabelPickerView: View {
         self.server = server
     }
     
-    var hasLabels: Bool {
-        !serverLabels.isEmpty
-    }
-    
     var body: some View {
         Group {
             if isLoading {
@@ -37,7 +33,7 @@ struct LabelPickerView: View {
                 .onAppear {
                     loadLabelsFromServer()
                 }
-            } else if hasLabels {
+            } else {
                 ForEach(serverLabels, id: \.self) { label in
                     #if os(macOS)
                     Toggle(isOn: Binding(
@@ -70,7 +66,7 @@ struct LabelPickerView: View {
                             Spacer()
                             if selectedLabels.contains(label) {
                                 Image(systemName: "checkmark")
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.primary)
                             }
                         }
                         .foregroundColor(.primary)
@@ -79,10 +75,6 @@ struct LabelPickerView: View {
                     .buttonStyle(.plain)
                     #endif
                 }
-            } else {
-                Text("No labels available")
-                    .foregroundStyle(.secondary)
-                    .font(.caption)
             }
         }
     }
