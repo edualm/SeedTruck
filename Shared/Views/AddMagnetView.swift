@@ -13,9 +13,9 @@ struct AddMagnetView: View {
     
     @State private var magnetLink: String = ""
     @State private var selectedLabels: [String] = []
+    @State private var serverLabels: [String] = []
     @State private var navigationLinkActive = false
     @State private var showingErrorAlert = false
-    @State private var hasServerLabels: Bool = false
     
     @Binding var server: Server?
     
@@ -38,9 +38,9 @@ struct AddMagnetView: View {
                 TextField("Magnet Link", text: $magnetLink)
             }
             
-            if hasServerLabels {
+            if !serverLabels.isEmpty {
                 Section("Labels (Optional)") {
-                    LabelPickerView(selectedLabels: $selectedLabels, server: server)
+                    LabelPickerView(selectedLabels: $selectedLabels, labels: serverLabels)
                 }
             }
             
@@ -68,7 +68,6 @@ struct AddMagnetView: View {
     
     private func loadLabelsFromServer() {
         guard let server = server else {
-            hasServerLabels = false
             return
         }
         
@@ -77,11 +76,10 @@ struct AddMagnetView: View {
                 switch result {
                 case .success(let torrents):
                     let allLabels = torrents.flatMap { $0.labels }
-                    let uniqueLabels = Array(Set(allLabels)).sorted()
-                    hasServerLabels = !uniqueLabels.isEmpty
+                    serverLabels = Array(Set(allLabels)).sorted()
                     
                 case .failure(_):
-                    hasServerLabels = false
+                    ()
                 }
             }
         }

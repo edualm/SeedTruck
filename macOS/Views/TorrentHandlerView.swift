@@ -21,8 +21,8 @@ struct TorrentHandlerView: View {
     @State var errorMessage: String? = nil
     @State var processing: Bool = false
     @State var selectedServers: [Server] = []
+    @State var serverLabels: [String] = []
     @State var selectedLabels: [String] = []
-    @State var hasServerLabels: Bool = false
     
     let torrent: LocalTorrent
     let server: Server?
@@ -69,10 +69,10 @@ struct TorrentHandlerView: View {
             }
             
             // Labels Section
-            if hasServerLabels {
+            if !serverLabels.isEmpty {
                 GroupBox(label: Label("Labels (Optional)", systemImage: "tag").font(.headline)) {
                     VStack(alignment: .leading, spacing: 4) {
-                        LabelPickerView(selectedLabels: $selectedLabels, server: server ?? selectedServers.first)
+                        LabelPickerView(selectedLabels: $selectedLabels, labels: serverLabels)
                     }
                     .padding(10)                    
                 }
@@ -149,7 +149,6 @@ struct TorrentHandlerView: View {
     
     func loadLabelsFromServer() {
         guard let serverToUse = server ?? selectedServers.first else {
-            hasServerLabels = false
             return
         }
         
@@ -158,11 +157,10 @@ struct TorrentHandlerView: View {
                 switch result {
                 case .success(let torrents):
                     let allLabels = torrents.flatMap { $0.labels }
-                    let uniqueLabels = Array(Set(allLabels)).sorted()
-                    hasServerLabels = !uniqueLabels.isEmpty
+                    serverLabels = Array(Set(allLabels)).sorted()
                     
                 case .failure(_):
-                    hasServerLabels = false
+                    ()
                 }
             }
         }

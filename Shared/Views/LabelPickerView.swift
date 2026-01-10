@@ -10,97 +10,55 @@ import SwiftUI
 struct LabelPickerView: View {
     
     @Binding var selectedLabels: [String]
-    @State private var serverLabels: [String] = []
-    @State private var isLoading: Bool = true
     
-    let server: Server?
+    let labels: [String]
     
-    init(selectedLabels: Binding<[String]>, server: Server? = nil) {
+    init(selectedLabels: Binding<[String]>, labels: [String]) {
         self._selectedLabels = selectedLabels
-        self.server = server
+        self.labels = labels
     }
     
     var body: some View {
-        Group {
-            if isLoading {
-                HStack {
-                    ProgressView()
-                        .controlSize(.small)
-                    Text("Loading labels...")
-                        .foregroundStyle(.secondary)
-                        .font(.caption)
-                }
-                .onAppear {
-                    loadLabelsFromServer()
-                }
-            } else {
-                ForEach(serverLabels, id: \.self) { label in
-                    #if os(macOS)
-                    Toggle(isOn: Binding(
-                        get: { selectedLabels.contains(label) },
-                        set: { isSelected in
-                            if isSelected {
-                                if !selectedLabels.contains(label) {
-                                    selectedLabels.append(label)
-                                }
-                            } else {
-                                selectedLabels.removeAll { $0 == label }
-                            }
-                        }
-                    )) {
-                        Text(label)
-                            .foregroundColor(.primary)
-                    }
-                    .toggleStyle(.checkbox)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    #else
-                    Button(action: {
-                        if selectedLabels.contains(label) {
-                            selectedLabels.removeAll { $0 == label }
-                        } else {
+        ForEach(labels, id: \.self) { label in
+            #if os(macOS)
+            Toggle(isOn: Binding(
+                get: { selectedLabels.contains(label) },
+                set: { isSelected in
+                    if isSelected {
+                        if !selectedLabels.contains(label) {
                             selectedLabels.append(label)
                         }
-                    }) {
-                        HStack {
-                            Text(label)
-                            Spacer()
-                            if selectedLabels.contains(label) {
-                                Image(systemName: "checkmark")
-                                    .foregroundColor(.primary)
-                            }
-                        }
-                        .foregroundColor(.primary)
-                        .contentShape(Rectangle())
+                    } else {
+                        selectedLabels.removeAll { $0 == label }
                     }
-                    .buttonStyle(.plain)
-                    #endif
                 }
+            )) {
+                Text(label)
+                    .foregroundColor(.primary)
             }
-        }
-    }
-    
-    private func loadLabelsFromServer() {
-        guard let server = server else {
-            serverLabels = []
-            
-            return
-        }
-        
-        server.connection.getTorrents { result in
-            DispatchQueue.main.async {
-                isLoading = false
-                
-                switch result {
-                case .success(let torrents):
-                    let allLabels = torrents.flatMap { $0.labels }
-                    let uniqueLabels = Array(Set(allLabels)).sorted()
-                    
-                    self.serverLabels = uniqueLabels
-                    
-                case .failure(_):
-                    self.serverLabels = []
+            .toggleStyle(.checkbox)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            #else
+            Button(action: {
+                if selectedLabels.contains(label) {
+                    selectedLabels.removeAll { $0 == label }
+                } else {
+                    selectedLabels.append(label)
                 }
+            }) {
+                HStack {
+                    Text(label)
+                    Spacer()
+                    if selectedLabels.contains(label) {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.primary)
+                    }
+                }
+                .foregroundColor(.primary)
+                .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
+            #endif
         }
     }
 }
@@ -108,6 +66,9 @@ struct LabelPickerView: View {
 struct LabelPickerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        LabelPickerView(selectedLabels: .constant(["Movies", "Work"]))
+        LabelPickerView(
+            selectedLabels: .constant(["Movies", "Work"]),
+            labels: ["Movies", "Songs", "Work"],
+        )
     }
 }
