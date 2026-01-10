@@ -48,16 +48,14 @@ struct LabelPickerView: View {
             }) {
                 HStack {
                     Text(label)
+                        .foregroundColor(.primary)
                     Spacer()
                     if selectedLabels.contains(label) {
                         Image(systemName: "checkmark")
                             .foregroundColor(.primary)
                     }
                 }
-                .foregroundColor(.primary)
-                .contentShape(Rectangle())
             }
-            .buttonStyle(.plain)
             #endif
         }
     }

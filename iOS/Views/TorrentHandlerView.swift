@@ -30,6 +30,18 @@ struct TorrentHandlerView: View {
     
     var normalBody: some View {
         Form {
+            Section {
+                HStack {
+                    Label("Confirm and Edit", systemImage: "checkmark.circle")
+                        .font(.headline)
+                    Spacer()
+                }.padding(.vertical, 4)
+                Text("Confirm the data matches what you expect, add labels to your torrent (if you want to and they exist on your server), and start the download!")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.vertical, 4)
+            }
+            
             Section(header: Text("Torrent Metadata")) {
                 InfoSectionView(torrent: torrent)
             }
