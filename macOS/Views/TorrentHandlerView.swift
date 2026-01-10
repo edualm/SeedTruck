@@ -71,13 +71,10 @@ struct TorrentHandlerView: View {
             // Labels Section
             if hasServerLabels {
                 GroupBox(label: Label("Labels (Optional)", systemImage: "tag").font(.headline)) {
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 4) {
-                            LabelPickerView(selectedLabels: $selectedLabels, server: server ?? selectedServers.first)
-                        }
-                        .padding(10)
+                    VStack(alignment: .leading, spacing: 4) {
+                        LabelPickerView(selectedLabels: $selectedLabels, server: server ?? selectedServers.first)
                     }
-                    .frame(maxHeight: 100)
+                    .padding(10)                    
                 }
             }
             
@@ -123,9 +120,6 @@ struct TorrentHandlerView: View {
         .alert(isPresented: showingError) {
             Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
         }
-        .onAppear {
-            loadLabelsFromServer()
-        }
     }
     
     struct MetadataRow: View {
@@ -153,7 +147,7 @@ struct TorrentHandlerView: View {
                    minHeight: 350, idealHeight: 420, maxHeight: 700)
     }
     
-    private func loadLabelsFromServer() {
+    func loadLabelsFromServer() {
         guard let serverToUse = server ?? selectedServers.first else {
             hasServerLabels = false
             return

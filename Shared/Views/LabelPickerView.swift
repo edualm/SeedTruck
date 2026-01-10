@@ -39,6 +39,25 @@ struct LabelPickerView: View {
                 }
             } else if hasLabels {
                 ForEach(serverLabels, id: \.self) { label in
+                    #if os(macOS)
+                    Toggle(isOn: Binding(
+                        get: { selectedLabels.contains(label) },
+                        set: { isSelected in
+                            if isSelected {
+                                if !selectedLabels.contains(label) {
+                                    selectedLabels.append(label)
+                                }
+                            } else {
+                                selectedLabels.removeAll { $0 == label }
+                            }
+                        }
+                    )) {
+                        Text(label)
+                            .foregroundColor(.primary)
+                    }
+                    .toggleStyle(.checkbox)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    #else
                     Button(action: {
                         if selectedLabels.contains(label) {
                             selectedLabels.removeAll { $0 == label }
@@ -58,6 +77,7 @@ struct LabelPickerView: View {
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
+                    #endif
                 }
             } else {
                 Text("No labels available")

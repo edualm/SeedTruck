@@ -81,9 +81,6 @@ struct TorrentHandlerView: View {
         .alert(isPresented: showingError) {
             Alert(title: Text("Error!"), message: Text(errorMessage!), dismissButton: .default(Text("Ok")))
         }
-        .onAppear {
-            loadLabelsFromServer()
-        }
     }
     
     var body: some View {
@@ -94,7 +91,7 @@ struct TorrentHandlerView: View {
             })
     }
     
-    private func loadLabelsFromServer() {
+    func loadLabelsFromServer() {
         guard let serverToUse = server ?? selectedServers.first else {
             hasServerLabels = false
             return

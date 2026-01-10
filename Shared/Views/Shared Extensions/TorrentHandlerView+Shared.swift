@@ -85,6 +85,8 @@ extension TorrentHandlerView {
         }
         
         selectedLabels = torrent.labels
+        
+        loadLabelsFromServer()
     }
     
     func startDownload() {
