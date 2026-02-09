@@ -21,18 +21,24 @@ struct TorrentItemView: View {
                     .foregroundColor(.secondary)
                 
             case let .downloading(_, _, _, downloadRate, uploadRate, _):
-                HStack {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate), systemImage: "arrow.down.forward")
+                        .labelStyle(CompactLabelStyle())
                         .font(.footnote)
-                        .foregroundColor(.secondary)
+                        
+                    Spacer()
+                    
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
+                        .labelStyle(CompactLabelStyle())
                         .font(.footnote)
-                        .foregroundColor(.secondary)
-                }
+                }.foregroundColor(.secondary)
                 
             case let .seeding(_, uploadRate, _, _, _, _):
-                VStack {
+                HStack {
+                    Spacer()
+                    
                     Label(ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate), systemImage: "arrow.up.forward")
+                        .labelStyle(CompactLabelStyle())
                         .font(.footnote)
                         .foregroundColor(.secondary)
                 }
