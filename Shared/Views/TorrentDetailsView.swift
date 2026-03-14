@@ -7,32 +7,52 @@
 
 import SwiftUI
 
-#if os(macOS)
-/// Wrapper to ensure presenter persists across view updates on macOS
+/// Wrapper to ensure presenter persists across view updates.
+/// On macOS this is needed because the NavigationSplitView detail column
+/// rebuilds its content on every list refresh. On iOS the NavigationLink
+/// destination similarly passes a new presenter instance whenever the
+/// parent list re-renders, replacing the @ObservedObject and resetting
+/// isLoading prematurely.
 struct TorrentDetailsViewWrapper: View {
     let torrent: RemoteTorrent
     let server: Server
+
+    #if os(macOS)
     @Binding var selectedTorrentId: String?
-    
+    #endif
+
     @StateObject private var presenter: TorrentDetailsPresenter
-    
+
+    #if os(macOS)
     init(torrent: RemoteTorrent, server: Server, selectedTorrentId: Binding<String?>) {
         self.torrent = torrent
         self.server = server
         self._selectedTorrentId = selectedTorrentId
-        // StateObject will preserve this presenter across view updates
         self._presenter = StateObject(wrappedValue: TorrentDetailsPresenter(server: server, torrent: torrent))
     }
-    
+    #else
+    init(torrent: RemoteTorrent, server: Server) {
+        self.torrent = torrent
+        self.server = server
+        self._presenter = StateObject(wrappedValue: TorrentDetailsPresenter(server: server, torrent: torrent))
+    }
+    #endif
+
     var body: some View {
+        #if os(macOS)
         TorrentDetailsView(
             torrent: torrent,
             selectedTorrentId: $selectedTorrentId,
             presenter: presenter
         )
+        #else
+        TorrentDetailsView(
+            torrent: torrent,
+            presenter: presenter
+        )
+        #endif
     }
 }
-#endif
 
 struct TorrentDetailsView: View {
     
@@ -460,8 +480,14 @@ struct TorrentDetailsView: View {
                              dismissButton: .default(Text("Ok")))
             }
         }
-        .onChange(of: torrent) { _, newTorrent in
-            // Update presenter's torrent data when it refreshes
+        .onChange(of: torrent) { oldTorrent, newTorrent in
+            // Update presenter's torrent data when it refreshes.
+            // Clear the loading state once the torrent status has actually
+            // changed on the server, so the spinner stays visible until
+            // the action is confirmed rather than just the network call completing.
+            if presenter.isLoading && newTorrent.status.simple != oldTorrent.status.simple {
+                presenter.isLoading = false
+            }
             presenter.torrent = newTorrent
         }
     }

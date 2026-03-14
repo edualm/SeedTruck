@@ -137,9 +137,7 @@ struct TorrentListView: View {
                                         #else
                                         TorrentItemView(torrent: torrent)
                                             .padding(.all, 5)
-                                        NavigationLink(destination: TorrentDetailsView(torrent: torrent,
-                                                                                       presenter: .init(server: server!,
-                                                                                                        torrent: torrent))) {
+                                        NavigationLink(destination: TorrentDetailsViewWrapper(torrent: torrent, server: server!)) {
                                             EmptyView()
                                         }
                                         .opacity(0.0)
