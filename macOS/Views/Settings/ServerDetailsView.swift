@@ -58,9 +58,6 @@ struct ServerDetailsView: View {
                         .stroke(Color.primary, lineWidth: 2)
                 )
                 
-                Divider()
-                    .padding([.top, .bottom])
-                
                 Label("To edit a connection, just delete and create it again.", systemImage: "pencil")
                     .padding([.leading, .trailing, .bottom])
                 

@@ -27,7 +27,6 @@ struct ServerSettingsView: View {
                             Label(server.name, systemImage: "server.rack")
                         }
                     }
-                    Divider()
                     NavigationLink(destination: NewServerView()) {
                         Label("New Server", systemImage: "plus.app")
                     }
