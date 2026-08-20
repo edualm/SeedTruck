@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@available(iOS 26.0, *)
 struct FloatingServerStatusView: View {
     
     let torrents: [RemoteTorrent]
@@ -28,6 +29,10 @@ struct FloatingServerStatusView: View {
             .padding(Self.rectanglePadding)
         }
         .padding(.horizontal)
+        .padding(.vertical, 5)
+        .glassEffect()
+        .padding(.horizontal)
+        .padding(.bottom, 8)
     }
 }
 
@@ -37,14 +42,18 @@ struct FloatingServerStatusView_Previews: PreviewProvider {
     static var previews: some View {
         TabView {
             Text("foo")
-        }.tabViewBottomAccessory {
-            FloatingServerStatusView(torrents:
-                            [
-                                PreviewMockData.remoteTorrent,
-                                PreviewMockData.remoteTorrent,
-                                PreviewMockData.remoteTorrent
-                            ]
-            )
+                .safeAreaBar(edge: .bottom) {
+                    FloatingServerStatusView(torrents:
+                                    [
+                                        PreviewMockData.remoteTorrent,
+                                        PreviewMockData.remoteTorrent,
+                                        PreviewMockData.remoteTorrent
+                                    ]
+                    )
+                }
+                .tabItem {
+                    Label("Torrents", systemImage: "tray.and.arrow.down")
+                }
         }
     }
 }
