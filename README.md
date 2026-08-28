@@ -62,15 +62,13 @@ on a trusted network.
 
 ## Screenshots
 
-iOS screenshots for now; screenshots for other platforms may appear eventually. Please note that these screenshots are a bit outdated too.
-
 <p align="center">
     <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/iPhone.png" />
-    <br />
+    <br /><br />
     <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Watch.png" />
-    <br />
+    <br /><br />
     <img width="600" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/iPad.png" />
-    <br />
+    <br /><br />
     <img width="600" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/macOS.png" />
 </p>
 
