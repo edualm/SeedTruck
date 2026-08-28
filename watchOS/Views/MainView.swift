@@ -9,49 +9,56 @@ import SwiftUI
 
 struct MainView: View {
     
-    @FetchRequest(
-        entity: Server.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Server.name, ascending: true)
-        ]
-    ) var serverConnections: FetchedResults<Server>
+    @EnvironmentObject private var serverRepository: ServerRepository
+
+    private var serverConnections: [Server] { serverRepository.servers }
     
-    @State private var selectedServer: Server?
+    @State private var selectedServerID: UUID?
     
-    func onAppear() {
-        if selectedServer == nil {
-            selectedServer = serverConnections.first
+    private func reconcileSelection(with serverIDs: [UUID]) {
+        if let selectedServerID, serverIDs.contains(selectedServerID) {
+            return
         }
+
+        selectedServerID = serverIDs.first
     }
     
     var body: some View {
         NavigationStack {
-            if serverConnections.count > 0 {
-                ScrollView {
-                    ForEach(serverConnections) { server in
-                        Button(action: {
-                            selectedServer = server
-                        }, label: {
-                            Label(server.name, systemImage: "server.rack")
-                        })
+            Group {
+                if serverConnections.count > 0 {
+                    ScrollView {
+                        ForEach(serverConnections) { server in
+                            Button(action: {
+                                selectedServerID = server.id
+                            }, label: {
+                                Label(server.name, systemImage: "server.rack")
+                            })
+                        }
                     }
+                    .navigationBarTitle("Servers")
+                } else {
+                    NoServersConfiguredView()
+                        .navigationBarTitle("Error!")
                 }
-                .navigationBarTitle("Servers")
-                .navigationDestination(isPresented: Binding(
-                    get: { selectedServer != nil },
-                    set: { if !$0 { selectedServer = nil } }
-                )) {
-                    if let selectedServer = selectedServer {
-                        ServerView(server: .constant(selectedServer),
-                                   shouldShowBackButton: serverConnections.count > 1)
-                    }
+            }
+            .navigationDestination(item: $selectedServerID) { serverID in
+                if let server = serverConnections.first(where: { $0.id == serverID }) {
+                    ServerView(
+                        server: server,
+                        shouldShowBackButton: serverConnections.count > 1
+                    )
+                } else {
+                    NoServersConfiguredView()
                 }
-            } else {
-                NoServersConfiguredView()
-                    .navigationBarTitle("Error!")
             }
         }
-        .onAppear(perform: onAppear)
+        .onAppear {
+            reconcileSelection(with: serverConnections.map(\.id))
+        }
+        .onChange(of: serverConnections.map(\.id)) { _, serverIDs in
+            reconcileSelection(with: serverIDs)
+        }
     }
 }
 
@@ -59,5 +66,6 @@ struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
         MainView()
+            .environmentObject(PreviewMockData.serverRepository)
     }
 }

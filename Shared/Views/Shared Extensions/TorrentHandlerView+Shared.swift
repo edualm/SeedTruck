@@ -12,54 +12,123 @@ extension TorrentHandlerView {
     struct NoServersWarningView: View {
         
         var body: some View {
-            GroupBox(label: Label("Oops!", systemImage: "exclamationmark.triangle")) {
-                HStack {
-                    Text("You must first configure at least one server in the app in order to be able to add a torrent!")
-                    Spacer()
-                }.padding(.top)
+            VStack(alignment: .leading, spacing: 6) {
+                Label("No Servers Configured", systemImage: "exclamationmark.triangle.fill")
+                    .font(.headline)
+                    .foregroundStyle(.orange)
+                Text("Add a torrent server in Settings before starting this download.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .accessibilityElement(children: .combine)
         }
     }
     
-    struct InfoSectionView: View {
+    struct TorrentSummaryView: View {
         
         let torrent: LocalTorrent
-        
-        var body: some View {
-            if let name = torrent.name {
-                HStack {
-                    Text("Name")
-                    Spacer()
-                    Text(name)
-                        .foregroundColor(.secondary)
-                }
+
+        private var displayName: String {
+            torrent.name ?? "Unnamed Torrent"
+        }
+
+        private var sourceDescription: String {
+            switch torrent {
+            case .magnet:
+                return "Magnet link"
+            case .torrent:
+                return "Torrent file"
             }
-            
+        }
+
+        private var sourceSystemImage: String {
+            switch torrent {
+            case .magnet:
+                return "link"
+            case .torrent:
+                return "doc"
+            }
+        }
+
+        @ViewBuilder
+        private var facts: some View {
+            SummaryFact(title: sourceDescription, systemImage: sourceSystemImage)
+
             if let size = torrent.size {
-                HStack {
-                    Text("Size")
-                    Spacer()
-                    Text(ByteCountFormatter.humanReadableFileSize(bytes: Int64(size)))
-                        .foregroundColor(.secondary)
-                }
+                SummaryFact(
+                    title: ByteCountFormatter.humanReadableFileSize(bytes: size),
+                    systemImage: "internaldrive"
+                )
             }
-            
+
             if let files = torrent.files {
-                HStack {
-                    Text("Files")
-                    Spacer()
-                    Text("\(files.count)")
-                        .foregroundColor(.secondary)
-                }
+                SummaryFact(
+                    title: files.count == 1 ? "1 file" : "\(files.count) files",
+                    systemImage: "doc.on.doc"
+                )
             }
-            
-            if let isPrivate = torrent.isPrivate {
-                HStack {
-                    Text("Private")
-                    Spacer()
-                    Text(isPrivate ? "Yes" : "No")
-                        .foregroundColor(.secondary)
+
+            if torrent.isPrivate == true {
+                SummaryFact(title: "Private", systemImage: "lock.fill")
+            }
+        }
+
+        var body: some View {
+            HStack(alignment: .top, spacing: 14) {
+                Image(systemName: sourceSystemImage)
+                    .font(.system(size: 24, weight: .medium))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 48, height: 48)
+                    .background(Color.accentColor.opacity(0.12), in: RoundedRectangle(cornerRadius: 12))
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: 8) {
+                    Text(displayName)
+                        .font(.title3.weight(.semibold))
+                        .lineLimit(2)
+                        .truncationMode(.middle)
+                        .textSelection(.enabled)
+
+                    #if os(macOS)
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 14) {
+                            facts
+                        }
+
+                        VStack(alignment: .leading, spacing: 5) {
+                            facts
+                        }
+                    }
+                    #else
+                    VStack(alignment: .leading, spacing: 5) {
+                        facts
+                    }
+                    #endif
                 }
+
+                Spacer(minLength: 0)
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityElement(children: .combine)
+        }
+
+        private struct SummaryFact: View {
+
+            let title: String
+            let systemImage: String
+
+            var body: some View {
+                HStack(spacing: 8) {
+                    Image(systemName: systemImage)
+                        .frame(width: 18, height: 18)
+                        .accessibilityHidden(true)
+                    Text(title)
+                }
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize()
             }
         }
     }
@@ -83,58 +152,73 @@ extension TorrentHandlerView {
         }
         
         selectedLabels = torrent.labels
+        loadedConnectionDetails = selectedServers.map(\.connectionDetails)
         
         loadLabelsFromServer()
     }
     
     func startDownload() {
+        guard !processing, !selectedServers.isEmpty else {
+            return
+        }
+
         processing = true
-        
-        var remaining = selectedServers.count
-        var errors: [(Server, Error)] = []
-        
-        selectedServers.forEach { server in
-            server.connection.addTorrent(torrent, labels: selectedLabels) {
-                switch $0 {
-                case .success:
-                    ()
-                    
-                case .failure(let error):
-                    errors.append((server, error))
-                }
-                
-                remaining = remaining - 1
-                
-                if remaining == 0 {
-                    processing = false
-                    
-                    if errors.count == 0 {
-                        closeHandler?()
-                    } else {
-                        errorMessage = "An error has occurred while adding the torrent to the following servers:\n\n" +
-                            "\(errors.map { "\"\($0.0.name)\": \($0.1.localizedDescription)\n" })\n" +
-                            "Please look at the inserted data and try again."
+
+        let addRequest = TorrentAddRequest(torrent: torrent, tags: selectedLabels)
+        let requests = selectedServers.map { (name: $0.name, connection: $0.connection) }
+
+        Task {
+            let errors: [(String, String)] = await withTaskGroup(of: (String, String)?.self) { group in
+                for request in requests {
+                    group.addTask {
+                        do {
+                            try await request.connection.addTorrent(addRequest)
+                            return nil
+                        } catch {
+                            return (request.name, error.localizedDescription)
+                        }
                     }
                 }
+
+                var errors: [(String, String)] = []
+
+                for await result in group {
+                    if let result {
+                        errors.append(result)
+                    }
+                }
+
+                return errors
+            }
+
+            processing = false
+
+            if errors.isEmpty {
+                NotificationCenter.default.post(name: .updateTorrentListView, object: nil)
+                dismissHandler()
+            } else {
+                let errorDetails = errors
+                    .map { "\"\($0.0)\": \($0.1)" }
+                    .joined(separator: "\n")
+                errorMessage = "An error has occurred while adding the torrent to the following servers:\n\n" +
+                    "\(errorDetails)\n\nPlease look at the inserted data and try again."
             }
         }
-    }
-    
-    var processingBody: some View {
-        ProgressView()
-            .progressViewStyle(CircularProgressViewStyle())
-            .padding()
     }
     
     var sharedBody: some View {
-        Group {
-            if processing {
-                processingBody
-            } else {
-                normalBody
+        normalBody
+            .navigationTitle("Add Torrent")
+            .onAppear(perform: onAppear)
+            .onChange(of: selectedServers.map(\.connectionDetails)) { _, connectionDetails in
+                guard connectionDetails != loadedConnectionDetails else {
+                    return
+                }
+
+                loadedConnectionDetails = connectionDetails
+                serverLabels = []
+                selectedLabels = []
+                loadLabelsFromServer()
             }
-        }
-        .navigationTitle("Add Torrent")
-        .onAppear(perform: onAppear)
     }
 }

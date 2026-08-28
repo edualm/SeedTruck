@@ -28,7 +28,11 @@ class DocumentPickerAdapter: NSObject, UIDocumentPickerDelegate {
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        onPick(urls.first!)
+        guard let url = urls.first else {
+            onDismiss()
+            return
+        }
+        onPick(url)
     }
 
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {

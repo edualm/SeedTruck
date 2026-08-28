@@ -59,6 +59,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Seed Truck connects to configured torrent clients on your local network when you test a server or manage torrents.</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

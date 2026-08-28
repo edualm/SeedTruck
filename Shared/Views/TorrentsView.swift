@@ -44,8 +44,17 @@ struct TorrentsTabView: View {
                             return
                         }
                         
-                        selectedServer?.connection.addTorrent(.torrent(fileData)) { result in
-                            if case Result.failure = result {
+                        guard let torrent = LocalTorrent(data: fileData),
+                              let connection = selectedServer?.connection else {
+                            showingAddTorrentErrorAlert = true
+                            return
+                        }
+
+                        let upload = TorrentAddRequest(torrent: torrent)
+                        Task {
+                            do {
+                                _ = try await connection.addTorrent(upload)
+                            } catch {
                                 self.showingAddTorrentErrorAlert = true
                             }
                         }
@@ -58,12 +67,9 @@ struct TorrentsTabView: View {
         ]
     }
     
-    @FetchRequest(
-        entity: Server.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Server.name, ascending: true)
-        ]
-    ) var serverConnections: FetchedResults<Server>
+    @EnvironmentObject private var serverRepository: ServerRepository
+
+    var serverConnections: [Server] { serverRepository.servers }
     
     @State private var selectedServer: Server?
     @State private var showingAddTorrentErrorAlert = false

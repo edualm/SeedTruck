@@ -9,35 +9,90 @@ import Foundation
 
 typealias Filter = RemoteTorrent.Status.Simple
 
-struct RemoteTorrent: Identifiable, Hashable {
+struct RemoteTorrent: Identifiable, Hashable, Sendable {
+
+    struct Statistics: Hashable, Sendable {
+
+        static let empty = Statistics()
+
+        let peersConnected: Int
+        let downloadingFrom: Int
+        let uploadingTo: Int
+        let downloadRate: Int
+        let uploadRate: Int
+        let uploadedEver: Int64?
+        let downloadedEver: Int64?
+        let uploadRatio: Double?
+        let eta: Int64?
+        let etaIdle: Int64?
+        let secondsDownloading: Int64?
+        let secondsSeeding: Int64?
+        let queuePosition: Int?
+
+        init(
+            peersConnected: Int = 0,
+            downloadingFrom: Int = 0,
+            uploadingTo: Int = 0,
+            downloadRate: Int = 0,
+            uploadRate: Int = 0,
+            uploadedEver: Int64? = nil,
+            downloadedEver: Int64? = nil,
+            uploadRatio: Double? = nil,
+            eta: Int64? = nil,
+            etaIdle: Int64? = nil,
+            secondsDownloading: Int64? = nil,
+            secondsSeeding: Int64? = nil,
+            queuePosition: Int? = nil
+        ) {
+            self.peersConnected = peersConnected
+            self.downloadingFrom = downloadingFrom
+            self.uploadingTo = uploadingTo
+            self.downloadRate = downloadRate
+            self.uploadRate = uploadRate
+            self.uploadedEver = uploadedEver
+            self.downloadedEver = downloadedEver
+            self.uploadRatio = uploadRatio
+            self.eta = eta
+            self.etaIdle = etaIdle
+            self.secondsDownloading = secondsDownloading
+            self.secondsSeeding = secondsSeeding
+            self.queuePosition = queuePosition
+        }
+    }
     
-    enum Status: Hashable {
+    enum Status: Hashable, Sendable {
         
-        enum Simple {
+        enum Simple: CaseIterable, Hashable, Identifiable, Sendable {
             
             case stopped
             case downloading
             case seeding
             case other
+
+            var id: Self { self }
         }
         
         case stopped
-        case downloading(peers: Int, peersSending: Int, peersReceiving: Int, downloadRate: Int, uploadRate: Int, eta: Int64)
-        case seeding(peers: Int, uploadRate: Int, ratio: Double, totalUploaded: Int64?, secondsSeeding: Int64?, etaIdle: Int64?)
-        case other(_ status: String)
+        case queuedForCheck
+        case checking
+        case queuedForDownload
+        case downloading
+        case queuedForSeed
+        case seeding
+        case unknown(String)
         
         var simple: Simple {
             switch self {
             case .stopped:
                 return .stopped
                 
-            case .downloading:
+            case .queuedForDownload, .downloading:
                 return .downloading
-                
-            case .seeding:
+
+            case .queuedForSeed, .seeding:
                 return .seeding
-                
-            case .other:
+
+            case .queuedForCheck, .checking, .unknown:
                 return .other
             }
         }
@@ -46,7 +101,29 @@ struct RemoteTorrent: Identifiable, Hashable {
     let id: String
     let name: String
     let progress: Double
+    let verificationProgress: Double?
     let status: Status
     let size: Int64
     let labels: [String]
+    let statistics: Statistics
+
+    init(
+        id: String,
+        name: String,
+        progress: Double,
+        status: Status,
+        size: Int64,
+        labels: [String],
+        verificationProgress: Double? = nil,
+        statistics: Statistics = .empty
+    ) {
+        self.id = id
+        self.name = name
+        self.progress = progress
+        self.verificationProgress = verificationProgress
+        self.status = status
+        self.size = size
+        self.labels = labels
+        self.statistics = statistics
+    }
 }

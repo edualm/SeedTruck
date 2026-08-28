@@ -13,31 +13,38 @@ struct ProgressBarView: View {
     let barColorBuilder: ((CGFloat) -> (Color))
     
     let progress: CGFloat
+    var accessibilityTitle = "Download progress"
+
+    var normalizedProgress: CGFloat {
+        min(max(progress, 0), 1)
+    }
+
+    var percentageLabel: String {
+        String(format: "%.0f%%", normalizedProgress * 100)
+    }
     
     var body: some View {
         GeometryReader { geometry in
-            HStack {
-                ZStack {
-                    Rectangle()
-                        #if os(macOS)
-                        .foregroundColor(progress > 0 ? Color.secondary.opacity(0.25) : .red)
-                        #else
-                        .foregroundColor(progress > 0 ? Color.secondary.opacity(0.3) : .red)
-                        #endif
-                    HStack {
-                        Rectangle()
-                            .foregroundColor(barColorBuilder(progress))
-                            .frame(minWidth: geometry.size.width * progress,
-                                   idealWidth: geometry.size.width * progress,
-                                   maxWidth: geometry.size.width * progress)
-                        Spacer()
-                            .frame(minWidth: 0)
-                    }
-                    Text("\(String(format: "%.2f", progress * 100))%")
-                        .font(.caption2)
-                        .padding(.top, -1)
-                }.cornerRadius(cornerRadius)
+            ZStack(alignment: .leading) {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(Color.secondary.opacity(0.2))
+
+                if normalizedProgress > 0 {
+                    RoundedRectangle(cornerRadius: cornerRadius)
+                        .fill(barColorBuilder(normalizedProgress))
+                        .frame(width: geometry.size.width * normalizedProgress)
+                }
+
+                Text(percentageLabel)
+                    .font(.caption2.monospacedDigit())
+                    .frame(maxWidth: .infinity)
             }
+        }
+        .accessibilityRepresentation {
+            ProgressView(value: Double(normalizedProgress), total: 1) {
+                Text(accessibilityTitle)
+            }
+            .accessibilityValue(percentageLabel)
         }
     }
 }
@@ -52,6 +59,6 @@ struct ProgressBarView_Previews: PreviewProvider {
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0.1)
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0.5)
             ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 1)
-        }.previewLayout(.fixed(width: 300, height: 10))
+        }.previewLayout(.fixed(width: 300, height: 20))
     }
 }

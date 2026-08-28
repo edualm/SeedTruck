@@ -9,45 +9,34 @@ import SwiftUI
 
 struct GeneralSettingsView: View {
     
-    @AppStorage(Constants.StorageKeys.autoUpdateInterval) var autoUpdateIntervalInSeconds: Int = 2
-    
-    @State private var autoUpdateIntervalSliderValue: Double = 0
-    
-    func onAppear() {
-        autoUpdateIntervalSliderValue = Double(AutoUpdateInterval(seconds: autoUpdateIntervalInSeconds).rawValue)
+    @AppStorage(Constants.StorageKeys.autoUpdateInterval) private var autoUpdateInterval = 2
+
+    private var refreshInterval: Binding<RefreshIntervalOption> {
+        Binding(
+            get: { RefreshIntervalOption(storedValue: autoUpdateInterval) },
+            set: { autoUpdateInterval = $0.rawValue }
+        )
     }
-    
-    func onSliderChange() {
-        guard let newInterval = AutoUpdateInterval(rawValue: Int(autoUpdateIntervalSliderValue)) else {
-            autoUpdateIntervalSliderValue = 0
-            autoUpdateIntervalInSeconds = 2
-            
-            return
-        }
-        
-        autoUpdateIntervalInSeconds = newInterval.secondsValue
-    }
-    
+
     var body: some View {
         Form {
-            Section(header: Text("Refresh/update data every...").font(.headline)) {
-                Slider(value: $autoUpdateIntervalSliderValue,
-                       in: 0...Double(AutoUpdateInterval.allCases.count - 1),
-                       step: 1,
-                       onEditingChanged: { _ in onSliderChange() })
-                Text(AutoUpdateInterval(rawValue: Int(autoUpdateIntervalSliderValue))!.userFacingString)
-                    .centered()
-                VStack {
-                    Text("Changes will be reflected the next time an update is triggered.")
-                    Text("This setting also affects the rate at which a torrent detail is updated.")
+            Section {
+                Picker("Refresh interval", selection: refreshInterval) {
+                    ForEach(RefreshIntervalOption.allCases) { option in
+                        Text(option.label).tag(option)
+                    }
                 }
-                    .font(.caption)
-                    .padding(.top)
-                    .centered()
+                .accessibilityIdentifier("settings-refresh-interval")
+            } header: {
+                Text("Updates")
+            } footer: {
+                Text("Controls how often torrent lists and details update. Choose Manual only to refresh on demand.")
             }
         }
-        .onAppear(perform: onAppear)
-        .frame(height: 100)
+        .formStyle(.grouped)
+        .contentMargins(.horizontal, 20, for: .scrollContent)
+        .contentMargins(.vertical, 16, for: .scrollContent)
+        .accessibilityIdentifier("settings-general-pane")
     }
 }
 
@@ -55,5 +44,6 @@ struct GeneralSettingsView_Previews: PreviewProvider {
     
     static var previews: some View {
         GeneralSettingsView()
+            .frame(width: 500, height: 220)
     }
 }

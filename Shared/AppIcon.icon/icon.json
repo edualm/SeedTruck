@@ -2,10 +2,7 @@
   "fill-specializations" : [
     {
       "value" : {
-        "linear-gradient" : [
-          "srgb:1.00000,0.57811,0.00000,1.00000",
-          "srgb:0.26052,0.26052,0.26052,1.00000"
-        ]
+        "automatic-gradient" : "display-p3:0.72549,0.83529,0.83529,1.00000"
       }
     },
     {
@@ -19,17 +16,25 @@
       "layers" : [
         {
           "blend-mode" : "normal",
-          "glass" : true,
+          "glass" : false,
           "hidden" : false,
-          "image-name" : "Dark.png",
-          "name" : "Dark"
+          "image-name" : "Truck.png",
+          "name" : "Truck",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              15.5703125,
+              10
+            ]
+          }
         }
       ],
       "lighting" : "combined",
       "shadow" : {
         "kind" : "layer-color",
-        "opacity" : 0.75
+        "opacity" : 1
       },
+      "specular" : true,
       "translucency" : {
         "enabled" : true,
         "value" : 0.5

@@ -5,28 +5,27 @@
 //  Created by Eduardo Almeida on 25/08/2020.
 //
 
-import CoreData
 import SwiftUI
 
 @main
 struct SeedTruckApp: App {
     
-    @State private var dataTransferManager: DataTransferManager? = nil
-    
-    @StateObject private var sharedBucket: SharedBucket = SharedBucket()
-    
-    private let persistentContainer: NSPersistentContainer = .default
+    @Environment(\.scenePhase) private var scenePhase
+    @StateObject private var serverRepository = ServerRepository()
     
     var body: some Scene {
         WindowGroup {
             MainView()
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
-                .environmentObject(sharedBucket)
+                .serverStoreErrorAlert()
+                .environmentObject(serverRepository)
                 .onAppear {
-                    if dataTransferManager == nil {
-                        dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
-                    }
+                    serverRepository.refresh()
                 }
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                serverRepository.refresh()
+            }
         }
     }
 }

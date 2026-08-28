@@ -9,13 +9,20 @@ import SwiftUI
 
 struct ServerView: View {
     
-    @Binding var server: Server?
+    let server: Server
     
     let shouldShowBackButton: Bool
     
     var body: some View {
-        TorrentListView(server: $server, filter: .constant(nil), filterQuery: .constant(""), selectedTorrentId: .constant(nil))
-            .navigationBarTitle(server?.name ?? "Torrents")
+        TorrentListView(
+            server: .constant(server),
+            filter: .constant(nil),
+            filterQuery: .constant(""),
+            sort: .constant(.name),
+            sortDirection: .constant(.ascending),
+            selectedTorrentId: .constant(nil)
+        )
+            .navigationBarTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(!shouldShowBackButton)
     }
@@ -24,7 +31,7 @@ struct ServerView: View {
 struct ServerView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ServerView(server: .constant(PreviewMockData.server),
+        ServerView(server: PreviewMockData.server,
                    shouldShowBackButton: false)
     }
 }

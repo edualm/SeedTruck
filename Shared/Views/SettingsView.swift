@@ -5,140 +5,353 @@
 //  Created by Eduardo Almeida on 23/08/2020.
 //
 
+import SafariServices
 import SwiftUI
 
+private struct InAppBrowserDestination: Identifiable {
+
+    let url: URL
+
+    var id: URL { url }
+}
+
+private struct InAppBrowserView: UIViewControllerRepresentable {
+
+    let url: URL
+
+    func makeUIViewController(context: Context) -> SFSafariViewController {
+        let controller = SFSafariViewController(url: url)
+        controller.view.accessibilityIdentifier = "settings-in-app-browser"
+        return controller
+    }
+
+    func updateUIViewController(
+        _ uiViewController: SFSafariViewController,
+        context: Context
+    ) {}
+}
+
 struct SettingsView: View {
-    
+
     private struct AlertData: Identifiable {
-        
-        var id: String {
-            return title + message
-        }
-        
+        var id: String { title + message }
         let title: String
         let message: String
     }
-    
-    @FetchRequest(
-        entity: Server.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Server.name, ascending: true)
-        ]
-    ) private var serverConnections: FetchedResults<Server>
-    
-    @Environment(\.managedObjectContext) private var managedObjectContext
-    
-    @State private var showingAlert: AlertData?
-    @State private var connectionResults: [Server: ConnectionResult] = [:]
-    
+
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @EnvironmentObject private var serverRepository: ServerRepository
+
+    @AppStorage(Constants.StorageKeys.autoUpdateInterval) private var autoUpdateInterval = 2
+
+    @State private var alertData: AlertData?
+    @State private var inAppBrowserDestination: InAppBrowserDestination?
+    @State private var selectedArea: SettingsArea? = .general
+
     @ObservedObject private var presenter: SettingsPresenter
-    
-    @EnvironmentObject private var sharedBucket: SharedBucket
-    
-    private var managedContextDidSave = NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)
-    
+
+    private var refreshInterval: Binding<RefreshIntervalOption> {
+        Binding(
+            get: { RefreshIntervalOption(storedValue: autoUpdateInterval) },
+            set: { autoUpdateInterval = $0.rawValue }
+        )
+    }
+
     init(presenter: SettingsPresenter) {
         self.presenter = presenter
     }
-    
-    func onAppear() {
-        connectionResults = serverConnections.reduce(into: [Server: ConnectionResult]()) {
-            $0[$1] = .connecting
+
+    private var serverConnections: [Server] { serverRepository.servers }
+
+    private func serverRow(_ server: Server) -> some View {
+        HStack(spacing: 12) {
+            Image(systemName: "server.rack")
+                .font(.title3)
+                .foregroundStyle(.tint)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(server.name)
+                    .font(.headline)
+                Text(server.displayHost)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text(
+                    TorrentClientRegistry.live
+                        .descriptor(for: ServerType(rawValue: server.type))?
+                        .displayName
+                        ?? "Unsupported client (\(server.type))"
+                )
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
         }
-        
-        serverConnections.forEach { server in
-            server.connection.test { success in
-                DispatchQueue.main.async {
-                    connectionResults[server] = success ? .success : .failure
+    }
+
+    private var generalContent: some View {
+        Form {
+            Section {
+                Picker("Refresh interval", selection: refreshInterval) {
+                    ForEach(RefreshIntervalOption.allCases) { option in
+                        Text(option.label).tag(option)
+                    }
                 }
+#if os(iOS)
+                .pickerStyle(.menu)
+#endif
+                .accessibilityIdentifier("settings-refresh-interval")
+            } header: {
+                Text("Updates")
+            } footer: {
+                Text("Controls how often torrent lists and details update. Choose Manual only to refresh on demand.")
+            }
+        }
+        .navigationTitle("General")
+#if os(iOS)
+        .formStyle(.grouped)
+        .navigationBarTitleDisplayMode(.inline)
+#endif
+    }
+
+    private var serversContent: some View {
+        List {
+            if serverConnections.isEmpty {
+                ContentUnavailableView(
+                    "No Servers",
+                    systemImage: "server.rack",
+                    description: Text("Add a torrent client to begin.")
+                )
+#if os(iOS)
+                .offset(y: 8)
+#endif
+            } else {
+                ForEach(serverConnections) { server in
+                    let serverID = server.id
+                    let serverName = server.name
+
+                    NavigationLink {
+                        ServerDetailsView(serverID: serverID, serverName: serverName)
+                    } label: {
+                        serverRow(server)
+                    }
+#if os(iOS)
+                    .swipeActions(edge: .trailing) {
+                        Button(role: .destructive) {
+                            presenter.perform(.delete(server))
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                                .accessibilityLabel("Delete \(server.name)")
+                        }
+                    }
+#elseif os(tvOS)
+                    .contextMenu {
+                        Button(role: .destructive) {
+                            presenter.perform(.delete(server))
+                        } label: {
+                            Label("Delete \(server.name)", systemImage: "trash")
+                        }
+                    }
+#endif
+                }
+            }
+        }
+        .navigationTitle("Servers")
+        .toolbar {
+            ToolbarItemGroup(placement: .primaryAction) {
+                Button {
+                    serverRepository.refresh()
+                } label: {
+                    Label("Refresh Servers", systemImage: "arrow.clockwise")
+                }
+                .accessibilityIdentifier("settings-refresh-servers")
+
+                NavigationLink {
+                    NewServerView()
+                } label: {
+                    Label("Add Server", systemImage: "plus")
+                }
+                .accessibilityIdentifier("settings-add-server")
             }
         }
     }
-    
-    var body: some View {
-        let newServerLink = NavigationLink(destination: NewServerView()) {
-            Text("New Server")
-        }
-        
-        NavigationView {
-            VStack {
-                List {
-                    ForEach(serverConnections) { server in
-                        Section(header: Text(server.name)) {
-                            switch connectionResults[server] {
-                            case .connecting:
-                                Label("Testing...", systemImage: "bolt.horizontal.circle")
-                                    .foregroundColor(.gray)
-                                
-                            case .success:
-                                Label("Connection Successful!", systemImage: "checkmark.circle")
-                                    .foregroundColor(.green)
-                                
-                            case .failure:
-                                Label("Connection Failed!", systemImage: "xmark.circle")
-                                    .foregroundColor(.red)
-                                
-                            case .none:
-                                EmptyView()
-                            }
-                            Button(action: {
-                                self.presenter.perform(.delete(server))
-                            }) {
-                                Label("Delete", systemImage: "trash")
-                                    .foregroundColor(.red)
-                            }.alert(isPresented: self.$presenter.showingDeleteAlert) {
-                                Alert(title: Text("Are you sure you want to delete \"\(presenter.serverUnderModification?.name ?? "Unknown")\"?"),
-                                      message: nil,
-                                      primaryButton: .destructive(Text("Delete")) {
-                                        self.presenter.perform(.confirmDeletion)
-                                      },
-                                      secondaryButton: .cancel() {
-                                        self.presenter.perform(.abortDeletion)
-                                      })
-                            }
-                        }
-                    }
-                    
-                    Section {
-                        newServerLink
-                    }
-                    
-                    if UIDevice.current.userInterfaceIdiom == .phone, let dataTransferManager = sharedBucket.dataTransferManager {
-                        Button(action: {
-                            dataTransferManager.sendUpdateToWatch {
-                                switch $0 {
-                                case .success:
-                                    showingAlert = .init(title: "Success!", message: "Successfully synced servers with your Apple Watch.")
-                                case .failure(let error):
-                                    showingAlert = .init(title: "Error!", message: error.localizedDescription)
-                                }
-                            }
-                        }) {
-                            Label("Force Sync to Apple Watch", systemImage: "applewatch.radiowaves.left.and.right")
-                                .foregroundColor(.primary)
-                        }
-                    }
-                }
-                .listStyle(Style.list)
+
+    private func supportLink(
+        _ title: String,
+        systemImage: String,
+        destination: URL,
+        identifier: String
+    ) -> some View {
+        Link(destination: destination) {
+            HStack {
+                Label(title, systemImage: systemImage)
+                    .foregroundStyle(.primary)
+                Spacer()
+                Image(systemName: "arrow.up.right.square")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
             }
-            .navigationTitle("Settings")
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(.rect)
         }
-        .navigationViewStyle(Style.navigationView)
-        .onAppear(perform: onAppear)
-        .onReceive(managedContextDidSave) { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250), execute: onAppear)
+        .accessibilityIdentifier(identifier)
+    }
+
+    private var helpContent: some View {
+        Form {
+            Section {
+                supportLink(
+                    "Help Center",
+                    systemImage: "questionmark.circle",
+                    destination: SeedTruckSupportLinks.helpCenterURL,
+                    identifier: "settings-help-center"
+                )
+                supportLink(
+                    "Submit a Support Request",
+                    systemImage: "envelope",
+                    destination: SeedTruckSupportLinks.supportTicketURL(
+                        platformIdentifier: SeedTruckSupportLinks.currentPlatformIdentifier
+                    ),
+                    identifier: "settings-submit-support-request"
+                )
+                supportLink(
+                    "Privacy Policy",
+                    systemImage: "hand.raised",
+                    destination: SeedTruckSupportLinks.privacyPolicyURL,
+                    identifier: "settings-privacy-policy"
+                )
+            }
         }
-        .alert(item: $showingAlert) {
-            Alert(title: Text($0.title),
-                  message: Text($0.message),
-                  dismissButton: .default(Text("Ok")))
+        .formStyle(.grouped)
+        .navigationTitle("Help")
+        .navigationBarTitleDisplayMode(.inline)
+        .accessibilityIdentifier("settings-help-page")
+        .environment(\.openURL, OpenURLAction { url in
+            inAppBrowserDestination = InAppBrowserDestination(url: url)
+            return .handled
+        })
+        .sheet(item: $inAppBrowserDestination) { destination in
+            InAppBrowserView(url: destination.url)
+                .ignoresSafeArea()
         }
+    }
+
+    @ViewBuilder
+    private func content(for area: SettingsArea) -> some View {
+        switch area {
+        case .general:
+            generalContent
+        case .servers:
+            serversContent
+        case .help:
+            helpContent
+        }
+    }
+
+    private var areaList: some View {
+        List(SettingsArea.allCases) { area in
+            NavigationLink {
+                content(for: area)
+            } label: {
+                Label {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text(area.title)
+                        Text(area.summary)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                } icon: {
+                    Image(systemName: area.systemImage)
+                }
+            }
+            .accessibilityIdentifier("settings-area-\(area.rawValue)")
+        }
+        .navigationTitle("Settings")
+    }
+
+    @ViewBuilder
+    private var navigationContent: some View {
+        #if os(iOS)
+        if horizontalSizeClass == .regular {
+            NavigationSplitView {
+                List(SettingsArea.allCases, selection: $selectedArea) { area in
+                    Label(area.title, systemImage: area.systemImage)
+                        .tag(area)
+                        .accessibilityIdentifier("settings-area-\(area.rawValue)")
+                }
+                .navigationTitle("Settings")
+            } detail: {
+                content(for: selectedArea ?? .general)
+            }
+        } else {
+            NavigationStack {
+                areaList
+            }
+        }
+        #else
+        NavigationStack {
+            areaList
+        }
+        #endif
+    }
+
+    var body: some View {
+        navigationContent
+            .onChange(of: presenter.persistenceError) { _, error in
+                guard let error else { return }
+                alertData = .init(
+                    title: presenter.persistenceErrorIsCleanupWarning
+                        ? "Server Deleted with Cleanup Warning"
+                        : "Unable to Delete Server",
+                    message: error
+                )
+                presenter.persistenceError = nil
+            }
+            .alert(
+                "Delete Server?",
+                isPresented: $presenter.showingDeleteAlert,
+                presenting: presenter.serverUnderModification
+            ) { server in
+                Button("Delete", role: .destructive) {
+                    presenter.perform(.confirmDeletion)
+                }
+                Button("Cancel", role: .cancel) {
+                    presenter.perform(.abortDeletion)
+                }
+            } message: { server in
+                Text("Are you sure you want to delete \"\(server.name)\"?")
+            }
+            .alert(item: $alertData) { alert in
+                Alert(
+                    title: Text(alert.title),
+                    message: Text(alert.message),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
-    
+
     static var previews: some View {
-        SettingsView(presenter: SettingsPresenter(managedObjectContext: MockCoreDataManagedObjectDeleter()))
+        SettingsPreview()
+            .previewDisplayName("Seeded Settings")
+    }
+}
+
+@MainActor
+private struct SettingsPreview: View {
+
+    @StateObject private var serverRepository = PreviewMockData.serverRepository
+
+    var body: some View {
+        SettingsView(
+            presenter: SettingsPresenter(
+                repository: serverRepository
+            )
+        )
+        .environmentObject(serverRepository)
     }
 }

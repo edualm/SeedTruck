@@ -8,61 +8,91 @@
 import Foundation
 
 enum Transmission {
-    
-    enum RPCResponse {
-        
-        enum Result {
-            
-            case success
-            case error(String)
-        }
-        
-        struct Generic {
-            
-            let result: Result
-            
-            let arguments: Dictionary<String, Any>?
-            let tag: Int?
-        }
-        
-        struct NoArguments: Codable {
-            
-            let result: Result
-            
-            let tag: Int?
-        }
-        
-        struct TorrentAdd: Codable {
-            
-            let result: Result
-            
-            let arguments: Dictionary<String, TorrentAdded>?
-            let tag: Int?
-        }
-        
-        struct TorrentGet: Codable {
-            
-            let result: Result
-            
-            let arguments: Dictionary<String, [Torrent]>?
-            let tag: Int?
-        }
-        
-        struct SessionArgumentsBoolean: Codable {
-            
-            let result: Result
-            
-            let arguments: Dictionary<String, Bool>?
-            let tag: Int?
-        }
-        
-        struct SessionArgumentsNumber: Codable {
-            
-            let result: Result
-            
-            let arguments: Dictionary<String, Double>?
-            let tag: Int?
-        }
+
+    struct RPCRequest<Parameters: Encodable>: Encodable {
+
+        let jsonrpc = "2.0"
+        let method: String
+        let params: Parameters
+        let id: String
+    }
+
+    struct RPCResponse<Value: Decodable>: Decodable {
+
+        let jsonrpc: String
+        let result: Value?
+        let error: RPCError?
+        let id: String?
+    }
+
+    struct RPCError: Decodable {
+
+        let code: Int
+        let message: String
+        let data: RPCErrorData?
+    }
+
+    struct RPCErrorData: Decodable {
+
+        let errorString: String?
+    }
+
+    struct EmptyResult: Decodable {}
+
+    struct TorrentGetParameters: Encodable {
+
+        let fields: [String]
+        let ids: [Int]?
+    }
+
+    struct TorrentGetResult: Decodable {
+
+        let torrents: [Torrent]
+    }
+
+    struct TorrentAddParameters: Encodable {
+
+        let filename: String?
+        let metainfo: String?
+        let labels: [String]?
+    }
+
+    struct TorrentAddResult: Decodable {
+
+        let torrentAdded: TorrentAdded?
+        let torrentDuplicate: TorrentAdded?
+    }
+
+    struct TorrentIDsParameters: Encodable {
+
+        let ids: [Int]
+    }
+
+    struct TorrentRemoveParameters: Encodable {
+
+        let ids: [Int]
+        let deleteLocalData: Bool
+    }
+
+    struct SessionGetParameters: Encodable {
+
+        let fields: [String]
+    }
+
+    struct SessionSpeedLimits: Decodable {
+
+        let speedLimitDown: Double?
+        let speedLimitUp: Double?
+        let speedLimitDownEnabled: Bool?
+        let speedLimitUpEnabled: Bool?
+    }
+
+    struct SessionSetParameters: Encodable {
+
+        let speedLimitDown: Int
+        let speedLimitDownEnabled: Bool
+        let speedLimitUp: Int
+        let speedLimitUpEnabled: Bool
     }
     
     struct TorrentAdded: Codable {
@@ -99,7 +129,7 @@ enum Transmission {
             let isEncrypted: Bool
             let isIncoming: Bool
             let isUploadingTo: Bool
-            let isUTP: Bool
+            let isUtp: Bool
             let peerIsChoked: Bool
             let peerIsInterested: Bool
             let port: Int
@@ -226,6 +256,6 @@ enum Transmission {
         let uploadRatio: Double?
         let wanted: [Bool]?
         let webseeds: [String]?
-        let webseedsSeedingToUs: Int?
+        let webseedsSendingToUs: Int?
     }
 }

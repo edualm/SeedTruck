@@ -50,12 +50,16 @@ struct LabelPickerView: View {
                     Text(label)
                         .foregroundColor(.primary)
                     Spacer()
-                    if selectedLabels.contains(label) {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.primary)
-                    }
+                    Image(
+                        systemName: selectedLabels.contains(label)
+                            ? "checkmark.circle.fill"
+                            : "circle"
+                    )
+                    .foregroundStyle(selectedLabels.contains(label) ? Color.accentColor : Color.secondary)
+                    .accessibilityHidden(true)
                 }
             }
+            .accessibilityAddTraits(selectedLabels.contains(label) ? .isSelected : [])
             #endif
         }
     }

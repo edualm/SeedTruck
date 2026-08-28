@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 enum Style {
     
     #if os(iOS)

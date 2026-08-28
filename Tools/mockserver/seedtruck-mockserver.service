@@ -1,0 +1,17 @@
+[Unit]
+Description=SeedTruck Transmission Mock Server
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+ExecStart=/usr/local/bin/seedtruck-mockserver -listen 0.0.0.0:9091
+Restart=on-failure
+RestartSec=2s
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+
+[Install]
+WantedBy=multi-user.target

@@ -5,20 +5,92 @@
 //  Created by Eduardo Almeida on 06/09/2020.
 //
 
-//  TODO: Missing URL handler.
-
-import CoreData
 import SwiftUI
 
+struct ImportCommandActions {
+
+    let openTorrentFile: () -> Void
+    let openMagnetLink: () -> Void
+}
+
+private struct ImportCommandActionsKey: FocusedValueKey {
+
+    typealias Value = ImportCommandActions
+}
+
+struct TorrentCommandActions {
+
+    let canStart: Bool
+    let canPause: Bool
+    let start: () -> Void
+    let pause: () -> Void
+}
+
+private struct TorrentCommandActionsKey: FocusedValueKey {
+
+    typealias Value = TorrentCommandActions
+}
+
+extension FocusedValues {
+
+    var importCommandActions: ImportCommandActions? {
+        get { self[ImportCommandActionsKey.self] }
+        set { self[ImportCommandActionsKey.self] = newValue }
+    }
+
+    var torrentCommandActions: TorrentCommandActions? {
+        get { self[TorrentCommandActionsKey.self] }
+        set { self[TorrentCommandActionsKey.self] = newValue }
+    }
+}
+
+private struct FileCommands: Commands {
+
+    @FocusedValue(\.importCommandActions) private var actions
+
+    var body: some Commands {
+        CommandGroup(replacing: .newItem) {
+            Button("Open Torrent File...") {
+                actions?.openTorrentFile()
+            }
+            .keyboardShortcut("o")
+            .disabled(actions == nil)
+
+            Button("Open Magnet Link...") {
+                actions?.openMagnetLink()
+            }
+            .keyboardShortcut("u")
+            .disabled(actions == nil)
+        }
+    }
+}
+
+private struct TorrentCommands: Commands {
+
+    @FocusedValue(\.torrentCommandActions) private var actions
+
+    var body: some Commands {
+        CommandMenu("Torrent") {
+            Button("Start") {
+                actions?.start()
+            }
+            .keyboardShortcut("r", modifiers: [.command, .shift])
+            .disabled(actions?.canStart != true)
+
+            Button("Pause") {
+                actions?.pause()
+            }
+            .keyboardShortcut("p", modifiers: [.command, .shift])
+            .disabled(actions?.canPause != true)
+        }
+    }
+}
+
 @main struct SeedTruckApp: App {
-    
-    private let persistentContainer: NSPersistentContainer = .default
-    
-    @State private var openedTorrent: LocalTorrent? = nil
-    
+
     @Environment(\.scenePhase) private var scenePhase
     
-    @StateObject private var sharedBucket: SharedBucket = SharedBucket()
+    @StateObject private var serverRepository = ServerRepository()
     
     @SceneBuilder
     var body: some Scene {
@@ -26,51 +98,34 @@ import SwiftUI
         //  Main Window
         //
         
-        WindowGroup {
+        Window("SeedTruck", id: "main") {
             MainView()
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
-                .environmentObject(sharedBucket)
                 .frame(minWidth: 700)
-        }.onChange(of: scenePhase) { oldPhase, newPhase in
-            switch newPhase {
-            case .background:
-                persistentContainer.save()
-                
-            default:
-                ()
+                .serverStoreErrorAlert()
+                .environmentObject(serverRepository)
+                .onAppear {
+                    serverRepository.refresh()
+                }
+        }
+        .defaultSize(width: 850, height: 600)
+        .commands {
+            FileCommands()
+            TorrentCommands()
+            CommandGroup(replacing: .help) {
+                Link("Help Center", destination: SeedTruckSupportLinks.helpCenterURL)
+                Link(
+                    "Submit a Support Request",
+                    destination: SeedTruckSupportLinks.supportTicketURL(
+                        platformIdentifier: SeedTruckSupportLinks.currentPlatformIdentifier
+                    )
+                )
+                Link("Privacy Policy", destination: SeedTruckSupportLinks.privacyPolicyURL)
             }
         }
-        
-        //
-        //  Magnet Link Handler
-        //
-        
-        WindowGroup {
-            Group {
-                if let torrent = openedTorrent {
-                    TorrentHandlerNavigationView(torrent: torrent, server: nil)
-                } else {
-                    //  Apparently, adding some text here instead of making this
-                    //  an `EmptyView()` fixes a whole myriad of issues... 🤷
-                    
-                    Text("Something weird happened.")
-                        .padding()
-                }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                serverRepository.refresh()
             }
-            .environment(\.managedObjectContext, persistentContainer.viewContext)
-            .onOpenURL { url in
-                openedTorrent = LocalTorrent(url: url)
-            }
-        }.handlesExternalEvents(matching: Set(arrayLiteral: "*"))
-        
-        //
-        //  Torrent File Handler
-        //
-        
-        DocumentGroup(viewing: TorrentFile.self) {
-            TorrentHandlerNavigationView(torrent: $0.document.localTorrent,
-                                         server: nil)
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
         }
         
         //
@@ -79,8 +134,11 @@ import SwiftUI
         
         Settings {
             SettingsView()
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
+                .serverStoreErrorAlert()
+                .environmentObject(serverRepository)
+                .onAppear {
+                    serverRepository.refresh()
+                }
         }
     }
 }
-

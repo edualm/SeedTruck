@@ -9,29 +9,16 @@ import SwiftUI
 
 struct MainView: View {
     
-    @Environment(\.managedObjectContext) private var managedObjectContext
-    @EnvironmentObject private var sharedBucket: SharedBucket
-    
-    @ViewBuilder
-    private var torrentsContent: some View {
-        if #available(iOS 26.1, *) {
-            TorrentsView()
-                .safeAreaBar(edge: .bottom) {
-                    FloatingServerStatusView(torrents: sharedBucket.torrents)
-                }
-        } else {
-            TorrentsView()
-        }
-    }
+    @EnvironmentObject private var serverRepository: ServerRepository
     
     private var tabContent: some View {
         Group {
-            torrentsContent
+            TorrentsView()
                 .tabItem {
                     Image(systemName: "tray.and.arrow.down")
                     Text("Torrents")
                 }
-            SettingsView(presenter: SettingsPresenter(managedObjectContext: managedObjectContext))
+            SettingsView(presenter: SettingsPresenter(repository: serverRepository))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")
@@ -48,6 +35,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
-        MainView().environmentObject(SharedBucket())
+        MainView().environmentObject(PreviewMockData.serverRepository)
     }
 }

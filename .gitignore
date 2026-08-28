@@ -40,3 +40,11 @@ DerivedData/
 # End of https://www.toptal.com/developers/gitignore/api/xcode
 
 .claude
+
+### Fastlane ###
+.bundle/
+vendor/
+fastlane/
+
+### Zendesk ###
+zendesk-articles/

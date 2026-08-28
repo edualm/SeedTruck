@@ -23,10 +23,12 @@ struct ErrorView: View {
             
             Image(systemName: "questionmark.folder")
                 .font(.largeTitle)
+                .accessibilityHidden(true)
             
             Text("Error!")
                 .font(.headline)
                 .padding()
+                .accessibilityAddTraits(.isHeader)
             
             switch type {
             case .noConnection:

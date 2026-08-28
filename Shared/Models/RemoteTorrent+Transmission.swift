@@ -22,50 +22,48 @@ extension RemoteTorrent {
         self.id = String(id)
         self.name = name
         self.progress = progress
+        self.verificationProgress = transmissionTorrent.recheckProgress
         self.size = size
         self.labels = transmissionTorrent.labels ?? []
-        
-        switch status {
+        self.status = Status(transmissionCode: status)
+        self.statistics = Statistics(
+            peersConnected: transmissionTorrent.peersConnected ?? 0,
+            downloadingFrom: transmissionTorrent.peersSendingToUs ?? 0,
+            uploadingTo: transmissionTorrent.peersGettingFromUs ?? 0,
+            downloadRate: transmissionTorrent.rateDownload ?? 0,
+            uploadRate: transmissionTorrent.rateUpload ?? 0,
+            uploadedEver: transmissionTorrent.uploadedEver,
+            downloadedEver: transmissionTorrent.downloadedEver,
+            uploadRatio: transmissionTorrent.uploadRatio,
+            eta: transmissionTorrent.eta,
+            etaIdle: transmissionTorrent.etaIdle,
+            secondsDownloading: transmissionTorrent.secondsDownloading.map(Int64.init),
+            secondsSeeding: transmissionTorrent.secondsSeeding,
+            queuePosition: transmissionTorrent.queuePosition
+        )
+    }
+}
+
+extension RemoteTorrent.Status {
+
+    init(transmissionCode: Int) {
+        switch transmissionCode {
         case 0:
-            self.status = .stopped
-            
+            self = .stopped
         case 1:
-            self.status = .other("Preparing/waiting to check")
-        
+            self = .queuedForCheck
         case 2:
-            self.status = .other("Checking")
-            
+            self = .checking
         case 3:
-            self.status = .other("Waiting for download")
-            
+            self = .queuedForDownload
         case 4:
-            guard let peers = transmissionTorrent.peersConnected,
-                  let uploadRate = transmissionTorrent.rateUpload,
-                  let peersSending = transmissionTorrent.peersSendingToUs,
-                  let peersReceiving = transmissionTorrent.peersGettingFromUs,
-                  let downloadRate = transmissionTorrent.rateDownload,
-                  let eta = transmissionTorrent.eta else {
-                
-                return nil
-            }
-            
-            self.status = .downloading(peers: peers, peersSending: peersSending, peersReceiving: peersReceiving, downloadRate: downloadRate, uploadRate: uploadRate, eta: eta)
-            
+            self = .downloading
         case 5:
-            self.status = .other("Preparing/waiting to seed")
-            
+            self = .queuedForSeed
         case 6:
-            guard let peers = transmissionTorrent.peersConnected,
-                  let uploadRate = transmissionTorrent.rateUpload,
-                  let ratio = transmissionTorrent.uploadRatio else {
-                
-                return nil
-            }
-            
-            self.status = .seeding(peers: peers, uploadRate: uploadRate, ratio: ratio, totalUploaded: transmissionTorrent.uploadedEver, secondsSeeding: transmissionTorrent.secondsSeeding, etaIdle: transmissionTorrent.etaIdle)
-            
+            self = .seeding
         default:
-            return nil
+            self = .unknown(String(transmissionCode))
         }
     }
 }

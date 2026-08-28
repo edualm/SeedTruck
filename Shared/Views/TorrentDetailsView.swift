@@ -7,518 +7,467 @@
 
 import SwiftUI
 
-/// Wrapper to ensure presenter persists across view updates.
-/// On macOS this is needed because the NavigationSplitView detail column
-/// rebuilds its content on every list refresh. On iOS the NavigationLink
-/// destination similarly passes a new presenter instance whenever the
-/// parent list re-renders, replacing the @ObservedObject and resetting
-/// isLoading prematurely.
 struct TorrentDetailsViewWrapper: View {
+
     let torrent: RemoteTorrent
     let server: Server
-
-    #if os(macOS)
-    @Binding var selectedTorrentId: String?
-    #endif
+    let onRemovalCompleted: () -> Void
 
     @StateObject private var presenter: TorrentDetailsPresenter
+    @State private var displayedTorrent: RemoteTorrent
+    @State private var refreshRequest = 0
 
-    #if os(macOS)
-    init(torrent: RemoteTorrent, server: Server, selectedTorrentId: Binding<String?>) {
+    private struct RefreshTaskID: Equatable {
+
+        let serverID: UUID
+        let connectionDetails: ConnectionDetails
+        let torrentID: String
+        let refreshRequest: Int
+    }
+
+    init(
+        torrent: RemoteTorrent,
+        server: Server,
+        actionController: TorrentActionController? = nil,
+        onRemovalCompleted: @escaping () -> Void = {}
+    ) {
+        let controller = actionController ?? TorrentActionController()
         self.torrent = torrent
         self.server = server
-        self._selectedTorrentId = selectedTorrentId
-        self._presenter = StateObject(wrappedValue: TorrentDetailsPresenter(server: server, torrent: torrent))
+        self.onRemovalCompleted = onRemovalCompleted
+        self._displayedTorrent = State(initialValue: torrent)
+        self._presenter = StateObject(
+            wrappedValue: TorrentDetailsPresenter(actionController: controller)
+        )
     }
-    #else
-    init(torrent: RemoteTorrent, server: Server) {
-        self.torrent = torrent
-        self.server = server
-        self._presenter = StateObject(wrappedValue: TorrentDetailsPresenter(server: server, torrent: torrent))
+
+    private var refreshTaskID: RefreshTaskID {
+        .init(
+            serverID: server.id,
+            connectionDetails: server.connectionDetails,
+            torrentID: torrent.id,
+            refreshRequest: refreshRequest
+        )
     }
-    #endif
+
+    private func refreshTorrent() async {
+        let torrentID = torrent.id
+        let connection = server.connection
+
+        guard let refreshedTorrent = try? await connection.getTorrent(id: torrentID),
+              !Task.isCancelled,
+              refreshedTorrent.id == torrentID else {
+            return
+        }
+
+        displayedTorrent = refreshedTorrent
+    }
 
     var body: some View {
-        #if os(macOS)
         TorrentDetailsView(
-            torrent: torrent,
-            selectedTorrentId: $selectedTorrentId,
-            presenter: presenter
+            torrent: displayedTorrent,
+            server: server,
+            onRemovalCompleted: onRemovalCompleted,
+            presenter: presenter,
+            actionController: presenter.actionController
         )
-        #else
-        TorrentDetailsView(
-            torrent: torrent,
-            presenter: presenter
-        )
-        #endif
+        .onChange(of: torrent) { _, updatedTorrent in
+            displayedTorrent = updatedTorrent
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .updateTorrentListView)) { _ in
+            refreshRequest += 1
+        }
+        .task(id: refreshTaskID) {
+            await refreshTorrent()
+        }
     }
 }
 
 struct TorrentDetailsView: View {
-    
-    #if os(macOS)
-    static private let innerDetailPadding: Edge.Set = .horizontal
-    #else
-    static private let innerDetailPadding: Edge.Set = Edge.Set()
-    #endif
-    
-    private struct MetadataView: View {
-        
-        let torrent: RemoteTorrent
-        
-        private struct MetadataRow: View {
-            let label: String
-            let value: String
-            let icon: String
-            
-            var body: some View {
-                HStack(alignment: .center, spacing: 8) {
-                    HStack(spacing: 4) {
-                        Image(systemName: icon)
-                            .font(.caption)
-                            .frame(width: 12, alignment: .center)
-                            .padding(.trailing, 4)
-                        Text(label)
-                            .font(.caption)
-                    }
-                    Spacer()
-                    Text(value)
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .multilineTextAlignment(.trailing)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.vertical, 2)
-            }
-        }
-        
-        var body: some View {
-            Box(label: Label("Details", systemImage: "doc.text.viewfinder")) {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(torrent.name)
-                        .font(.headline)
-                        .fontWeight(.regular)
-                        .lineLimit(nil)
-                        .multilineTextAlignment(.leading)
-                    
-                    Divider()
-                        .padding(.vertical, 4)
-                    
-                    VStack(spacing: 6) {
-                        MetadataRow(
-                            label: "Status",
-                            value: torrent.status.displayableStatus,
-                            icon: "circle.fill"
-                        )
-                        
-                        MetadataRow(
-                            label: "Size",
-                            value: ByteCountFormatter.humanReadableFileSize(bytes: torrent.size),
-                            icon: "externaldrive"
-                        )
-                        
-                        if !torrent.labels.isEmpty {
-                            MetadataRow(
-                                label: "Labels",
-                                value: torrent.labels.joined(separator: ", "),
-                                icon: "tag"
-                            )
-                        }
-                        
-                        if torrent.status.simple == .downloading {
-                            MetadataRow(
-                                label: "Progress",
-                                value: "\(String(format: "%.1f", torrent.progress * 100))%",
-                                icon: "chart.bar.fill"
-                            )
-                        }
-                        
-                        switch torrent.status {
-                        case let .downloading(_, peersSending, peersReceiving, downloadRate, uploadRate, eta):
-                            MetadataRow(
-                                label: "Seeders",
-                                value: "\(peersSending)",
-                                icon: "person.and.arrow.left.and.arrow.right"
-                            )
-                            
-                            MetadataRow(
-                                label: "Leechers",
-                                value: "\(peersReceiving)",
-                                icon: "person.3"
-                            )
-                            
-                            MetadataRow(
-                                label: "Download Speed",
-                                value: ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: downloadRate),
-                                icon: "arrow.down.forward"
-                            )
-                            
-                            MetadataRow(
-                                label: "Upload Speed",
-                                value: ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate),
-                                icon: "arrow.up.forward"
-                            )
-                            
-                            if let humanReadableETA = eta.humanReadableDate {
-                                MetadataRow(
-                                    label: "Time Remaining",
-                                    value: humanReadableETA,
-                                    icon: "clock"
-                                )
-                            }
-                            
-                        case let .seeding(_, uploadRate, ratio, totalUploaded, secondsSeeding, _):
-                            MetadataRow(
-                                label: "Upload Speed",
-                                value: ByteCountFormatter.humanReadableTransmissionSpeed(bytesPerSecond: uploadRate),
-                                icon: "arrow.up.forward"
-                            )
-                            
-                            MetadataRow(
-                                label: "Ratio",
-                                value: String(format: "%.2f", ratio),
-                                icon: "arrow.up.arrow.down"
-                            )
-                            
-                            if let totalUploaded = totalUploaded {
-                                MetadataRow(
-                                    label: "Uploaded",
-                                    value: ByteCountFormatter.humanReadableFileSize(bytes: totalUploaded),
-                                    icon: "arrow.up.to.line"
-                                )
-                            }
-                            
-                            if let humanReadableSeedingTime = secondsSeeding?.humanReadableDate {
-                                MetadataRow(
-                                    label: "Seeding Time",
-                                    value: humanReadableSeedingTime,
-                                    icon: "deskclock"
-                                )
-                            }
-                            
-                        default:
-                            EmptyView()
-                        }
-                    }
-                }
-                .padding(TorrentDetailsView.innerDetailPadding)
-                .padding(.top)
-            }
-        }
-    }
-    
-    private struct ActionsView: View {
-        
-        @Binding var presentation: PresentationMode
-        
-        let presenter: TorrentDetailsPresenter
-        
-        private func actionButton<Content: View>(
-            action: @escaping () -> Void,
-            style: ButtonStyle = .primary,
+
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .caption) private var progressHeight: CGFloat = 18
+    @AccessibilityFocusState private var failureIsFocused: Bool
+
+    private struct SectionCard<Content: View>: View {
+
+        let title: String
+        let systemImage: String
+        @ViewBuilder let content: Content
+
+        init(
+            title: String,
+            systemImage: String,
             @ViewBuilder content: () -> Content
-        ) -> some View {
-            let button = Button(action: action) {
-                content()
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .padding(.horizontal, 16)
-                    .background(style.backgroundView)
-                    .foregroundColor(style.foregroundColor)
-                    .cornerRadius(12)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(style.borderColor, lineWidth: style.borderWidth)
-                    )
-                    .contentShape(Rectangle())
-            }
-            .buttonStyle(PlainButtonStyle())
-
-            if #available(iOS 26.0, macOS 26.0, watchOS 26.0, tvOS 26.0, *) {
-                return button
-                    .glassEffect(.regular.tint(style.glassTintColor).interactive())
-            } else {
-                return button
-            }
+        ) {
+            self.title = title
+            self.systemImage = systemImage
+            self.content = content()
         }
-        
-        private enum ButtonStyle {
-            case primary
-            case secondary
-            case destructive
-            
-            @ViewBuilder
-            var backgroundView: some View {
-                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
-                    // Use clear background for glass effect - the glassEffect modifier will handle the appearance
-                    Color.clear
-                } else {
-                    // Fallback solid colors for older OS versions
-                    switch self {
-                    case .primary:
-                        Color.blue
-                    case .secondary:
-                        Color.gray
-                    case .destructive:
-                        Color.red
-                    }
-                }
-            }
-            
-            var foregroundColor: Color {
-                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
-                    // Enhanced colors for glass effect
-                    switch self {
-                    case .primary:
-                        return .primary
-                    case .secondary:
-                        return .primary
-                    case .destructive:
-                        return .primary
-                    }
-                } else {
-                    // Original colors for older versions
-                    switch self {
-                    case .primary, .destructive:
-                        return .white
-                    case .secondary:
-                        return .primary
-                    }
-                }
-            }
-            
-            var borderColor: Color {
-                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
-                    // No border needed with native glass effects
-                    return .clear
-                } else {
-                    return .clear
-                }
-            }
-            
-            var borderWidth: CGFloat {
-                if #available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *) {
-                    // No border needed with native glass effects
-                    return 0
-                } else {
-                    return 0
-                }
-            }
 
-            @available(iOS 26.0, macOS 15.0, watchOS 11.0, tvOS 18.0, *)
-            var glassTintColor: Color {
-                switch self {
-                case .primary:
-                    return .blue.opacity(0.8)
-                case .secondary:
-                    return .gray.opacity(0.6)
-                case .destructive:
-                    return .red.opacity(0.8)
-                }
-            }
-        }
-        
         var body: some View {
-            let startTorrentButton = actionButton(
-                action: {
-                    presenter.perform(.start)
-                },
-                style: .primary
-            ) {
-                #if os(watchOS)
-                Text("Start")
+            VStack(alignment: .leading, spacing: 14) {
+                Label(title, systemImage: systemImage)
                     .font(.headline)
-                    .fontWeight(.semibold)
-                #else
-                Label("Start Torrent", systemImage: "play.fill")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                #endif
+                    .accessibilityAddTraits(.isHeader)
+                content
             }
-            
-            let pauseTorrentButton = actionButton(
-                action: {
-                    presenter.perform(.pause)
-                },
-                style: .secondary
-            ) {
-                #if os(watchOS)
-                Text("Pause")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                #else
-                Label("Pause Torrent", systemImage: "pause.fill")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                #endif
-            }
-            
-            let removeTorrentButton = actionButton(
-                action: {
-                    presenter.perform(.prepareForRemoval(deletingFiles: false))
-                },
-                style: .destructive
-            ) {
-                #if os(watchOS)
-                Text("Remove")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                #else
-                Label("Remove Torrent", systemImage: "xmark.circle.fill")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                #endif
-            }
-            
-            let removeTorrentAndDataButton = actionButton(
-                action: {
-                    presenter.perform(.prepareForRemoval(deletingFiles: true))
-                },
-                style: .destructive
-            ) {
-                #if os(watchOS)
-                Text("Remove Data")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                    .multilineTextAlignment(.center)
-                #else
-                Label("Remove Data", systemImage: "trash.fill")
-                    .font(.headline)
-                    .fontWeight(.semibold)
-                #endif
-            }
-            
-            VStack(spacing: 12) {
-                switch presenter.torrent.status {
-                case .downloading, .seeding:
-                    pauseTorrentButton
-                case .stopped:
-                    startTorrentButton
-                default:
-                    EmptyView()
-                }
-                
-                #if !os(watchOS)
-                Divider()
-                    .padding(.vertical, 4)
-                #endif
-                
-                removeTorrentButton
-                removeTorrentAndDataButton
-            }
+            .padding()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .fill(Color.secondary.opacity(0.08))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(Color.secondary.opacity(0.14), lineWidth: 1)
+            )
         }
     }
-    
-    @Environment(\.presentationMode) private var presentation
-    
+
+    private struct MetricCard: View {
+
+        let metric: TorrentDetailMetric
+
+        var body: some View {
+            VStack(alignment: .leading, spacing: 8) {
+                Label(metric.label, systemImage: metric.systemImage)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    #if os(watchOS)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    #endif
+
+                Text(metric.value)
+                    .font(.headline.monospacedDigit())
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .padding(12)
+            .frame(maxWidth: .infinity, minHeight: 76, alignment: .leading)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color.secondary.opacity(0.08))
+            )
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(metric.label)
+            .accessibilityValue(metric.value)
+        }
+    }
+
+    @Environment(\.dismiss) private var dismiss
+
     let torrent: RemoteTorrent
-    
-    @State var shouldShowEmptyView: Bool = false
-    
-    #if os(macOS)
-    @Binding var selectedTorrentId: String?
-    #endif
-    
+    let server: Server
+    let onRemovalCompleted: () -> Void
+
     @ObservedObject var presenter: TorrentDetailsPresenter
-    
-    var innerBody: some View {
-        ScrollView {
-            MetadataView(torrent: torrent)
-            #if os(macOS)
-                .padding(.top)
-            #endif
-            
-            #if os(watchOS) || os(tvOS)
-            Divider()
-                .padding()
-            #endif
-            
-            if presenter.isLoading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-                    .padding()
-            } else {
-                #if os(tvOS)
-                HStack {
-                    ActionsView(presentation: presentation, presenter: presenter)
-                }
-                #else
-                Box(label: Label("Actions", systemImage: "wrench")) {
-                    VStack {
-                        ActionsView(presentation: presentation, presenter: presenter)
-                            .centered()
-                    }.padding(.top)
-                }
-                #if os(macOS)
-                    .padding(.top)
-                #endif
-                #endif
-            }
-        }
-        .alert(item: $presenter.currentAlert) {
-            switch $0.id {
-            case .confirmation:
-                return Alert(title: Text("Are you sure?"),
-                             message: Text("You are about to perform a destructive action.\n\nAre you really sure?"),
-                             primaryButton: .destructive(Text("Confirm")) {
-                                self.presenter.perform(.commit) {
-                                    DispatchQueue.main.async {
-                                        #if os(macOS)
-                                        // Clear selection instead of dismissing on macOS
-                                        self.selectedTorrentId = nil
-                                        #else
-                                        shouldShowEmptyView = true
-                                        self.presentation.wrappedValue.dismiss()
-                                        #endif
-                                    }
-                                }
-                             }, secondaryButton: .cancel())
-                
-            case .error:
-                return Alert(title: Text("Error!"),
-                             message: Text("The requested action couldn't be completed."),
-                             dismissButton: .default(Text("Ok")))
-            }
-        }
-        .onChange(of: torrent) { oldTorrent, newTorrent in
-            // Update presenter's torrent data when it refreshes.
-            // Clear the loading state once the torrent status has actually
-            // changed on the server, so the spinner stays visible until
-            // the action is confirmed rather than just the network call completing.
-            if presenter.isLoading && newTorrent.status.simple != oldTorrent.status.simple {
-                presenter.isLoading = false
-            }
-            presenter.torrent = newTorrent
+    @ObservedObject var actionController: TorrentActionController
+
+    private var projection: TorrentDetailProjection {
+        TorrentDetailProjection(torrent: torrent)
+    }
+
+    private var isPerformingAction: Bool {
+        actionController.isPerformingAction(on: torrent, server: server)
+    }
+
+    private var actionFailure: TorrentActionFailure? {
+        actionController.failure(on: torrent, server: server)
+    }
+
+    private var statusColor: Color {
+        switch torrent.status {
+        case .stopped:
+            return .secondary
+        case .queuedForCheck, .checking, .queuedForDownload, .queuedForSeed:
+            return .orange
+        case .downloading:
+            return .blue
+        case .seeding:
+            return .green
+        case .unknown:
+            return .secondary
         }
     }
-    
+
+    private var metricColumns: [GridItem] {
+        #if os(watchOS)
+        [GridItem(.flexible())]
+        #elseif os(tvOS)
+        [GridItem(.adaptive(minimum: 240, maximum: 360), spacing: 16)]
+        #else
+        dynamicTypeSize.isAccessibilitySize
+            ? [GridItem(.flexible())]
+            : [GridItem(.adaptive(minimum: 150, maximum: 260), spacing: 12)]
+        #endif
+    }
+
+    private func completeRemoval() {
+        onRemovalCompleted()
+        dismiss()
+    }
+
+    @ViewBuilder
+    private var primaryActionButton: some View {
+        if let action = projection.primaryAction {
+            Button {
+                presenter.performPrimaryAction(on: torrent, server: server)
+            } label: {
+                HStack(spacing: 8) {
+                    if isPerformingAction {
+                        ProgressView()
+                            .controlSize(.small)
+                            .accessibilityHidden(true)
+                    } else {
+                        Image(systemName: action.systemImage)
+                    }
+                    Text(action.displayName)
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(isPerformingAction)
+            .accessibilityValue(isPerformingAction ? "In progress" : "")
+        }
+    }
+
+    private var summaryHeader: some View {
+        SectionCard(title: "Overview", systemImage: "doc.text.magnifyingglass") {
+            VStack(alignment: .leading, spacing: 14) {
+                Text(torrent.name)
+                    #if os(watchOS)
+                    .font(.headline)
+                    #else
+                    .font(.title2.bold())
+                    #endif
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Label(projection.statusText, systemImage: projection.statusSystemImage)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(statusColor)
+
+                ProgressBarView(
+                    cornerRadius: 9,
+                    barColorBuilder: { progress in
+                        if projection.progress.kind == .verification {
+                            return .orange
+                        }
+                        return progress < 1 ? .blue : .green
+                    },
+                    progress: CGFloat(projection.progress.fraction),
+                    accessibilityTitle: projection.progress.label
+                )
+                .frame(height: progressHeight)
+
+                if let etaLabel = projection.etaLabel {
+                    HStack(alignment: .firstTextBaseline) {
+                        Label(etaLabel, systemImage: "clock")
+                        Spacer()
+                        Text(projection.etaText)
+                            .monospacedDigit()
+                            .foregroundStyle(.secondary)
+                    }
+                    .font(.subheadline)
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(etaLabel)
+                    .accessibilityValue(projection.etaText)
+                }
+
+                primaryActionButton
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var failureView: some View {
+        if let failure = actionFailure {
+            SectionCard(title: "Action Failed", systemImage: "exclamationmark.triangle.fill") {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(failure.message)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+
+                    Button {
+                        presenter.retryFailedAction(
+                            on: torrent,
+                            server: server,
+                            onRemovalSuccess: completeRemoval
+                        )
+                    } label: {
+                        Label("Retry \(failure.action.displayName)", systemImage: "arrow.clockwise")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    .disabled(isPerformingAction)
+                    .accessibilityValue(isPerformingAction ? "In progress" : "")
+                }
+            }
+            .accessibilityFocused($failureIsFocused)
+        }
+    }
+
+    private var metricsGrid: some View {
+        SectionCard(title: "Activity", systemImage: "gauge.with.dots.needle.50percent") {
+            LazyVGrid(columns: metricColumns, alignment: .leading, spacing: 12) {
+                ForEach(projection.metrics) { metric in
+                    MetricCard(metric: metric)
+                }
+            }
+        }
+    }
+
+    private var removalSection: some View {
+        SectionCard(title: "Removal", systemImage: "trash") {
+            VStack(alignment: .leading, spacing: 12) {
+                Button(role: .destructive) {
+                    if !isPerformingAction {
+                        presenter.prepareRemoval(.keepLocalData, from: torrent)
+                    }
+                } label: {
+                    Label("Remove Torrent and Keep Files", systemImage: "externaldrive.badge.checkmark")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .disabled(isPerformingAction)
+                .accessibilityValue(isPerformingAction ? "Another action is in progress" : "")
+
+                Button(role: .destructive) {
+                    if !isPerformingAction {
+                        presenter.prepareRemoval(.deleteLocalData, from: torrent)
+                    }
+                } label: {
+                    Label("Remove Torrent and Delete Files", systemImage: "trash.fill")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .disabled(isPerformingAction)
+                .accessibilityValue(isPerformingAction ? "Another action is in progress" : "")
+            }
+        }
+    }
+
     var body: some View {
-        if shouldShowEmptyView {
-            EmptyView()
-        } else {
-            #if os(macOS)
-            innerBody.padding(.horizontal)
-            #elseif os(tvOS) || os(watchOS)
-            innerBody.navigationBarTitle("Torrent Detail")
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                summaryHeader
+                failureView
+                metricsGrid
+                removalSection
+            }
+            #if os(watchOS)
+            .padding(.horizontal, 2)
+            .padding(.vertical, 8)
             #else
-            innerBody.navigationBarTitle("Torrent Detail").padding(.horizontal)
+            .padding()
             #endif
+            .frame(maxWidth: 920)
+            .frame(maxWidth: .infinity)
+        }
+        .navigationTitle("Torrent Details")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
+        .alert(item: $presenter.pendingRemoval) { confirmation in
+            Alert(
+                title: Text(confirmation.title),
+                message: Text(confirmation.message),
+                primaryButton: .destructive(Text(confirmation.confirmButtonTitle)) {
+                    presenter.confirmRemoval(
+                        confirmation.id,
+                        from: torrent,
+                        server: server,
+                        onSuccess: completeRemoval
+                    )
+                },
+                secondaryButton: .cancel()
+            )
+        }
+        .onChange(of: actionFailure) { _, failure in
+            failureIsFocused = failure != nil
+        }
+        .onAppear {
+            failureIsFocused = actionFailure != nil
         }
     }
 }
 
 struct TorrentDetailsView_Previews: PreviewProvider {
-    
+
     static var previews: some View {
-        #if os(macOS)
-        TorrentDetailsView(torrent: PreviewMockData.remoteTorrent,
-                           selectedTorrentId: .constant(nil),
-                           presenter: .init(server: PreviewMockData.server,
-                                                torrent: PreviewMockData.remoteTorrent))
-        #else
-        TorrentDetailsView(torrent: PreviewMockData.remoteTorrent,
-                           presenter: .init(server: PreviewMockData.server,
-                                                torrent: PreviewMockData.remoteTorrent))
-        #endif
+        Group {
+            ForEach(PreviewMockData.remoteTorrents) { torrent in
+                TorrentDetailsViewWrapper(
+                    torrent: torrent,
+                    server: PreviewMockData.server
+                )
+                .previewDisplayName(torrent.status.displayableStatus)
+            }
+
+            TorrentDetailsStatePreview(state: .failure)
+                .preferredColorScheme(.dark)
+                .previewDisplayName("Action Failure - Dark")
+
+            TorrentDetailsStatePreview(state: .busy)
+                .environment(\.dynamicTypeSize, .accessibility3)
+                .previewDisplayName("Busy - Accessibility Text")
+        }
+    }
+}
+
+private struct TorrentDetailsStatePreview: View {
+
+    enum State {
+        case busy
+        case failure
+    }
+
+    private let server: Server?
+    @StateObject private var actionController: TorrentActionController
+
+    init(state: State) {
+        let server = PreviewMockData.settingsServer
+        self.server = server
+
+        guard let server else {
+            self._actionController = StateObject(wrappedValue: TorrentActionController())
+            return
+        }
+
+        let identifier = TorrentActionIdentifier(
+            serverID: server.id,
+            torrentID: PreviewMockData.remoteTorrent.id
+        )
+        switch state {
+        case .busy:
+            self._actionController = StateObject(
+                wrappedValue: TorrentActionController(activeActionIDs: [identifier])
+            )
+        case .failure:
+            self._actionController = StateObject(
+                wrappedValue: TorrentActionController(
+                    failures: [
+                        identifier: TorrentActionFailure(
+                            action: .stop,
+                            message: "The local server rejected the request after a long-running connection attempt. Check its availability and retry."
+                        )
+                    ]
+                )
+            )
+        }
+    }
+
+    var body: some View {
+        if let server {
+            NavigationStack {
+                TorrentDetailsViewWrapper(
+                    torrent: PreviewMockData.remoteTorrent,
+                    server: server,
+                    actionController: actionController
+                )
+            }
+        } else {
+            Text("Preview server unavailable")
+        }
     }
 }

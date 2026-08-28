@@ -8,32 +8,39 @@
 import SwiftUI
 
 struct SettingsView: View {
-    
-    @Environment(\.managedObjectContext) private var managedObjectContext
-    
-    private enum Tabs: Hashable {
-        
+
+    private enum Tab: Hashable {
         case general
         case servers
     }
-    
+
+    @EnvironmentObject private var serverRepository: ServerRepository
+    @State private var selectedTab = Tab.general
+
+    private var contentSize: CGSize {
+        switch selectedTab {
+        case .general:
+            return CGSize(width: 500, height: 220)
+        case .servers:
+            return CGSize(width: 540, height: 320)
+        }
+    }
+
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             GeneralSettingsView()
                 .tabItem {
-                    Label("General", systemImage: "gear")
+                    Label("General", systemImage: "gearshape")
                 }
-                .tag(Tabs.general)
-                .frame(width: 700, height: 150)
-            
-            ServerSettingsView()
+                .tag(Tab.general)
+
+            ServerSettingsView(repository: serverRepository)
                 .tabItem {
                     Label("Servers", systemImage: "server.rack")
                 }
-                .tag(Tabs.servers)
-                .frame(width: 700, height: 375)
+                .tag(Tab.servers)
         }
-        .padding(20)
+        .frame(width: contentSize.width, height: contentSize.height)
     }
 }
 
@@ -41,5 +48,6 @@ struct SettingsView_Previews: PreviewProvider {
     
     static var previews: some View {
         SettingsView()
+            .environmentObject(PreviewMockData.serverRepository)
     }
 }

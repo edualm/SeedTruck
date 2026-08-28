@@ -20,11 +20,13 @@ struct NoServersConfiguredView: View {
     var body: some View {
         VStack {
             Spacer()
-            Text("😞")
+            Image(systemName: "server.rack")
                 .font(.largeTitle)
+                .accessibilityHidden(true)
             Text("No servers configured!")
                 .font(.headline)
                 .padding()
+                .accessibilityAddTraits(.isHeader)
             text
                 .fontWeight(.light)
                 .multilineTextAlignment(.center)

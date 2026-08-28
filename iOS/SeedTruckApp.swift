@@ -5,19 +5,15 @@
 //  Created by Eduardo Almeida on 23/08/2020.
 //
 
-import CoreData
 import SwiftUI
 
 @main struct SeedTruckApp: App {
     
-    private let persistentContainer: NSPersistentContainer = .default
-    
     @Environment(\.scenePhase) private var scenePhase
     
     @State private var openedTorrent: LocalTorrent? = nil
-    @State private var dataTransferManager: DataTransferManager? = nil
-    
-    @StateObject private var sharedBucket: SharedBucket = SharedBucket()
+    @State private var importErrorMessage: String?
+    @StateObject private var serverRepository = ServerRepository()
     
     @SceneBuilder
     var body: some Scene {
@@ -29,6 +25,10 @@ import SwiftUI
                 }
             }
         )
+        let showingImportError = Binding<Bool>(
+            get: { importErrorMessage != nil },
+            set: { if !$0 { importErrorMessage = nil } }
+        )
         
         WindowGroup {
             MainView()
@@ -39,10 +39,21 @@ import SwiftUI
                         EmptyView()
                     }
                 }
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
-                .environmentObject(sharedBucket)
+                .serverStoreErrorAlert()
+                .environmentObject(serverRepository)
+                .alert("Unable to Add Torrent", isPresented: showingImportError) {
+                    Button("OK", role: .cancel) {
+                        importErrorMessage = nil
+                    }
+                } message: {
+                    Text(importErrorMessage ?? "The torrent could not be imported.")
+                }
                 .onOpenURL { url in
-                    openedTorrent = LocalTorrent(url: url)
+                    do {
+                        openedTorrent = try LocalTorrent(validating: url)
+                    } catch {
+                        importErrorMessage = error.localizedDescription
+                    }
                 }
                 .onDrop(of: [UTI.torrent], isTargeted: nil) { providers in
                     guard providers.count == 1 else {
@@ -51,30 +62,38 @@ import SwiftUI
                     
                     let provider = providers[0]
                     
-                    provider.loadInPlaceFileRepresentation(forTypeIdentifier: "public.item") { url, success, _ in
-                        guard success, let url = url else {
+                    provider.loadInPlaceFileRepresentation(forTypeIdentifier: UTI.torrent.identifier) { url, _, error in
+                        guard let url else {
+                            let message = error?.localizedDescription ?? TorrentImportError.unreadableFile.localizedDescription
+                            Task { @MainActor in
+                                importErrorMessage = message
+                            }
                             return
                         }
-                        
-                        openedTorrent = LocalTorrent(url: url)
+
+                        do {
+                            let torrent = try LocalTorrent(validating: url)
+                            Task { @MainActor in
+                                openedTorrent = torrent
+                            }
+                        } catch {
+                            let message = error.localizedDescription
+                            Task { @MainActor in
+                                importErrorMessage = message
+                            }
+                        }
                     }
                     
                     return true
                 }
                 .onAppear {
-                    if dataTransferManager == nil {
-                        dataTransferManager = DataTransferManager(managedObjectContext: persistentContainer.viewContext)
-                        
-                        sharedBucket.dataTransferManager = dataTransferManager
-                    }
+                    serverRepository.refresh()
                 }
-        }.onChange(of: scenePhase) { oldPhase, newPhase in
-            switch newPhase {
-            case .background:
-                persistentContainer.save()
-                
-            default:
-                ()
+                .statusBarHidden(CommandLine.arguments.contains("--hide-status-bar"))
+        }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                serverRepository.refresh()
             }
         }
     }

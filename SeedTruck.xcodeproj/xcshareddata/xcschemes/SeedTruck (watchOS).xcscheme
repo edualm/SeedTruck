@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A096385724F568CF00F2062F"
-               BuildableName = "SeedTruck (watchOS).app"
+               BuildableName = "SeedTruckWatch.app"
                BlueprintName = "SeedTruck (watchOS)"
                ReferencedContainer = "container:SeedTruck.xcodeproj">
             </BuildableReference>
@@ -59,7 +59,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A096385724F568CF00F2062F"
-            BuildableName = "SeedTruck (watchOS).app"
+            BuildableName = "SeedTruckWatch.app"
             BlueprintName = "SeedTruck (watchOS)"
             ReferencedContainer = "container:SeedTruck.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A096385724F568CF00F2062F"
-            BuildableName = "SeedTruck (watchOS).app"
+            BuildableName = "SeedTruckWatch.app"
             BlueprintName = "SeedTruck (watchOS)"
             ReferencedContainer = "container:SeedTruck.xcodeproj">
          </BuildableReference>

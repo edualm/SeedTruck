@@ -7,364 +7,373 @@
 
 import Foundation
 
-class TransmissionConnection: ServerConnection {
-    
-    private typealias Parameters = Dictionary<String, Any>
-    
+final class TransmissionConnection: ServerConnection, @unchecked Sendable {
+
     private enum Header: String {
-        
-        case Authorization = "Authorization"
-        case CSRFToken = "X-Transmission-Session-Id"
-        
-        var name: String {
-            return rawValue
-        }
+
+        case authorization = "Authorization"
+        case csrfToken = "X-Transmission-Session-Id"
+        case contentType = "Content-Type"
     }
-    
-    private enum TransmissionError: Error {
-        case invalidRequest
-        case invalidResponse
+
+    private enum Method: String {
+
+        case sessionGet = "session_get"
+        case sessionSet = "session_set"
+        case torrentAdd = "torrent_add"
+        case torrentGet = "torrent_get"
+        case torrentRemove = "torrent_remove"
+        case torrentStart = "torrent_start"
+        case torrentStop = "torrent_stop"
     }
-    
-    struct ConnectionDetails {
-        
-        struct Credentials {
-            
-            let username: String
-            let password: String
-            
-            var base64Encoded: String {
-                return "\(username):\(password)".data(using: .utf8)!.base64EncodedString()
-            }
-        }
-        
-        let endpoint: URL
-        let credentials: Credentials?
-    }
-    
-    static private let CSRFTokenHeaderName = "X-Transmission-Session-Id"
-    
-    static private let TorrentFields = ["id", "name", "percentDone", "status", "sizeWhenDone", "peersConnected", "rateUpload", "peersSendingToUs", "peersGettingFromUs", "rateDownload", "uploadedEver", "uploadRatio", "secondsSeeding", "eta", "etaIdle", "labels"]
-    
+
+    static private let torrentFields = ["id", "name", "percent_done", "recheck_progress", "status", "size_when_done", "peers_connected", "rate_upload", "peers_sending_to_us", "peers_getting_from_us", "rate_download", "uploaded_ever", "downloaded_ever", "upload_ratio", "seconds_downloading", "seconds_seeding", "queue_position", "eta", "eta_idle", "labels"]
+
     private let connectionDetails: ConnectionDetails
+    private let session: URLSession
+    private let redirectDelegate: CustomHeaderRedirectDelegate
+    private let tokenLock = NSLock()
     private var csrfToken: String?
-    
-    init(connectionDetails: ConnectionDetails) {
+
+    init(connectionDetails: ConnectionDetails, session: URLSession? = nil) {
         self.connectionDetails = connectionDetails
+        redirectDelegate = CustomHeaderRedirectDelegate(connectionDetails: connectionDetails)
+
+        if let session {
+            self.session = session
+        } else {
+            let configuration = URLSessionConfiguration.default
+            configuration.waitsForConnectivity = true
+            configuration.timeoutIntervalForRequest = 5
+            configuration.timeoutIntervalForResource = 30
+            self.session = URLSession(configuration: configuration)
+        }
     }
-    
-    private func performCall<T: Decodable>(withMethod method: String, parameters: Dictionary<String, Any>?, completionHandler: @escaping (Result<T, TransmissionError>) -> ()) {
-        let request: [String: Any] = [
-            "method": method,
-            "arguments": parameters as Any
-        ]
-        
-        var urlRequest = URLRequest(url: connectionDetails.endpoint)
-        
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: request, options: .init()) else {
-            completionHandler(.failure(.invalidRequest))
-            
+
+    private var currentCSRFToken: String? {
+        tokenLock.lock()
+        defer { tokenLock.unlock() }
+        return csrfToken
+    }
+
+    private func updateCSRFToken(_ token: String, replacing expectedToken: String?) {
+        tokenLock.lock()
+        defer { tokenLock.unlock() }
+
+        guard csrfToken == expectedToken else {
             return
         }
-        
-        urlRequest.httpBody = httpBody
-        urlRequest.httpMethod = "POST"
-        
+
+        csrfToken = token
+    }
+
+    private func makeRequest<Parameters: Encodable>(
+        method: Method,
+        parameters: Parameters,
+        id: String,
+        csrfToken: String?
+    ) throws -> URLRequest {
+        let body = Transmission.RPCRequest(
+            method: method.rawValue,
+            params: parameters,
+            id: id
+        )
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+
+        var request = URLRequest(url: connectionDetails.endpoint)
+        do {
+            request.httpBody = try encoder.encode(body)
+        } catch {
+            throw ServerCommunicationError.parseError
+        }
+        request.httpMethod = "POST"
+        connectionDetails.applyCustomHeaders(to: &request)
+        request.setValue("application/json", forHTTPHeaderField: Header.contentType.rawValue)
+
         if let credentials = connectionDetails.credentials {
-            urlRequest.addValue("Basic \(credentials.base64Encoded)", forHTTPHeaderField: Header.Authorization.name)
-        }
-        
-        if let csrfToken = csrfToken {
-            urlRequest.addValue(csrfToken, forHTTPHeaderField: Header.CSRFToken.name)
-        }
-        
-        let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.timeoutIntervalForRequest = 5.0
-        sessionConfig.timeoutIntervalForResource = 10.0
-        
-        let task = URLSession(configuration: sessionConfig).dataTask(with: urlRequest) { [self] data, response, error in
-            guard error == nil, let response = response as? HTTPURLResponse else {
-                completionHandler(.failure(.invalidResponse))
-                
-                return
+            let rawCredentials = "\(credentials.username):\(credentials.password)"
+            guard let encodedCredentials = rawCredentials.data(using: .utf8)?.base64EncodedString() else {
+                throw ServerCommunicationError.parseError
             }
-            
-            if response.statusCode == 403 || response.statusCode == 500 {
-                completionHandler(.failure(.invalidResponse))
-                
-                return
+            request.setValue("Basic \(encodedCredentials)", forHTTPHeaderField: Header.authorization.rawValue)
+        }
+
+        if let csrfToken {
+            request.setValue(csrfToken, forHTTPHeaderField: Header.csrfToken.rawValue)
+        }
+
+        return request
+    }
+
+    private func performCall<Parameters: Encodable, Value: Decodable>(
+        method: Method,
+        parameters: Parameters
+    ) async throws -> Value {
+        let requestID = UUID().uuidString
+
+        for attempt in 0...1 {
+            try Task.checkCancellation()
+
+            let requestToken = currentCSRFToken
+            let request = try makeRequest(
+                method: method,
+                parameters: parameters,
+                id: requestID,
+                csrfToken: requestToken
+            )
+            let data: Data
+            let response: URLResponse
+
+            do {
+                (data, response) = try await session.data(
+                    for: request,
+                    delegate: redirectDelegate
+                )
+            } catch is CancellationError {
+                throw CancellationError()
+            } catch let error as URLError where error.code == .cancelled {
+                throw CancellationError()
+            } catch let error as URLError {
+                throw ServerCommunicationError.connectivity(error, endpoint: connectionDetails.endpoint)
+            } catch {
+                throw ServerCommunicationError.serverError(error.localizedDescription)
             }
-            
-            guard response.statusCode != 409 else {
-                if let newCSRFToken = response.allHeaderFields[Header.CSRFToken.name] as? String {
-                    csrfToken = newCSRFToken
-                } else if let newCSRFToken = response.allHeaderFields[Header.CSRFToken.name.localizedLowercase] as? String {
-                    csrfToken = newCSRFToken
+
+            try Task.checkCancellation()
+
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw ServerCommunicationError.invalidResponse
+            }
+
+            if httpResponse.statusCode == 409 {
+                guard attempt == 0,
+                      let newToken = httpResponse.value(forHTTPHeaderField: Header.csrfToken.rawValue),
+                      !newToken.isEmpty else {
+                    throw ServerCommunicationError.invalidResponse
+                }
+
+                updateCSRFToken(newToken, replacing: requestToken)
+                continue
+            }
+
+            guard (200..<300).contains(httpResponse.statusCode) else {
+                throw ServerCommunicationError.httpStatus(httpResponse.statusCode)
+            }
+
+            let parsedResponse: Transmission.RPCResponse<Value>
+
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                parsedResponse = try decoder.decode(Transmission.RPCResponse<Value>.self, from: data)
+            } catch {
+                throw ServerCommunicationError.parseError
+            }
+
+            guard parsedResponse.jsonrpc == "2.0", parsedResponse.id == requestID else {
+                throw ServerCommunicationError.invalidResponse
+            }
+
+            switch (parsedResponse.result, parsedResponse.error) {
+            case let (result?, nil):
+                return result
+            case let (nil, error?):
+                let detail = error.data?.errorString
+                let message: String
+                if let detail, !detail.isEmpty, detail != error.message {
+                    message = "\(error.message): \(detail)"
                 } else {
-                    completionHandler(.failure(.invalidResponse))
-                    
-                    return
+                    message = error.message
                 }
-                
-                performCall(withMethod: method, parameters: parameters, completionHandler: completionHandler)
-                
-                return
+                throw ServerCommunicationError.serverError(message)
+            default:
+                throw ServerCommunicationError.invalidResponse
             }
-            
-            guard let data = data else {
-                completionHandler(.failure(.invalidResponse))
-                
-                return
-            }
-            
-            guard let parsedResponse = try? JSONDecoder().decode(T.self, from: data) else {
-                completionHandler(.failure(.invalidResponse))
-
-                return
-            }
-
-            completionHandler(.success(parsedResponse))
         }
-        
-        task.resume()
+
+        throw ServerCommunicationError.invalidResponse
     }
-    
-    func test(completionHandler: @escaping (Bool) -> ()) {
-        getTorrents {
-            if case Result.success = $0 {
-                completionHandler(true)
-                
-                return
-            }
-            
-            completionHandler(false)
-        }
+
+    func checkConnection() async throws {
+        _ = try await getTorrents()
     }
-    
+
     #if os(iOS) || os(macOS)
-    
-    func addTorrent(_ torrent: LocalTorrent, labels: [String] = [], completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
-        var parameters: Parameters
-        
-        switch torrent {
-        case .magnet(let magnet, _):
-            parameters = ["filename": magnet]
-            
-        case .torrent(let data, _, _):
-            parameters = ["metainfo": data.base64EncodedString()]
+    func addTorrent(_ request: TorrentAddRequest) async throws {
+        let filename: String?
+        let metainfo: String?
+
+        switch request.source {
+        case .magnet(let magnet):
+            filename = magnet
+            metainfo = nil
+        case .metainfo(let data):
+            filename = nil
+            metainfo = data.base64EncodedString()
         }
-        
-        let finalLabels = !labels.isEmpty ? labels : torrent.labels
-        if !finalLabels.isEmpty {
-            parameters["labels"] = finalLabels
-        }
-        
-        performCall(withMethod: "torrent-add", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentAdd, TransmissionError>) in
-            switch result {
-            case .success(let response):
-                guard let torrentAdded = response.arguments?["torrent-added"] else {
-                    completionHandler(.failure(.parseError))
-                    
-                    return
-                }
-                
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(1)) {
-                    self.getTorrent(id: String(torrentAdded.id), completionHandler: completionHandler)
-                }
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
+
+        let parameters = Transmission.TorrentAddParameters(
+            filename: filename,
+            metainfo: metainfo,
+            labels: request.tags.isEmpty ? nil : request.tags
+        )
+
+        let response: Transmission.TorrentAddResult = try await performCall(
+            method: .torrentAdd,
+            parameters: parameters
+        )
+
+        guard response.torrentAdded != nil || response.torrentDuplicate != nil else {
+            throw ServerCommunicationError.parseError
         }
     }
-    
     #endif
-    
-    private func getTorrents(ids: [Int], completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
-        let parameters: Parameters
-        
-        if ids.count != 0 {
-            parameters = [
-                "fields": Self.TorrentFields,
-                "ids": ids
-            ]
-        } else {
-            parameters = ["fields": Self.TorrentFields]
+
+    private func getTorrents(ids: [Int]) async throws -> [RemoteTorrent] {
+        let parameters = Transmission.TorrentGetParameters(
+            fields: Self.torrentFields,
+            ids: ids.isEmpty ? nil : ids
+        )
+
+        let response: Transmission.TorrentGetResult = try await performCall(
+            method: .torrentGet,
+            parameters: parameters
+        )
+
+        let torrents = response.torrents.compactMap(RemoteTorrent.init(from:))
+        guard torrents.count == response.torrents.count else {
+            throw ServerCommunicationError.parseError
         }
-        
-        performCall(withMethod: "torrent-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.TorrentGet, TransmissionError>) in
-            switch result {
-            case .success(let response):
-                guard let transmissionTorrents = response.arguments?["torrents"] else {
-                    completionHandler(.failure(.parseError))
-                    
-                    return
-                }
-                
-                if case let Transmission.RPCResponse.Result.error(error) = response.result {
-                    completionHandler(.failure(.serverError(error)))
-                    
-                    return
-                }
-                
-                completionHandler(.success(transmissionTorrents.compactMap { RemoteTorrent(from: $0) }))
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
+
+        return torrents
+    }
+
+    func getTorrent(id: String) async throws -> RemoteTorrent {
+        guard let id = Int(id) else {
+            throw ServerCommunicationError.parseError
         }
-    }
-    
-    func getTorrent(id: String, completionHandler: @escaping (Result<RemoteTorrent, ServerCommunicationError>) -> ()) {
-        getTorrents(ids: [Int(id)].compactMap { $0 }) {
-            switch $0 {
-            case .success(let torrents):
-                guard torrents.count == 1 else {
-                    completionHandler(.failure(.parseError))
-                    
-                    return
-                }
-                
-                completionHandler(.success(torrents[0]))
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
+
+        let torrents = try await getTorrents(ids: [id])
+        guard torrents.count == 1, let torrent = torrents.first else {
+            throw ServerCommunicationError.parseError
         }
+
+        return torrent
     }
-    
-    func getTorrents(completionHandler: @escaping (Result<[RemoteTorrent], ServerCommunicationError>) -> ()) {
-        getTorrents(ids: [], completionHandler: completionHandler)
+
+    func getTorrents() async throws -> [RemoteTorrent] {
+        try await getTorrents(ids: [])
     }
-    
-    private func removeTorrents(byId ids: [String], deletingData: Bool, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
-        let parameters: Parameters = [
-            "ids": ids.map { Int($0) },
-            "delete-local-data": deletingData
-        ]
-        
-        performCall(withMethod: "torrent-remove", parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
-            switch result {
-            case .success(let response):
-                switch response.result {
-                case .success:
-                    completionHandler(.success(true))
-                case .error:
-                    completionHandler(.success(false))
-                }
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
+
+    private func integerIDs(from ids: [String]) throws -> [Int] {
+        let integerIDs = ids.compactMap(Int.init)
+        guard integerIDs.count == ids.count else {
+            throw ServerCommunicationError.parseError
         }
+        return integerIDs
     }
-    
-    private func performGenericAction(withMethodName methodName: String, torrentIds: [String], completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
-        let parameters: Parameters = [
-            "ids": torrentIds.map { Int($0) }
-        ]
-        
-        performCall(withMethod: methodName, parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
-            switch result {
-            case .success(let response):
-                switch response.result {
-                case .success:
-                    completionHandler(.success(true))
-                case .error:
-                    completionHandler(.success(false))
-                }
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
-        }
+
+    private func removeTorrents(byID ids: [String], deletingData: Bool) async throws {
+        let parameters = Transmission.TorrentRemoveParameters(
+            ids: try integerIDs(from: ids),
+            deleteLocalData: deletingData
+        )
+
+        let _: Transmission.EmptyResult = try await performCall(
+            method: .torrentRemove,
+            parameters: parameters
+        )
     }
-    
-    func perform(_ action: RemoteTorrent.Action, on torrent: RemoteTorrent, completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
-        let torrentIds = [torrent.id]
-        
+
+    private func performGenericAction(method: Method, torrentIDs: [String]) async throws {
+        let parameters = Transmission.TorrentIDsParameters(ids: try integerIDs(from: torrentIDs))
+        let _: Transmission.EmptyResult = try await performCall(
+            method: method,
+            parameters: parameters
+        )
+    }
+
+    func perform(_ action: RemoteTorrent.Action, on torrent: RemoteTorrent) async throws {
         switch action {
-        case .pause:
-            performGenericAction(withMethodName: "torrent-stop", torrentIds: torrentIds, completionHandler: completionHandler)
-            
-        case .remove(let deletingData):
-            removeTorrents(byId: torrentIds, deletingData: deletingData, completionHandler: completionHandler)
-            
+        case .stop:
+            try await performGenericAction(method: .torrentStop, torrentIDs: [torrent.id])
+        case .remove(let policy):
+            try await removeTorrents(
+                byID: [torrent.id],
+                deletingData: policy == .deleteLocalData
+            )
         case .start:
-            performGenericAction(withMethodName: "torrent-start-now", torrentIds: torrentIds, completionHandler: completionHandler)
+            try await performGenericAction(method: .torrentStart, torrentIDs: [torrent.id])
         }
     }
 }
 
-extension TransmissionConnection: HasSpeedLimitSupport {
-    
-    func getSpeedLimitConfiguration(completionHandler: @escaping (Result<(down: Double, up: Double), ServerCommunicationError>) -> ()) {
-        let parameters: Parameters = [
-            "fields": ["speed-limit-up", "speed-limit-down"],
-        ]
-        
-        performCall(withMethod: "session-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.SessionArgumentsNumber, TransmissionError>) in
-            switch result {
-            case .success(let response):
-                guard let responseArguments = response.arguments,
-                      let speedLimitDown = responseArguments["speed-limit-down"],
-                      let speedLimitUp = responseArguments["speed-limit-up"] else {
-                    completionHandler(.failure(.parseError))
-                    
-                    return
-                }
-                
-                completionHandler(.success((speedLimitDown, speedLimitUp)))
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
+extension TransmissionConnection: GlobalSpeedLimitSupporting {
+
+    func globalSpeedLimits() async throws -> GlobalSpeedLimits {
+        let parameters = Transmission.SessionGetParameters(
+            fields: [
+                "speed_limit_up",
+                "speed_limit_down",
+                "speed_limit_up_enabled",
+                "speed_limit_down_enabled"
+            ]
+        )
+        let response: Transmission.SessionSpeedLimits = try await performCall(
+            method: .sessionGet,
+            parameters: parameters
+        )
+
+        guard let speedLimitDownValue = response.speedLimitDown,
+              let speedLimitUpValue = response.speedLimitUp,
+              let speedLimitDown = Int64(exactly: speedLimitDownValue),
+              let speedLimitUp = Int64(exactly: speedLimitUpValue),
+              let speedLimitDownEnabled = response.speedLimitDownEnabled,
+              let speedLimitUpEnabled = response.speedLimitUpEnabled,
+              speedLimitDown >= 0,
+              speedLimitUp >= 0,
+              speedLimitDown <= Int64.max / 1_000,
+              speedLimitUp <= Int64.max / 1_000 else {
+            throw ServerCommunicationError.parseError
         }
+
+        return GlobalSpeedLimits(
+            download: .init(
+                bytesPerSecond: speedLimitDown * 1_000,
+                isEnabled: speedLimitDownEnabled
+            ),
+            upload: .init(
+                bytesPerSecond: speedLimitUp * 1_000,
+                isEnabled: speedLimitUpEnabled
+            )
+        )
     }
-    
-    func getSpeedLimitState(completionHandler: @escaping (Result<(down: Bool, up: Bool), ServerCommunicationError>) -> ()) {
-        let parameters: Parameters = [
-            "fields": ["speed-limit-up-enabled", "speed-limit-down-enabled"],
-        ]
-        
-        performCall(withMethod: "session-get", parameters: parameters) { (result: Result<Transmission.RPCResponse.SessionArgumentsBoolean, TransmissionError>) in
-            switch result {
-            case .success(let response):
-                guard let responseArguments = response.arguments,
-                      let speedLimitDownEnabled = responseArguments["speed-limit-down-enabled"],
-                      let speedLimitUpEnabled = responseArguments["speed-limit-up-enabled"] else {
-                    completionHandler(.failure(.parseError))
-                    
-                    return
-                }
-                
-                completionHandler(.success((speedLimitDownEnabled, speedLimitUpEnabled)))
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
+
+    func setGlobalSpeedLimits(_ limits: GlobalSpeedLimits) async throws {
+        let downloadKilobytes = limits.download.bytesPerSecond / 1_000
+        let uploadKilobytes = limits.upload.bytesPerSecond / 1_000
+        guard let downloadKilobytes = Int(exactly: downloadKilobytes),
+              let uploadKilobytes = Int(exactly: uploadKilobytes) else {
+            throw ServerCommunicationError.parseError
         }
+
+        let parameters = Transmission.SessionSetParameters(
+            speedLimitDown: downloadKilobytes,
+            speedLimitDownEnabled: limits.download.isEnabled,
+            speedLimitUp: uploadKilobytes,
+            speedLimitUpEnabled: limits.upload.isEnabled
+        )
+        let _: Transmission.EmptyResult = try await performCall(
+            method: .sessionSet,
+            parameters: parameters
+        )
     }
-    
-    func setSpeedLimitState(_ enabled: (down: Bool, up: Bool), completionHandler: @escaping (Result<Bool, ServerCommunicationError>) -> ()) {
-        let parameters: Parameters = [
-            "speed-limit-down-enabled": enabled.down,
-            "speed-limit-up-enabled": enabled.up
-        ]
-        
-        performCall(withMethod: "session-set", parameters: parameters) { (result: Result<Transmission.RPCResponse.NoArguments, TransmissionError>) in
-            switch result {
-            case .success(let response):
-                switch response.result {
-                case .success:
-                    completionHandler(.success(true))
-                case .error:
-                    completionHandler(.success(false))
-                }
-                
-            case .failure(let error):
-                completionHandler(.failure(.serverError(error.localizedDescription)))
-            }
-        }
+}
+
+extension TransmissionConnection: TorrentTagProviding {
+
+    func availableTags() async throws -> [String] {
+        Array(Set(try await getTorrents().flatMap(\.labels))).sorted()
     }
 }

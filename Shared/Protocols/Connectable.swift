@@ -5,25 +5,39 @@
 //  Created by Eduardo Almeida on 16/09/2020.
 //
 
-protocol Connectable {
-    
-    var connectionDetails: ConnectionDetails { get }
-}
+import Foundation
 
-extension Connectable {
-    
-    var connection: ServerConnection {
-        switch connectionDetails.type {
-        case .transmission:
-            let credentials: TransmissionConnection.ConnectionDetails.Credentials?
-            
-            if let c = connectionDetails.credentials {
-                credentials = TransmissionConnection.ConnectionDetails.Credentials(username: c.username, password: c.password)
-            } else {
-                credentials = nil
-            }
-            
-            return TransmissionConnection(connectionDetails: .init(endpoint: connectionDetails.endpoint, credentials: credentials))
+@MainActor
+final class ServerConnectionStore {
+
+    static let shared = ServerConnectionStore(builder: TorrentClientRegistry.live)
+
+    private struct Entry {
+
+        let details: ConnectionDetails
+        let connection: ServerConnection
+    }
+
+    private var entries: [UUID: Entry] = [:]
+    private let builder: any ServerConnectionBuilding
+
+    init(builder: any ServerConnectionBuilding) {
+        self.builder = builder
+    }
+
+    func connection(for serverID: UUID, details: ConnectionDetails) -> ServerConnection {
+        if let entry = entries[serverID], entry.details == details {
+            return entry.connection
         }
+
+        let connection = builder.makeConnection(for: details)
+
+        entries[serverID] = .init(details: details, connection: connection)
+
+        return connection
+    }
+
+    func removeConnection(for serverID: UUID) {
+        entries[serverID] = nil
     }
 }

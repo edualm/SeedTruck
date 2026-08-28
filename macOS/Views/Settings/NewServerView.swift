@@ -7,90 +7,102 @@
 
 import SwiftUI
 
-struct NewServerView: View {
-    
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @Environment(\.presentationMode) var presentation
-    
-    @State var name = ""
-    @State var endpoint = ""
-    @State var type = 0
-    @State var username = ""
-    @State var password = ""
-    
-    @State var showingAlert: AlertIdentifier?
-    
-    @State var done: Bool = false
-    
+struct ServerEditorSheet: View {
+
+    let server: Server?
+
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var model: ServerEditorModel
+    @State private var saveInProgress = false
+
+    private var title: String {
+        server == nil ? "Add Server" : "Edit Server"
+    }
+
+    private var saveTitle: String {
+        server == nil ? "Add" : "Save"
+    }
+
+    init(server: Server?, repository: ServerRepository) {
+        self.server = server
+        self._model = StateObject(
+            wrappedValue: ServerEditorModel(
+                repository: repository,
+                server: server
+            )
+        )
+    }
+
     var body: some View {
-        if done {
-            NewServerDoneView(done: $done)
-        } else {
-            Form {
-                Section(header: Text("Metadata").font(.headline)) {
-                    TextField("Name", text: $name)
+        NavigationStack {
+            VStack(spacing: 0) {
+                ScrollView {
+                    ServerEditorForm(
+                        model: model,
+                        remoteSettingsServer: server,
+                        showsActions: false
+                    )
                 }
-                
+
                 Divider()
-                    .padding([.top, .bottom])
-                
-                Section(header: Text("Connection Info").font(.headline)) {
-                    Picker(selection: $type, label: EmptyView()) {
-                        ForEach(0 ..< ServerType.allCases.count, id: \.self) {
-                            Text(ServerType.allCases[$0].rawValue)
+
+                HStack {
+                    Button("Test Connection") {
+                        Task {
+                            await model.testConnection()
                         }
                     }
-                    TextField("Endpoint", text: $endpoint)
-                    TextField("Username", text: $username)
-                    SecureField("Password", text: $password)
-                }
-                
-                Divider()
-                    .padding([.top, .bottom])
-                
-                Section {
-                    HStack {
-                        Button(action: {
-                            testConnection {
-                                if $0 {
-                                    showingAlert = .init(id: .success)
-                                } else {
-                                    showingAlert = .init(id: .failure)
-                                }
+                    .disabled(saveInProgress || model.isBusy || !model.validation.isValid)
+
+                    Spacer()
+
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                    .keyboardShortcut(.cancelAction)
+                    .disabled(saveInProgress)
+
+                    Button(saveTitle) {
+                        saveInProgress = true
+                        Task {
+                            let didSave = await model.save()
+                            saveInProgress = false
+
+                            if didSave, model.saveWarning == nil {
+                                dismiss()
                             }
-                        }) {
-                            Label("Test Connection", systemImage: "wand.and.rays")
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: { save(onSuccess: { done = true }) }) {
-                            Label("Save", systemImage: "tag")
                         }
                     }
+                    .keyboardShortcut(.defaultAction)
+                    .disabled(saveInProgress || model.isBusy || !model.validation.isValid)
+                    .accessibilityIdentifier("server-editor-save")
                 }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
             }
-            .padding(.leading)
-            .alert(item: $showingAlert) {
-                switch $0.id {
-                case .success:
-                    return Alert(title: Text("Success!"),
-                          message: Text("Connection established successfully."),
-                          dismissButton: .default(Text("Ok")))
-                    
-                case .failure:
-                    return Alert(title: Text("Error!"),
-                          message: Text("Please verify the inserted data."),
-                          dismissButton: .default(Text("Ok")))
-                }
-            }
+            .navigationTitle(title)
         }
+        .frame(width: 520, height: 620)
+        .interactiveDismissDisabled(saveInProgress)
+        .accessibilityIdentifier("server-editor-sheet")
     }
 }
 
-struct NewServerView_Previews: PreviewProvider {
-    
+struct ServerEditorSheet_Previews: PreviewProvider {
+
     static var previews: some View {
-        NewServerView()
+        Group {
+            ServerEditorSheet(
+                server: nil,
+                repository: PreviewMockData.serverRepository
+            )
+
+            if let server = PreviewMockData.settingsServer {
+                ServerEditorSheet(
+                    server: server,
+                    repository: PreviewMockData.serverRepository
+                )
+            }
+        }
     }
 }

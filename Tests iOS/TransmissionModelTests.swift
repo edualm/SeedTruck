@@ -11,38 +11,56 @@ import XCTest
 
 class TransmissionModelTests: XCTestCase {
 
-    func testDecodeFromJSON() {
+    func testPositivePollingInterval() {
+        XCTAssertEqual(PollingInterval.timeInterval(for: 2), 2)
+        XCTAssertEqual(PollingInterval.timeInterval(for: 300), 300)
+    }
+
+    func testManualPollingInterval() {
+        XCTAssertNil(PollingInterval.timeInterval(for: 0))
+        XCTAssertNil(PollingInterval.timeInterval(for: -1))
+    }
+
+    func testDecodesJSONRPCResponseAndSnakeCaseTorrentFields() throws {
         let jsonString = """
             {
-                "arguments": {
+                "jsonrpc": "2.0",
+                "result": {
                     "torrents": [
                         {
                             "error": 0,
-                            "errorString": "",
+                            "error_string": "",
                             "eta": -1,
                             "id": 1,
-                            "isFinished": false,
-                            "leftUntilDone": 0,
+                            "is_finished": false,
+                            "left_until_done": 0,
                             "name": "Linux Distribution ISO DVD",
-                            "peersGettingFromUs": 0,
-                            "peersSendingToUs": 0,
-                            "rateDownload": 0,
-                            "rateUpload": 0,
-                            "sizeWhenDone": 1234567890,
+                            "peers_getting_from_us": 0,
+                            "peers_sending_to_us": 0,
+                            "percent_done": 1,
+                            "rate_download": 0,
+                            "rate_upload": 0,
+                            "size_when_done": 1234567890,
                             "status": 6,
-                            "uploadRatio": 0.25
+                            "upload_ratio": 0.25
                         }
                     ]
                 },
-                "result": "success",
-                "tag": 1
+                "id": "request-1"
             }
         """
-        
-        let jsonData = jsonString.data(using: .utf8)!
-        
-        let decoded = try! JSONDecoder().decode(Transmission.RPCResponse.TorrentGet.self, from: jsonData)
+        let jsonData = try XCTUnwrap(jsonString.data(using: .utf8))
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let decoded = try decoder.decode(
+            Transmission.RPCResponse<Transmission.TorrentGetResult>.self,
+            from: jsonData
+        )
 
-        XCTAssertEqual(decoded.result, .success)
+        XCTAssertEqual(decoded.jsonrpc, "2.0")
+        XCTAssertEqual(decoded.id, "request-1")
+        XCTAssertEqual(decoded.result?.torrents.first?.name, "Linux Distribution ISO DVD")
+        XCTAssertEqual(decoded.result?.torrents.first?.sizeWhenDone, 1_234_567_890)
+        XCTAssertNil(decoded.error)
     }
 }

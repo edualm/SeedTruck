@@ -12,13 +12,15 @@ struct LoadingView: View {
     var body: some View {
         VStack {
             Spacer()
-            Image(systemName: "globe")
-                .font(.largeTitle)
-            Text("Loading...")
+            #if os(watchOS)
+            ProgressView()
+                .controlSize(.large)
+                .accessibilityLabel("Loading torrents")
+            #else
+            ProgressView("Loading torrents...")
                 .font(.headline)
                 .padding()
-            Text("Your data's coming!")
-                .fontWeight(.light)
+            #endif
             Spacer()
         }
     }

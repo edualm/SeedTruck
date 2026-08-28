@@ -6,23 +6,16 @@
 //
 
 import Foundation
-import SwiftyBencode
 
 extension LocalTorrent {
-    
-    struct File {
-        
-        let path: String
-        let size: Int
-    }
-    
+
     var name: String? {
         switch self {
         case .magnet(let magnet, _):
             return magnet.slice(from: "dn=", to: "&")?.replacingOccurrences(of: "+", with: " ")
             
-        case .torrent(_, let parsedTorrent, _):
-            return parsedTorrent.name
+        case .torrent(_, let metadata, _):
+            return metadata.name
         }
     }
     
@@ -31,8 +24,8 @@ extension LocalTorrent {
         case .magnet:
             return nil
             
-        case .torrent(_, let parsedTorrent, _):
-            return parsedTorrent.dictionary?["info"]?["private"]?.integer == 1
+        case .torrent(_, let metadata, _):
+            return metadata.isPrivate
         }
     }
     
@@ -41,26 +34,18 @@ extension LocalTorrent {
         case .magnet:
             return nil
             
-        case .torrent(_, let parsedTorrent, _):
-            return parsedTorrent.files.compactMap {
-                let path = $0.path.joined(separator: "/")
-                
-                return File(path: path, size: $0.length)
-            }
+        case .torrent(_, let metadata, _):
+            return metadata.files
         }
     }
     
-    var size: Int? {
+    var size: Int64? {
         switch self {
         case .magnet:
             return nil
 
-        case .torrent:
-            guard let files = files else {
-                return nil
-            }
-            
-            return files.reduce(0) { $0 + $1.size }
+        case .torrent(_, let metadata, _):
+            return metadata.totalSize
         }
     }
 }
