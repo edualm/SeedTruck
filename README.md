@@ -66,9 +66,12 @@ iOS screenshots for now; screenshots for other platforms may appear eventually. 
 
 <p align="center">
     <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/iPhone.png" />
-    <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/iPad.png" />
+    <br />
     <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Watch.png" />
-    <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/macOS.png" />
+    <br />
+    <img width="600" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/iPad.png" />
+    <br />
+    <img width="600" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/macOS.png" />
 </p>
 
 ## Features
