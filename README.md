@@ -64,9 +64,12 @@ on a trusted network.
 
 iOS screenshots for now; screenshots for other platforms may appear eventually. Please note that these screenshots are a bit outdated too.
 
-<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Listing%20-%20Light.png">&nbsp;&nbsp;&nbsp;<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Detail%20-%20Light.png">
-
-<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Listing%20-%20Dark.png">&nbsp;&nbsp;&nbsp;<img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Torrent%20Detail%20-%20Dark.png">
+<p align="center">
+    <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/iPhone.png" />
+    <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/iPad.png" />
+    <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/Watch.png" />
+    <img width="300" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Screenshots/macOS.png" />
+</p>
 
 ## Features
 
