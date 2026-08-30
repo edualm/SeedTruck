@@ -26,11 +26,11 @@ struct ProgressBarView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
-                RoundedRectangle(cornerRadius: cornerRadius)
+                Rectangle()
                     .fill(Color.secondary.opacity(0.2))
 
                 if normalizedProgress > 0 {
-                    RoundedRectangle(cornerRadius: cornerRadius)
+                    Rectangle()
                         .fill(barColorBuilder(normalizedProgress))
                         .frame(width: geometry.size.width * normalizedProgress)
                 }
@@ -39,6 +39,7 @@ struct ProgressBarView: View {
                     .font(.caption2.monospacedDigit())
                     .frame(maxWidth: .infinity)
             }
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
         }
         .accessibilityRepresentation {
             ProgressView(value: Double(normalizedProgress), total: 1) {
@@ -54,11 +55,18 @@ struct ProgressBarView_Previews: PreviewProvider {
     static private let defaultBarColorBuilder: ((CGFloat) -> (Color)) = { $0 < 1 ? .blue : .green }
     
     static var previews: some View {
-        Group {
-            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0)
-            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0.1)
-            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 0.5)
-            ProgressBarView(cornerRadius: 10.0, barColorBuilder: defaultBarColorBuilder, progress: 1)
-        }.previewLayout(.fixed(width: 300, height: 20))
+        VStack(spacing: 8) {
+            ForEach([CGFloat(0), 0.01, 0.03, 0.1, 0.5, 1], id: \.self) { progress in
+                ProgressBarView(
+                    cornerRadius: 10.0,
+                    barColorBuilder: defaultBarColorBuilder,
+                    progress: progress
+                )
+                .frame(height: 20)
+            }
+        }
+        .frame(width: 300)
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
