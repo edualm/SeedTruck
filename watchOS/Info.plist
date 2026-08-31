@@ -32,6 +32,8 @@
 	</array>
 	<key>WKApplication</key>
 	<true/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>WKCompanionAppBundleIdentifier</key>
 	<string>io.edr.seedtruck</string>
 </dict>
