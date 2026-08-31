@@ -225,6 +225,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
+        .contentMargins(.top, 0, for: .scrollContent)
         .navigationTitle("Help")
         .navigationBarTitleDisplayMode(.inline)
         .accessibilityIdentifier("settings-help-page")
