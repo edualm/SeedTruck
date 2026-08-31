@@ -157,7 +157,9 @@ struct SettingsView: View {
                 }
             }
         }
+        .contentMargins(.top, 0, for: .scrollContent)
         .navigationTitle("Servers")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 Button {
