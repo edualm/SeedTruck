@@ -45,6 +45,8 @@ DerivedData/
 .bundle/
 vendor/
 fastlane/
+SeedTruck.app.dSYM.zip
+SeedTruck.ipa
 
 ### Zendesk ###
 zendesk-articles/
