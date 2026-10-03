@@ -6,13 +6,18 @@
 
 A seedbox management application for iOS, macOS and watchOS.
 
-Seed Truck is available now on the App Store for iPhone, iPad and Apple Watch, and on the Mac App Store. It remains open source, so you can also compile and install it yourself.
+Seed Truck is available now on the App Store for iPhone, iPad and Apple Watch, on the Mac App Store, and on AltStore. It remains open source, so you can also compile and install it yourself.
 
 <p align="center">
   <a href="https://apps.apple.com/us/app/seed-truck/id6805884643"><img height="50" alt="Download on the App Store" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/en-us"></a>
   &nbsp;
   <a href="https://apps.apple.com/us/app/seed-truck/id6805884643"><img height="50" alt="Download on the Mac App Store" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-mac-app-store/black/en-us"></a>
+  &nbsp;
+  <a href="https://altstore.io/source/bittenapps.com/altstore/source.json?app=io.edr.seedtruck"><img height="50" alt="Download on AltStore" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Badges/AltStore.png"></a>
 </p>
+
+> [!NOTE]
+> Releases published on GitHub are legacy builds, and no new releases will be published there. Please get Seed Truck from the App Store, the Mac App Store, or AltStore instead.
 
 It uses SwiftUI, and as such, can run on iOS/iPadOS/watchOS/macOS.
 

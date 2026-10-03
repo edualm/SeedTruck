@@ -45,6 +45,7 @@ struct SettingsView: View {
     @AppStorage(Constants.StorageKeys.autoUpdateInterval) private var autoUpdateInterval = 2
 
     @State private var alertData: AlertData?
+    @State private var appIcon = AppIconOption.default
     @State private var inAppBrowserDestination: InAppBrowserDestination?
     @State private var selectedArea: SettingsArea? = .general
 
@@ -90,6 +91,53 @@ struct SettingsView: View {
         }
     }
 
+    private func appIconRow(_ option: AppIconOption) -> some View {
+        Button {
+            selectAppIcon(option)
+        } label: {
+            HStack(spacing: 12) {
+                Image(option.previewImageName)
+                    .resizable()
+                    .frame(width: 48, height: 48)
+                    .accessibilityHidden(true)
+
+                Text(option.title)
+                    .foregroundStyle(Color.primary)
+
+                Spacer()
+
+                if option == appIcon {
+                    Image(systemName: "checkmark")
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.tint)
+                }
+            }
+            .contentShape(.rect)
+        }
+        .accessibilityAddTraits(option == appIcon ? .isSelected : [])
+        .accessibilityIdentifier("settings-app-icon-\(option.rawValue)")
+    }
+
+    private func selectAppIcon(_ option: AppIconOption) {
+        guard option != appIcon else { return }
+
+        let previousIcon = appIcon
+        appIcon = option
+
+        Task {
+            do {
+                // This only returns once the system confirmation alert is dismissed.
+                try await UIApplication.shared.setAlternateIconName(option.alternateIconName)
+            } catch {
+                appIcon = previousIcon
+                alertData = .init(
+                    title: "Unable to Change App Icon",
+                    message: error.localizedDescription
+                )
+            }
+        }
+    }
+
     private var generalContent: some View {
         Form {
             Section {
@@ -107,6 +155,19 @@ struct SettingsView: View {
             } footer: {
                 Text("Controls how often torrent lists and details update. Choose Manual only to refresh on demand.")
             }
+
+            if UIApplication.shared.supportsAlternateIcons {
+                Section {
+                    ForEach(AppIconOption.allCases) { option in
+                        appIconRow(option)
+                    }
+                } header: {
+                    Text("App Icon")
+                }
+            }
+        }
+        .onAppear {
+            appIcon = AppIconOption(alternateIconName: UIApplication.shared.alternateIconName)
         }
         .navigationTitle("General")
 #if os(iOS)

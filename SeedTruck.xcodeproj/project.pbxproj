@@ -87,6 +87,7 @@
 		A08863CA2585B65E00443ECB /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08863C92585B65E00443ECB /* View+Extensions.swift */; };
 		A08863D32585B66900443ECB /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08863C92585B65E00443ECB /* View+Extensions.swift */; };
 		A08863DC2585B66A00443ECB /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08863C92585B65E00443ECB /* View+Extensions.swift */; };
+		A0AB1C022F80000100A1C0DE /* AppIconOption+Dock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AB1C012F80000100A1C0DE /* AppIconOption+Dock.swift */; };
 		A08864182585BB5500443ECB /* GeneralSettingsView+AutoUpdateInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08864062585BB4100443ECB /* GeneralSettingsView+AutoUpdateInterval.swift */; };
 		A0888AB22F3A50B900B52C8D /* CompactLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0888AB12F3A50B900B52C8D /* CompactLabelStyle.swift */; };
 		A0888AB32F3A50B900B52C8D /* CompactLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0888AB12F3A50B900B52C8D /* CompactLabelStyle.swift */; };
@@ -165,7 +166,6 @@
 		A0D87FF1258456260031E898 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D87FF0258456260031E898 /* SettingsView.swift */; };
 		A0D88003258457300031E898 /* GeneralSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D88002258457300031E898 /* GeneralSettingsView.swift */; };
 		A0D8800D258457370031E898 /* ServerSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D8800C258457370031E898 /* ServerSettingsView.swift */; };
-		A0D93F242E70CD670041FE7B /* AppIconLegacy.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0D93F232E70CD670041FE7B /* AppIconLegacy.icon */; };
 		A0D93F262E70CD670041FE7B /* AppIconLegacy.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0D93F232E70CD670041FE7B /* AppIconLegacy.icon */; };
 		A0D93F272E70CD670041FE7B /* AppIconLegacy.icon in Resources */ = {isa = PBXBuildFile; fileRef = A0D93F232E70CD670041FE7B /* AppIconLegacy.icon */; };
 		A0E7426525154FCB0029FFD6 /* ServerRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E7426425154FCB0029FFD6 /* ServerRepository.swift */; };
@@ -329,6 +329,7 @@
 		A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionModelTests.swift; sourceTree = "<group>"; };
 		A08863A42585ADD800443ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A08863C92585B65E00443ECB /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		A0AB1C012F80000100A1C0DE /* AppIconOption+Dock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppIconOption+Dock.swift"; sourceTree = "<group>"; };
 		A08864062585BB4100443ECB /* GeneralSettingsView+AutoUpdateInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneralSettingsView+AutoUpdateInterval.swift"; sourceTree = "<group>"; };
 		A0888AB12F3A50B900B52C8D /* CompactLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactLabelStyle.swift; sourceTree = "<group>"; };
 		A096385824F568CF00F2062F /* SeedTruckWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedTruckWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -786,6 +787,7 @@
 		A0F99C3225620974002D7BC6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A0AB1C012F80000100A1C0DE /* AppIconOption+Dock.swift */,
 				A08864062585BB4100443ECB /* GeneralSettingsView+AutoUpdateInterval.swift */,
 			);
 			path = Models;
@@ -1012,7 +1014,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0D93F242E70CD670041FE7B /* AppIconLegacy.icon in Resources */,
 				A02BD541307000D600A3D06A /* AppIcon.icon in Resources */,
 				A096387424F568D000F2062F /* Preview Assets.xcassets in Resources */,
 				A096385B24F568CF00F2062F /* Assets.xcassets in Resources */,
@@ -1144,6 +1145,7 @@
 				A096388824F569CA00F2062F /* ServerType.swift in Sources */,
 				A012561325046F0D00C7D51B /* SeedTruckApp.swift in Sources */,
 				A07DD0F52512C9D400559D9A /* TemporaryServer.swift in Sources */,
+				A0AB1C022F80000100A1C0DE /* AppIconOption+Dock.swift in Sources */,
 				A08864182585BB5500443ECB /* GeneralSettingsView+AutoUpdateInterval.swift in Sources */,
 				A0CE011D25853DD2002777BF /* TorrentsView+Shared.swift in Sources */,
 				A08863AE2585AE1700443ECB /* Constants.swift in Sources */,
@@ -1411,6 +1413,7 @@
 		A045C8D424F2006500B3B1CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIconLegacy;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iOS/iOS.entitlements;
@@ -1434,6 +1437,7 @@
 		A045C8D524F2006500B3B1CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIconLegacy;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = iOS/iOS.entitlements;
@@ -1458,6 +1462,7 @@
 		A045C8D724F2006500B3B1CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIconLegacy;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
@@ -1488,6 +1493,7 @@
 		A045C8D824F2006500B3B1CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIconLegacy;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;

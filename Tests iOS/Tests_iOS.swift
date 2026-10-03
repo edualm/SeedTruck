@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import XCTest
 @testable import SeedTruck
 
@@ -1734,6 +1735,28 @@ final class Tests_iOS: XCTestCase {
             server.connectionDetails.credentials,
             .init(username: "user", password: "password")
         )
+    }
+
+    func testAppIconOptionMapsAlternateIconNames() {
+        XCTAssertEqual(AppIconOption(alternateIconName: nil), .default)
+        XCTAssertEqual(AppIconOption(alternateIconName: "AppIconLegacy"), .classic)
+        XCTAssertEqual(AppIconOption(alternateIconName: "Unknown"), .default)
+        XCTAssertNil(AppIconOption.default.alternateIconName)
+        XCTAssertEqual(AppIconOption.default.iconName, "AppIcon")
+        XCTAssertEqual(AppIconOption.classic.iconName, "AppIconLegacy")
+    }
+
+    func testAppIconOptionsAreBundled() {
+        let icons = Bundle.main.object(forInfoDictionaryKey: "CFBundleIcons") as? [String: Any]
+        let alternateIcons = icons?["CFBundleAlternateIcons"] as? [String: Any]
+
+        for option in AppIconOption.allCases {
+            XCTAssertNotNil(UIImage(named: option.previewImageName), option.previewImageName)
+
+            if let alternateIconName = option.alternateIconName {
+                XCTAssertNotNil(alternateIcons?[alternateIconName], alternateIconName)
+            }
+        }
     }
 }
 

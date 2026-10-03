@@ -90,6 +90,7 @@ private struct TorrentCommands: Commands {
 
     @Environment(\.scenePhase) private var scenePhase
     
+    @AppStorage(Constants.StorageKeys.appIcon) private var appIcon = AppIconOption.default
     @StateObject private var serverRepository = ServerRepository()
     
     @SceneBuilder
@@ -104,6 +105,7 @@ private struct TorrentCommands: Commands {
                 .serverStoreErrorAlert()
                 .environmentObject(serverRepository)
                 .onAppear {
+                    appIcon.applyToDock()
                     serverRepository.refresh()
                 }
         }

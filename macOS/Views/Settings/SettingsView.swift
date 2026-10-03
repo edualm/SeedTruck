@@ -20,7 +20,7 @@ struct SettingsView: View {
     private var contentSize: CGSize {
         switch selectedTab {
         case .general:
-            return CGSize(width: 500, height: 220)
+            return CGSize(width: 500, height: 380)
         case .servers:
             return CGSize(width: 540, height: 320)
         }

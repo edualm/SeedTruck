@@ -11,6 +11,7 @@ enum Constants {
     
     enum StorageKeys {
         
+        static let appIcon = "appIcon"
         static let autoUpdateInterval = "autoUpdateInterval"
         static let torrentSort = "torrentSort"
         static let torrentSortDirection = "torrentSortDirection"
@@ -102,6 +103,47 @@ enum RefreshIntervalOption: Int, CaseIterable, Identifiable, Sendable {
     }
 }
 
+enum AppIconOption: String, CaseIterable, Identifiable, Sendable {
+
+    case `default`
+    case classic
+
+    var id: String {
+        rawValue
+    }
+
+    init(alternateIconName: String?) {
+        self = Self.allCases.first { $0.alternateIconName == alternateIconName } ?? .default
+    }
+
+    var title: String {
+        switch self {
+        case .default:
+            return "Default"
+        case .classic:
+            return "Classic"
+        }
+    }
+
+    /// The name of the alternate icon in the asset catalog, or `nil` for the primary icon.
+    var alternateIconName: String? {
+        switch self {
+        case .default:
+            return nil
+        case .classic:
+            return "AppIconLegacy"
+        }
+    }
+
+    var iconName: String {
+        alternateIconName ?? "AppIcon"
+    }
+
+    var previewImageName: String {
+        iconName + "Preview"
+    }
+}
+
 enum SettingsArea: String, CaseIterable, Identifiable, Sendable {
 
     case general
@@ -130,7 +172,7 @@ enum SettingsArea: String, CaseIterable, Identifiable, Sendable {
     var summary: String {
         switch self {
         case .general:
-            return "Refresh and application behavior"
+            return "Refresh interval and app icon"
         case .servers:
             return "Connections, authentication, and limits"
         case .help:
