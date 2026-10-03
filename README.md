@@ -9,11 +9,11 @@ A seedbox management application for iOS, macOS and watchOS.
 Seed Truck is available now on the App Store for iPhone, iPad and Apple Watch, on the Mac App Store, and on AltStore. It remains open source, so you can also compile and install it yourself.
 
 <p align="center">
-  <a href="https://apps.apple.com/us/app/seed-truck/id6805884643"><img height="50" alt="Download on the App Store" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/en-us"></a>
+  <a href="https://apps.apple.com/us/app/seed-truck/id6805884643"><img width="150" height="50" alt="Download on the App Store" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-app-store/black/en-us"></a>
   &nbsp;
-  <a href="https://apps.apple.com/us/app/seed-truck/id6805884643"><img height="50" alt="Download on the Mac App Store" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-mac-app-store/black/en-us"></a>
+  <a href="https://apps.apple.com/us/app/seed-truck/id6805884643"><img width="195" height="50" alt="Download on the Mac App Store" src="https://toolbox.marketingtools.apple.com/api/badges/download-on-the-mac-app-store/black/en-us"></a>
   &nbsp;
-  <a href="https://altstore.io/source/bittenapps.com/altstore/source.json?app=io.edr.seedtruck"><img height="50" alt="Download on AltStore" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Badges/AltStore.png"></a>
+  <a href="https://altstore.io/source/bittenapps.com/altstore/source.json?app=io.edr.seedtruck"><img width="156" height="50" alt="Download on AltStore" src="https://raw.githubusercontent.com/edualm/SeedTruck/main/Badges/AltStore.png"></a>
 </p>
 
 > [!NOTE]
