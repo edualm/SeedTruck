@@ -353,6 +353,7 @@ struct ServerEditorForm: View {
                         Button(role: .destructive, action: onDeleteRequest) {
                             Image(systemName: "trash")
                         }
+                        .tint(.red)
                         .accessibilityLabel("Delete Server")
                     }
 

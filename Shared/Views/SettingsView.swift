@@ -39,6 +39,11 @@ struct SettingsView: View {
         let message: String
     }
 
+    private enum ServerRoute: Hashable {
+        case details(serverID: UUID, serverName: String)
+        case newServer
+    }
+
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @EnvironmentObject private var serverRepository: ServerRepository
 
@@ -48,6 +53,7 @@ struct SettingsView: View {
     @State private var appIcon = AppIconOption.default
     @State private var inAppBrowserDestination: InAppBrowserDestination?
     @State private var selectedArea: SettingsArea? = .general
+    @State private var detailPath = NavigationPath()
 
     @ObservedObject private var presenter: SettingsPresenter
 
@@ -192,9 +198,7 @@ struct SettingsView: View {
                     let serverID = server.id
                     let serverName = server.name
 
-                    NavigationLink {
-                        ServerDetailsView(serverID: serverID, serverName: serverName)
-                    } label: {
+                    NavigationLink(value: ServerRoute.details(serverID: serverID, serverName: serverName)) {
                         serverRow(server)
                     }
 #if os(iOS)
@@ -230,12 +234,18 @@ struct SettingsView: View {
                 }
                 .accessibilityIdentifier("settings-refresh-servers")
 
-                NavigationLink {
-                    NewServerView()
-                } label: {
+                NavigationLink(value: ServerRoute.newServer) {
                     Label("Add Server", systemImage: "plus")
                 }
                 .accessibilityIdentifier("settings-add-server")
+            }
+        }
+        .navigationDestination(for: ServerRoute.self) { route in
+            switch route {
+            case .details(let serverID, let serverName):
+                ServerDetailsView(serverID: serverID, serverName: serverName)
+            case .newServer:
+                NewServerView()
             }
         }
     }
@@ -316,9 +326,7 @@ struct SettingsView: View {
 
     private var areaList: some View {
         List(SettingsArea.allCases) { area in
-            NavigationLink {
-                content(for: area)
-            } label: {
+            NavigationLink(value: area) {
                 Label {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(area.title)
@@ -333,6 +341,20 @@ struct SettingsView: View {
             .accessibilityIdentifier("settings-area-\(area.rawValue)")
         }
         .navigationTitle("Settings")
+        .navigationDestination(for: SettingsArea.self) { area in
+            content(for: area)
+        }
+    }
+
+    private var sidebarSelection: Binding<SettingsArea?> {
+        Binding(
+            get: { selectedArea },
+            set: { area in
+                // Selecting an area starts the detail column at its root.
+                detailPath = NavigationPath()
+                selectedArea = area
+            }
+        )
     }
 
     @ViewBuilder
@@ -340,14 +362,25 @@ struct SettingsView: View {
         #if os(iOS)
         if horizontalSizeClass == .regular {
             NavigationSplitView {
-                List(SettingsArea.allCases, selection: $selectedArea) { area in
-                    Label(area.title, systemImage: area.systemImage)
-                        .tag(area)
-                        .accessibilityIdentifier("settings-area-\(area.rawValue)")
+                List(SettingsArea.allCases, selection: sidebarSelection) { area in
+                    // List selection ignores taps on the selected row, so a button also handles
+                    // those to pop the detail column back to the area's root.
+                    Button {
+                        sidebarSelection.wrappedValue = area
+                    } label: {
+                        Label(area.title, systemImage: area.systemImage)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(.rect)
+                    }
+                    .buttonStyle(.plain)
+                    .tag(area)
+                    .accessibilityIdentifier("settings-area-\(area.rawValue)")
                 }
                 .navigationTitle("Settings")
             } detail: {
-                content(for: selectedArea ?? .general)
+                NavigationStack(path: $detailPath) {
+                    content(for: selectedArea ?? .general)
+                }
             }
         } else {
             NavigationStack {
