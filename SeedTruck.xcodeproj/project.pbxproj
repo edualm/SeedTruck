@@ -87,7 +87,6 @@
 		A08863CA2585B65E00443ECB /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08863C92585B65E00443ECB /* View+Extensions.swift */; };
 		A08863D32585B66900443ECB /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08863C92585B65E00443ECB /* View+Extensions.swift */; };
 		A08863DC2585B66A00443ECB /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08863C92585B65E00443ECB /* View+Extensions.swift */; };
-		A0AB1C022F80000100A1C0DE /* AppIconOption+Dock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AB1C012F80000100A1C0DE /* AppIconOption+Dock.swift */; };
 		A08864182585BB5500443ECB /* GeneralSettingsView+AutoUpdateInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08864062585BB4100443ECB /* GeneralSettingsView+AutoUpdateInterval.swift */; };
 		A0888AB22F3A50B900B52C8D /* CompactLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0888AB12F3A50B900B52C8D /* CompactLabelStyle.swift */; };
 		A0888AB32F3A50B900B52C8D /* CompactLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0888AB12F3A50B900B52C8D /* CompactLabelStyle.swift */; };
@@ -128,6 +127,7 @@
 		A0AAF2AA257BB39600A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
 		A0AAF2BB257BB44A00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
 		A0AAF2C4257BB44B00A2217A /* NoTorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */; };
+		A0AB1C022F80000100A1C0DE /* AppIconOption+Dock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AB1C012F80000100A1C0DE /* AppIconOption+Dock.swift */; };
 		A0AC7BB92E710A79004C65AF /* FloatingServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AC7BB82E710A79004C65AF /* FloatingServerStatusView.swift */; };
 		A0B8C13324F3FF4E00ACD713 /* DocumentPickerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */; };
 		A0B9B85F2516373300E3486A /* Box+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B9B85E2516373300E3486A /* Box+View.swift */; };
@@ -329,7 +329,6 @@
 		A07FFC7224F306AC002A78B5 /* TransmissionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransmissionModelTests.swift; sourceTree = "<group>"; };
 		A08863A42585ADD800443ECB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A08863C92585B65E00443ECB /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
-		A0AB1C012F80000100A1C0DE /* AppIconOption+Dock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppIconOption+Dock.swift"; sourceTree = "<group>"; };
 		A08864062585BB4100443ECB /* GeneralSettingsView+AutoUpdateInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GeneralSettingsView+AutoUpdateInterval.swift"; sourceTree = "<group>"; };
 		A0888AB12F3A50B900B52C8D /* CompactLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactLabelStyle.swift; sourceTree = "<group>"; };
 		A096385824F568CF00F2062F /* SeedTruckWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeedTruckWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -346,6 +345,7 @@
 		A099A5DE304049D30021B122 /* TorrentPreview.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TorrentPreview.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A099A5DF304049D30021B122 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		A0AAF2A9257BB39600A2217A /* NoTorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTorrentsView.swift; sourceTree = "<group>"; };
+		A0AB1C012F80000100A1C0DE /* AppIconOption+Dock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppIconOption+Dock.swift"; sourceTree = "<group>"; };
 		A0AC7BB82E710A79004C65AF /* FloatingServerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingServerStatusView.swift; sourceTree = "<group>"; };
 		A0B8C13224F3FF4E00ACD713 /* DocumentPickerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerAdapter.swift; sourceTree = "<group>"; };
 		A0B9B85E2516373300E3486A /* Box+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Box+View.swift"; sourceTree = "<group>"; };
@@ -1314,7 +1314,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
@@ -1337,7 +1337,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Seed Truck";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.1.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1383,7 +1383,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 30;
+				CURRENT_PROJECT_VERSION = 31;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
@@ -1400,7 +1400,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Seed Truck";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				MARKETING_VERSION = 2.1;
+				MARKETING_VERSION = 2.1.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

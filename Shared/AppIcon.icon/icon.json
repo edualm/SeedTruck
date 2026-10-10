@@ -1,20 +1,19 @@
 {
   "fill" : {
-    "automatic-gradient" : "display-p3:0.96783,0.94551,0.56674,1.00000"
+    "automatic-gradient" : "display-p3:0.96783,0.84647,0.12417,1.00000"
   },
   "groups" : [
     {
       "layers" : [
         {
           "glass" : false,
-          "hidden" : false,
           "image-name" : "TruckWithFiles.png",
           "name" : "TruckWithFiles",
           "position" : {
             "scale" : 0.7,
             "translation-in-points" : [
-              -65,
-              -55
+              5.600000000000023,
+              -40
             ]
           }
         }
