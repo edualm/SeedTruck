@@ -1,0 +1,113 @@
+<!doctype html>
+<!-- The product page header: the icon's truck over a tilted wall of transfers drawn after the torrent list's rows,
+     without text, since the App Store lays the icon, name, and Get button over its lower part. The transfers are
+     white, washed into the icon's yellow. banners.sh renders it at 3840x1646. -->
+<meta charset="utf-8">
+<style>
+  html, body { margin: 0; width: 3840px; height: 1646px; overflow: hidden; }
+  body { background: #ffd60a; font-family: "SF Pro Text", "SF Pro Display", sans-serif; }
+  .wall {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    gap: 40px;
+    transform: translate(-50%, -50%) rotate(-12deg);
+  }
+  .column { display: flex; flex-direction: column; gap: 36px; }
+  .column:nth-child(even) { margin-top: 140px; }
+  .transfer {
+    width: 640px;
+    padding: 30px 36px 32px;
+    box-sizing: border-box;
+    border-radius: 40px;
+    background: #ffffff;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  }
+  .name {
+    overflow: hidden;
+    font-size: 34px;
+    font-weight: 600;
+    color: #000000;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .bar {
+    position: relative;
+    height: 30px;
+    margin: 16px 0 14px;
+    border-radius: 15px;
+    background: #e5e5ea;
+    overflow: hidden;
+  }
+  .fill { height: 100%; border-radius: 15px; }
+  .percent {
+    position: absolute;
+    inset: 0;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 500;
+    line-height: 30px;
+    color: #000000;
+  }
+  .status { display: flex; align-items: center; gap: 10px; font-size: 26px; color: #8e8e93; }
+  .status::before { content: ""; width: 24px; height: 24px; border-radius: 50%; background: var(--tint); }
+  .status span { margin-left: auto; }
+  /* Washes the wall into texture, palest behind the truck and deepest at the edges and along the bottom. */
+  .shade {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 1250px 760px at 50% 44%, rgba(255, 246, 200, 0.75), rgba(255, 236, 140, 0) 72%),
+      radial-gradient(ellipse 2300px 1250px at 50% 44%, rgba(255, 214, 10, 0.55), rgba(255, 196, 0, 0.88) 100%),
+      linear-gradient(180deg, rgba(255, 190, 0, 0) 55%, rgba(255, 190, 0, 0.55) 100%);
+  }
+  .truck {
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    width: 1400px;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 40px 70px rgba(130, 80, 0, 0.4)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  }
+</style>
+<div class="wall"></div>
+<div class="shade"></div>
+<img class="truck" src="truck.png" alt="">
+<script>
+  // Freely distributable films and operating system images, like the screenshots' torrents.
+  const names = [
+    "Big Buck Bunny", "ubuntu-26.04.1-desktop-arm64.iso", "Cosmos Laundromat", "Elephants Dream",
+    "debian-13.2.0-amd64-netinst.iso", "Sintel", "Sprite Fright", "fedora-workstation-43-x86_64.iso",
+    "Tears of Steel", "Spring", "archlinux-2026.10.01-x86_64.iso", "Caminandes: Llamigos", "Agent 327",
+    "linuxmint-22.2-cinnamon-64bit.iso", "Wing It!", "Charge", "Night of the Living Dead (1968)",
+    "freebsd-15.0-RELEASE-amd64-disc1.iso", "Glass Half", "Coffee Run", "kali-linux-2026.3-installer.iso",
+  ];
+  const states = [
+    { tint: "#0a84ff", label: "Downloading", speeds: "↘ 2,3 MB/s   ↗ 122 KB/s" },
+    { tint: "#ff9f0a", label: "Verifying local data", speeds: "" },
+    { tint: "#8e8e93", label: "Stopped", speeds: "" },
+    { tint: "#30d158", label: "Seeding", speeds: "↗ 830 KB/s" },
+  ];
+  const wall = document.querySelector(".wall");
+  // Steps of 5 down a column and 8 across keep every transfer's neighbors different.
+  for (let c = 0; c < 8; c++) {
+    const column = wall.appendChild(document.createElement("div"));
+    column.className = "column";
+    for (let r = 0; r < 12; r++) {
+      const i = c * 8 + r * 5;
+      const state = states[(c + r * 3) % states.length];
+      const progress = state.label === "Seeding" ? 100 : 12 + (i * 37) % 80;
+      const transfer = column.appendChild(document.createElement("div"));
+      transfer.className = "transfer";
+      transfer.style.setProperty("--tint", state.tint);
+      transfer.innerHTML = `
+        <div class="name">${names[i % names.length]}</div>
+        <div class="bar">
+          <div class="fill" style="width: ${progress}%; background: ${state.tint}"></div>
+          <div class="percent">${progress}%</div>
+        </div>
+        <div class="status">${state.label}<span>${state.speeds}</span></div>`;
+    }
+  }
+</script>
