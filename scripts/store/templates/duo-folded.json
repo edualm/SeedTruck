@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "deviceKey": "iphoneDuoPortrait",
+  "background": {
+    "mode": "gradient",
+    "color": "#101820",
+    "gradient": "linear-gradient(150deg, #000000 0%, #2b2b2b 100%)",
+    "imageSrc": null,
+    "imageFit": "cover"
+  },
+  "text": {
+    "content": "Your seedbox, in your pocket",
+    "fontFamily": "sf-pro-display",
+    "x": 150,
+    "y": 150,
+    "width": 1707,
+    "fontSize": 150,
+    "lineHeight": 0.98,
+    "color": "#f6f0e8",
+    "accent": "#7dd3fc",
+    "align": "center",
+    "subtextContent": "Track progress and status wherever you are.",
+    "subtextFontFamily": "sf-pro-text",
+    "subtextFontSize": 54,
+    "subtextLineHeight": 1.2,
+    "subtextColor": "#c9d6df",
+    "subtextGap": 36
+  },
+  "frame": {
+    "enabled": true,
+    "x": 0,
+    "y": 0,
+    "scale": 1,
+    "variant": "outer"
+  },
+  "screenshotScale": null,
+  "screenshotPlacement": null,
+  "showMask": false
+}

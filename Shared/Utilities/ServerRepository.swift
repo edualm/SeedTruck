@@ -15,11 +15,21 @@ final class ServerRepository: ObservableObject {
     private let store: any ServerStoring
 
     init(
-        store: any ServerStoring = KeychainServerStore.shared,
+        store: any ServerStoring = ServerRepository.defaultStore,
         initialServers: [Server] = []
     ) {
         self.store = store
         servers = Self.sorted(initialServers)
+    }
+
+    /// The Keychain, or the sample seedbox's store while showcasing.
+    static var defaultStore: any ServerStoring {
+        #if DEBUG
+        if let store = Showcase.serverStore {
+            return store
+        }
+        #endif
+        return KeychainServerStore.shared
     }
 
     func refresh() {

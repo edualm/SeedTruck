@@ -25,6 +25,13 @@ struct ServerView: View {
             .navigationBarTitle(server.name)
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarBackButtonHidden(!shouldShowBackButton)
+            #if DEBUG
+            .task {
+                if await Showcase.stage(.list) {
+                    await Showcase.finish(after: 2)
+                }
+            }
+            #endif
     }
 }
 

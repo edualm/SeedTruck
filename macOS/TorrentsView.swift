@@ -32,6 +32,10 @@ struct TorrentsView: View {
     
     @State var filterQuery: String = ""
 
+    #if DEBUG
+    @Environment(\.openSettings) private var openSettings
+    #endif
+
     var selectedServer: Server? {
         get {
             serverConnections.first { $0.id == selectedServerID }
@@ -302,6 +306,27 @@ struct TorrentsView: View {
         }
         .focusedSceneValue(\.importCommandActions, importCommandActions)
         .focusedSceneValue(\.torrentCommandActions, torrentCommandActions)
+        #if DEBUG
+        .task {
+            if await Showcase.stage(.list, when: { !torrents.isEmpty }) {
+                await Showcase.finish()
+            } else if await Showcase.stage(.details, when: { !torrents.isEmpty }) {
+                selectedTorrentId = Showcase.state?.selectedTorrent
+                await Showcase.finish()
+            } else if await Showcase.stage(.add, when: { !torrents.isEmpty }),
+                      let torrent = Showcase.torrentFile {
+                // As when a .torrent file is opened from the Finder.
+                presentedSheet = .addTorrent(torrent, nil)
+                await Showcase.finish()
+            } else if await Showcase.stage(.limits, when: { !torrents.isEmpty }) {
+                // Settings stages the rest; the capture takes the app's largest window, so the main one goes.
+                let mainWindow = NSApplication.shared.windows.first(where: \.isVisible)
+                openSettings()
+                await Showcase.pause(0.5)
+                mainWindow?.orderOut(nil)
+            }
+        }
+        #endif
     }
 }
 

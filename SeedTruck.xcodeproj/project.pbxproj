@@ -200,6 +200,9 @@
 		C100000630404A0000000001 /* ByteCountFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A071CAC824F3113800B6AC0C /* ByteCountFormatter+Extensions.swift */; };
 		C100000730404A0000000001 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C100000830404A0000000001 /* Quartz.framework */; platformFilters = (macos, ); };
 		C100000930404A0000000001 /* TorrentPreview.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = A099A5DE304049D30021B122 /* TorrentPreview.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		D2D5ABF6655FE3EF848AB94D /* Showcase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70CBCBF9B3B391D1A6A02D /* Showcase.swift */; };
+		E0CA63E92292B6DA1EF09EAA /* Showcase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70CBCBF9B3B391D1A6A02D /* Showcase.swift */; };
+		E7E8FB26F2147CD11DF7BF44 /* Showcase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD70CBCBF9B3B391D1A6A02D /* Showcase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -384,6 +387,7 @@
 		B10000042F60000100000001 /* TorrentClientRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentClientRegistry.swift; sourceTree = "<group>"; };
 		B10000052F60000100000001 /* QBittorrentModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBittorrentModelTests.swift; sourceTree = "<group>"; };
 		B10000062F60000100000001 /* QBittorrentConnectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QBittorrentConnectionTests.swift; sourceTree = "<group>"; };
+		BD70CBCBF9B3B391D1A6A02D /* Showcase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Showcase.swift; sourceTree = "<group>"; };
 		C100000030404A0000000001 /* TorrentPreviewHTMLRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentPreviewHTMLRenderer.swift; sourceTree = "<group>"; };
 		C100000830404A0000000001 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -644,6 +648,7 @@
 				A0F99C2725620933002D7BC6 /* UTI.swift */,
 				A08863C92585B65E00443ECB /* View+Extensions.swift */,
 				A0888AB12F3A50B900B52C8D /* CompactLabelStyle.swift */,
+				BD70CBCBF9B3B391D1A6A02D /* Showcase.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1095,6 +1100,7 @@
 				A073DD2124F4658700BA37C9 /* AddMagnetView.swift in Sources */,
 				A051D54F2E563EF800A94EDA /* LabelPickerView.swift in Sources */,
 				A08863CA2585B65E00443ECB /* View+Extensions.swift in Sources */,
+				D2D5ABF6655FE3EF848AB94D /* Showcase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1166,6 +1172,7 @@
 				A0D8800D258457370031E898 /* ServerSettingsView.swift in Sources */,
 				A0CE018425855834002777BF /* NewServerView+Shared.swift in Sources */,
 				A073DD2224F4658700BA37C9 /* AddMagnetView.swift in Sources */,
+				E7E8FB26F2147CD11DF7BF44 /* Showcase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,6 +1241,7 @@
 				A0C0720424F5B03700CEC1DA /* ServerStatusView.swift in Sources */,
 				A096388324F5697600F2062F /* TorrentListView.swift in Sources */,
 				A09638A224F56B9700F2062F /* TorrentItemView.swift in Sources */,
+				E0CA63E92292B6DA1EF09EAA /* Showcase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1314,7 +1322,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 37;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
@@ -1337,7 +1345,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Seed Truck";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1383,7 +1391,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 34;
+				CURRENT_PROJECT_VERSION = 37;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3D7R27DBRZ;
@@ -1400,7 +1408,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Seed Truck";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

@@ -57,6 +57,10 @@ struct SettingsView: View {
 
     @ObservedObject private var presenter: SettingsPresenter
 
+    #if DEBUG
+    @State private var showcaseLimitsServer: Server?
+    #endif
+
     private var refreshInterval: Binding<RefreshIntervalOption> {
         Binding(
             get: { RefreshIntervalOption(storedValue: autoUpdateInterval) },
@@ -346,6 +350,17 @@ struct SettingsView: View {
         }
     }
 
+    @ViewBuilder
+    private func showcaseDestination<Content: View>(_ content: Content) -> some View {
+        #if DEBUG
+        content.navigationDestination(item: $showcaseLimitsServer) { server in
+            RemoteServerSettingsView(presenter: RemoteServerSettingsPresenter(server: server))
+        }
+        #else
+        content
+        #endif
+    }
+
     private var sidebarSelection: Binding<SettingsArea?> {
         Binding(
             get: { selectedArea },
@@ -379,12 +394,12 @@ struct SettingsView: View {
                 .navigationTitle("Settings")
             } detail: {
                 NavigationStack(path: $detailPath) {
-                    content(for: selectedArea ?? .general)
+                    showcaseDestination(content(for: selectedArea ?? .general))
                 }
             }
         } else {
             NavigationStack {
-                areaList
+                showcaseDestination(areaList)
             }
         }
         #else
@@ -396,6 +411,18 @@ struct SettingsView: View {
 
     var body: some View {
         navigationContent
+            #if DEBUG
+            .task {
+                if await Showcase.stage(.limits, when: { !serverConnections.isEmpty }) {
+                    if horizontalSizeClass == .regular {
+                        selectedArea = .servers
+                        await Showcase.pause(0.5)
+                    }
+                    showcaseLimitsServer = serverConnections.first
+                    await Showcase.finish(after: 2)
+                }
+            }
+            #endif
             .onChange(of: presenter.persistenceError) { _, error in
                 guard let error else { return }
                 alertData = .init(

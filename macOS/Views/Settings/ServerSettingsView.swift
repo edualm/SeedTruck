@@ -201,6 +201,16 @@ struct ServerSettingsView: View {
         .sheet(item: $speedLimitsPresentation) { presentation in
             RemoteServerSettingsSheet(server: presentation.server)
         }
+        #if DEBUG
+        .task {
+            if await Showcase.stage(.limits, when: { !serverConnections.isEmpty }),
+               let server = serverConnections.first {
+                selectedServerID = server.id
+                speedLimitsPresentation = SpeedLimitsPresentation(server: server)
+                await Showcase.finish(after: 2)
+            }
+        }
+        #endif
         .alert("Delete Server?", isPresented: $presenter.showingDeleteAlert) {
             Button("Delete", role: .destructive) {
                 presenter.perform(.confirmDeletion)

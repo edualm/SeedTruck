@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "deviceKey": "ipadLandscape",
+  "background": {
+    "mode": "gradient",
+    "color": "#101820",
+    "gradient": "linear-gradient(150deg, #000000 0%, #2b2b2b 100%)",
+    "imageSrc": null,
+    "imageFit": "cover"
+  },
+  "text": {
+    "content": "Everything in one view",
+    "fontFamily": "sf-pro-display",
+    "x": 116,
+    "y": 99.82446543905914,
+    "width": 2500,
+    "fontSize": 200,
+    "lineHeight": 0.98,
+    "color": "#f6f0e8",
+    "accent": "#7dd3fc",
+    "align": "center",
+    "subtextContent": "Browse your queue and inspect every detail without losing context.",
+    "subtextFontFamily": "sf-pro-text",
+    "subtextFontSize": 75,
+    "subtextLineHeight": 1.2,
+    "subtextColor": "#c9d6df",
+    "subtextGap": 60
+  },
+  "frame": {
+    "enabled": true,
+    "x": 0.9374441258268007,
+    "y": -7.725178186980202,
+    "scale": 1
+  },
+  "screenshotScale": 0.624269079123229,
+  "screenshotPlacement": {
+    "offsetX": 0,
+    "offsetY": 0
+  },
+  "showMask": false
+}

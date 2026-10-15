@@ -21,6 +21,11 @@ struct SeedTruckApp: App {
                 .onAppear {
                     serverRepository.refresh()
                 }
+                #if DEBUG
+                .task {
+                    await Showcase.start()
+                }
+                #endif
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {

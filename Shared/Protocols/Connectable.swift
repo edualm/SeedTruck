@@ -10,7 +10,17 @@ import Foundation
 @MainActor
 final class ServerConnectionStore {
 
-    static let shared = ServerConnectionStore(builder: TorrentClientRegistry.live)
+    static let shared = ServerConnectionStore(builder: defaultBuilder)
+
+    /// The live clients, or the sample seedbox while showcasing.
+    private static var defaultBuilder: any ServerConnectionBuilding {
+        #if DEBUG
+        if let builder = Showcase.connectionBuilder {
+            return builder
+        }
+        #endif
+        return TorrentClientRegistry.live
+    }
 
     private struct Entry {
 

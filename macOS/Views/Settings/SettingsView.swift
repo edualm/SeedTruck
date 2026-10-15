@@ -41,6 +41,13 @@ struct SettingsView: View {
                 .tag(Tab.servers)
         }
         .frame(width: contentSize.width, height: contentSize.height)
+        #if DEBUG
+        .task {
+            if Showcase.scene == .limits {
+                selectedTab = .servers
+            }
+        }
+        #endif
     }
 }
 

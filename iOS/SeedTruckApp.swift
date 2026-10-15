@@ -90,6 +90,17 @@ import SwiftUI
                     serverRepository.refresh()
                 }
                 .statusBarHidden(CommandLine.arguments.contains("--hide-status-bar"))
+                #if DEBUG
+                .task {
+                    await Showcase.start()
+                    if await Showcase.stage(.add) {
+                        // The list loads behind the sheet first.
+                        await Showcase.pause(1)
+                        openedTorrent = Showcase.torrentFile
+                        await Showcase.finish()
+                    }
+                }
+                #endif
         }
         .onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active {

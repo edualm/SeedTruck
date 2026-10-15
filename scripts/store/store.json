@@ -1,0 +1,60 @@
+{
+  "bundleId": "io.edr.seedtruck",
+  "xcode": { "project": "SeedTruck.xcodeproj" },
+  "build": {
+    "ios": {
+      "scheme": "SeedTruck (iOS)",
+      "settings": ["GENERATE_INFOPLIST_FILE=YES", "INFOPLIST_KEY_UIRequiresFullScreen=YES"],
+      "app": "SeedTruck"
+    },
+    "watch": { "scheme": "SeedTruck (watchOS)", "app": "SeedTruckWatch", "bundleId": "io.edr.seedtruck.watchkitapp" },
+    "mac": { "scheme": "SeedTruck (macOS)", "settings": ["CODE_SIGNING_ALLOWED=NO"], "app": "SeedTruck" }
+  },
+  "appearance": "light",
+  "locale": { "language": "en", "region": "en_US" },
+  "launchArgs": ["-AppleLanguages", "(en)", "-AppleLocale", "en_US",
+                 "-torrentSort", "name", "-torrentSortDirection", "ascending"],
+  "stillArgs": [],
+  "platforms": {
+    "iphone": {
+      "simulator": "Seed Truck Store iPhone",
+      "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-18-Pro-Max",
+      "rawSize": "1320x2868"
+    },
+    "ipad": {
+      "simulator": "Seed Truck Store iPad",
+      "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPad-Pro-13-inch-M5-12GB",
+      "args": ["--showcase-landscape", "--hide-status-bar"],
+      "rawSize": "2752x2064",
+      "rotate": true
+    },
+    "duo": {
+      "simulator": "Seed Truck Store Duo",
+      "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-Duo",
+      "display": "primary-1",
+      "args": ["--showcase-landscape", "--hide-status-bar"],
+      "rawSize": "2853x2007",
+      "rotate": true,
+      "setup": "Open it in DeviceHub and drag the hinge fully open; the showcase turns the app to landscape."
+    },
+    "mac": {
+      "kind": "mac",
+      "window": "850x600",
+      "rawSize": "1700x1200"
+    },
+    "watch": {
+      "os": "watchOS",
+      "simulator": "Seed Truck Store Watch",
+      "deviceType": "com.apple.CoreSimulator.SimDeviceType.Apple-Watch-Ultra-3-49mm",
+      "rawSize": "422x514",
+      "statusBarPatch": "320,40,78,34"
+    },
+    "duo-folded": {
+      "simulator": "Seed Truck Store Duo",
+      "deviceType": "com.apple.CoreSimulator.SimDeviceType.iPhone-Duo",
+      "display": "primary",
+      "rawSize": "1398x2034",
+      "setup": "Fold it in DeviceHub (hinge fully closed), in portrait."
+    }
+  }
+}

@@ -223,6 +223,16 @@ struct TorrentsView: View {
                 EmptyView()
             }
         }
+        #if DEBUG
+        .task {
+            if await Showcase.stage(.list, when: { !torrents.isEmpty }) {
+                await Showcase.finish()
+            } else if await Showcase.stage(.details, when: { !torrents.isEmpty }) {
+                selectedTorrentId = Showcase.state?.selectedTorrent
+                await Showcase.finish()
+            }
+        }
+        #endif
     }
 
     @ViewBuilder

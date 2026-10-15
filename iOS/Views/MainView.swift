@@ -9,7 +9,14 @@ import SwiftUI
 
 struct MainView: View {
     
+    private enum Tab: Hashable {
+        case torrents
+        case settings
+    }
+    
     @EnvironmentObject private var serverRepository: ServerRepository
+    
+    @State private var selectedTab = Tab.torrents
     
     private var tabContent: some View {
         Group {
@@ -18,17 +25,26 @@ struct MainView: View {
                     Image(systemName: "tray.and.arrow.down")
                     Text("Torrents")
                 }
+                .tag(Tab.torrents)
             SettingsView(presenter: SettingsPresenter(repository: serverRepository))
                 .tabItem {
                     Image(systemName: "wrench.and.screwdriver")
                     Text("Settings")
                 }
+                .tag(Tab.settings)
         }
         .toolbar(.visible, for: .tabBar)
     }
     
     var body: some View {
-        TabView { tabContent }
+        TabView(selection: $selectedTab) { tabContent }
+        #if DEBUG
+            .task {
+                if Showcase.scene == .limits {
+                    selectedTab = .settings
+                }
+            }
+        #endif
     }
 }
 

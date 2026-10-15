@@ -1,0 +1,39 @@
+{
+  "description": "The sample seedbox: a Transmission server called My Server with the four Blender open movies of Tools/mockserver (same values, in torrent_get's format), its labels and speed limits, and the Ubuntu torrent file the add scene opens. Every shot uses it.",
+  "state": {
+    "server": "My Server",
+    "endpoint": "http://seedbox.local:9091/transmission/rpc",
+    "selected_torrent": "1",
+    "labels": ["Animation", "Archive", "Movies", "Open source"],
+    "speed_limits": { "download": 1000, "upload": 500, "download_enabled": true, "upload_enabled": false },
+    "torrent_file": { "name": "ubuntu-26.04.1-desktop-arm64.iso", "size": 4155000000, "labels": ["Open source"] },
+    "torrents": [
+      {
+        "id": 1, "hash_string": "dd8255ecdc7ca55fb0bbf81323d87062db1f6d1c", "name": "Big Buck Bunny",
+        "percent_done": 0.58, "status": 4, "size_when_done": 8400000000, "peers_connected": 24,
+        "rate_download": 2448765, "rate_upload": 125000, "peers_sending_to_us": 8, "peers_getting_from_us": 3,
+        "downloaded_ever": 4872000000, "uploaded_ever": 1250000000, "upload_ratio": 0.26,
+        "seconds_downloading": 7200, "queue_position": 0, "eta": 1845, "eta_idle": -1,
+        "labels": ["Movies", "Open source"]
+      },
+      {
+        "id": 2, "hash_string": "257b501b9d8aef4537e0e0a7c6f2ff87f50c7f5a", "name": "Cosmos Laundromat",
+        "percent_done": 0.72, "recheck_progress": 0.35, "status": 2, "size_when_done": 2100000000,
+        "peers_connected": 7, "downloaded_ever": 1512000000, "queue_position": 1, "eta": -2, "eta_idle": -1,
+        "labels": ["Animation"]
+      },
+      {
+        "id": 3, "hash_string": "209c8226b299b308beaf2b9cd3fb49212dbd13ec", "name": "Tears of Steel",
+        "percent_done": 1, "status": 6, "size_when_done": 3750000000, "peers_connected": 8,
+        "rate_upload": 850000, "peers_getting_from_us": 4, "downloaded_ever": 3750000000,
+        "uploaded_ever": 9000000000, "upload_ratio": 2.4, "seconds_seeding": 3600, "queue_position": 2,
+        "eta": -1, "eta_idle": 900, "labels": ["Movies"]
+      },
+      {
+        "id": 4, "hash_string": "08ada5a7a6183aae1e09d831df6748d566095a10", "name": "Sintel",
+        "percent_done": 0.43, "status": 0, "size_when_done": 4000000000, "downloaded_ever": 1720000000,
+        "queue_position": 3, "eta": -1, "eta_idle": -1, "labels": ["Archive"]
+      }
+    ]
+  }
+}

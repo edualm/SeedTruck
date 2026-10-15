@@ -15,6 +15,10 @@ struct MainView: View {
     
     @State private var selectedServerID: UUID?
     
+    #if DEBUG
+    @State private var showcaseTorrent: RemoteTorrent?
+    #endif
+    
     private func reconcileSelection(with serverIDs: [UUID]) {
         if let selectedServerID, serverIDs.contains(selectedServerID) {
             return
@@ -52,6 +56,13 @@ struct MainView: View {
                     NoServersConfiguredView()
                 }
             }
+            #if DEBUG
+            .navigationDestination(item: $showcaseTorrent) { torrent in
+                if let server = serverConnections.first {
+                    TorrentDetailsViewWrapper(torrent: torrent, server: server)
+                }
+            }
+            #endif
         }
         .onAppear {
             reconcileSelection(with: serverConnections.map(\.id))
@@ -59,6 +70,18 @@ struct MainView: View {
         .onChange(of: serverConnections.map(\.id)) { _, serverIDs in
             reconcileSelection(with: serverIDs)
         }
+        #if DEBUG
+        .task {
+            if await Showcase.stage(.details, when: { selectedServerID != nil }),
+               let server = serverConnections.first,
+               let id = Showcase.state?.selectedTorrent {
+                // As a tap on the torrent's row would, once the server's list is up.
+                await Showcase.pause(1.5)
+                showcaseTorrent = try? await server.connection.getTorrent(id: id)
+                await Showcase.finish(after: 2)
+            }
+        }
+        #endif
     }
 }
 

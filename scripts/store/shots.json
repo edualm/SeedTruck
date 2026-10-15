@@ -1,0 +1,33 @@
+{
+  "iphone": [
+    { "id": "01-list", "scene": "list", "fixture": "seedbox" },
+    { "id": "02-list-dark", "scene": "list", "fixture": "seedbox", "appearance": "dark" },
+    { "id": "03-details", "scene": "details", "fixture": "seedbox" },
+    { "id": "04-add", "scene": "add", "fixture": "seedbox" },
+    { "id": "05-limits", "scene": "limits", "fixture": "seedbox" }
+  ],
+  "ipad": [
+    { "id": "01-details", "scene": "details", "fixture": "seedbox" },
+    { "id": "02-details-dark", "scene": "details", "fixture": "seedbox", "appearance": "dark" },
+    { "id": "03-add", "scene": "add", "fixture": "seedbox" },
+    { "id": "04-limits", "scene": "limits", "fixture": "seedbox" }
+  ],
+  "duo": [
+    { "id": "01-details", "scene": "details", "fixture": "seedbox" },
+    { "id": "02-details-dark", "scene": "details", "fixture": "seedbox", "appearance": "dark" },
+    { "id": "03-add", "scene": "add", "fixture": "seedbox" },
+    { "id": "04-limits", "scene": "limits", "fixture": "seedbox" }
+  ],
+  "mac": [
+    { "id": "01-details", "scene": "details", "fixture": "seedbox", "appearance": "dark" },
+    { "id": "02-add", "scene": "add", "fixture": "seedbox", "appearance": "dark" },
+    { "id": "03-limits", "scene": "limits", "fixture": "seedbox", "appearance": "dark", "rawSize": "1080x1026" }
+  ],
+  "watch": [
+    { "id": "01-list", "scene": "list", "fixture": "seedbox" },
+    { "id": "02-details", "scene": "details", "fixture": "seedbox" }
+  ],
+  "duo-folded": [
+    { "id": "01-list", "scene": "list", "fixture": "seedbox" }
+  ]
+}

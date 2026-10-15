@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "deviceKey": "mac",
+  "background": {
+    "mode": "gradient",
+    "color": "#101820",
+    "gradient": "linear-gradient(150deg, #000000 0%, #2b2b2b 100%)",
+    "imageSrc": null,
+    "imageFit": "cover"
+  },
+  "text": {
+    "content": "Everything in one view",
+    "fontFamily": "sf-pro-display",
+    "x": 243.00861378205127,
+    "y": 86.15384615384616,
+    "width": 2074,
+    "fontSize": 180,
+    "lineHeight": 0.98,
+    "color": "#f6f0e8",
+    "accent": "#7dd3fc",
+    "align": "center",
+    "subtextContent": "Browse your queue and inspect every detail without losing context.",
+    "subtextFontFamily": "sf-pro-text",
+    "subtextFontSize": 60,
+    "subtextLineHeight": 1.2,
+    "subtextColor": "#c9d6df",
+    "subtextGap": 56
+  },
+  "frame": {
+    "enabled": false,
+    "x": 0,
+    "y": 0,
+    "scale": 1
+  },
+  "screenshotScale": 0.85,
+  "screenshotPlacement": {
+    "offsetX": -65.78,
+    "offsetY": -48.59
+  },
+  "showMask": false
+}

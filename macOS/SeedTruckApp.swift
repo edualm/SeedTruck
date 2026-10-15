@@ -93,6 +93,12 @@ private struct TorrentCommands: Commands {
     @AppStorage(Constants.StorageKeys.appIcon) private var appIcon = AppIconOption.default
     @StateObject private var serverRepository = ServerRepository()
     
+    #if DEBUG
+    init() {
+        Showcase.applyAppearance()
+    }
+    #endif
+    
     @SceneBuilder
     var body: some Scene {
         //
@@ -108,6 +114,11 @@ private struct TorrentCommands: Commands {
                     appIcon.applyToDock()
                     serverRepository.refresh()
                 }
+                #if DEBUG
+                .task {
+                    await Showcase.start()
+                }
+                #endif
         }
         .defaultSize(width: 850, height: 600)
         .commands {
