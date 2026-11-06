@@ -205,7 +205,15 @@ struct TorrentDetailsView: View {
 
     private func completeRemoval() {
         onRemovalCompleted()
+
+        // On macOS this view isn't presented modally: it's the detail column of the
+        // main window's NavigationSplitView. Calling dismiss() there resolves to the
+        // window itself, closing it — and closing the app's single Window scene quits
+        // the app. The completion handler already clears the selection, which shows
+        // the placeholder instead.
+        #if !os(macOS)
         dismiss()
+        #endif
     }
 
     @ViewBuilder
