@@ -26,6 +26,7 @@ struct TorrentsView: View {
     @AppStorage(Constants.StorageKeys.torrentSortDirection) var sortDirection: TorrentSortDirection = .ascending
     @State private var torrents: [RemoteTorrent] = []
     @StateObject private var actionController = TorrentActionController()
+    @StateObject private var serverPickerToolbar = ServerPickerToolbarController()
     @State private var importErrorMessage: String?
     @State private var presentedSheet: PresentedSheet?
     @State private var showingTorrentFileImporter = false
@@ -63,6 +64,24 @@ struct TorrentsView: View {
         Binding(
             get: { importErrorMessage != nil },
             set: { if !$0 { importErrorMessage = nil } }
+        )
+    }
+
+    private var serverCommandActions: ServerCommandActions? {
+        guard !serverConnections.isEmpty else { return nil }
+
+        return ServerCommandActions(
+            servers: serverConnections,
+            selectedServerID: selectedServer?.id,
+            select: { selectedServer = $0 }
+        )
+    }
+
+    private func updateServerPicker() {
+        serverPickerToolbar.update(
+            servers: serverConnections,
+            selectedID: selectedServerID,
+            select: { selectedServer = $0 }
         )
     }
     
@@ -130,23 +149,17 @@ struct TorrentsView: View {
         return NavigationSplitView {
             // Sidebar
             VStack {
-                if serverConnections.count > 1 {
-                    if let s = selectedServer {
-                        Menu(s.name) {
-                            ForEach(serverConnections, id: \.self) { server in
-                                Button {
-                                    selectedServer = server
-                                } label: {
-                                    Text(server.name)
-                                    Image(systemName: "server.rack")
-                                }
-                            }
-                        }.padding([.top, .leading, .trailing])
+                if serverPickerToolbar.didFail,
+                   selectedServer != nil {
+                    HStack {
+                        ServerPickerView(model: serverPickerToolbar.model)
+                        Spacer(minLength: 0)
                     }
-                    
-                    Spacer()
+                    .padding(.horizontal, 12)
+                    .padding(.top, 8)
+                    .padding(.bottom, 2)
                 }
-                
+
                 HStack {
                     if serverConnections.count > 0 {
                         Menu {
@@ -238,7 +251,7 @@ struct TorrentsView: View {
             }
             .navigationTitle(selectedServer?.name ?? "Torrents")
             .searchable(text: $filterQuery, prompt: "Search torrents")
-            .navigationSplitViewColumnWidth(min: 300, ideal: 375)
+            .navigationSplitViewColumnWidth(min: 375, ideal: 375)
         } detail: {
             // Detail view
             if let torrentId = selectedTorrentId,
@@ -271,13 +284,24 @@ struct TorrentsView: View {
             }
         }
         .onAppear(perform: onAppear)
+        .background(
+            WindowAccessor { window in
+                serverPickerToolbar.install(in: window)
+                updateServerPicker()
+            }
+        )
         .onChange(of: serverConnections.map(\.id)) { _, serverIDs in
+            updateServerPicker()
+
             guard let selectedServerID = selectedServer?.id,
                   serverIDs.contains(selectedServerID) else {
                 selectedServer = serverConnections.first
 
                 return
             }
+        }
+        .onChange(of: selectedServerID) { _, _ in
+            updateServerPicker()
         }
         .onOpenURL { importTorrent(from: $0, server: nil) }
         .handlesExternalEvents(preferring: ["*"], allowing: ["*"])
@@ -306,6 +330,7 @@ struct TorrentsView: View {
         }
         .focusedSceneValue(\.importCommandActions, importCommandActions)
         .focusedSceneValue(\.torrentCommandActions, torrentCommandActions)
+        .focusedSceneValue(\.serverCommandActions, serverCommandActions)
         #if DEBUG
         .task {
             if await Showcase.stage(.list, when: { !torrents.isEmpty }) {

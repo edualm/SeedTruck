@@ -43,6 +43,7 @@
 		A045C8CF24F2006500B3B1CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A045C8A424F2006500B3B1CD /* Assets.xcassets */; };
 		A045C8E024F2011E00B3B1CD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8DF24F2011E00B3B1CD /* MainView.swift */; };
 		A045C8E324F2013100B3B1CD /* TorrentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E224F2013100B3B1CD /* TorrentsView.swift */; };
+		A0C0FFEE2F90000100000002 /* ServerPickerToolbarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C0FFEE2F90000100000001 /* ServerPickerToolbarItem.swift */; };
 		A045C8E624F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
 		A045C8E724F2021100B3B1CD /* TorrentItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E524F2021100B3B1CD /* TorrentItemView.swift */; };
 		A045C8E924F205B100B3B1CD /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A045C8E824F205B100B3B1CD /* ProgressBarView.swift */; };
@@ -362,6 +363,7 @@
 		A0C1DB3524F42E4100C76682 /* SettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		A0C1DB3824F4358500C76682 /* TorrentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentListView.swift; sourceTree = "<group>"; };
 		A0CE00F625853C53002777BF /* TorrentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentsView.swift; sourceTree = "<group>"; };
+		A0C0FFEE2F90000100000001 /* ServerPickerToolbarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPickerToolbarItem.swift; sourceTree = "<group>"; };
 		A0CE011025853D93002777BF /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
 		A0CE011B25853DD2002777BF /* TorrentsView+Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TorrentsView+Shared.swift"; sourceTree = "<group>"; };
 		A0CE013625854916002777BF /* ServerDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerDetailsView.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				A0F99C3225620974002D7BC6 /* Models */,
 				A06DEFA524FD7ED9004B2DC9 /* Views */,
 				A0CE00F625853C53002777BF /* TorrentsView.swift */,
+				A0C0FFEE2F90000100000001 /* ServerPickerToolbarItem.swift */,
 				A012561225046F0D00C7D51B /* SeedTruckApp.swift */,
 				A0F99D142569EACF002D7BC6 /* Assets.xcassets */,
 				A045C8B324F2006500B3B1CD /* Info.plist */,
@@ -1148,6 +1151,7 @@
 				A05FE16B24F45B2700B57E45 /* LoadingView.swift in Sources */,
 				A0888AB52F3A50B900B52C8D /* CompactLabelStyle.swift in Sources */,
 				A0CE00F725853C53002777BF /* TorrentsView.swift in Sources */,
+				A0C0FFEE2F90000100000002 /* ServerPickerToolbarItem.swift in Sources */,
 				A096388824F569CA00F2062F /* ServerType.swift in Sources */,
 				A012561325046F0D00C7D51B /* SeedTruckApp.swift in Sources */,
 				A07DD0F52512C9D400559D9A /* TemporaryServer.swift in Sources */,
@@ -1489,7 +1493,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1520,7 +1524,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.edr.seedtruck;
 				PRODUCT_NAME = SeedTruck;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1584,7 +1588,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.edr.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1605,7 +1609,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.edr.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;

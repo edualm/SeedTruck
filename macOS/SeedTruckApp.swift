@@ -31,6 +31,18 @@ private struct TorrentCommandActionsKey: FocusedValueKey {
     typealias Value = TorrentCommandActions
 }
 
+struct ServerCommandActions {
+
+    let servers: [Server]
+    let selectedServerID: UUID?
+    let select: (Server) -> Void
+}
+
+private struct ServerCommandActionsKey: FocusedValueKey {
+
+    typealias Value = ServerCommandActions
+}
+
 extension FocusedValues {
 
     var importCommandActions: ImportCommandActions? {
@@ -41,6 +53,11 @@ extension FocusedValues {
     var torrentCommandActions: TorrentCommandActions? {
         get { self[TorrentCommandActionsKey.self] }
         set { self[TorrentCommandActionsKey.self] = newValue }
+    }
+
+    var serverCommandActions: ServerCommandActions? {
+        get { self[ServerCommandActionsKey.self] }
+        set { self[ServerCommandActionsKey.self] = newValue }
     }
 }
 
@@ -86,6 +103,53 @@ private struct TorrentCommands: Commands {
     }
 }
 
+private struct ServerCommands: Commands {
+
+    @ObservedObject var serverRepository: ServerRepository
+    @FocusedValue(\.serverCommandActions) private var actions
+
+    var body: some Commands {
+        CommandMenu("Server") {
+            let servers = serverRepository.servers
+
+            if servers.isEmpty {
+                Text("No Servers")
+            } else {
+                ForEach(Array(servers.prefix(9).enumerated()), id: \.element.id) { index, server in
+                    Button {
+                        actions?.select(server)
+                    } label: {
+                        label(for: server, selectedID: actions?.selectedServerID)
+                    }
+                    .keyboardShortcut(
+                        KeyEquivalent(Character(String(index + 1))),
+                        modifiers: .command
+                    )
+                    .disabled(actions == nil)
+                }
+
+                ForEach(servers.dropFirst(9), id: \.id) { server in
+                    Button {
+                        actions?.select(server)
+                    } label: {
+                        label(for: server, selectedID: actions?.selectedServerID)
+                    }
+                    .disabled(actions == nil)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func label(for server: Server, selectedID: UUID?) -> some View {
+        if server.id == selectedID {
+            Label(server.name, systemImage: "checkmark")
+        } else {
+            Text(server.name)
+        }
+    }
+}
+
 @main struct SeedTruckApp: App {
 
     @Environment(\.scenePhase) private var scenePhase
@@ -124,6 +188,7 @@ private struct TorrentCommands: Commands {
         .commands {
             FileCommands()
             TorrentCommands()
+            ServerCommands(serverRepository: serverRepository)
             CommandGroup(replacing: .help) {
                 Link("Help Center", destination: SeedTruckSupportLinks.helpCenterURL)
                 Link(
